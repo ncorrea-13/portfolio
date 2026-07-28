@@ -21,15 +21,21 @@ Proyectos personales y académicos, la mayoría open source. Código y detalles 
   <button class="filter-btn active" data-filter="all">Todos</button>
   <button class="filter-btn" data-filter="python">Python</button>
   <button class="filter-btn" data-filter="typescript">TypeScript</button>
+  <button class="filter-btn" data-filter="TUI/CLI">TUI/CLI</button>
   <button class="filter-btn" data-filter="infra">Infraestructura</button>
   <button class="filter-btn" data-filter="ml">Machine Learning</button>
 </div>
 
-<div class="project-card" data-tags="python infra">
+<div class="project-card" data-tags="TUI/CLI">
 
-**[pentest-handbook](https://github.com/ncorrea-13/pentest-handbook)**
-Scripts y guías prácticas de reconocimiento: automatización de dorking y recolección de OSINT en Python. Documentación de metodologías para las fases de un pentest. _(GPLv3)_
+**[bw-tui](https://github.com/ncorrea-13/bw-tui)**
+Terminal User Interface que funciona como wrapper para utilizar Bitwarden desde la terminal. _(GPLv3)_
 
+</div>
+<div class="project-card" data-tags="TUI/CLI">
+
+**[weathertui](https://github.com/ncorrea-13/weathertui)**
+Terminal User Interface basada en meteo-cli. Utiliza OpenweatherMap para mostrar el pronóstico del tiempo en la terminal. _(GPLv3)_
 </div>
 
 <div class="project-card" data-tags="infra">
@@ -41,7 +47,7 @@ Scripts y guías prácticas de reconocimiento: automatización de dorking y reco
 <div class="project-card" data-tags="infra">
 
 **[dotfiles](https://github.com/ncorrea-13/dotfiles)**
-Configuración personal de Linux para Devuan 6 (Excalibur) sobre Wayland. 100% systemd-free. Sin dependencia de `systemctl` ni `loginctl` para gestión de sesión.
+Configuración personal de Linux para Devuan 6 (Excalibur) sobre Wayland. 100% systemd-free. _(Mit License)_
 
 </div>
 
