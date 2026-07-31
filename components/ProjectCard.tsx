@@ -19,9 +19,9 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
-      className="group overflow-hidden rounded-lg border border-card-border bg-card-bg"
+      className="group flex h-full flex-col overflow-hidden rounded-lg border border-card-border bg-card-bg"
     >
-      <div className="aspect-video w-full overflow-hidden">
+      <div className="aspect-video w-full shrink-0 overflow-hidden">
         {project.image ? (
           <Image
             src={project.image}
@@ -39,7 +39,7 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
           </div>
         )}
       </div>
-      <div className="p-4">
+      <div className="flex flex-1 flex-col p-4">
         <a
           href={project.url}
           target="_blank"
@@ -49,7 +49,19 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
           {project.name}
         </a>
         <p className="mt-1.5 text-[15px]">{project.desc}</p>
-        <p className="mt-2 font-mono text-xs text-muted">{project.license}</p>
+        <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-3">
+          {project.stack.map((tech) => (
+            <span
+              key={tech}
+              className="rounded-full border border-border bg-code-bg px-2 py-0.5 font-mono text-[11px] text-code-text"
+            >
+              {tech}
+            </span>
+          ))}
+          {project.license && (
+            <span className="ml-auto font-mono text-xs text-muted">{project.license}</span>
+          )}
+        </div>
       </div>
     </motion.div>
   );

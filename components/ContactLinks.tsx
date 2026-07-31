@@ -30,7 +30,7 @@ function WhatsAppIcon() {
 
 export function ContactLinks({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex flex-wrap gap-3 ${className}`}>
+    <div className={`flex flex-wrap justify-center gap-3 ${className}`}>
       <a href={`mailto:${EMAIL}`} className={btnClass}>
         <MailIcon /> Mail
       </a>

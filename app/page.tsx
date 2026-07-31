@@ -1,10 +1,14 @@
+import Link from "next/link";
 import { LinkButton } from "@/components/LinkButton";
 import { ContactLinks } from "@/components/ContactLinks";
 import { TagGroup } from "@/components/TagGroup";
+import { ProjectCard } from "@/components/ProjectCard";
 import { Hero } from "@/components/Hero";
 import { Reveal } from "@/components/Reveal";
 import { skillGroups } from "@/content/skills";
-import { SERVIDOR_URL } from "@/content/site";
+import { projects } from "@/content/projects";
+
+const featuredProjects = ["bw-tui", "weathertui", "homeserver", "accesoriosstina"];
 
 export default function Home() {
   return (
@@ -22,52 +26,34 @@ export default function Home() {
       </Reveal>
 
       <Reveal delay={0.05}>
-        {skillGroups.map((group) => (
-          <TagGroup key={group.label} label={group.label} tags={group.tags} />
+        {skillGroups.map((group, i) => (
+          <TagGroup key={group.label} label={group.label} tags={group.tags} index={i} />
         ))}
       </Reveal>
 
       <Reveal delay={0.1}>
-        <div className="my-8 flex flex-wrap gap-3">
+        <div className="my-8 flex justify-center">
           <LinkButton href="/cv.pdf" external>
             Descargar CV
           </LinkButton>
-          <LinkButton href="/proyectos">Ver proyectos</LinkButton>
-          <LinkButton href="/sobre-mi">Sobre mí</LinkButton>
         </div>
       </Reveal>
 
       <Reveal>
-        <h2 className="mt-8 mb-3 font-sans text-lg text-accent">Destacado</h2>
-        <p>
-          Actualmente me encuentro trabajando con infraestructura self-hosted, contenedores y
-          privacidad aplicada a un uso diario real. Mantengo mi propio homeserver corriendo 24/7
-          con{" "}
-          <a href="https://tailscale.com" className="text-accent-strong hover:underline">
-            Tailscale
-          </a>
-          , expuesto puntualmente vía Funnel.
-        </p>
-        <p className="mt-3">
-          El detalle técnico completo, incluyendo el diagrama de arquitectura y el uptime en vivo
-          del server real, está en{" "}
-          <a
-            href={SERVIDOR_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent-strong hover:underline"
-          >
-            la página de arquitectura del homeserver ↗
-          </a>
-          . Su configuración se puede encontrar{" "}
-          <a
-            href="https://github.com/ncorrea-13/homeserver"
-            className="text-accent-strong hover:underline"
-          >
-            en github
-          </a>
-          .
-        </p>
+        <h2 className="mt-8 mb-3 font-sans text-lg text-accent">Proyectos</h2>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {projects
+            .filter((p) => featuredProjects.includes(p.name))
+            .map((project, i) => (
+              <ProjectCard key={project.name} project={project} index={i} />
+            ))}
+        </div>
+        <Link
+          href="/proyectos"
+          className="mt-3 inline-block text-sm text-accent-strong hover:underline"
+        >
+          Ver todos los proyectos →
+        </Link>
       </Reveal>
 
       <Reveal>
