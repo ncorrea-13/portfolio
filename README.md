@@ -22,22 +22,24 @@ Sin backend, sin formularios ni cookies: no hay lógica de servidor ni input de 
 app/          rutas del portfolio (Next.js App Router)
 components/   componentes React compartidos
 content/      datos tipados (proyectos, experiencia, skills, links)
-public/       assets del portfolio (cv.pdf, foto.jpg — gitignored)
+public/       assets del portfolio (cv.pdf, foto.jpg, capturas de proyectos)
 servidor/     página estática de arquitectura, deploy aparte vía Funnel
 service/      unit de systemd que escribe servidor/boot.json en el host real
 ```
 
 ## Desarrollo
 
+Versión de `pnpm` pineada en `mise.toml`.
+
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ## Build (portfolio)
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 Genera `out/` estático (`output: 'export'` en `next.config.ts`). Es lo que Vercel deploya; configurar el proyecto de Vercel con Root Directory en la raíz del repo.
