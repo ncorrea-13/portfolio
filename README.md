@@ -1,34 +1,50 @@
-# Pequeño portfolio personal
+# Portfolio personal
 
-Portfolio público de mi homeserver personal: quién soy, mi experiencia y mis proyectos.
+Portfolio público: quién soy, mi experiencia y mis proyectos. Dos superficies independientes, un solo repo:
 
-Corre 24/7 detrás de Tailscale Funnel como única superficie de ese servidor expuesta directamente a internet; todo lo demás (Vaultwarden, Immich, Cockpit, etc.) queda en la tailnet privada. Este repo es solo la réplica del sitio, separada del repo completo del homeserver, que tiene la configuración de red y el resto de los servicios.
+- **Portfolio** (raíz) — Next.js + TypeScript + Tailwind, export estático, deploy en **Vercel**.
+- **`servidor/`** — página de arquitectura del homeserver + uptime en vivo, HTML/CSS plano sin build, servida 24/7 por **Tailscale Funnel** desde el homeserver real. Es la única prueba de que el self-hosting es real, por eso no vive en Vercel.
 
 ## Por qué estático
 
-Sin backend, sin JS de terceros, sin formularios ni cookies: no hay lógica de servidor ni input de usuario, así que no hay superficie de inyección que auditar. Es la misma filosofía que aplico al resto de la infraestructura: Exponer lo mínimo posible.
+Sin backend, sin formularios ni cookies: no hay lógica de servidor ni input de usuario, así que no hay superficie de inyección que auditar. Misma filosofía en las dos partes: exponer lo mínimo posible.
 
-## Contenido del sitio
+## Contenido
 
-- Presentación personal y stack técnico
-- Experiencia, educación y CV descargable
-- Proyectos personales y académicos, con filtro por tecnología
-- Arquitectura del homeserver completa: diagrama, stack, decisiones y trade-offs
+- `/` — presentación, stack técnico, contacto
+- `/sobre-mi` — experiencia, educación, CV descargable
+- `/proyectos` — proyectos personales y académicos, con filtro por tecnología
+- `servidor/` — arquitectura del homeserver: diagrama, stack, decisiones y trade-offs, más el contador de uptime real
 
 ## Estructura
 
-- `md/` ficheros fuentes en Markdown de cada página.
-- `html/` el sitio generado, tal cual se sirve.
-- `build.sh` convierte `md/` a `html/` vía pandoc + prettier.
-- `service/` unit de systemd para publicar el uptime del servidor; se instala aparte, en el host real.
-
-## Generar el sitio
-
-```bash
-./build.sh
+```
+app/          rutas del portfolio (Next.js App Router)
+components/   componentes React compartidos
+content/      datos tipados (proyectos, experiencia, skills, links)
+public/       assets del portfolio (cv.pdf, foto.jpg — gitignored)
+servidor/     página estática de arquitectura, deploy aparte vía Funnel
+service/      unit de systemd que escribe servidor/boot.json en el host real
 ```
 
-Requiere `pandoc` y `npx` (para `prettier`) instalados.
+## Desarrollo
+
+```bash
+npm install
+npm run dev
+```
+
+## Build (portfolio)
+
+```bash
+npm run build
+```
+
+Genera `out/` estático (`output: 'export'` en `next.config.ts`). Es lo que Vercel deploya; configurar el proyecto de Vercel con Root Directory en la raíz del repo.
+
+## Deploy de `servidor/`
+
+Sin build. Se sirve tal cual desde el homeserver real vía Tailscale Funnel — copiar/sincronizar la carpeta `servidor/` al doc root correspondiente. `boot.json` lo escribe `service/write-boot-time.service` en el host real (`DOC_ROOT` debe apuntar ahí).
 
 ## Repo relacionado
 

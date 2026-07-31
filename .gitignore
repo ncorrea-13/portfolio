@@ -1,3 +1,14 @@
-boot.json
-html/cv.pdf
-html/foto.jpg
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+
+# misc
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+
+# personal files, not committed
+servidor/boot.json
