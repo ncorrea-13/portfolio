@@ -1,18 +1,22 @@
 export const skillGroups = [
   {
     label: "Backend",
-    tags: ["Java · Spring Boot", "GraphQL · RabbitMQ", "Node.js · Express.js", "PL/SQL", "PostgreSQL"],
+    tags: ["Java", "Spring Boot", "GraphQL", "RabbitMQ", "Node.js", "Express.js", "PL/SQL", "PostgreSQL"],
   },
   {
-    label: "Frontend",
-    tags: ["JavaScript · TypeScript", "Node.js · React · Next.js", "Oracle APEX"],
+    label: "Infraestructura",
+    tags: ["Bash", "Docker", "Podman", "Linux avanzado", "Microservicios", "Redes", "Wireguard"],
+  },
+  {
+    label: "Sistemas",
+    tags: ["Go", "Rust"],
   },
   {
     label: "Seguridad ofensiva",
     tags: ["Nmap", "Burp Suite", "OSINT", "Python"],
   },
   {
-    label: "Infraestructura",
-    tags: ["Bash", "Docker", "Linux avanzado", "Microservicios", "Podman", "Redes", "Wireguard"],
+    label: "Frontend",
+    tags: ["JavaScript", "TypeScript", "React", "Next.js", "Oracle APEX"],
   },
 ] as const;
