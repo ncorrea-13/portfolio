@@ -9,9 +9,7 @@
 <script>
   (function () {
     var stored = localStorage.getItem("theme");
-    if (stored) {
-      document.documentElement.setAttribute("data-theme", stored);
-    }
+    document.documentElement.setAttribute("data-theme", stored || "dark");
   })();
   function toggleTheme() {
     var current = document.documentElement.getAttribute("data-theme");
