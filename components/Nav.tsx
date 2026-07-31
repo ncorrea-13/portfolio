@@ -15,31 +15,31 @@ export function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav className="mx-auto flex max-w-3xl flex-wrap items-center gap-x-5 gap-y-2 px-6 pt-10 pb-6 font-sans text-sm">
-      {links.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          className={
-            pathname === link.href
-              ? "text-accent-strong"
-              : "text-muted hover:text-accent-strong"
-          }
+    <nav className="mx-auto flex max-w-3xl items-start justify-between gap-4 px-6 pt-10 pb-6 font-sans text-sm">
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+        {links.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={
+              pathname === link.href
+                ? "text-accent-strong"
+                : "text-muted hover:text-accent-strong"
+            }
+          >
+            {link.label}
+          </Link>
+        ))}
+        <a
+          href={SERVIDOR_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted hover:text-accent-strong"
         >
-          {link.label}
-        </Link>
-      ))}
-      <a
-        href={SERVIDOR_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-muted hover:text-accent-strong"
-      >
-        Arquitectura del homeserver ↗
-      </a>
-      <div className="ml-auto">
-        <ThemeToggle />
+          Arquitectura del homeserver ↗
+        </a>
       </div>
+      <ThemeToggle />
     </nav>
   );
 }
