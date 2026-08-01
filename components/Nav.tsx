@@ -3,16 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
+import { LocaleToggle } from "./LocaleToggle";
+import { useLocale } from "./LocaleProvider";
 import { SERVIDOR_URL } from "@/content/site";
 
 const links = [
-  { href: "/", label: "Inicio" },
-  { href: "/sobre-mi", label: "Sobre mí" },
-  { href: "/proyectos", label: "Proyectos" },
+  { href: "/", label: { es: "Inicio", en: "Home" } },
+  { href: "/sobre-mi", label: { es: "Sobre mí", en: "About" } },
+  { href: "/proyectos", label: { es: "Proyectos", en: "Projects" } },
 ];
 
 export function Nav() {
   const pathname = usePathname();
+  const { locale } = useLocale();
 
   return (
     <nav className="mx-auto flex max-w-3xl items-start justify-between gap-4 px-6 pt-10 pb-6 font-sans text-sm">
@@ -27,7 +30,7 @@ export function Nav() {
                 : "text-muted hover:text-accent-strong"
             }
           >
-            {link.label}
+            {locale === "en" ? link.label.en : link.label.es}
           </Link>
         ))}
         <a
@@ -36,10 +39,16 @@ export function Nav() {
           rel="noopener noreferrer"
           className="text-muted hover:text-accent-strong"
         >
-          Arquitectura del homeserver ↗
+          {locale === "en"
+            ? "Homeserver architecture"
+            : "Arquitectura del homeserver"}{" "}
+          ↗
         </a>
       </div>
-      <ThemeToggle />
+      <div className="flex shrink-0 items-center gap-2">
+        <LocaleToggle />
+        <ThemeToggle />
+      </div>
     </nav>
   );
 }
