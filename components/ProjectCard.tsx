@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Project } from "@/content/projects";
+import { useLocale } from "./LocaleProvider";
 
 const gradients = [
   "linear-gradient(135deg, var(--accent-strong), var(--accent-warm))",
@@ -11,10 +12,21 @@ const gradients = [
 ];
 
 function initials(name: string) {
-  return name.replace(/[^a-zA-Z0-9]/g, "").slice(0, 2).toUpperCase();
+  return name
+    .replace(/[^a-zA-Z0-9]/g, "")
+    .slice(0, 2)
+    .toUpperCase();
 }
 
-export function ProjectCard({ project, index = 0 }: { project: Project; index?: number }) {
+export function ProjectCard({
+  project,
+  index = 0,
+}: {
+  project: Project;
+  index?: number;
+}) {
+  const { locale } = useLocale();
+
   return (
     <motion.a
       href={project.url}
@@ -48,10 +60,14 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
             {project.name}
           </span>
           {project.license && (
-            <span className="font-mono text-xs text-muted">{project.license}</span>
+            <span className="font-mono text-xs text-muted">
+              {project.license}
+            </span>
           )}
         </div>
-        <p className="mt-1.5 text-[15px]">{project.desc}</p>
+        <p className="mt-1.5 text-[15px]">
+          {locale === "en" ? project.desc.en : project.desc.es}
+        </p>
         <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-3">
           {project.stack.map((tech) => (
             <span

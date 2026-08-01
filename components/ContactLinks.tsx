@@ -5,7 +5,14 @@ const btnClass =
 
 function MailIcon() {
   return (
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      viewBox="0 0 24 24"
+      width="16"
+      height="16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <rect x="3" y="5" width="18" height="14" rx="2" />
       <path d="m3 7 9 6 9-6" />
     </svg>
@@ -30,7 +37,14 @@ function GitHubIcon() {
 
 function WhatsAppIcon() {
   return (
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      viewBox="0 0 24 24"
+      width="16"
+      height="16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
     </svg>
   );
@@ -42,13 +56,28 @@ export function ContactLinks({ className = "" }: { className?: string }) {
       <a href={`mailto:${EMAIL}`} className={btnClass}>
         <MailIcon /> Mail
       </a>
-      <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className={btnClass}>
+      <a
+        href={LINKEDIN_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={btnClass}
+      >
         <LinkedInIcon /> LinkedIn
       </a>
-      <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className={btnClass}>
+      <a
+        href={GITHUB_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={btnClass}
+      >
         <GitHubIcon /> GitHub
       </a>
-      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={btnClass}>
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={btnClass}
+      >
         <WhatsAppIcon /> WhatsApp
       </a>
     </div>

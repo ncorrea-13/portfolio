@@ -1,45 +1,57 @@
 export const experience = [
   {
-    role: "Desarrollador de Software Full-Stack",
+    role: {
+      es: "Desarrollador de Software Full-Stack",
+      en: "Full Stack Software Developer",
+    },
     org: "Aguas y Saneamiento Mendoza",
-    period: "Dic 2025 - Presente",
+    period: { es: "Dic 2025 - Presente", en: "Dec 2025 - Present" },
   },
   {
-    role: "Pasante de Sistemas",
+    role: { es: "Pasante de Sistemas", en: "Systems Intern" },
     org: "Caja Forense de Mendoza",
-    period: "Sep 2025 - Nov 2025",
+    period: { es: "Sep 2025 - Nov 2025", en: "Sep 2025 - Nov 2025" },
   },
   {
-    role: "Becario de desarrollo e investigación",
+    role: {
+      es: "Becario de desarrollo e investigación",
+      en: "Research and Development Fellow",
+    },
     org: "Laboratorio AuSegTIC, UTN - Beca BIS",
-    period: "Mar 2025 - Nov 2025",
+    period: { es: "Mar 2025 - Nov 2025", en: "Mar 2025 - Nov 2025" },
   },
   {
-    role: "Full Stack Developer Jr",
+    role: { es: "Full Stack Developer Jr", en: "Full Stack Developer Jr" },
     org: "Freelance",
-    period: "Dic 2024 - Feb 2025",
+    period: { es: "Dic 2024 - Feb 2025", en: "Dec 2024 - Feb 2025" },
   },
   {
-    role: "Back End Developer Jr",
+    role: { es: "Back End Developer Jr", en: "Back End Developer Jr" },
     org: "Qaizen",
-    period: "Feb 2023 - Jun 2023",
+    period: { es: "Feb 2023 - Jun 2023", en: "Feb 2023 - Jun 2023" },
   },
 ] as const;
 
 export const education = [
   {
-    title: "Ingeniería en Sistemas de Información",
+    title: {
+      es: "Ingeniería en Sistemas de Información",
+      en: "Systems Engineering",
+    },
     org: "UTN Facultad Regional Mendoza",
-    period: "2022 - Presente",
+    period: { es: "2022 - Presente", en: "2022 - Present" },
   },
   {
-    title: "Full-Stack Java Web Developer",
+    title: {
+      es: "Full-Stack Java Web Developer",
+      en: "Full-Stack Java Web Developer",
+    },
     org: "Egg Education (Beca DAD, 500hs)",
-    period: "Nov 2021 - Oct 2022",
+    period: { es: "Nov 2021 - Oct 2022", en: "Nov 2021 - Oct 2022" },
   },
   {
-    title: "Inglés B2",
+    title: { es: "Inglés B2", en: "English B2" },
     org: "Instituto Cultural de Mendoza",
-    period: "2018 - 2024",
+    period: { es: "2018 - 2024", en: "2018 - 2024" },
   },
 ] as const;

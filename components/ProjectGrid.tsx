@@ -4,11 +4,16 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { projects, filters } from "@/content/projects";
 import { ProjectCard } from "./ProjectCard";
+import { useLocale } from "./LocaleProvider";
 
 export function ProjectGrid() {
   const [active, setActive] = useState<string>("all");
+  const { locale } = useLocale();
 
-  const visible = active === "all" ? projects : projects.filter((p) => p.tags.includes(active));
+  const visible =
+    active === "all"
+      ? projects
+      : projects.filter((p) => p.tags.includes(active));
 
   return (
     <div>
@@ -25,11 +30,14 @@ export function ProjectGrid() {
             }
             style={
               active === f.key
-                ? { backgroundImage: "linear-gradient(135deg, var(--accent-strong), var(--accent-warm))" }
+                ? {
+                    backgroundImage:
+                      "linear-gradient(135deg, var(--accent-strong), var(--accent-warm))",
+                  }
                 : undefined
             }
           >
-            {f.label}
+            {locale === "en" ? f.label.en : f.label.es}
           </button>
         ))}
       </div>
