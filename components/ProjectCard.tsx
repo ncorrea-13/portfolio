@@ -16,7 +16,10 @@ function initials(name: string) {
 
 export function ProjectCard({ project, index = 0 }: { project: Project; index?: number }) {
   return (
-    <motion.div
+    <motion.a
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
       className="group flex h-full flex-col overflow-hidden rounded-lg border border-card-border bg-card-bg"
@@ -40,14 +43,14 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
         )}
       </div>
       <div className="flex flex-1 flex-col p-4">
-        <a
-          href={project.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-sans font-semibold text-heading hover:text-accent-strong"
-        >
-          {project.name}
-        </a>
+        <div className="flex items-center justify-between gap-2">
+          <span className="font-sans font-semibold text-heading group-hover:text-accent-strong">
+            {project.name}
+          </span>
+          {project.license && (
+            <span className="font-mono text-xs text-muted">{project.license}</span>
+          )}
+        </div>
         <p className="mt-1.5 text-[15px]">{project.desc}</p>
         <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-3">
           {project.stack.map((tech) => (
@@ -58,11 +61,8 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
               {tech}
             </span>
           ))}
-          {project.license && (
-            <span className="ml-auto font-mono text-xs text-muted">{project.license}</span>
-          )}
         </div>
       </div>
-    </motion.div>
+    </motion.a>
   );
 }
