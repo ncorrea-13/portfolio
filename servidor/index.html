@@ -29,7 +29,9 @@
   </head>
   <body>
     <nav class="site-nav">
-      <a href="https://www.ncorrea.com.ar" data-i18n="navBack">← Volver al portfolio</a>
+      <a href="https://www.ncorrea.com.ar" data-i18n="navBack"
+        >← Volver al portfolio</a
+      >
       <div class="nav-toggles">
         <button
           class="lang-toggle"
@@ -60,17 +62,16 @@
     <h2 data-i18n="philosophyH2">Filosofía</h2>
 
     <p data-i18n="philosophyP1">
-      Infraestructura privada, modular y de bajo mantenimiento. Sin telemetría,
-      sin dependencia de servicios cloud comerciales, con cero puertos expuestos
-      al público salvo esta misma web. Actualmente de forma dinámica administro
-      la apertura al público por Tailscale Funnel a medida de mis necesidades.
+      Infraestructura privada, modular y de bajo mantenimiento. Sin dependencia
+      de servicios cloud comerciales, con cero puertos expuestos al público
+      salvo esta misma web. Actualmente de forma dinámica administro la apertura
+      al público por Tailscale Funnel a medida de mis necesidades.
     </p>
 
     <p data-i18n="philosophyP2">
       Cada stack corre como un pod de Podman independiente, gestionado como
-      servicio de <code>systemd</code> a nivel usuario. Esto mantiene las
-      responsabilidades aisladas: reiniciar o actualizar un pod no afecta a los
-      demás.
+      servicio de systemd a nivel usuario. Esto mantiene las responsabilidades
+      aisladas: reiniciar o actualizar un pod no afecta a los demás.
     </p>
 
     <h2 data-i18n="archH2">Arquitectura</h2>
@@ -221,7 +222,9 @@ graph TD
         expuesta a internet, mediante Cludflare Tunnel sobre una ruta
         específica. Es HTML/CSS/JS estático, sin backend ni contenedor propio.
       </li>
-      <li data-i18n="note4"><strong>Cockpit:</strong> corre directamente en el host.</li>
+      <li data-i18n="note4">
+        <strong>Cockpit:</strong> corre directamente en el host.
+      </li>
       <li data-i18n="note5">
         <strong>Webhook:</strong> API que corre en el host. Su función es la
         habilitación dinámica de Tailscale Funnel. Permite instanciar en
@@ -253,7 +256,9 @@ graph TD
       <li data-i18n="stack1">
         <strong>Hardware:</strong> Lenovo ThinkCentre M700 (i3-6100T, 8GB RAM)
       </li>
-      <li data-i18n="stack2"><strong>Sistema operativo:</strong> Debian 13 Trixie</li>
+      <li data-i18n="stack2">
+        <strong>Sistema operativo:</strong> Debian 13 Trixie
+      </li>
       <li data-i18n="stack3">
         <strong>Contenedores:</strong> Podman rootless con
         <code>podman-compose</code>, orquestado vía <code>systemd</code> a nivel
@@ -365,7 +370,9 @@ graph TD
 
     <h2 data-i18n="openSourceH2">Código abierto</h2>
 
-    <p data-i18n="openSourceP1">La configuración completa está disponible en el repositorio:</p>
+    <p data-i18n="openSourceP1">
+      La configuración completa está disponible en el repositorio:
+    </p>
     <p>
       <a href="https://github.com/ncorrea-13/homeserver"
         >github.com/ncorrea-13/homeserver</a
@@ -404,9 +411,9 @@ graph TD
           uptimeCalculating: "calculando…",
           philosophyH2: "Filosofía",
           philosophyP1:
-            "Infraestructura privada, modular y de bajo mantenimiento. Sin telemetría, sin dependencia de servicios cloud comerciales, con cero puertos expuestos al público salvo esta misma web. Actualmente de forma dinámica administro la apertura al público por Tailscale Funnel a medida de mis necesidades.",
+            "Infraestructura privada, modular y de bajo mantenimiento. Sin dependencia de servicios cloud comerciales, con cero puertos expuestos al público salvo esta misma web. Actualmente de forma dinámica administro la apertura al público por Tailscale Funnel a medida de mis necesidades.",
           philosophyP2:
-            "Cada stack corre como un pod de Podman independiente, gestionado como servicio de <code>systemd</code> a nivel usuario. Esto mantiene las responsabilidades aisladas: reiniciar o actualizar un pod no afecta a los demás.",
+            "Cada stack corre como un pod de Podman independiente, gestionado como servicio de systemd a nivel usuario. Esto mantiene las responsabilidades aisladas: reiniciar o actualizar un pod no afecta a los demás.",
           archH2: "Arquitectura",
           archImgAlt:
             "Diagrama de las dos rutas de entrada al homeserver: Cludflare Tunnel hacia esta página, y Tailscale WireGuard hacia el resto del homeserver y sus pods",
@@ -430,7 +437,8 @@ graph TD
           note9:
             "<strong>DNS:</strong> Pi-hole filtra consultas y las reenvía a Unbound, que sale a los servidores de Mullvad exclusivamente vía DoT.",
           stackH2: "Stack técnico",
-          stack1: "<strong>Hardware:</strong> Lenovo ThinkCentre M700 (i3-6100T, 8GB RAM)",
+          stack1:
+            "<strong>Hardware:</strong> Lenovo ThinkCentre M700 (i3-6100T, 8GB RAM)",
           stack2: "<strong>Sistema operativo:</strong> Debian 13 Trixie",
           stack3:
             "<strong>Contenedores:</strong> Podman rootless con <code>podman-compose</code>, orquestado vía <code>systemd</code> a nivel usuario",
@@ -475,7 +483,8 @@ graph TD
           cockpitP3:
             "La solución fue configurar Cockpit para escuchar en HTTP plano localmente y agregar el dominio de Tailscale a los orígenes permitidos en la configuración de Cockpit, para que dejara de tratar esas requests como intentos de CSRF.",
           openSourceH2: "Código abierto",
-          openSourceP1: "La configuración completa está disponible en el repositorio:",
+          openSourceP1:
+            "La configuración completa está disponible en el repositorio:",
           footer: "Última actualización: julio 2026",
           uptimePrefix: "El último reinicio fue el ",
           uptimeFallbackLabel: "Activo desde",
@@ -488,9 +497,9 @@ graph TD
           uptimeCalculating: "calculating…",
           philosophyH2: "Philosophy",
           philosophyP1:
-            "Private, modular infrastructure with low maintenance. No telemetry, no dependency on commercial cloud services, and zero ports open to the public except this page. I dynamically manage public access through Tailscale Funnel based on my needs.",
+            "Private, modular infrastructure with low maintenance. No dependency on commercial cloud services, and zero ports open to the public except this page. I dynamically manage public access through Tailscale Funnel based on my needs.",
           philosophyP2:
-            "Each stack runs as an independent Podman pod, managed as a user level <code>systemd</code> service. This keeps responsibilities isolated. Restarting or updating one pod does not affect the others.",
+            "Each stack runs as an independent Podman pod, managed as a user level systemd service. This keeps responsibilities isolated. Restarting or updating one pod does not affect the others.",
           archH2: "Architecture",
           archImgAlt:
             "Diagram of the two entry paths to the homeserver. Cloudflare Tunnel leads to this page, and Tailscale WireGuard leads to the rest of the homeserver and its pods.",
@@ -514,7 +523,8 @@ graph TD
           note9:
             "<strong>DNS:</strong> Pi-hole filters queries and forwards them to Unbound, which reaches Mullvad's servers exclusively over DoT.",
           stackH2: "Technical stack",
-          stack1: "<strong>Hardware:</strong> Lenovo ThinkCentre M700 (i3-6100T, 8GB RAM)",
+          stack1:
+            "<strong>Hardware:</strong> Lenovo ThinkCentre M700 (i3-6100T, 8GB RAM)",
           stack2: "<strong>Operating system:</strong> Debian 13 Trixie",
           stack3:
             "<strong>Containers:</strong> rootless Podman with <code>podman-compose</code>, orchestrated through a user level <code>systemd</code> service",
@@ -559,7 +569,8 @@ graph TD
           cockpitP3:
             "The fix was to set Cockpit to listen on plain HTTP locally and add the Tailscale domain to the allowed origins in Cockpit's configuration, so it would stop treating those requests as CSRF attempts.",
           openSourceH2: "Open source",
-          openSourceP1: "The full configuration is available in the repository:",
+          openSourceP1:
+            "The full configuration is available in the repository:",
           footer: "Last updated: July 2026",
           uptimePrefix: "The last restart was on ",
           uptimeFallbackLabel: "Active since",
@@ -586,7 +597,8 @@ graph TD
           counterEl.textContent = dict.uptimeCalculating;
           return;
         }
-        labelEl.textContent = dict.uptimePrefix + formatFecha(new Date(bootEpoch * 1000), lang);
+        labelEl.textContent =
+          dict.uptimePrefix + formatFecha(new Date(bootEpoch * 1000), lang);
       }
 
       function updateCounter() {
@@ -612,15 +624,20 @@ graph TD
           var key = el.getAttribute("data-i18n-alt");
           if (dict[key] !== undefined) el.alt = dict[key];
         });
-        document.getElementById("theme-toggle").setAttribute(
-          "aria-label",
-          lang === "en" ? "Switch theme" : "Cambiar tema",
-        );
-        document.getElementById("lang-toggle").setAttribute(
-          "aria-label",
-          lang === "en" ? "Switch language" : "Cambiar idioma",
-        );
-        document.getElementById("lang-toggle").textContent = lang === "en" ? "ES" : "EN";
+        document
+          .getElementById("theme-toggle")
+          .setAttribute(
+            "aria-label",
+            lang === "en" ? "Switch theme" : "Cambiar tema",
+          );
+        document
+          .getElementById("lang-toggle")
+          .setAttribute(
+            "aria-label",
+            lang === "en" ? "Switch language" : "Cambiar idioma",
+          );
+        document.getElementById("lang-toggle").textContent =
+          lang === "en" ? "ES" : "EN";
         renderUptime(lang);
       }
 
@@ -646,8 +663,10 @@ graph TD
           })
           .catch(function () {
             var lang = document.documentElement.lang === "en" ? "en" : "es";
-            document.getElementById("uptime-label").textContent = translations[lang].uptimeFallbackLabel;
-            document.getElementById("uptime-counter").textContent = translations[lang].uptimeUnavailable;
+            document.getElementById("uptime-label").textContent =
+              translations[lang].uptimeFallbackLabel;
+            document.getElementById("uptime-counter").textContent =
+              translations[lang].uptimeUnavailable;
           });
       });
     </script>
