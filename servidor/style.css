@@ -194,9 +194,16 @@ strong {
   color: var(--heading);
 }
 
-.theme-toggle {
+.nav-toggles {
   margin-left: auto;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-toggle,
+.lang-toggle {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   color: var(--heading);
@@ -209,8 +216,14 @@ strong {
   align-items: center;
   justify-content: center;
 }
-.theme-toggle:hover {
+.theme-toggle:hover,
+.lang-toggle:hover {
   border-color: var(--accent-strong);
+}
+.lang-toggle {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
 }
 
 /* Uptime counter */

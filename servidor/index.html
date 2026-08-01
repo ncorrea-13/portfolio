@@ -29,47 +29,59 @@
   </head>
   <body>
     <nav class="site-nav">
-      <a href="https://www.ncorrea.com.ar">← Volver al portfolio</a>
-      <button
-        class="theme-toggle"
-        id="theme-toggle"
-        aria-label="Cambiar tema"
-        onclick="toggleTheme()"
-      >
-        ◐
-      </button>
+      <a href="https://www.ncorrea.com.ar" data-i18n="navBack">← Volver al portfolio</a>
+      <div class="nav-toggles">
+        <button
+          class="lang-toggle"
+          id="lang-toggle"
+          aria-label="Cambiar idioma"
+          onclick="toggleLocale()"
+        >
+          EN
+        </button>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Cambiar tema"
+          onclick="toggleTheme()"
+        >
+          ◐
+        </button>
+      </div>
     </nav>
 
-    <h1>Arquitectura del homeserver</h1>
+    <h1 data-i18n="h1">Arquitectura del homeserver</h1>
 
     <div class="uptime-box compact">
       <p class="uptime-label" id="uptime-label">El último reinicio fue el …</p>
       <p class="uptime-value" id="uptime-counter">calculando…</p>
     </div>
 
-    <h2>Filosofía</h2>
+    <h2 data-i18n="philosophyH2">Filosofía</h2>
 
-    <p>
+    <p data-i18n="philosophyP1">
       Infraestructura privada, modular y de bajo mantenimiento. Sin telemetría,
       sin dependencia de servicios cloud comerciales, con cero puertos expuestos
       al público salvo esta misma web. Actualmente de forma dinámica administro
       la apertura al público por Tailscale Funnel a medida de mis necesidades.
     </p>
 
-    <p>
+    <p data-i18n="philosophyP2">
       Cada stack corre como un pod de Podman independiente, gestionado como
       servicio de <code>systemd</code> a nivel usuario. Esto mantiene las
       responsabilidades aisladas: reiniciar o actualizar un pod no afecta a los
       demás.
     </p>
 
-    <h2>Arquitectura</h2>
+    <h2 data-i18n="archH2">Arquitectura</h2>
 
     <img
       src="diagrama-arquitectura.svg"
       alt="Diagrama de las dos rutas de entrada al homeserver: Cludflare Tunnel hacia esta página, y Tailscale WireGuard hacia el resto del homeserver y sus pods"
+      data-i18n-alt="archImgAlt"
       style="width: 100%; height: auto"
     />
+    <p class="diagram-note" data-i18n="diagramNote"></p>
 
     <pre class="mermaid">
 graph TD
@@ -191,126 +203,126 @@ graph TD
     class Mullvad dns;
 </pre>
 
-    <h3>Notas de arquitectura</h3>
+    <h3 data-i18n="notesH3">Notas de arquitectura</h3>
 
     <ul>
-      <li>
+      <li data-i18n="note1">
         <strong>Acceso único:</strong> todo el tráfico pasa exclusivamente por
         Tailscale; el único puerto permitido de entrada es 22/SSH por red LAN.
         Los puertos de cada servicio se redirigen internamente para el proxy de
         Tailscale.
       </li>
-      <li>
+      <li data-i18n="note2">
         <strong>Tailscale:</strong> actúa como proxy único hacia todos los
         servicios y provee SSL en todos los casos.
       </li>
-      <li>
+      <li data-i18n="note3">
         <strong>Esta página:</strong> única excepción siempre disponible y
         expuesta a internet, mediante Cludflare Tunnel sobre una ruta
         específica. Es HTML/CSS/JS estático, sin backend ni contenedor propio.
       </li>
-      <li><strong>Cockpit:</strong> corre directamente en el host.</li>
-      <li>
+      <li data-i18n="note4"><strong>Cockpit:</strong> corre directamente en el host.</li>
+      <li data-i18n="note5">
         <strong>Webhook:</strong> API que corre en el host. Su función es la
         habilitación dinámica de Tailscale Funnel. Permite instanciar en
         Homepage botones con scripts en bash para habilitar la salida de
         servicios de forma dinámica.
       </li>
-      <li>
+      <li data-i18n="note6">
         <strong>Podman:</strong> motor rootless que orquesta todos los pods de
         servicios.
       </li>
-      <li>
+      <li data-i18n="note7">
         <strong>Bases de datos:</strong> Immich y Miniflux poseen sus
         contenedores de base de datos. Se omiten en el diagrama.
       </li>
-      <li>
+      <li data-i18n="note8">
         <strong>Discos:</strong> un SSD de 120GB exclusivo del sistema
         operativo. Un SSD concentra toda la información como disco de datos. Los
         dos HDD son destino de backups diario y semanal respectivamente.
       </li>
-      <li>
+      <li data-i18n="note9">
         <strong>DNS:</strong> Pi-hole filtra consultas y las reenvía a Unbound,
         que sale a los servidores de Mullvad exclusivamente vía DoT.
       </li>
     </ul>
 
-    <h2>Stack técnico</h2>
+    <h2 data-i18n="stackH2">Stack técnico</h2>
 
     <ul>
-      <li>
+      <li data-i18n="stack1">
         <strong>Hardware:</strong> Lenovo ThinkCentre M700 (i3-6100T, 8GB RAM)
       </li>
-      <li><strong>Sistema operativo:</strong> Debian 13 Trixie</li>
-      <li>
+      <li data-i18n="stack2"><strong>Sistema operativo:</strong> Debian 13 Trixie</li>
+      <li data-i18n="stack3">
         <strong>Contenedores:</strong> Podman rootless con
         <code>podman-compose</code>, orquestado vía <code>systemd</code> a nivel
         usuario
       </li>
-      <li>
+      <li data-i18n="stack4">
         <strong>Red:</strong> Tailscale (WireGuard) sin puertos abiertos en el
         router
       </li>
-      <li>
+      <li data-i18n="stack5">
         <strong>Administración:</strong> Cockpit para monitoreo de sistema y
         contenedores
       </li>
     </ul>
 
-    <h2>Servicios</h2>
+    <h2 data-i18n="servicesH2">Servicios</h2>
 
-    <p>
+    <p data-i18n="service1">
       <strong>Core</strong> — Vaultwarden (contraseñas), Radicale (calendarios y
       contactos)
     </p>
-    <p>
+    <p data-i18n="service2">
       <strong>Gateway</strong> — Pi-hole (bloqueo de publicidad), Unbound (DNS
       recursivo con DoT)
     </p>
-    <p>
+    <p data-i18n="service3">
       <strong>Immich</strong> — Backup y galería de fotos y videos con búsqueda
       por ML
     </p>
-    <p>
+    <p data-i18n="service4">
       <strong>Entertainment</strong> — Miniflux (RSS), Suwayomi (lector de
       comics), Kavita (biblioteca digital)
     </p>
-    <p>
+    <p data-i18n="service5">
       <strong>Storage</strong> — Syncthing (sincronización), Filebrowser
       (gestión de archivos)
     </p>
-    <p>
+    <p data-i18n="service6">
       <strong>Utils</strong> — Homepage (dashboard), Uptime Kuma (monitoreo),
       Ntfy (notificaciones push)
     </p>
 
-    <h2>Decisiones técnicas</h2>
+    <h2 data-i18n="decisionsH2">Decisiones técnicas</h2>
 
     <ul>
-      <li>
+      <li data-i18n="decision1">
         <strong>Debian Trixie:</strong> prioricé estabilidad y soporte de
         paquetes para un servidor que se va a encontrar siempre disponible y no
         debe recibir actualizaciones ni reinicios de forma inesperada.
       </li>
-      <li>
+      <li data-i18n="decision2">
         <strong>Podman:</strong> menor superficie de ataque al no depender de un
         daemon corriendo como root.
       </li>
-      <li>
+      <li data-i18n="decision3">
         <strong>Tailscale:</strong> cero puertos abiertos en el router, evitando
         fallas de seguridad y accesos no deseados.
       </li>
-      <li>
+      <li data-i18n="decision4">
         <strong>Exposición pública temporal:</strong> solo esta página queda
         fija en Tunnel; el resto de los servicios se exponen puntualmente y se
         apagan al terminar de usarlos.
       </li>
     </ul>
 
-    <h2>Trade-offs de arquitectura</h2>
+    <h2 data-i18n="tradeoffsH2">Trade-offs de arquitectura</h2>
 
-    <h3>Orígenes del proyecto</h3>
-    <p>
+    <h3 data-i18n="originsH3">Orígenes del proyecto</h3>
+    <p data-i18n="originsP">
       Mi servidor personal inició por medio de una instancia de una Raspberry Pi
       4b. Fue el motor que incentivó tanto este proyecto. En el día a día me
       sirve tanto para aprender como para proveer los servicios sin pagos de
@@ -320,8 +332,8 @@ graph TD
       cualquier inconveniente que pueda llegar a ocurrir.
     </p>
 
-    <h3>Self-hosted vs. cloud</h3>
-    <p>
+    <h3 data-i18n="selfhostedH3">Self-hosted vs. cloud</h3>
+    <p data-i18n="selfhostedP">
       Siempre el criterio de elección fue el mismo: privacidad y control sobre
       datos sensibles. El costo es mantenimiento propio, backups,
       actualizaciones y disponibilidad que en un servicio cloud vendría resuelto
@@ -330,30 +342,30 @@ graph TD
       homeserver.
     </p>
 
-    <h3>Cockpit detrás de Tailscale Serve</h3>
-    <p>
+    <h3 data-i18n="cockpitH3">Cockpit detrás de Tailscale Serve</h3>
+    <p data-i18n="cockpitP1">
       Cockpit ya sirve su propia interfaz por HTTPS con certificado autofirmado.
       Al exponerlo detrás de <code>tailscale serve</code>, que también termina
       TLS, el resultado era una segunda capa de cifrado envolviendo a la
       primera. El navegador recibía una respuesta cifrada dos veces y fallaba al
       renderizar la interfaz.
     </p>
-    <p>
+    <p data-i18n="cockpitP2">
       Sumado a eso, Cockpit valida el header <code>Origin</code> de cada request
       como protección CSRF. Al llegar las requests desde el dominio de Tailscale
       en vez del hostname local que Cockpit esperaba, las rechazaba
       silenciosamente.
     </p>
-    <p>
+    <p data-i18n="cockpitP3">
       La solución fue configurar Cockpit para escuchar en HTTP plano localmente
       y agregar el dominio de Tailscale a los orígenes permitidos en la
       configuración de Cockpit, para que dejara de tratar esas requests como
       intentos de CSRF.
     </p>
 
-    <h2>Código abierto</h2>
+    <h2 data-i18n="openSourceH2">Código abierto</h2>
 
-    <p>La configuración completa está disponible en el repositorio:</p>
+    <p data-i18n="openSourceP1">La configuración completa está disponible en el repositorio:</p>
     <p>
       <a href="https://github.com/ncorrea-13/homeserver"
         >github.com/ncorrea-13/homeserver</a
@@ -364,7 +376,7 @@ graph TD
 
     <p>
       <small
-        >Última actualización: julio 2026 ·
+        ><span data-i18n="footer">Última actualización: julio 2026</span> ·
         <a href="https://github.com/ncorrea-13/portfolio/blob/main/LICENSE"
           >MIT License</a
         ></small
@@ -384,29 +396,243 @@ graph TD
       });
     </script>
     <script>
-      (function () {
-        var counterEl = document.getElementById("uptime-counter");
+      var translations = {
+        es: {
+          navBack: "← Volver al portfolio",
+          h1: "Arquitectura del homeserver",
+          uptimeLabelPlaceholder: "El último reinicio fue el …",
+          uptimeCalculating: "calculando…",
+          philosophyH2: "Filosofía",
+          philosophyP1:
+            "Infraestructura privada, modular y de bajo mantenimiento. Sin telemetría, sin dependencia de servicios cloud comerciales, con cero puertos expuestos al público salvo esta misma web. Actualmente de forma dinámica administro la apertura al público por Tailscale Funnel a medida de mis necesidades.",
+          philosophyP2:
+            "Cada stack corre como un pod de Podman independiente, gestionado como servicio de <code>systemd</code> a nivel usuario. Esto mantiene las responsabilidades aisladas: reiniciar o actualizar un pod no afecta a los demás.",
+          archH2: "Arquitectura",
+          archImgAlt:
+            "Diagrama de las dos rutas de entrada al homeserver: Cludflare Tunnel hacia esta página, y Tailscale WireGuard hacia el resto del homeserver y sus pods",
+          diagramNote: "",
+          notesH3: "Notas de arquitectura",
+          note1:
+            "<strong>Acceso único:</strong> todo el tráfico pasa exclusivamente por Tailscale; el único puerto permitido de entrada es 22/SSH por red LAN. Los puertos de cada servicio se redirigen internamente para el proxy de Tailscale.",
+          note2:
+            "<strong>Tailscale:</strong> actúa como proxy único hacia todos los servicios y provee SSL en todos los casos.",
+          note3:
+            "<strong>Esta página:</strong> única excepción siempre disponible y expuesta a internet, mediante Cludflare Tunnel sobre una ruta específica. Es HTML/CSS/JS estático, sin backend ni contenedor propio.",
+          note4: "<strong>Cockpit:</strong> corre directamente en el host.",
+          note5:
+            "<strong>Webhook:</strong> API que corre en el host. Su función es la habilitación dinámica de Tailscale Funnel. Permite instanciar en Homepage botones con scripts en bash para habilitar la salida de servicios de forma dinámica.",
+          note6:
+            "<strong>Podman:</strong> motor rootless que orquesta todos los pods de servicios.",
+          note7:
+            "<strong>Bases de datos:</strong> Immich y Miniflux poseen sus contenedores de base de datos. Se omiten en el diagrama.",
+          note8:
+            "<strong>Discos:</strong> un SSD de 120GB exclusivo del sistema operativo. Un SSD concentra toda la información como disco de datos. Los dos HDD son destino de backups diario y semanal respectivamente.",
+          note9:
+            "<strong>DNS:</strong> Pi-hole filtra consultas y las reenvía a Unbound, que sale a los servidores de Mullvad exclusivamente vía DoT.",
+          stackH2: "Stack técnico",
+          stack1: "<strong>Hardware:</strong> Lenovo ThinkCentre M700 (i3-6100T, 8GB RAM)",
+          stack2: "<strong>Sistema operativo:</strong> Debian 13 Trixie",
+          stack3:
+            "<strong>Contenedores:</strong> Podman rootless con <code>podman-compose</code>, orquestado vía <code>systemd</code> a nivel usuario",
+          stack4:
+            "<strong>Red:</strong> Tailscale (WireGuard) sin puertos abiertos en el router",
+          stack5:
+            "<strong>Administración:</strong> Cockpit para monitoreo de sistema y contenedores",
+          servicesH2: "Servicios",
+          service1:
+            "<strong>Core</strong> — Vaultwarden (contraseñas), Radicale (calendarios y contactos)",
+          service2:
+            "<strong>Gateway</strong> — Pi-hole (bloqueo de publicidad), Unbound (DNS recursivo con DoT)",
+          service3:
+            "<strong>Immich</strong> — Backup y galería de fotos y videos con búsqueda por ML",
+          service4:
+            "<strong>Entertainment</strong> — Miniflux (RSS), Suwayomi (lector de comics), Kavita (biblioteca digital)",
+          service5:
+            "<strong>Storage</strong> — Syncthing (sincronización), Filebrowser (gestión de archivos)",
+          service6:
+            "<strong>Utils</strong> — Homepage (dashboard), Uptime Kuma (monitoreo), Ntfy (notificaciones push)",
+          decisionsH2: "Decisiones técnicas",
+          decision1:
+            "<strong>Debian Trixie:</strong> prioricé estabilidad y soporte de paquetes para un servidor que se va a encontrar siempre disponible y no debe recibir actualizaciones ni reinicios de forma inesperada.",
+          decision2:
+            "<strong>Podman:</strong> menor superficie de ataque al no depender de un daemon corriendo como root.",
+          decision3:
+            "<strong>Tailscale:</strong> cero puertos abiertos en el router, evitando fallas de seguridad y accesos no deseados.",
+          decision4:
+            "<strong>Exposición pública temporal:</strong> solo esta página queda fija en Tunnel; el resto de los servicios se exponen puntualmente y se apagan al terminar de usarlos.",
+          tradeoffsH2: "Trade-offs de arquitectura",
+          originsH3: "Orígenes del proyecto",
+          originsP:
+            "Mi servidor personal inició por medio de una instancia de una Raspberry Pi 4b. Fue el motor que incentivó tanto este proyecto. En el día a día me sirve tanto para aprender como para proveer los servicios sin pagos de suscripción. Actualmente esa Raspberry Pi se encuentra vinculada al nodo principal permitiendo redundancia para los servicios primordiales como Vaultwarden, Pihole o Unbound. Así mantengo una alta disponibilidad ante cualquier inconveniente que pueda llegar a ocurrir.",
+          selfhostedH3: "Self-hosted vs. cloud",
+          selfhostedP:
+            "Siempre el criterio de elección fue el mismo: privacidad y control sobre datos sensibles. El costo es mantenimiento propio, backups, actualizaciones y disponibilidad que en un servicio cloud vendría resuelto de fábrica. Para este tipo de datos, priorizo ese control incluso a costa del trabajo extra. Este fue el principio para la construcción de este homeserver.",
+          cockpitH3: "Cockpit detrás de Tailscale Serve",
+          cockpitP1:
+            "Cockpit ya sirve su propia interfaz por HTTPS con certificado autofirmado. Al exponerlo detrás de <code>tailscale serve</code>, que también termina TLS, el resultado era una segunda capa de cifrado envolviendo a la primera. El navegador recibía una respuesta cifrada dos veces y fallaba al renderizar la interfaz.",
+          cockpitP2:
+            "Sumado a eso, Cockpit valida el header <code>Origin</code> de cada request como protección CSRF. Al llegar las requests desde el dominio de Tailscale en vez del hostname local que Cockpit esperaba, las rechazaba silenciosamente.",
+          cockpitP3:
+            "La solución fue configurar Cockpit para escuchar en HTTP plano localmente y agregar el dominio de Tailscale a los orígenes permitidos en la configuración de Cockpit, para que dejara de tratar esas requests como intentos de CSRF.",
+          openSourceH2: "Código abierto",
+          openSourceP1: "La configuración completa está disponible en el repositorio:",
+          footer: "Última actualización: julio 2026",
+          uptimePrefix: "El último reinicio fue el ",
+          uptimeFallbackLabel: "Activo desde",
+          uptimeUnavailable: "uptime no disponible",
+        },
+        en: {
+          navBack: "← Back to portfolio",
+          h1: "Homeserver architecture",
+          uptimeLabelPlaceholder: "The last restart was on …",
+          uptimeCalculating: "calculating…",
+          philosophyH2: "Philosophy",
+          philosophyP1:
+            "Private, modular infrastructure with low maintenance. No telemetry, no dependency on commercial cloud services, and zero ports open to the public except this page. I dynamically manage public access through Tailscale Funnel based on my needs.",
+          philosophyP2:
+            "Each stack runs as an independent Podman pod, managed as a user level <code>systemd</code> service. This keeps responsibilities isolated. Restarting or updating one pod does not affect the others.",
+          archH2: "Architecture",
+          archImgAlt:
+            "Diagram of the two entry paths to the homeserver. Cloudflare Tunnel leads to this page, and Tailscale WireGuard leads to the rest of the homeserver and its pods.",
+          diagramNote: "(Diagram labels are in Spanish.)",
+          notesH3: "Architecture notes",
+          note1:
+            "<strong>Single access point:</strong> all traffic goes exclusively through Tailscale. The only inbound port allowed is 22/SSH over the LAN. Each service's ports are redirected internally for the Tailscale proxy.",
+          note2:
+            "<strong>Tailscale:</strong> acts as the single proxy for all services and provides SSL in every case.",
+          note3:
+            "<strong>This page:</strong> the only exception, always available and exposed to the internet through Cloudflare Tunnel on a specific route. It is static HTML, CSS, and JS, with no backend or container of its own.",
+          note4: "<strong>Cockpit:</strong> runs directly on the host.",
+          note5:
+            "<strong>Webhook:</strong> an API that runs on the host. Its job is to dynamically enable Tailscale Funnel. It lets me add buttons in Homepage with bash scripts to enable service exposure on demand.",
+          note6:
+            "<strong>Podman:</strong> the rootless engine that orchestrates all the service pods.",
+          note7:
+            "<strong>Databases:</strong> Immich and Miniflux each have their own database containers. They are left out of the diagram.",
+          note8:
+            "<strong>Disks:</strong> one 120GB SSD is dedicated to the operating system. One SSD holds all the data. The two HDDs receive daily and weekly backups.",
+          note9:
+            "<strong>DNS:</strong> Pi-hole filters queries and forwards them to Unbound, which reaches Mullvad's servers exclusively over DoT.",
+          stackH2: "Technical stack",
+          stack1: "<strong>Hardware:</strong> Lenovo ThinkCentre M700 (i3-6100T, 8GB RAM)",
+          stack2: "<strong>Operating system:</strong> Debian 13 Trixie",
+          stack3:
+            "<strong>Containers:</strong> rootless Podman with <code>podman-compose</code>, orchestrated through a user level <code>systemd</code> service",
+          stack4:
+            "<strong>Network:</strong> Tailscale (WireGuard) with no open ports on the router",
+          stack5:
+            "<strong>Administration:</strong> Cockpit for system and container monitoring",
+          servicesH2: "Services",
+          service1:
+            "<strong>Core:</strong> Vaultwarden (passwords), Radicale (calendars and contacts)",
+          service2:
+            "<strong>Gateway:</strong> Pi-hole (ad blocking), Unbound (recursive DNS with DoT)",
+          service3:
+            "<strong>Immich:</strong> backup and gallery for photos and videos, with ML powered search",
+          service4:
+            "<strong>Entertainment:</strong> Miniflux (RSS), Suwayomi (comic reader), Kavita (digital library)",
+          service5:
+            "<strong>Storage:</strong> Syncthing (sync), Filebrowser (file management)",
+          service6:
+            "<strong>Utils:</strong> Homepage (dashboard), Uptime Kuma (monitoring), Ntfy (push notifications)",
+          decisionsH2: "Technical decisions",
+          decision1:
+            "<strong>Debian Trixie:</strong> I prioritized stability and package support, since this server needs to stay available and should not get unexpected updates or restarts.",
+          decision2:
+            "<strong>Podman:</strong> a smaller attack surface, since it does not depend on a daemon running as root.",
+          decision3:
+            "<strong>Tailscale:</strong> zero open ports on the router, avoiding security gaps and unwanted access.",
+          decision4:
+            "<strong>Temporary public exposure:</strong> only this page stays fixed on Tunnel. The rest of the services are exposed only when needed and turned off after use.",
+          tradeoffsH2: "Architecture trade-offs",
+          originsH3: "Project origins",
+          originsP:
+            "My personal server started with a Raspberry Pi 4B. That was the project that got this whole idea going. Day to day, it helps me both learn and run services without paying for subscriptions. That Raspberry Pi is now linked to the main node, giving redundancy to core services like Vaultwarden, Pi-hole, and Unbound. This keeps things available even if something goes wrong.",
+          selfhostedH3: "Self-hosted vs. cloud",
+          selfhostedP:
+            "My choice was always based on the same idea: privacy and control over sensitive data. The cost is doing my own maintenance, backups, updates, and uptime, things a cloud service would handle for you. For this kind of data, I prioritize that control even if it means extra work. That was the starting principle for building this homeserver.",
+          cockpitH3: "Cockpit behind Tailscale Serve",
+          cockpitP1:
+            "Cockpit already serves its own interface over HTTPS with a self signed certificate. When I put it behind <code>tailscale serve</code>, which also terminates TLS, the result was a second layer of encryption wrapping the first one. The browser got a response encrypted twice and failed to render the interface.",
+          cockpitP2:
+            "On top of that, Cockpit checks the <code>Origin</code> header on every request as CSRF protection. Since requests were coming from the Tailscale domain instead of the local hostname Cockpit expected, it silently rejected them.",
+          cockpitP3:
+            "The fix was to set Cockpit to listen on plain HTTP locally and add the Tailscale domain to the allowed origins in Cockpit's configuration, so it would stop treating those requests as CSRF attempts.",
+          openSourceH2: "Open source",
+          openSourceP1: "The full configuration is available in the repository:",
+          footer: "Last updated: July 2026",
+          uptimePrefix: "The last restart was on ",
+          uptimeFallbackLabel: "Active since",
+          uptimeUnavailable: "uptime not available",
+        },
+      };
+
+      var bootEpoch = null;
+
+      function formatFecha(d, lang) {
+        return d.toLocaleDateString(lang === "en" ? "en-US" : "es-AR", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        });
+      }
+
+      function renderUptime(lang) {
         var labelEl = document.getElementById("uptime-label");
-        var bootEpoch = null;
-
-        function formatFecha(d) {
-          return d.toLocaleDateString("es-AR", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          });
+        var counterEl = document.getElementById("uptime-counter");
+        var dict = translations[lang];
+        if (bootEpoch === null) {
+          labelEl.textContent = dict.uptimeLabelPlaceholder;
+          counterEl.textContent = dict.uptimeCalculating;
+          return;
         }
+        labelEl.textContent = dict.uptimePrefix + formatFecha(new Date(bootEpoch * 1000), lang);
+      }
 
-        function update() {
-          if (bootEpoch === null) return;
-          var diff = Date.now() - bootEpoch * 1000;
-          var days = Math.floor(diff / 86400000);
-          var hours = Math.floor((diff % 86400000) / 3600000);
-          var mins = Math.floor((diff % 3600000) / 60000);
-          var secs = Math.floor((diff % 60000) / 1000);
-          counterEl.textContent =
-            days + "d " + hours + "h " + mins + "m " + secs + "s";
-        }
+      function updateCounter() {
+        if (bootEpoch === null) return;
+        var counterEl = document.getElementById("uptime-counter");
+        var diff = Date.now() - bootEpoch * 1000;
+        var days = Math.floor(diff / 86400000);
+        var hours = Math.floor((diff % 86400000) / 3600000);
+        var mins = Math.floor((diff % 3600000) / 60000);
+        var secs = Math.floor((diff % 60000) / 1000);
+        counterEl.textContent =
+          days + "d " + hours + "h " + mins + "m " + secs + "s";
+      }
+
+      function applyLocale(lang) {
+        document.documentElement.lang = lang;
+        var dict = translations[lang];
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n");
+          if (dict[key] !== undefined) el.innerHTML = dict[key];
+        });
+        document.querySelectorAll("[data-i18n-alt]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n-alt");
+          if (dict[key] !== undefined) el.alt = dict[key];
+        });
+        document.getElementById("theme-toggle").setAttribute(
+          "aria-label",
+          lang === "en" ? "Switch theme" : "Cambiar tema",
+        );
+        document.getElementById("lang-toggle").setAttribute(
+          "aria-label",
+          lang === "en" ? "Switch language" : "Cambiar idioma",
+        );
+        document.getElementById("lang-toggle").textContent = lang === "en" ? "ES" : "EN";
+        renderUptime(lang);
+      }
+
+      function toggleLocale() {
+        var current = document.documentElement.lang === "en" ? "en" : "es";
+        var next = current === "en" ? "es" : "en";
+        localStorage.setItem("lang", next);
+        applyLocale(next);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        applyLocale(localStorage.getItem("lang") === "en" ? "en" : "es");
 
         fetch("boot.json", { cache: "no-store" })
           .then(function (r) {
@@ -414,17 +640,16 @@ graph TD
           })
           .then(function (data) {
             bootEpoch = data.boot_epoch;
-            labelEl.textContent =
-              "El último reinicio fue el " +
-              formatFecha(new Date(bootEpoch * 1000));
-            update();
-            setInterval(update, 1000);
+            renderUptime(document.documentElement.lang === "en" ? "en" : "es");
+            updateCounter();
+            setInterval(updateCounter, 1000);
           })
           .catch(function () {
-            labelEl.textContent = "Activo desde";
-            counterEl.textContent = "uptime no disponible";
+            var lang = document.documentElement.lang === "en" ? "en" : "es";
+            document.getElementById("uptime-label").textContent = translations[lang].uptimeFallbackLabel;
+            document.getElementById("uptime-counter").textContent = translations[lang].uptimeUnavailable;
           });
-      })();
+      });
     </script>
   </body>
 </html>
