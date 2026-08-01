@@ -18,7 +18,7 @@ export const projects: Project[] = [
     url: "https://github.com/ncorrea-13/bw-tui",
     desc: "Terminal User Interface que funciona como wrapper para utilizar Bitwarden desde la terminal.",
     license: "GPLv3",
-    tags: ["TUI/CLI"],
+    tags: ["tui-cli"],
     stack: ["Rust", "Ratatui"],
     image: "/projects/bw-tui.png",
   },
@@ -27,8 +27,8 @@ export const projects: Project[] = [
     url: "https://github.com/ncorrea-13/weathertui",
     desc: "Terminal User Interface basada en meteo-cli. Utiliza OpenWeatherMap para mostrar el pronóstico del tiempo en la terminal.",
     license: "GPLv3",
-    tags: ["TUI/CLI"],
-    stack: ["Go"],
+    tags: ["tui-cli"],
+    stack: ["Go", "Bubbletea"],
     image: "/projects/weathertui.png",
   },
   {
@@ -37,7 +37,7 @@ export const projects: Project[] = [
     desc: "Configuración y compose files de mi servidor personal. Debian Trixie + Podman rootless. El mismo servidor que hostea la página de arquitectura.",
     license: "MIT",
     tags: ["infra"],
-    stack: ["Podman", "Debian", "systemd"],
+    stack: ["WireGuard", "Containers", "Bash", "systemd"],
     image: "/projects/homeserver.jpeg",
   },
   {
@@ -46,7 +46,7 @@ export const projects: Project[] = [
     desc: "Configuración personal de Linux para Devuan 6 (Excalibur) sobre Wayland. 100% systemd-free.",
     license: "MIT",
     tags: ["infra"],
-    stack: ["Neovim", "Zellij", "Wayland"],
+    stack: ["Bash", "Lua", "Neovim"],
     image: "/projects/dotfiles.png",
   },
   {
@@ -54,7 +54,7 @@ export const projects: Project[] = [
     url: "https://accesoriosstina.vercel.app/",
     desc: "Página web para un emprendimiento de accesorios, con catálogo de productos.",
     tags: ["frontend"],
-    stack: ["Next.js", "Tailwind"],
+    stack: ["React", "Next.js", "Tailwind"],
     image: "/projects/accesorioss.png",
   },
   {
@@ -62,7 +62,7 @@ export const projects: Project[] = [
     url: "https://github.com/ncorrea-13/mailMicroservicio",
     desc: "Microservicio de correo con arquitectura RESTful, trabajo final de Arquitectura de Microservicios (2025).",
     license: "GPLv3",
-    tags: ["typescript"],
+    tags: ["backend"],
     stack: ["TypeScript", "Node.js", "Express"],
   },
   {
@@ -70,18 +70,16 @@ export const projects: Project[] = [
     url: "https://github.com/ncorrea-13/generadorLibros",
     desc: "cGAN y cVAE para síntesis de estructuras de texto, trabajo final de Redes Neuronales Profundas (2025), con Jupyter Notebook y Google Colab.",
     license: "GPLv3",
-    tags: ["python", "ml"],
-    stack: ["Python", "PyTorch"],
+    tags: ["frontend", "backend"],
+    stack: ["Python", "PyTorch", "Streamlit"],
     image: "/projects/generador.png",
   },
 ];
 
 export const filters = [
   { key: "all", label: "Todos" },
-  { key: "python", label: "Python" },
-  { key: "typescript", label: "TypeScript" },
+  { key: "backend", label: "Backend" },
   { key: "frontend", label: "Frontend" },
-  { key: "TUI/CLI", label: "TUI/CLI" },
   { key: "infra", label: "Infraestructura" },
-  { key: "ml", label: "Machine Learning" },
+  { key: "tui-cli", label: "TUI/CLI" },
 ] as const;

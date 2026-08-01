@@ -4,7 +4,7 @@ export function Footer() {
       <hr className="mb-6 border-border" />
       Última actualización: julio 2026 ·{" "}
       <a
-        href="https://github.com/ncorrea-13/homeserver-landing/blob/main/LICENSE"
+        href="https://github.com/ncorrea-13/portfolio/blob/main/LICENSE"
         className="text-accent-strong hover:underline"
       >
         MIT License
