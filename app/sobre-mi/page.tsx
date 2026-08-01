@@ -80,15 +80,6 @@ export default function SobreMi() {
       </Reveal>
 
       <Reveal>
-        <h2 className="mt-8 mb-3 font-sans text-lg text-accent">Intereses</h2>
-        <p>
-          Arquitectura de sistemas y sistemas operativos, sobre todo por
-          CLI/TUI. Self-hosting y privacidad digital, como el motivo por el que
-          este homeserver sigue creciendo. Seguridad ofensiva.
-        </p>
-      </Reveal>
-
-      <Reveal>
         <h2 className="mt-8 mb-3 font-sans text-lg text-accent">
           Cómo encaro el software
         </h2>
@@ -103,22 +94,19 @@ export default function SobreMi() {
 
       <Reveal>
         <h2 className="mt-8 mb-3 font-sans text-lg text-accent">
-          Entorno de trabajo
+          Stack y entorno
         </h2>
         <p>
           Mi día a día pasa por la terminal: Neovim como editor principal,
           Zellij como multiplexor y Yazi para manejar archivos, todo dentro de
-          WezTerm. La mayoría de mis herramientas propias de uso personal las
-          utilizo por medio de interfaces CLI o TUI, así puedo tenerlas
-          disponibles en cualquier máquina. Considero que el software que
-          utilizo para crear software debe ser lo más ligero y completo posible
-          así todos los recursos de mi hardware se enfocan en lo que estoy
-          construyendo.
+          WezTerm. La mayoría de mis herramientas propias las uso por medio de
+          interfaces CLI o TUI, así las tengo disponibles en cualquier máquina
+          independientemente del sistema y el lenguaje.
         </p>
       </Reveal>
 
       <Reveal>
-        <h2 className="mt-8 mb-3 font-sans text-lg text-accent">CV</h2>
+        <h2 className="mt-8 mb-3"></h2>
         <div className="flex justify-center">
           <LinkButton href="/cv.pdf" external>
             Descargar CV completo (PDF)
