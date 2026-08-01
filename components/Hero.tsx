@@ -10,7 +10,11 @@ const container = {
 
 const item = {
   hidden: { opacity: 0, y: 14 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" as const },
+  },
 };
 
 export function Hero() {
@@ -38,7 +42,7 @@ export function Hero() {
           Nicolás Correa
         </h1>
         <p className="font-sans text-[15px] text-accent">
-          Full-stack developer · Sysadmin &amp; homelab · Red Team Trainee
+          Desarrollador de Software Full-stack · Administrador de Sistemas
         </p>
       </motion.div>
     </motion.div>
