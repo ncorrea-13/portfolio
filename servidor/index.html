@@ -67,7 +67,7 @@
 
     <img
       src="diagrama-arquitectura.svg"
-      alt="Diagrama de las dos rutas de entrada al homeserver: Tailscale Funnel hacia la landing pública, y Tailscale WireGuard hacia el resto del homeserver y sus pods"
+      alt="Diagrama de las dos rutas de entrada al homeserver: Cludflare Tunnel hacia esta página, y Tailscale WireGuard hacia el resto del homeserver y sus pods"
       style="width: 100%; height: auto"
     />
 
@@ -84,7 +84,7 @@ graph TD
 
     subgraph Host_Server ["Host: Debian 13 Trixie"]
 
-        TSFunnel["Tailscale Funnel<br/>(expone SOLO el portfolio a Internet)"]
+        TSFunnel["Cludflare Tunnel<br/>(expone SOLO la página del servidor a Internet)"]
         TSServe["Tailscale + MagicDNS<br/>Proxy HTTPS único"]
 
         Landing["Landing Page Portfolio<br/>HTML / CSS / JS estático<br/>servido directo por Tailscale Serve"]
@@ -206,7 +206,7 @@ graph TD
       </li>
       <li>
         <strong>Esta página:</strong> única excepción siempre disponible y
-        expuesta a internet, mediante Tailscale Funnel sobre una ruta
+        expuesta a internet, mediante Cludflare Tunnel sobre una ruta
         específica. Es HTML/CSS/JS estático, sin backend ni contenedor propio.
       </li>
       <li><strong>Cockpit:</strong> corre directamente en el host.</li>
@@ -302,7 +302,7 @@ graph TD
       </li>
       <li>
         <strong>Exposición pública temporal:</strong> solo esta página queda
-        fija en Funnel; el resto de los servicios se exponen puntualmente y se
+        fija en Tunnel; el resto de los servicios se exponen puntualmente y se
         apagan al terminar de usarlos.
       </li>
     </ul>
