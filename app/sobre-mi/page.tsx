@@ -18,8 +18,8 @@ export default function SobreMi() {
           <div>
             <p>
               <T
-                es="Soy un estudiante avanzado de Ingeniería en Sistemas de Información en la Universidad Tecnológica Nacional, Facultad Regional Mendoza. Actualmente tengo 37/41 materias aprobadas. Soy desarrollador full-stack en AYSAM. Me apasiona el desarrollo de software, y mi experiencia en Linux despertó interés en la infraestructura, la ciberseguridad y explotación de vulnerabilidades."
-                en="I am an advanced student of Systems Engineering at Universidad Tecnológica Nacional, Facultad Regional Mendoza. I have currently passed 37 of 41 subjects. I work as a full stack developer at AYSAM. I am passionate about software development, and my experience with Linux got me interested in infrastructure, cybersecurity, and vulnerability exploitation."
+                es="Soy un estudiante avanzado de Ingeniería en Sistemas de Información en la Universidad Tecnológica Nacional, Facultad Regional Mendoza. Actualmente tengo 37/41 materias aprobadas. Soy desarrollador full-stack en AYSAM. Me apasiona el desarrollo de software, y mi experiencia en Linux despertó interés en la infraestructura y la ciberseguridad."
+                en="I am an advanced student of Systems Engineering at Universidad Tecnológica Nacional, Facultad Regional Mendoza. I have currently passed 37 of 41 subjects. I work as a full stack developer at AYSAM. I am passionate about software development, and my experience with Linux got me interested in infrastructure and cybersecurity."
               />
             </p>
             <p className="mt-3">
@@ -55,7 +55,7 @@ export default function SobreMi() {
         </ul>
         <p className="mt-3 text-sm text-muted">
           <T
-            es="Detalle de cada rol en el CV descargable más abajo."
+            es="El detalle de cada rol está en el CV que se puede descargar más abajo."
             en="See the details of each role in the resume you can download below."
           />
         </p>
@@ -83,8 +83,8 @@ export default function SobreMi() {
         </h2>
         <p>
           <T
-            es="Trabajo en equipo, comunicación efectiva, responsabilidad y adaptabilidad; sobre todo al pasar entre roles de desarrollo, infraestructura y de seguridad ofensiva, donde el contexto y las prioridades cambian rápido."
-            en="Teamwork, clear communication, responsibility, and adaptability, especially when moving between development, infrastructure, and offensive security roles, where context and priorities change fast."
+            es="Trabajo en equipo, comunicación efectiva, responsabilidad y adaptabilidad; sobre todo al cambiar de roles desarrollo e infraestructura, donde el contexto y las prioridades cambian rápido."
+            en="Teamwork, clear communication, responsibility, and adaptability, especially when moving between development and infrastructure, where context and priorities change fast."
           />
         </p>
       </Reveal>
@@ -95,7 +95,7 @@ export default function SobreMi() {
         </h2>
         <p>
           <T
-            es="Le doy tanta importancia a cómo está construido el código como a que funcione. Mi principal enfoque a la hora de construir software es mantener la filosofía KISS. Mantener el software lo más chico posible así se puede desacoplar de forma sencilla y reutilizar en diferentes proyectos; a menos que la situación amerite lo contrario."
+            es="Le doy tanta importancia a cómo está construido el código como a que funcione. Mi principal enfoque a la hora de construir software es mantener la filosofía KISS. Mantener el software lo más chico posible así se puede desacoplar de forma sencilla y reutilizar en diferentes proyectos; a menos que la situación indique lo contrario."
             en="I care as much about how the code is built as about whether it works. My main focus when building software is to follow the KISS philosophy. I try to keep software as small as possible, so it stays easy to decouple and reuse across different projects, unless the situation calls for something else."
           />
         </p>
