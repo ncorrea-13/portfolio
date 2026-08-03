@@ -26,8 +26,8 @@ export default function Proyectos() {
         </h2>
         <p>
           <T
-            es="Además de estos proyectos poseo varios trabajos académicos y experimentos menores. El listado completo, siempre actualizado, está en mi cuenta de Github:"
-            en="Besides these projects, I have several academic assignments and small experiments. The full list, always up to date, is on my GitHub account:"
+            es="Además poseo varios trabajos académicos y experimentos menores. El listado completo está en mi cuenta de Github:"
+            en="I have several academic assignments and small experiments. The full list, always up to date, is on my GitHub account:"
           />{" "}
           <a href={GITHUB_URL} className="text-accent-strong hover:underline">
             {GITHUB_URL.replace("https://", "")}
