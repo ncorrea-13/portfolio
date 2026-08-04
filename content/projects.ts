@@ -15,8 +15,8 @@ export const projects: Project[] = [
     name: "accesoriosstina",
     url: "https://accesoriosstina.vercel.app/",
     desc: {
-      es: "Página web para un emprendimiento de accesorios, con catálogo de productos.",
-      en: "A website for a small accessories business, with a product catalog.",
+      es: "Página web para AccesoriossTina, un emprendimiento de accesorios que cuenta con autenticación de usuarios, gestión de insumos y control de stock.",
+      en: "A website for AccesoriossTina, an accessories business featuring user authentication, supplies management, and stock control.",
     },
     tags: ["frontend"],
     stack: ["React", "Next.js", "Tailwind"],
