@@ -64,7 +64,7 @@ No hay test runner configurado (no hay lógica de negocio que testear - es conte
 
 ## Internacionalización (ES/EN)
 
-Ya implementado, no es una idea a futuro (corregir si algo dice lo contrario en `CLAUDE.md` - quedó desactualizado en ese punto):
+Ya implementado, no es una idea a futuro:
 
 - `LocaleProvider` (`components/LocaleProvider.tsx`): Context con `locale: "es" | "en"`, persiste en `localStorage` bajo la key `"locale"`, sincroniza entre pestañas vía evento `storage` + evento custom `locale-change`. `getServerSnapshot()` devuelve siempre `"es"` (el SSR/export estático no puede leer `localStorage`), así que el primer render en el cliente puede "flashear" ES antes de hidratar con la preferencia real - comportamiento esperado, no un bug.
 - `<T es="…" en="…" />` (`components/T.tsx`): forma preferida de texto bilingüe embebido en JSX. Contenido más largo o estructurado (arrays en `content/*.ts`) usa el shape `{ es: string; en: string }` in-line en vez de `T`.
@@ -79,7 +79,7 @@ Ya implementado, no es una idea a futuro (corregir si algo dice lo contrario en 
 - Contenido (textos, links, proyectos, experiencia) vive en `content/*.ts`, tipado - no hardcodear strings de contenido dentro de componentes de `app/`/`components/` salvo texto puramente estructural (labels de UI que no son "contenido del portfolio").
 - Todo texto visible al usuario final va bilingüe (`T` o `LocalizedText`) - no agregar texto solo en español o solo en inglés.
 - Commits en español, formato convencional: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`.
-- `servidor/`: se edita `index.html`/`style.css` directo, sin pipeline de build - lo que está en el archivo es lo que se sirve. No portarlo a React/Next (ver razón en `CLAUDE.md`).
+- `servidor/`: se edita `index.html`/`style.css` directo, sin pipeline de build - lo que está en el archivo es lo que se sirve. No portarlo a React/Next: página única, estado mínimo (tema + fetch de `boot.json`), ya resuelto en vanilla JS - un build no se justifica.
 
 ## Variables de entorno
 
