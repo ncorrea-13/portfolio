@@ -1,16 +1,16 @@
 # Portfolio personal
 
-Este es mi portfolio personal: quién soy, mi experiencia y mis proyectos. Se compone de dos partes:
+Esta web muestra quién soy, mi experiencia y mis proyectos. Se compone de dos partes:
 
-- **Portfolio** (raíz) — Next.js + TypeScript + Tailwind, deploy en **Vercel**.
-- **`servidor/`** — HTML/CSS/Js estático buscando mantenerlo simple. Es la página del homeserver que se encuentra servida 24/7 desde la infra. Es la prueba de que el hosting es real.
+- **Portfolio** (raíz): TypeScript + Next.js + Tailwind, deploy en **Vercel**.
+- **`servidor/`**: HTML/CSS/Js estático buscando mantenerlo simple. Es la página del homeserver que se encuentra servida 24/7 desde la infra. Es la prueba de que el hosting es real.
 
 ## Contenido
 
-- `/` — Presentación, stack técnico, contacto
-- `/sobre-mi` — Experiencia, educación, CV
-- `/proyectos` — Proyectos laborales (que se pueden exponer), personales y académicos, con filtro por tecnología.
-- `servidor/` — Página del servidor con su diagrama, stack, y decisiones.
+- `/`: Presentación, stack técnico, contacto
+- `/sobre-mi`: Experiencia, educación, CV
+- `/proyectos`: Proyectos laborales (que se pueden exponer), personales y académicos, con filtro por tecnología.
+- `servidor/`: Página del servidor con su diagrama, stack, y decisiones.
 
 ## Estructura
 
@@ -25,7 +25,7 @@ service/      unit de systemd que escribe servidor/boot.json
 
 ## Desarrollo
 
-Versión de `pnpm` pineada en `mise.toml`.
+Para la administración de la app en Node.js, uso `pnpm` definida en `mise.toml`.
 
 ```bash
 pnpm install
@@ -42,7 +42,9 @@ Genera `out/` estático para Vercel.
 
 ## Deploy de `servidor/`
 
-Se sirve tal cual vía Cloudflare Tunnel. Para su deply se sincroniza la carpeta `servidor/` al root correspondiente. `boot.json` lo escribe `service/write-boot-time.service` en el host real.
+Se sirve tal cual vía Cloudflare Tunnel. Para su deploy se sincroniza la carpeta `servidor/` al root correspondiente. `boot.json` lo escribe `service/write-boot-time.service` en el host real.
+
+> [!NOTE] El deploy de `servidor/` es independiente del portfolio, ya que ambos están instanciados en diferentes servidores.
 
 ## Repo relacionado
 

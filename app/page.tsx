@@ -31,12 +31,12 @@ export default function Home() {
       </Reveal>
 
       <Reveal delay={0.05}>
-        {skillGroups.map((group, i) => (
+        {skillGroups.map((group) => (
           <TagGroup
             key={group.label.es}
             label={group.label}
             tags={group.tags}
-            index={i}
+            color={group.color}
           />
         ))}
       </Reveal>
