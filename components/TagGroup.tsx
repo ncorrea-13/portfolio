@@ -5,13 +5,6 @@ import { useLocale } from "./LocaleProvider";
 type LocalizedText = { es: string; en: string };
 type Tag = string | LocalizedText;
 
-const groupColors = [
-  "var(--accent)",
-  "var(--accent-strong)",
-  "var(--accent-warm)",
-  "var(--card-border)",
-];
-
 function resolve(text: LocalizedText, locale: "es" | "en") {
   return locale === "en" ? text.en : text.es;
 }
@@ -19,14 +12,13 @@ function resolve(text: LocalizedText, locale: "es" | "en") {
 export function TagGroup({
   label,
   tags,
-  index = 0,
+  color,
 }: {
   label: LocalizedText;
   tags: readonly Tag[];
-  index?: number;
+  color: string;
 }) {
   const { locale } = useLocale();
-  const color = groupColors[index % groupColors.length];
 
   return (
     <div className="mb-5">

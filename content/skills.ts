@@ -1,24 +1,29 @@
 export const skillGroups = [
   {
     label: { es: "Backend", en: "Backend" },
+    color: "var(--accent)",
     tags: [
       "Java",
       "Spring Boot",
-      "GraphQL",
-      "RabbitMQ",
       "Node.js",
       "Express.js",
       "PL/SQL",
+      "OracleDB",
       "PostgreSQL",
+      "Git",
+      "GraphQL",
+      "RabbitMQ",
     ],
   },
   {
     label: { es: "Infraestructura", en: "Infrastructure" },
+    color: "var(--tag-infra)",
     tags: [
       "Bash",
       "Docker",
       "Podman",
       { es: "Linux avanzado", en: "Advanced Linux" },
+      "Systemd",
       { es: "Microservicios", en: "Microservices" },
       { es: "Redes", en: "Networking" },
       "Wireguard",
@@ -26,14 +31,36 @@ export const skillGroups = [
   },
   {
     label: { es: "Sistemas", en: "Systems" },
+    color: "var(--accent-warm)",
     tags: ["Go", "Rust"],
   },
   {
     label: { es: "Seguridad ofensiva", en: "Offensive Security" },
-    tags: ["Nmap", "Burp Suite", "OSINT", "Python"],
+    color: "var(--tag-security)",
+    tags: ["Python", "Nmap", "Burp Suite", "OSINT"],
   },
   {
     label: { es: "Frontend", en: "Frontend" },
-    tags: ["JavaScript", "TypeScript", "React", "Next.js", "Oracle APEX"],
+    color: "var(--tag-frontend)",
+    tags: [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "TailwindCSS",
+      "Oracle APEX",
+    ],
+  },
+  {
+    label: { es: "Prompt engineering", en: "Prompt engineering" },
+    color: "var(--tag-prompt)",
+    tags: [
+      "Claude Code",
+      "OpenCode",
+      { es: "Agentes LLM", en: "LLM Agents" },
+      "MCP",
+      { es: "Automatización", en: "Automation" },
+      "Python",
+    ],
   },
 ] as const;
