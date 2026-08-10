@@ -47,16 +47,16 @@ export const projects: Project[] = [
     image: "/projects/bw-tui.png",
   },
   {
-    name: "homeserver",
-    url: "https://github.com/ncorrea-13/homeserver",
+    name: "homeserver/homelab",
+    url: "https://github.com/ncorrea-13/homelab",
     desc: {
-      es: "Configuración y compose files de mi servidor personal. Debian Trixie + Podman rootless. El mismo servidor que hostea la página de arquitectura.",
-      en: "Configuration and compose files for my personal server. Debian Trixie plus rootless Podman. The same server that hosts the architecture page.",
+      es: "Configuración y compose files de mi servidor personal. El mismo servidor que hostea la página de arquitectura.",
+      en: "Configuration and compose files for my personal server. The same server that hosts the architecture page.",
     },
     license: "MIT",
     tags: ["infra"],
-    stack: ["WireGuard", "Containers", "Bash", "systemd"],
-    image: "/projects/homeserver.jpeg",
+    stack: ["WireGuard", "Containers", "Bash", "Systemd"],
+    image: "/projects/homelab.jpg",
   },
   {
     name: "dotfiles",
