@@ -12,7 +12,7 @@ import { projects } from "@/content/projects";
 const featuredProjects = [
   "bw-tui",
   "weathertui",
-  "homeserver",
+  "homeserver/homelab",
   "accesoriosstina",
 ];
 
