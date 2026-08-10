@@ -39,10 +39,7 @@ export function Nav() {
           rel="noopener noreferrer"
           className="text-muted hover:text-accent-strong"
         >
-          {locale === "en"
-            ? "Homeserver architecture"
-            : "Arquitectura del homeserver"}{" "}
-          ↗
+          {locale === "en" ? "Homelab" : "Homelab"} ↗
         </a>
       </div>
       <div className="flex shrink-0 items-center gap-2">
