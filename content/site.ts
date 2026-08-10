@@ -1,4 +1,4 @@
-export const SERVIDOR_URL = "https://homeserver.ncorrea.com.ar/";
+export const SERVIDOR_URL = "https://homelab.ncorrea.com.ar/";
 
 export const EMAIL = "ncorrea13@proton.me";
 export const LINKEDIN_URL =
