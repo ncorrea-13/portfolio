@@ -24,8 +24,8 @@
         var next = effectiveCurrent === "dark" ? "light" : "dark";
         document.documentElement.setAttribute("data-theme", next);
         localStorage.setItem("theme", next);
-        if (typeof renderArchDiagram === "function") {
-          renderArchDiagram(next);
+        if (typeof updateDiagrams === "function") {
+          updateDiagrams(next);
         }
       }
     </script>
@@ -56,7 +56,9 @@
     <h1 data-i18n="h1"></h1>
 
     <div class="uptime-box compact">
-      <p class="uptime-label" id="uptime-label">El último reinicio fue el …</p>
+      <p class="uptime-label" id="uptime-label">
+        El último reinicio de la Pi fue el …
+      </p>
       <p class="uptime-value" id="uptime-counter">calculando…</p>
     </div>
 
@@ -72,153 +74,47 @@
 
     <br />
 
-    <div id="archContainer" class="mermaid-container"></div>
-
-    <script type="text/plain" id="archSource">
-      graph TD
-
-          Internet_Publico["Internet Público"]
-
-          subgraph Tailnet_Privada ["Tailnet"]
-              Owner["Dispositivos Autenticados"]
-          end
-
-          subgraph Host_Server ["Host: Debian 13 Trixie"]
-
-              TSFunnel["Cludflare Tunnel"]
-              TSServe["Tailscale<br/>"]
-
-              Landing["Página de servidor. <br/>HTML / CSS / JS estático"]
-
-              Cockpit["Cockpit"]
-
-              Cron["Cron Jobs<br/>Backups programados"]
-
-              subgraph Podman_Engine ["Pods"]
-
-                  PodmanRoot["Podman"]
-
-                  subgraph Pod_Core ["Pod: Core"]
-                      direction TB
-                      Vaultwarden["Vaultwarden"]
-                      Radicale["Radicale"]
-                      Vaultwarden ~~~ Radicale
-                  end
-
-                  subgraph Pod_Network ["Pod: Network"]
-                      direction TB
-                      Pihole["Pi-hole<br/>(filtrado DNS)"]
-                      Caddy["Caddy<br/>(Proxy inverso)"]
-                      Unbound["Unbound<br/>DoT → Mullvad"]
-                      Pihole ~~~ Caddy
-                  end
-
-                  subgraph Pod_Storage ["Pod: Storage"]
-                      direction TB
-                      Syncthing["Syncthing"]
-                      Filebrowser["Filebrowser"]
-                      Syncthing ~~~ Filebrowser
-                  end
-
-                  subgraph Pod_Utils ["Pod: Utils"]
-                      direction TB
-                      Homepage["Homepage"]
-                      Ntfy["Ntfy"]
-                      Kuma["Uptime Kuma"]
-                      Homepage ~~~ Ntfy ~~~ Kuma
-                  end
-
-                  subgraph Pod_Immich ["Pod: Immich"]
-                      direction TB
-                      ImmichSrv["Immich Server"]
-                      ImmichML["Immich Machine Learning"]
-                      ImmichSrv ~~~ ImmichML
-                  end
-
-                  subgraph Pod_Entertainment ["Pod: Entertainment"]
-                      direction TB
-                      Miniflux["Miniflux"]
-                      Suwayomi["Suwayomi"]
-                      Kavita["Kavita"]
-                      Flaresolverr["Flaresolverr"]
-                      Miniflux ~~~ Suwayomi ~~~ Kavita ~~~ Flaresolverr
-                  end
-
-              end
-          end
-
-          %% Conexiones de acceso
-          Internet_Publico --> TSFunnel
-          Internet_Publico ~~~ TSServe
-          TSFunnel --> Landing
-
-          Owner --> TSServe
-          TSServe --> Cockpit
-          TSServe --> PodmanRoot
-          PodmanRoot --> Pod_Core
-          PodmanRoot --> Pod_Network
-          PodmanRoot --> Pod_Storage
-          PodmanRoot --> Pod_Utils
-          PodmanRoot --> Pod_Immich
-          PodmanRoot --> Pod_Entertainment
-
-          %% DNS
-          Pihole --> Unbound
-          Pihole --> Caddy
-
-          %% Notificaciones
-          Kuma -.->|notifica| Ntfy
-
-          class Internet_Publico public;
-          class Owner public;
-          class Host_Server,Podman_Engine,Pod_Core,Pod_Network,Pod_Storage,Pod_Utils,Pod_Immich,Pod_Entertainment pod;
-          class TSFunnel,TSServe,Pihole,Caddy,Unbound red;
-          class Vaultwarden,Radicale,Syncthing,Filebrowser,Homepage,Ntfy,Kuma,ImmichSrv,ImmichML,Miniflux,Suwayomi,Kavita,Flaresolverr servicio;
-          class Landing,Cockpit,Cron,PodmanRoot programa;
-    </script>
-
-    <div id="hwContainer" class="mermaid-container mermaid-container--sm"></div>
-
-    <script type="text/plain" id="hwSource">
-      graph LR
-
-          subgraph Almacenamiento ["Hardware: Almacenamiento"]
-              direction LR
-              SSD_OS[("SSD 120GB<br/>Sistema Operativo")]
-              SSD_Data[("SSD 480GB<br/>Datos: volúmenes Podman<br/>Toda la información y contenedores")]
-              HDD_Daily[("HDD 480GB<br/>Backup Diario")]
-              HDD_Weekly[("HDD 480GB<br/>Backup Semanal")]
-              SSD_OS ~~~ SSD_Data ~~~ HDD_Daily ~~~ HDD_Weekly
-          end
-
-          class SSD_OS,SSD_Data,HDD_Daily,HDD_Weekly disco;
-          class Almacenamiento disco;
-    </script>
+    <img
+      id="archDiagramImg"
+      src="diagrama-arquitectura-oscuro.svg"
+      alt="Diagrama de arquitectura del ThinkCentre"
+      class="mermaid-container"
+    />
 
     <div class="button-row">
       <a
         id="archOpenFull"
         class="link-button"
-        href="#"
+        href="diagrama-arquitectura-oscuro.svg"
         target="_blank"
         rel="noopener"
         data-i18n="archOpenFull"
       ></a>
     </div>
 
+    <h3 data-i18n="hwH3"></h3>
+    <ul>
+      <li data-i18n="hw1"></li>
+      <li data-i18n="hw2"></li>
+      <li data-i18n="hw3"></li>
+      <li data-i18n="hw4"></li>
+    </ul>
+
+    <h2 data-i18n="gatewayH2"></h2>
+    <p data-i18n="gatewayP"></p>
+
     <h3 data-i18n="notesH3"></h3>
 
     <ul>
       <li data-i18n="note1"></li>
       <li data-i18n="note2"></li>
-      <li data-i18n="note3"></li>
       <li data-i18n="note4"></li>
       <li data-i18n="note5"></li>
       <li data-i18n="note6"></li>
       <li data-i18n="note7"></li>
-      <li data-i18n="note8"></li>
       <li data-i18n="note9"></li>
       <li data-i18n="note10"></li>
+      <li data-i18n="note12"></li>
     </ul>
 
     <h2 data-i18n="stackH2"></h2>
@@ -227,8 +123,6 @@
       <li data-i18n="stack1"></li>
       <li data-i18n="stack2"></li>
       <li data-i18n="stack3"></li>
-      <li data-i18n="stack4"></li>
-      <li data-i18n="stack5"></li>
     </ul>
 
     <h2 data-i18n="servicesH2"></h2>
@@ -239,6 +133,8 @@
     <p data-i18n="service4"></p>
     <p data-i18n="service5"></p>
     <p data-i18n="service6"></p>
+    <p data-i18n="service7"></p>
+    <p data-i18n="service8"></p>
 
     <h2 data-i18n="decisionsH2"></h2>
 
@@ -248,6 +144,7 @@
       <li data-i18n="decision3"></li>
       <li data-i18n="decision4"></li>
       <li data-i18n="decision5"></li>
+      <li data-i18n="decision6"></li>
     </ul>
 
     <h2 data-i18n="originsH2"></h2>
@@ -273,247 +170,91 @@
       >
     </p>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"
-      integrity="sha384-WmdflGW9aGfoBdHc4rRyWzYuAjEmDwMdGdiPNacbwfGKxBW/SO6guzuQ76qjnSlr"
-      crossorigin="anonymous"
-    ></script>
     <script>
-      var diagramPalettes = {
-        dark: {
-          background: "#1e1e1e",
-          primaryColor: "#241f30",
-          primaryBorderColor: "#4a4560",
-          primaryTextColor: "#b8b8b8",
-          secondaryColor: "#242424",
-          secondaryBorderColor: "#4a4a4a",
-          tertiaryColor: "#242424",
-          tertiaryBorderColor: "#4a4a4a",
-          lineColor: "#6a6a6a",
-          textColor: "#b8b8b8",
-          clusterBkg: "#241f30",
-          clusterBorder: "#4a4560",
-          edgeLabelBackground: "#1e1e1e",
-          classDefs: {
-            public:
-              "fill:#242424,stroke:#666666,stroke-width:1px,color:#cfcfcf",
-            pod: "fill:#201d28,stroke:#4a4560,stroke-width:1px,color:#a8a2c0",
-            red: "fill:#1c262a,stroke:#4f7a80,stroke-width:1px,color:#a8c8cc",
-            servicio:
-              "fill:#241f30,stroke:#6a5a8a,stroke-width:1px,color:#cbb8e0",
-            programa:
-              "fill:#2a2620,stroke:#8a7a55,stroke-width:1px,color:#d8c9a0",
-            disco: "fill:#24211d,stroke:#8a7050,stroke-width:1px,color:#d0b896",
-          },
-        },
-        light: {
-          background: "#faf9f6",
-          primaryColor: "#f0ede4",
-          primaryBorderColor: "#b8acff",
-          primaryTextColor: "#3d3a34",
-          secondaryColor: "#f0ede4",
-          secondaryBorderColor: "#ddd8cc",
-          tertiaryColor: "#f0ede4",
-          tertiaryBorderColor: "#ddd8cc",
-          lineColor: "#9a8fc4",
-          textColor: "#3d3a34",
-          clusterBkg: "#f0ede4",
-          clusterBorder: "#b8acff",
-          edgeLabelBackground: "#faf9f6",
-          classDefs: {
-            public:
-              "fill:#eeeae2,stroke:#9a948a,stroke-width:1px,color:#3d3a34",
-            pod: "fill:#efeaf7,stroke:#b8acff,stroke-width:1px,color:#4a3f6b",
-            red: "fill:#e3eef0,stroke:#5c9aa0,stroke-width:1px,color:#2f5a5e",
-            servicio:
-              "fill:#f0e9f7,stroke:#a488c9,stroke-width:1px,color:#5a3d7a",
-            programa:
-              "fill:#f5eede,stroke:#b89a5f,stroke-width:1px,color:#6b551f",
-            disco: "fill:#f2ebe0,stroke:#b08f5f,stroke-width:1px,color:#6b4f24",
-          },
-        },
-      };
+      function updateDiagrams(themeName) {
+        var suffix = themeName === "light" ? "claro" : "oscuro";
 
-      var archDiagramSource = document.getElementById("archSource").textContent;
-      var hwDiagramSource = document.getElementById("hwSource").textContent;
+        var archImg = document.getElementById("archDiagramImg");
+        var archSrc = "diagrama-arquitectura-" + suffix + ".svg";
+        if (archImg) archImg.src = archSrc;
 
-      function buildDiagramText(sourceText, themeName) {
-        var classDefs = diagramPalettes[themeName].classDefs;
-        var lines = Object.keys(classDefs).map(function (name) {
-          return "classDef " + name + " " + classDefs[name] + ";";
-        });
-        return sourceText + "\n" + lines.join("\n");
+        var openLink = document.getElementById("archOpenFull");
+        if (openLink) openLink.href = archSrc;
       }
 
-      function applyMermaidTheme(themeName) {
-        var palette = diagramPalettes[themeName] || diagramPalettes.dark;
-        mermaid.initialize({
-          startOnLoad: false,
-          theme: "base",
-          themeVariables: {
-            background: palette.background,
-            primaryColor: palette.primaryColor,
-            primaryBorderColor: palette.primaryBorderColor,
-            primaryTextColor: palette.primaryTextColor,
-            secondaryColor: palette.secondaryColor,
-            secondaryBorderColor: palette.secondaryBorderColor,
-            tertiaryColor: palette.tertiaryColor,
-            tertiaryBorderColor: palette.tertiaryBorderColor,
-            lineColor: palette.lineColor,
-            textColor: palette.textColor,
-            clusterBkg: palette.clusterBkg,
-            clusterBorder: palette.clusterBorder,
-            edgeLabelBackground: palette.edgeLabelBackground,
-            fontFamily: "inherit",
-          },
-          securityLevel: "loose",
-        });
-      }
-
-      function svgSize(svgEl) {
-        var viewBox = svgEl.getAttribute("viewBox");
-        if (viewBox) {
-          var parts = viewBox.split(/\s+/).map(Number);
-          return { width: parts[2], height: parts[3] };
-        }
-        return {
-          width: parseFloat(svgEl.getAttribute("width")) || 0,
-          height: parseFloat(svgEl.getAttribute("height")) || 0,
-        };
-      }
-
-      function combineSvgs(svgTextA, svgTextB) {
-        var parser = new DOMParser();
-        var svgA = parser.parseFromString(
-          svgTextA,
-          "image/svg+xml",
-        ).documentElement;
-        var svgB = parser.parseFromString(
-          svgTextB,
-          "image/svg+xml",
-        ).documentElement;
-        var sizeA = svgSize(svgA);
-        var sizeB = svgSize(svgB);
-        var width = Math.max(sizeA.width, sizeB.width);
-        var height = sizeA.height + sizeB.height;
-
-        var xmlns = "http://www.w3.org/2000/svg";
-        var combined = document.createElementNS(xmlns, "svg");
-        combined.setAttribute("xmlns", xmlns);
-        combined.setAttribute("viewBox", "0 0 " + width + " " + height);
-        combined.setAttribute("width", width);
-        combined.setAttribute("height", height);
-
-        svgA.setAttribute("x", (width - sizeA.width) / 2);
-        svgA.setAttribute("y", 0);
-        svgA.setAttribute("width", sizeA.width);
-        svgA.setAttribute("height", sizeA.height);
-        combined.appendChild(svgA);
-
-        svgB.setAttribute("x", (width - sizeB.width) / 2);
-        svgB.setAttribute("y", sizeA.height);
-        svgB.setAttribute("width", sizeB.width);
-        svgB.setAttribute("height", sizeB.height);
-        combined.appendChild(svgB);
-
-        return new XMLSerializer().serializeToString(combined);
-      }
-
-      function renderArchDiagram(themeName) {
-        applyMermaidTheme(themeName);
-
-        Promise.all([
-          mermaid.render(
-            "archGraphSvg",
-            buildDiagramText(archDiagramSource, themeName),
-          ),
-          mermaid.render(
-            "hwGraphSvg",
-            buildDiagramText(hwDiagramSource, themeName),
-          ),
-        ]).then(function (results) {
-          document.getElementById("archContainer").innerHTML = results[0].svg;
-          document.getElementById("hwContainer").innerHTML = results[1].svg;
-
-          var openLink = document.getElementById("archOpenFull");
-          if (openLink.dataset.blobUrl) {
-            URL.revokeObjectURL(openLink.dataset.blobUrl);
-          }
-          var combinedSvg = combineSvgs(results[0].svg, results[1].svg);
-          var url = URL.createObjectURL(
-            new Blob([combinedSvg], { type: "image/svg+xml" }),
-          );
-          openLink.href = url;
-          openLink.dataset.blobUrl = url;
-        });
-      }
-
-      renderArchDiagram(
+      updateDiagrams(
         document.documentElement.getAttribute("data-theme") || "dark",
       );
     </script>
     <script>
       var translations = {
         es: {
-          navBack: "← Volver al portfolio",
-          h1: "Arquitectura del homeserver",
-          uptimeLabelPlaceholder: "El último reinicio fue el …",
+          navBack: "← Volver",
+          h1: "Homelab",
+          uptimeLabelPlaceholder: "El último reinicio de la Pi fue el …",
           uptimeCalculating: "calculando…",
           philosophyH2: "Filosofía",
           philosophyP1:
-            "Infraestructura privada, modular y de bajo mantenimiento. Sin dependencia de servicios cloud comerciales. Esta página se encuentra publicada por Cloudflare Tunnel y está alojandose el servidor descrito. El resto de servicios se manejan por wireguard en mi tailnet personal. Actualmente de forma dinámica administro la apertura al público por Tailscale Funnel a medida de mis necesidades.",
+            "Infraestructura privada, modular y de bajo mantenimiento. Sin dependencia de servicios cloud comerciales. Esta página se publica mediante Cloudflare Tunnel. El resto de servicios se utilizan por WireGuard en mi tailnet personal, y de forma dinámica administro la apertura puntual al público vía Tailscale Funnel a medida de mis necesidades.",
           philosophyP2:
             "Cada stack corre en un pod de Podman, gestionado como servicio de systemd a nivel usuario. Permite mantener las responsabilidades y los entornos aislados.",
           archH2: "Arquitectura",
           diagramNote: "",
           archOpenFull: "Abrir diagrama en una pestaña nueva",
+          hwH3: "Almacenamiento del ThinkCentre",
+          hw1: "<strong>SSD 120GB</strong> - Sistema operativo",
+          hw2: "<strong>SSD 480GB</strong> - Datos: volúmenes de Podman, toda la información y contenedores",
+          hw3: "<strong>HDD 480GB</strong> - Backup diario",
+          hw4: "<strong>HDD 480GB</strong> - Backup semanal",
+          gatewayH2: "Gateway y monitoreo",
+          gatewayP:
+            "El ThinkCentre corre los servicios con gran almacenamiento de información como Immich o Vaultwarden. La Raspberry Pi 4B es nodo de red como DNS y proxy inverso, y también monitorea los otros servicios por Uptime Kuma. El Samsung S9+ corre Ntfy dentro de Termux.",
           notesH3: "Notas de arquitectura",
           note1:
             "<strong>Acceso único:</strong> El tráfico viaja por la tailnet siempre y es redirigido por Caddy. De esta forma se identifican más facilmente a donde se está accediendo. Todos los puertos se encuentran cerrados para la red LAN.",
           note2:
-            "<strong>Tailscale:</strong> Permite la conexión en remoto sin abrir puertos en el router. Se complementa con cloudflare para la gestión de los SSL.",
-          note3:
-            "<strong>Esta web:</strong> Es la única excepción de la gestión de Tailscale. Es una página estática ligera la cual tiene su acceso gestionado por Cloudflare Tunnel para el dominio.",
+            "<strong>Tailscale:</strong> Permite la conexión en remoto por la VPN. También permite ir rotando la exposición con Funnel.",
           note4:
             "<strong>Cockpit:</strong> corre directamente en el host. Es el panel principal de administración fuera de la terminal.",
           note5:
-            "<strong>Webhook:</strong> API que corre en el host. Su función es la habilitación dinámica de Tailscale Funnel. Permite instanciar en Homepage botones con scripts en bash para habilitar la salida de servicios de forma dinámica.",
+            "<strong>Webhook:</strong> API que corre en el host. Permite instanciar en Homepage botones con scripts en bash para habilitar la salida de servicios de forma dinámica por Tailscale Funnel.",
           note6:
             "<strong>Podman:</strong> motor rootless que orquesta todos los pods de servicios.",
           note7:
             "<strong>Bases de datos:</strong> Immich y Miniflux poseen sus contenedores de base de datos. Se omiten en el diagrama.",
-          note8:
-            "<strong>Discos:</strong> un SSD de 120GB exclusivo del sistema operativo. Un SSD concentra toda la información como disco de datos. Los dos HDD son destino de backups diario y semanal respectivamente.",
           note9:
-            "<strong>DNS:</strong> Pi-hole filtra consultas y las reenvía a Unbound, que sale a los servidores de Mullvad exclusivamente vía DoT. En caso de encontrar una subruta del dominio interno, la redirige a Caddy.",
+            "<strong>DNS:</strong> Pi-hole filtra consultas y las reenvía a Unbound, que sale a los servidores de Mullvad exclusivamente vía DoT. Los subdominios los redirige a Caddy.",
           note10:
-            "<strong>Proxy inverso:</strong> Caddy gestiona internamente el dominio para poder acceder por dominio y subdominio a los servicios de la red, permitiendo identificarlos de una forma más sencilla.",
+            "<strong>Proxy inverso:</strong> Caddy gestiona internamente el dominio para poder acceder de forma más sencilla a los servicios de la red.",
+          note12:
+            "<strong>El observador del observador:</strong> el Samsung S9+ corre Ntfy y recibe todas las notificaciones del sistema. También vigila que Uptime Kuma esté vivo mediante un chequeo periódico.",
           stackH2: "Stack técnico",
           stack1:
-            "<strong>Hardware:</strong> Lenovo ThinkCentre M700 (i3-6100T, 8GB RAM)",
-          stack2: "<strong>Sistema operativo:</strong> Debian 13 Trixie",
+            "<strong>ThinkCentre</strong>: Intel i3-6100T · 8GB RAM · Debian 13 Trixie, Podman rootless",
+          stack2:
+            "<strong>Raspberry Pi 4B</strong>: BCM2711 quad-core 1.5GHz · 4GB RAM · Raspberry Pi OS Lite, Podman rootless",
           stack3:
-            "<strong>Contenedores:</strong> Podman rootless orquestado vía systemd a nivel usuario",
-          stack4:
-            "<strong>Red:</strong> Tailscale (WireGuard) y Cloudflare Tunnel",
-          stack5:
-            "<strong>Administración:</strong> Cockpit para monitoreo de sistema y contenedores",
+            "<strong>Samsung S9+</strong>: Snapdragon 845 · 6GB RAM · Termux (proot-distro)",
           servicesH2: "Servicios",
           service1:
-            "<strong>Core</strong> — Vaultwarden (contraseñas), Radicale (calendarios y contactos)",
+            "<strong>Core</strong>: Vaultwarden (contraseñas), Radicale (calendarios y contactos)",
           service2:
-            "<strong>Gateway</strong> — Pi-hole (bloqueo de publicidad), Unbound (DNS recursivo con DoT), Caddy (Proxy inverso)",
+            "<strong>Gateway</strong>: Pi-hole (bloqueo de publicidad), Unbound (DNS recursivo con DoT), Caddy (Proxy inverso)",
           service3:
-            "<strong>Immich</strong> — Pod completo para Immich con su servidor, su backup y galería de fotos y videos con búsqueda por ML",
+            "<strong>Immich</strong>: Pod completo para Immich con su servidor, su backup y galería de fotos y videos con búsqueda por ML",
           service4:
-            "<strong>Entertainment</strong> — Miniflux (RSS), Suwayomi (lector de comics), Kavita (biblioteca digital) y Flaresolverr (bypass de Cloudflare)",
+            "<strong>Entertainment</strong>: Miniflux (RSS), Suwayomi (lector de comics), Kavita (biblioteca digital) y Flaresolverr (bypass de Cloudflare)",
           service5:
-            "<strong>Storage</strong> — Syncthing (sincronización), Filebrowser (gestión de archivos)",
+            "<strong>Storage</strong>: Syncthing (sincronización), Filebrowser (gestión de archivos)",
           service6:
-            "<strong>Utils</strong> — Homepage (dashboard), Uptime Kuma (monitoreo), Ntfy (notificaciones push)",
+            "<strong>Utils (ThinkCentre) </strong>: Homepage (dashboard)",
+          service7:
+            "<strong>Utils (Raspberry Pi)</strong>: Uptime Kuma, vigilando todos los servicios del ThinkCentre y de la propia Pi",
+          service8:
+            "<strong>Ntfy</strong>: Ntfy corriendo en Debian sobre Termux (proot-distro)",
           decisionsH2: "Decisiones técnicas",
           decision1:
-            "<strong>Debian Trixie:</strong> prioricé estabilidad y soporte de paquetes para un servidor que se va a encontrar siempre disponible y no debe recibir actualizaciones ni reinicios de forma inesperada.",
+            "<strong>Debian:</strong> prioricé estabilidad y soporte de paquetes para un servidor que se va a encontrar siempre disponible y no debe recibir actualizaciones ni reinicios de forma inesperada.",
           decision2:
             "<strong>Podman:</strong> menor superficie de ataque al no depender de un daemon corriendo como root.",
           decision3:
@@ -521,95 +262,106 @@
           decision4:
             "<strong>Cloudflare:</strong> permite la gestión simple y sencilla para mi dominio personal, gestionando los SSL y su renovación de forma automática.",
           decision5:
-            "<strong>Exposición pública:</strong> solo esta página queda fija en Tunnel; el resto de los servicios se exponen puntualmente y se apagan al terminar de usarlos por medio de Funnel y el MagicDNS.",
+            "<strong>Exposición pública:</strong> solo esta landing queda fija, en un Tunnel independiente; el resto de los servicios se exponen puntualmente y se apagan al terminar de usarlos, vía Tailscale Funnel activado por un webhook local. El acceso interno normal siempre es por Caddy en la tailnet, sin MagicDNS.",
+          decision6:
+            "<strong>Separación de observabilidad:</strong> el nodo que monitorea vive aparte del nodo que corre los servicios. Si el host cae, el monitoreo sigue en pie.",
           originsH2: "Orígenes del proyecto",
           originsP:
-            "Mi servidor personal inició por medio de una instancia de una Raspberry Pi 4b. Fue el motor que incentivó tanto este proyecto. En el día a día me sirve tanto para aprender como para proveer los servicios sin pagos de suscripción. Actualmente esa Raspberry Pi se encuentra vinculada al nodo principal permitiendo redundancia para los servicios primordiales como Vaultwarden, Pihole o Unbound. Así mantengo una alta disponibilidad ante cualquier inconveniente que pueda llegar a ocurrir.",
+            "Mi servidor personal inició por medio esta misma Raspberry Pi 4B. Así fui experimentando, probando y trabajando poco a poco hasta llegar a este punto. En el día a día me sirve tanto para aprender como para proveer los servicios sin pagos de suscripción.",
           openSourceH2: "Código abierto",
           openSourceP1:
             "La configuración completa está disponible en el repositorio:",
           footer: "Última actualización: Agosto 2026",
-          uptimePrefix: "El último reinicio fue el ",
-          uptimeFallbackLabel: "Activo desde",
+          uptimePrefix: "El último reinicio de la Pi fue el ",
+          uptimeFallbackLabel: "Pi activa desde",
           uptimeUnavailable: "uptime no disponible",
         },
         en: {
-          navBack: "← Back to portfolio",
-          h1: "Homeserver architecture",
-          uptimeLabelPlaceholder: "The last restart was on …",
+          navBack: "← Back",
+          h1: "Homelab",
+          uptimeLabelPlaceholder: "The Pi's last restart was on …",
           uptimeCalculating: "calculating…",
           philosophyH2: "Philosophy",
           philosophyP1:
-            "Private, modular infrastructure with low maintenance. It has no dependency on commercial cloud services. This page is published through Cloudflare Tunnel and hosted on the server described here. All other services run over WireGuard on my personal tailnet. I dynamically manage public access through Tailscale Funnel based on my needs.",
+            "Private, modular infrastructure with low maintenance. It doesn't depend on any commercial cloud service. This page is published through Cloudflare Tunnel. All other services run over WireGuard on my personal tailnet, and I dynamically open public access to them through Tailscale Funnel whenever I need to.",
           philosophyP2:
             "Each stack runs in a Podman pod, managed as a user level systemd service. This keeps responsibilities and environments isolated.",
           archH2: "Architecture",
           diagramNote: "(Diagram labels are in Spanish.)",
           archOpenFull: "Open diagram in a new tab",
+          hwH3: "ThinkCentre storage",
+          hw1: "<strong>120GB SSD</strong>: operating system",
+          hw2: "<strong>480GB SSD</strong>: data, Podman volumes, all information and containers",
+          hw3: "<strong>480GB HDD</strong>: daily backup",
+          hw4: "<strong>480GB HDD</strong>: weekly backup",
+          gatewayH2: "Gateway and monitoring",
+          gatewayP:
+            "The ThinkCentre runs the services that need heavy storage, like Immich or Vaultwarden. The Raspberry Pi 4B works as the network node, handling DNS and reverse proxy, and it also monitors the other services through Uptime Kuma. The Samsung S9+ runs Ntfy inside Termux.",
           notesH3: "Architecture notes",
           note1:
-            "<strong>Single access point:</strong> traffic always travels through the tailnet and gets redirected by Caddy. This makes it easier to identify what is being accessed. All ports are closed to the LAN.",
+            "<strong>Single access point:</strong> traffic always travels through the tailnet and gets redirected by Caddy. This makes it easier to identify what's being accessed. All ports are closed to the LAN.",
           note2:
-            "<strong>Tailscale:</strong> allows remote connections without opening any ports on the router. It works together with Cloudflare to manage SSL certificates.",
-          note3:
-            "<strong>This site:</strong> the only exception to Tailscale management. It is a lightweight static page, and its access is managed through Cloudflare Tunnel for the domain.",
+            "<strong>Tailscale:</strong> allows remote connections through the VPN. It also lets me rotate public exposure using Funnel.",
           note4:
-            "<strong>Cockpit:</strong> runs directly on the host. It is the main administration panel outside the terminal.",
+            "<strong>Cockpit:</strong> runs directly on the host. It's the main admin panel outside the terminal.",
           note5:
-            "<strong>Webhook:</strong> an API that runs on the host. Its job is to dynamically enable Tailscale Funnel. It lets me add buttons in Homepage with bash scripts to turn on service exposure on demand.",
+            "<strong>Webhook:</strong> an API running on the host. It lets me add buttons in Homepage with bash scripts to dynamically enable public access to services through Tailscale Funnel.",
           note6:
-            "<strong>Podman:</strong> the rootless engine that manages all the service pods.",
+            "<strong>Podman:</strong> the rootless engine that orchestrates all the service pods.",
           note7:
-            "<strong>Databases:</strong> Immich and Miniflux each have their own database containers. They are left out of the diagram.",
-          note8:
-            "<strong>Disks:</strong> one 120GB SSD is dedicated to the operating system. Another SSD holds all the data. The two HDDs receive daily and weekly backups.",
+            "<strong>Databases:</strong> Immich and Miniflux each have their own database containers. They're left out of the diagram.",
           note9:
-            "<strong>DNS:</strong> Pi-hole filters queries and forwards them to Unbound, which reaches Mullvad's servers exclusively over DoT. If it finds a subroute of the internal domain, it redirects it to Caddy.",
+            "<strong>DNS:</strong> Pi-hole filters queries and forwards them to Unbound, which reaches Mullvad's servers exclusively over DoT. It redirects subdomains to Caddy.",
           note10:
-            "<strong>Reverse proxy:</strong> Caddy manages the domain internally so services can be reached by domain and subdomain, making them easier to identify.",
+            "<strong>Reverse proxy:</strong> Caddy manages the domain internally, making it easier to access the services on the network.",
+          note12:
+            "<strong>The watcher of the watcher:</strong> the Samsung S9+ runs Ntfy and receives every system notification. It also checks that Uptime Kuma is alive through a periodic check.",
           stackH2: "Technical stack",
           stack1:
-            "<strong>Hardware:</strong> Lenovo ThinkCentre M700 (i3-6100T, 8GB RAM)",
-          stack2: "<strong>Operating system:</strong> Debian 13 Trixie",
+            "<strong>ThinkCentre</strong>: Intel i3-6100T · 8GB RAM · Debian 13 Trixie, rootless Podman",
+          stack2:
+            "<strong>Raspberry Pi 4B</strong>: BCM2711 quad-core 1.5GHz · 4GB RAM · Raspberry Pi OS Lite, rootless Podman",
           stack3:
-            "<strong>Containers:</strong> rootless Podman, orchestrated through a user level systemd service",
-          stack4:
-            "<strong>Network:</strong> Tailscale (WireGuard) and Cloudflare Tunnel",
-          stack5:
-            "<strong>Administration:</strong> Cockpit for system and container monitoring",
+            "<strong>Samsung S9+</strong>: Snapdragon 845 · 6GB RAM · Termux (proot-distro)",
           servicesH2: "Services",
           service1:
-            "<strong>Core</strong> — Vaultwarden (passwords), Radicale (calendars and contacts)",
+            "<strong>Core</strong>: Vaultwarden (passwords), Radicale (calendars and contacts)",
           service2:
-            "<strong>Gateway</strong> — Pi-hole (ad blocking), Unbound (recursive DNS with DoT), Caddy (reverse proxy)",
+            "<strong>Gateway</strong>: Pi-hole (ad blocking), Unbound (recursive DNS with DoT), Caddy (reverse proxy)",
           service3:
-            "<strong>Immich</strong> — a complete pod for Immich, with its server plus backup and gallery for photos and videos, including ML powered search",
+            "<strong>Immich</strong>: a complete pod for Immich, with its server, backup, and a photo and video gallery with ML powered search",
           service4:
-            "<strong>Entertainment</strong> — Miniflux (RSS), Suwayomi (comic reader), Kavita (digital library), and Flaresolverr (Cloudflare bypass)",
+            "<strong>Entertainment</strong>: Miniflux (RSS), Suwayomi (comic reader), Kavita (digital library), and Flaresolverr (Cloudflare bypass)",
           service5:
-            "<strong>Storage</strong> — Syncthing (sync), Filebrowser (file management)",
+            "<strong>Storage</strong>: Syncthing (sync), Filebrowser (file management)",
           service6:
-            "<strong>Utils</strong> — Homepage (dashboard), Uptime Kuma (monitoring), Ntfy (push notifications)",
+            "<strong>Utils (ThinkCentre)</strong>: Homepage (dashboard)",
+          service7:
+            "<strong>Utils (Raspberry Pi)</strong>: Uptime Kuma, watching every service on the ThinkCentre and on the Pi itself",
+          service8:
+            "<strong>Ntfy</strong>: runs on Debian over Termux (proot-distro)",
           decisionsH2: "Technical decisions",
           decision1:
-            "<strong>Debian Trixie:</strong> I prioritized stability and package support, since this server needs to stay available at all times and should not get unexpected updates or restarts.",
+            "<strong>Debian:</strong> I prioritized stability and package support, since this server needs to stay available at all times and shouldn't get unexpected updates or restarts.",
           decision2:
-            "<strong>Podman:</strong> a smaller attack surface, since it does not depend on a daemon running as root.",
+            "<strong>Podman:</strong> a smaller attack surface, since it doesn't depend on a daemon running as root.",
           decision3:
             "<strong>Tailscale:</strong> zero open ports on the router, avoiding security gaps and unwanted access.",
           decision4:
             "<strong>Cloudflare:</strong> makes it simple to manage my personal domain, handling SSL certificates and renewing them automatically.",
           decision5:
-            "<strong>Public exposure:</strong> only this page stays fixed on Tunnel. The other services are exposed only when needed and turned off after use, through Funnel and MagicDNS.",
+            "<strong>Public exposure:</strong> only this landing page stays fixed, on its own independent Tunnel. Every other service is exposed on demand and turned off after use, through Tailscale Funnel triggered by a local webhook. Regular internal access always goes through Caddy on the tailnet, without MagicDNS.",
+          decision6:
+            "<strong>Observability separation:</strong> the node that monitors lives apart from the node that runs the services. If the host goes down, monitoring stays up.",
           originsH2: "Project origins",
           originsP:
-            "My personal server started with a Raspberry Pi 4B. That was the project that got this whole idea going. Day to day, it helps me both learn and run services without paying for subscriptions. That Raspberry Pi is now linked to the main node, giving redundancy to core services like Vaultwarden, Pi-hole, and Unbound. This keeps things available even if something goes wrong.",
+            "My personal server started with this same Raspberry Pi 4B. From there, I kept experimenting, testing, and working step by step until I got to this point. Day to day, it helps me both learn and run services without paying for subscriptions.",
           openSourceH2: "Open source",
           openSourceP1:
             "The full configuration is available in the repository:",
           footer: "Last updated: August 2026",
-          uptimePrefix: "The last restart was on ",
-          uptimeFallbackLabel: "Active since",
+          uptimePrefix: "The Pi's last restart was on ",
+          uptimeFallbackLabel: "Pi active since",
           uptimeUnavailable: "uptime not available",
         },
       };
