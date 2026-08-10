@@ -48,7 +48,7 @@ export const projects: Project[] = [
   },
   {
     name: "homeserver/homelab",
-    url: "https://github.com/ncorrea-13/homelab",
+    url: "https://github.com/ncorrea-13/homeserver",
     desc: {
       es: "Configuración y compose files de mi servidor personal. El mismo servidor que hostea la página de arquitectura.",
       en: "Configuration and compose files for my personal server. The same server that hosts the architecture page.",
