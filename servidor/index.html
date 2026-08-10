@@ -56,7 +56,9 @@
     <h1 data-i18n="h1"></h1>
 
     <div class="uptime-box compact">
-      <p class="uptime-label" id="uptime-label">El último reinicio fue el …</p>
+      <p class="uptime-label" id="uptime-label">
+        El último reinicio de la Pi fue el …
+      </p>
       <p class="uptime-value" id="uptime-counter">calculando…</p>
     </div>
 
@@ -106,14 +108,12 @@
     <ul>
       <li data-i18n="note1"></li>
       <li data-i18n="note2"></li>
-      <li data-i18n="note3"></li>
       <li data-i18n="note4"></li>
       <li data-i18n="note5"></li>
       <li data-i18n="note6"></li>
       <li data-i18n="note7"></li>
       <li data-i18n="note9"></li>
       <li data-i18n="note10"></li>
-      <li data-i18n="note11"></li>
       <li data-i18n="note12"></li>
     </ul>
 
@@ -123,8 +123,6 @@
       <li data-i18n="stack1"></li>
       <li data-i18n="stack2"></li>
       <li data-i18n="stack3"></li>
-      <li data-i18n="stack4"></li>
-      <li data-i18n="stack5"></li>
     </ul>
 
     <h2 data-i18n="servicesH2"></h2>
@@ -182,9 +180,6 @@
 
         var openLink = document.getElementById("archOpenFull");
         if (openLink) openLink.href = archSrc;
-
-        var gatewayImg = document.getElementById("gatewayDiagramImg");
-        if (gatewayImg) gatewayImg.src = "gateway-diagram-" + suffix + ".svg";
       }
 
       updateDiagrams(
@@ -194,78 +189,72 @@
     <script>
       var translations = {
         es: {
-          navBack: "← Volver al portfolio",
-          h1: "Arquitectura del homeserver",
-          uptimeLabelPlaceholder: "El último reinicio fue el …",
+          navBack: "← Volver",
+          h1: "Homelab",
+          uptimeLabelPlaceholder: "El último reinicio de la Pi fue el …",
           uptimeCalculating: "calculando…",
           philosophyH2: "Filosofía",
           philosophyP1:
-            "Infraestructura privada, modular y de bajo mantenimiento. Sin dependencia de servicios cloud comerciales. Esta página se publica mediante Cloudflare Tunnel. El resto de servicios se utilizan se manejan por WireGuard en mi tailnet personal, y de forma dinámica administro la apertura puntual al público vía Tailscale Funnel a medida de mis necesidades.",
+            "Infraestructura privada, modular y de bajo mantenimiento. Sin dependencia de servicios cloud comerciales. Esta página se publica mediante Cloudflare Tunnel. El resto de servicios se utilizan por WireGuard en mi tailnet personal, y de forma dinámica administro la apertura puntual al público vía Tailscale Funnel a medida de mis necesidades.",
           philosophyP2:
             "Cada stack corre en un pod de Podman, gestionado como servicio de systemd a nivel usuario. Permite mantener las responsabilidades y los entornos aislados.",
           archH2: "Arquitectura",
           diagramNote: "",
           archOpenFull: "Abrir diagrama en una pestaña nueva",
           hwH3: "Almacenamiento del ThinkCentre",
-          hw1: "<strong>SSD 120GB</strong> — sistema operativo",
-          hw2: "<strong>SSD 480GB</strong> — datos: volúmenes de Podman, toda la información y contenedores",
-          hw3: "<strong>HDD 480GB</strong> — backup diario",
-          hw4: "<strong>HDD 480GB</strong> — backup semanal",
+          hw1: "<strong>SSD 120GB</strong> - Sistema operativo",
+          hw2: "<strong>SSD 480GB</strong> - Datos: volúmenes de Podman, toda la información y contenedores",
+          hw3: "<strong>HDD 480GB</strong> - Backup diario",
+          hw4: "<strong>HDD 480GB</strong> - Backup semanal",
           gatewayH2: "Gateway y monitoreo",
           gatewayP:
-            "El ThinkCentre corre los servicios con gran almacenamiento de información como Immich o Vaultwarden. La Raspberry Pi 4B es nodo de red como DNS y proxy inverso, y también monitorea los otros servicios por Uptime Kuma, separada del host que vigila a propósito. El Samsung S9+, corre Ntfy dentro de Termux y monitorea que Kuma esté vivo, el único punto ciego que Kuma tiene de sí mismo.",
+            "El ThinkCentre corre los servicios con gran almacenamiento de información como Immich o Vaultwarden. La Raspberry Pi 4B es nodo de red como DNS y proxy inverso, y también monitorea los otros servicios por Uptime Kuma. El Samsung S9+ corre Ntfy dentro de Termux.",
           notesH3: "Notas de arquitectura",
           note1:
             "<strong>Acceso único:</strong> El tráfico viaja por la tailnet siempre y es redirigido por Caddy. De esta forma se identifican más facilmente a donde se está accediendo. Todos los puertos se encuentran cerrados para la red LAN.",
           note2:
-            "<strong>Tailscale:</strong> Permite la conexión en remoto sin abrir puertos en el router. Se complementa con cloudflare para la gestión de los SSL.",
-          note3:
-            "<strong>Esta web:</strong> Es la única excepción de la gestión de Tailscale. Es una página estática ligera la cual tiene su acceso gestionado por Cloudflare Tunnel para el dominio.",
+            "<strong>Tailscale:</strong> Permite la conexión en remoto por la VPN. También permite ir rotando la exposición con Funnel.",
           note4:
             "<strong>Cockpit:</strong> corre directamente en el host. Es el panel principal de administración fuera de la terminal.",
           note5:
-            "<strong>Webhook:</strong> API que corre en el host. Su función es la habilitación dinámica de Tailscale Funnel. Permite instanciar en Homepage botones con scripts en bash para habilitar la salida de servicios de forma dinámica.",
+            "<strong>Webhook:</strong> API que corre en el host. Permite instanciar en Homepage botones con scripts en bash para habilitar la salida de servicios de forma dinámica por Tailscale Funnel.",
           note6:
             "<strong>Podman:</strong> motor rootless que orquesta todos los pods de servicios.",
           note7:
             "<strong>Bases de datos:</strong> Immich y Miniflux poseen sus contenedores de base de datos. Se omiten en el diagrama.",
           note9:
-            "<strong>DNS:</strong> Pi-hole, corriendo en la Raspberry Pi, filtra consultas y las reenvía a Unbound, que sale a los servidores de Mullvad exclusivamente vía DoT. En caso de encontrar una subruta del dominio interno, la redirige a Caddy.",
+            "<strong>DNS:</strong> Pi-hole filtra consultas y las reenvía a Unbound, que sale a los servidores de Mullvad exclusivamente vía DoT. Los subdominios los redirige a Caddy.",
           note10:
-            "<strong>Proxy inverso:</strong> Caddy, en la Raspberry Pi, gestiona internamente el dominio para poder acceder por dominio y subdominio a los servicios de la red — tanto del ThinkCentre como de la propia Pi — permitiendo identificarlos de una forma más sencilla.",
-          note11:
-            "<strong>Independencia del monitoreo:</strong> Uptime Kuma vive en la Raspberry Pi, separada del ThinkCentre a propósito. Si el host principal cae, el monitoreo sigue en pie y puede avisarlo.",
+            "<strong>Proxy inverso:</strong> Caddy gestiona internamente el dominio para poder acceder de forma más sencilla a los servicios de la red.",
           note12:
-            "<strong>El observador del observador:</strong> el Samsung S9+ corre Ntfy y recibe todas las notificaciones del sistema. También vigila que Uptime Kuma esté vivo mediante un chequeo periódico, el único punto ciego que Kuma tiene de sí mismo.",
+            "<strong>El observador del observador:</strong> el Samsung S9+ corre Ntfy y recibe todas las notificaciones del sistema. También vigila que Uptime Kuma esté vivo mediante un chequeo periódico.",
           stackH2: "Stack técnico",
           stack1:
-            "<strong>Hardware:</strong> Lenovo ThinkCentre M710q (i3-6100T, 8GB RAM)",
-          stack2: "<strong>Sistema operativo:</strong> Debian 13 Trixie",
+            "<strong>ThinkCentre</strong>: Intel i3-6100T · 8GB RAM · Debian 13 Trixie, Podman rootless",
+          stack2:
+            "<strong>Raspberry Pi 4B</strong>: BCM2711 quad-core 1.5GHz · 4GB RAM · Raspberry Pi OS Lite, Podman rootless",
           stack3:
-            "<strong>Contenedores:</strong> Podman rootless orquestado vía systemd a nivel usuario",
-          stack4:
-            "<strong>Red:</strong> Tailscale (WireGuard) y Cloudflare Tunnel",
-          stack5:
-            "<strong>Administración:</strong> Cockpit para monitoreo de sistema y contenedores",
+            "<strong>Samsung S9+</strong>: Snapdragon 845 · 6GB RAM · Termux (proot-distro)",
           servicesH2: "Servicios",
           service1:
-            "<strong>Core</strong> — Vaultwarden (contraseñas), Radicale (calendarios y contactos)",
+            "<strong>Core</strong>: Vaultwarden (contraseñas), Radicale (calendarios y contactos)",
           service2:
-            "<strong>Gateway (Raspberry Pi)</strong> — Pi-hole (bloqueo de publicidad), Unbound (DNS recursivo con DoT), Caddy (Proxy inverso)",
+            "<strong>Gateway</strong>: Pi-hole (bloqueo de publicidad), Unbound (DNS recursivo con DoT), Caddy (Proxy inverso)",
           service3:
-            "<strong>Immich</strong> — Pod completo para Immich con su servidor, su backup y galería de fotos y videos con búsqueda por ML",
+            "<strong>Immich</strong>: Pod completo para Immich con su servidor, su backup y galería de fotos y videos con búsqueda por ML",
           service4:
-            "<strong>Entertainment</strong> — Miniflux (RSS), Suwayomi (lector de comics), Kavita (biblioteca digital) y Flaresolverr (bypass de Cloudflare)",
+            "<strong>Entertainment</strong>: Miniflux (RSS), Suwayomi (lector de comics), Kavita (biblioteca digital) y Flaresolverr (bypass de Cloudflare)",
           service5:
-            "<strong>Storage</strong> — Syncthing (sincronización), Filebrowser (gestión de archivos)",
-          service6: "<strong>Utils</strong> — Homepage (dashboard)",
+            "<strong>Storage</strong>: Syncthing (sincronización), Filebrowser (gestión de archivos)",
+          service6:
+            "<strong>Utils (ThinkCentre) </strong>: Homepage (dashboard)",
           service7:
-            "<strong>Monitoreo (Raspberry Pi)</strong> — Uptime Kuma, vigilando todos los servicios del ThinkCentre y de la propia Pi",
+            "<strong>Utils (Raspberry Pi)</strong>: Uptime Kuma, vigilando todos los servicios del ThinkCentre y de la propia Pi",
           service8:
-            "<strong>Notificaciones (Samsung S9+)</strong> — Ntfy, corriendo en Debian sobre Termux (proot-distro)",
+            "<strong>Ntfy</strong>: Ntfy corriendo en Debian sobre Termux (proot-distro)",
           decisionsH2: "Decisiones técnicas",
           decision1:
-            "<strong>Debian Trixie:</strong> prioricé estabilidad y soporte de paquetes para un servidor que se va a encontrar siempre disponible y no debe recibir actualizaciones ni reinicios de forma inesperada.",
+            "<strong>Debian:</strong> prioricé estabilidad y soporte de paquetes para un servidor que se va a encontrar siempre disponible y no debe recibir actualizaciones ni reinicios de forma inesperada.",
           decision2:
             "<strong>Podman:</strong> menor superficie de ataque al no depender de un daemon corriendo como root.",
           decision3:
@@ -275,110 +264,104 @@
           decision5:
             "<strong>Exposición pública:</strong> solo esta landing queda fija, en un Tunnel independiente; el resto de los servicios se exponen puntualmente y se apagan al terminar de usarlos, vía Tailscale Funnel activado por un webhook local. El acceso interno normal siempre es por Caddy en la tailnet, sin MagicDNS.",
           decision6:
-            "<strong>Separación de observabilidad:</strong> el nodo que monitorea (Raspberry Pi + Uptime Kuma) vive aparte del nodo que corre los servicios (ThinkCentre) — si el host cae, el monitoreo sigue en pie. Reutiliza hardware que ya tenía, sin comprar nada nuevo.",
+            "<strong>Separación de observabilidad:</strong> el nodo que monitorea vive aparte del nodo que corre los servicios. Si el host cae, el monitoreo sigue en pie.",
           originsH2: "Orígenes del proyecto",
           originsP:
-            "Mi servidor personal inició por medio de una instancia de una Raspberry Pi 4B. Fue el motor que incentivó tanto este proyecto. En el día a día me sirve tanto para aprender como para proveer los servicios sin pagos de suscripción. Hoy esa Raspberry Pi cumple un rol distinto: es el nodo de red y observabilidad (Pi-hole, Unbound, Caddy, Uptime Kuma), separado a propósito del ThinkCentre que corre los servicios principales — así el monitoreo no depende del mismo host que vigila.",
+            "Mi servidor personal inició por medio esta misma Raspberry Pi 4B. Así fui experimentando, probando y trabajando poco a poco hasta llegar a este punto. En el día a día me sirve tanto para aprender como para proveer los servicios sin pagos de suscripción.",
           openSourceH2: "Código abierto",
           openSourceP1:
             "La configuración completa está disponible en el repositorio:",
           footer: "Última actualización: Agosto 2026",
-          uptimePrefix: "El último reinicio fue el ",
-          uptimeFallbackLabel: "Activo desde",
+          uptimePrefix: "El último reinicio de la Pi fue el ",
+          uptimeFallbackLabel: "Pi activa desde",
           uptimeUnavailable: "uptime no disponible",
         },
         en: {
-          navBack: "← Back to portfolio",
-          h1: "Homeserver architecture",
-          uptimeLabelPlaceholder: "The last restart was on …",
+          navBack: "← Back",
+          h1: "Homelab",
+          uptimeLabelPlaceholder: "The Pi's last restart was on …",
           uptimeCalculating: "calculating…",
           philosophyH2: "Philosophy",
           philosophyP1:
-            "Private, modular infrastructure with low maintenance. It has no dependency on commercial cloud services. This page is published through Cloudflare Tunnel and hosted on the server described here. All other services run over WireGuard on my personal tailnet. I dynamically manage public access through Tailscale Funnel based on my needs.",
+            "Private, modular infrastructure with low maintenance. It doesn't depend on any commercial cloud service. This page is published through Cloudflare Tunnel. All other services run over WireGuard on my personal tailnet, and I dynamically open public access to them through Tailscale Funnel whenever I need to.",
           philosophyP2:
             "Each stack runs in a Podman pod, managed as a user level systemd service. This keeps responsibilities and environments isolated.",
           archH2: "Architecture",
           diagramNote: "(Diagram labels are in Spanish.)",
           archOpenFull: "Open diagram in a new tab",
-          hwH3: "ThinkCentre's Storage",
-          hw1: "<strong>120GB SSD</strong> — operating system",
-          hw2: "<strong>480GB SSD</strong> — data: Podman volumes, all information and containers",
-          hw3: "<strong>480GB HDD</strong> — daily backup",
-          hw4: "<strong>480GB HDD</strong> — weekly backup",
+          hwH3: "ThinkCentre storage",
+          hw1: "<strong>120GB SSD</strong>: operating system",
+          hw2: "<strong>480GB SSD</strong>: data, Podman volumes, all information and containers",
+          hw3: "<strong>480GB HDD</strong>: daily backup",
+          hw4: "<strong>480GB HDD</strong>: weekly backup",
           gatewayH2: "Gateway and monitoring",
           gatewayP:
-            'The ThinkCentre runs the "heavy" services (Immich, Vaultwarden, etc). The Raspberry Pi 4B is the network plane — DNS, reverse proxy — and also the observer (Uptime Kuma), deliberately kept apart from the host it watches. The Samsung S9+, with its cracked screen, runs Ntfy inside Termux and is the watcher of the watcher: it checks that Kuma is alive, the one blind spot Kuma has of itself.',
+            "The ThinkCentre runs the services that need heavy storage, like Immich or Vaultwarden. The Raspberry Pi 4B works as the network node, handling DNS and reverse proxy, and it also monitors the other services through Uptime Kuma. The Samsung S9+ runs Ntfy inside Termux.",
           notesH3: "Architecture notes",
           note1:
-            "<strong>Single access point:</strong> traffic always travels through the tailnet and gets redirected by Caddy. This makes it easier to identify what is being accessed. All ports are closed to the LAN.",
+            "<strong>Single access point:</strong> traffic always travels through the tailnet and gets redirected by Caddy. This makes it easier to identify what's being accessed. All ports are closed to the LAN.",
           note2:
-            "<strong>Tailscale:</strong> allows remote connections without opening any ports on the router. It works together with Cloudflare to manage SSL certificates.",
-          note3:
-            "<strong>This site:</strong> the only exception to Tailscale management. It is a lightweight static page, and its access is managed through Cloudflare Tunnel for the domain.",
+            "<strong>Tailscale:</strong> allows remote connections through the VPN. It also lets me rotate public exposure using Funnel.",
           note4:
-            "<strong>Cockpit:</strong> runs directly on the host. It is the main administration panel outside the terminal.",
+            "<strong>Cockpit:</strong> runs directly on the host. It's the main admin panel outside the terminal.",
           note5:
-            "<strong>Webhook:</strong> an API that runs on the host. Its job is to dynamically enable Tailscale Funnel. It lets me add buttons in Homepage with bash scripts to turn on service exposure on demand.",
+            "<strong>Webhook:</strong> an API running on the host. It lets me add buttons in Homepage with bash scripts to dynamically enable public access to services through Tailscale Funnel.",
           note6:
-            "<strong>Podman:</strong> the rootless engine that manages all the service pods.",
+            "<strong>Podman:</strong> the rootless engine that orchestrates all the service pods.",
           note7:
-            "<strong>Databases:</strong> Immich and Miniflux each have their own database containers. They are left out of the diagram.",
+            "<strong>Databases:</strong> Immich and Miniflux each have their own database containers. They're left out of the diagram.",
           note9:
-            "<strong>DNS:</strong> Pi-hole, running on the Raspberry Pi, filters queries and forwards them to Unbound, which reaches Mullvad's servers exclusively over DoT. If it finds a subroute of the internal domain, it redirects it to Caddy.",
+            "<strong>DNS:</strong> Pi-hole filters queries and forwards them to Unbound, which reaches Mullvad's servers exclusively over DoT. It redirects subdomains to Caddy.",
           note10:
-            "<strong>Reverse proxy:</strong> Caddy, on the Raspberry Pi, manages the domain internally so services can be reached by domain and subdomain — both on the ThinkCentre and on the Pi itself — making them easier to identify.",
-          note11:
-            "<strong>Monitoring independence:</strong> Uptime Kuma lives on the Raspberry Pi, deliberately separate from the ThinkCentre. If the main host goes down, monitoring stays up and can report it.",
+            "<strong>Reverse proxy:</strong> Caddy manages the domain internally, making it easier to access the services on the network.",
           note12:
-            "<strong>The watcher of the watcher:</strong> the Samsung S9+ runs Ntfy and receives every system notification. It also checks that Uptime Kuma is alive through a periodic check, the one blind spot Kuma has of itself.",
+            "<strong>The watcher of the watcher:</strong> the Samsung S9+ runs Ntfy and receives every system notification. It also checks that Uptime Kuma is alive through a periodic check.",
           stackH2: "Technical stack",
           stack1:
-            "<strong>Hardware:</strong> Lenovo ThinkCentre M710q (i3-6100T, 8GB RAM)",
-          stack2: "<strong>Operating system:</strong> Debian 13 Trixie",
+            "<strong>ThinkCentre</strong>: Intel i3-6100T · 8GB RAM · Debian 13 Trixie, rootless Podman",
+          stack2:
+            "<strong>Raspberry Pi 4B</strong>: BCM2711 quad-core 1.5GHz · 4GB RAM · Raspberry Pi OS Lite, rootless Podman",
           stack3:
-            "<strong>Containers:</strong> rootless Podman, orchestrated through a user level systemd service",
-          stack4:
-            "<strong>Network:</strong> Tailscale (WireGuard) and Cloudflare Tunnel",
-          stack5:
-            "<strong>Administration:</strong> Cockpit for system and container monitoring",
+            "<strong>Samsung S9+</strong>: Snapdragon 845 · 6GB RAM · Termux (proot-distro)",
           servicesH2: "Services",
           service1:
-            "<strong>Core</strong> — Vaultwarden (passwords), Radicale (calendars and contacts)",
+            "<strong>Core</strong>: Vaultwarden (passwords), Radicale (calendars and contacts)",
           service2:
-            "<strong>Gateway (Raspberry Pi)</strong> — Pi-hole (ad blocking), Unbound (recursive DNS with DoT), Caddy (reverse proxy)",
+            "<strong>Gateway</strong>: Pi-hole (ad blocking), Unbound (recursive DNS with DoT), Caddy (reverse proxy)",
           service3:
-            "<strong>Immich</strong> — a complete pod for Immich, with its server plus backup and gallery for photos and videos, including ML powered search",
+            "<strong>Immich</strong>: a complete pod for Immich, with its server, backup, and a photo and video gallery with ML powered search",
           service4:
-            "<strong>Entertainment</strong> — Miniflux (RSS), Suwayomi (comic reader), Kavita (digital library), and Flaresolverr (Cloudflare bypass)",
+            "<strong>Entertainment</strong>: Miniflux (RSS), Suwayomi (comic reader), Kavita (digital library), and Flaresolverr (Cloudflare bypass)",
           service5:
-            "<strong>Storage</strong> — Syncthing (sync), Filebrowser (file management)",
-          service6: "<strong>Utils</strong> — Homepage (dashboard)",
+            "<strong>Storage</strong>: Syncthing (sync), Filebrowser (file management)",
+          service6:
+            "<strong>Utils (ThinkCentre)</strong>: Homepage (dashboard)",
           service7:
-            "<strong>Monitoring (Raspberry Pi)</strong> — Uptime Kuma, watching every service on the ThinkCentre and on the Pi itself",
+            "<strong>Utils (Raspberry Pi)</strong>: Uptime Kuma, watching every service on the ThinkCentre and on the Pi itself",
           service8:
-            "<strong>Notifications (Samsung S9+)</strong> — Ntfy, running on Debian over Termux (proot-distro)",
+            "<strong>Ntfy</strong>: runs on Debian over Termux (proot-distro)",
           decisionsH2: "Technical decisions",
           decision1:
-            "<strong>Debian Trixie:</strong> I prioritized stability and package support, since this server needs to stay available at all times and should not get unexpected updates or restarts.",
+            "<strong>Debian:</strong> I prioritized stability and package support, since this server needs to stay available at all times and shouldn't get unexpected updates or restarts.",
           decision2:
-            "<strong>Podman:</strong> a smaller attack surface, since it does not depend on a daemon running as root.",
+            "<strong>Podman:</strong> a smaller attack surface, since it doesn't depend on a daemon running as root.",
           decision3:
             "<strong>Tailscale:</strong> zero open ports on the router, avoiding security gaps and unwanted access.",
           decision4:
             "<strong>Cloudflare:</strong> makes it simple to manage my personal domain, handling SSL certificates and renewing them automatically.",
           decision5:
-            "<strong>Public exposure:</strong> only this landing page stays fixed, on its own independent Tunnel; every other service is exposed on demand and turned off after use, through Tailscale Funnel triggered by a local webhook. Regular internal access always goes through Caddy on the tailnet, without MagicDNS.",
+            "<strong>Public exposure:</strong> only this landing page stays fixed, on its own independent Tunnel. Every other service is exposed on demand and turned off after use, through Tailscale Funnel triggered by a local webhook. Regular internal access always goes through Caddy on the tailnet, without MagicDNS.",
           decision6:
-            "<strong>Observability separation:</strong> the node that monitors (Raspberry Pi + Uptime Kuma) lives apart from the node that runs the services (ThinkCentre) — if the host goes down, monitoring stays up. It reuses hardware I already had, no new purchase needed.",
+            "<strong>Observability separation:</strong> the node that monitors lives apart from the node that runs the services. If the host goes down, monitoring stays up.",
           originsH2: "Project origins",
           originsP:
-            "My personal server started with a Raspberry Pi 4B. That was the project that got this whole idea going. Day to day, it helps me both learn and run services without paying for subscriptions. Today that Raspberry Pi plays a different role: it's the network and observability node (Pi-hole, Unbound, Caddy, Uptime Kuma), deliberately separated from the ThinkCentre that runs the main services — so monitoring doesn't depend on the same host it watches.",
+            "My personal server started with this same Raspberry Pi 4B. From there, I kept experimenting, testing, and working step by step until I got to this point. Day to day, it helps me both learn and run services without paying for subscriptions.",
           openSourceH2: "Open source",
           openSourceP1:
             "The full configuration is available in the repository:",
           footer: "Last updated: August 2026",
-          uptimePrefix: "The last restart was on ",
-          uptimeFallbackLabel: "Active since",
+          uptimePrefix: "The Pi's last restart was on ",
+          uptimeFallbackLabel: "Pi active since",
           uptimeUnavailable: "uptime not available",
         },
       };
