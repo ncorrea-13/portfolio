@@ -26,6 +26,7 @@ export function ProjectCard({
   index?: number;
 }) {
   const { locale } = useLocale();
+  const name = locale === "en" ? project.name.en : project.name.es;
 
   return (
     <motion.a
@@ -40,7 +41,7 @@ export function ProjectCard({
         {project.image ? (
           <Image
             src={project.image}
-            alt={project.name}
+            alt={name}
             width={480}
             height={270}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
@@ -50,14 +51,14 @@ export function ProjectCard({
             className="flex h-full w-full items-center justify-center font-sans text-2xl font-semibold text-bg/80"
             style={{ backgroundImage: gradients[index % gradients.length] }}
           >
-            {initials(project.name)}
+            {initials(name)}
           </div>
         )}
       </div>
       <div className="flex flex-1 flex-col p-4">
         <div className="flex items-center justify-between gap-2">
           <span className="font-sans font-semibold text-heading group-hover:text-accent-strong">
-            {project.name}
+            {name}
           </span>
           {project.license && (
             <span className="font-mono text-xs text-muted">

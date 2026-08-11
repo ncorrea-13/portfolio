@@ -10,10 +10,10 @@ import { skillGroups } from "@/content/skills";
 import { projects } from "@/content/projects";
 
 const featuredProjects = [
-  "bw-tui",
-  "weathertui",
-  "homeserver/homelab",
-  "accesoriosstina",
+  "https://github.com/ncorrea-13/bw-tui",
+  "https://github.com/ncorrea-13/weathertui",
+  "https://github.com/ncorrea-13/homeserver",
+  "https://accesoriosstina.vercel.app/",
 ];
 
 export default function Home() {
@@ -51,20 +51,20 @@ export default function Home() {
 
       <Reveal>
         <h2 className="mt-8 mb-3 font-sans text-lg text-accent">
-          <T es="Proyectos" en="Projects" />
+          <T es="Proyectos destacados" en="Featured projects" />
         </h2>
         <div className="grid gap-4 sm:grid-cols-2">
           {projects
-            .filter((p) => featuredProjects.includes(p.name))
+            .filter((p) => featuredProjects.includes(p.url))
             .map((project, i) => (
-              <ProjectCard key={project.name} project={project} index={i} />
+              <ProjectCard key={project.url} project={project} index={i} />
             ))}
         </div>
         <Link
           href="/proyectos"
           className="mt-3 inline-block text-sm text-accent-strong hover:underline"
         >
-          <T es="Ver todos los proyectos →" en="See all projects →" />
+          <T es="Ver todos →" en="See all →" />
         </Link>
       </Reveal>
 
