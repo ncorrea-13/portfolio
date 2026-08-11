@@ -18,8 +18,8 @@ export default function SobreMi() {
           <div>
             <p>
               <T
-                es="Soy un estudiante avanzado de Ingeniería en Sistemas de Información en la Universidad Tecnológica Nacional, Facultad Regional Mendoza. Actualmente tengo 37/41 materias aprobadas. Soy desarrollador full-stack en AYSAM. Me apasiona el desarrollo de software, y mi experiencia en Linux despertó interés en la infraestructura y la ciberseguridad."
-                en="I am an advanced student of Systems Engineering at Universidad Tecnológica Nacional, Facultad Regional Mendoza. I have currently passed 37 of 41 subjects. I work as a full stack developer at AYSAM. I am passionate about software development, and my experience with Linux got me interested in infrastructure and cybersecurity."
+                es="Soy un estudiante avanzado de Ingeniería en Sistemas de Información en la Universidad Tecnológica Nacional, Facultad Regional Mendoza. Actualmente tengo 37/42 materias aprobadas. Soy desarrollador full-stack en AYSAM. Me apasiona el desarrollo de software, y mi experiencia en Linux despertó interés en la infraestructura y la ciberseguridad."
+                en="I am an advanced student of Systems Engineering at Universidad Tecnológica Nacional, Facultad Regional Mendoza. I have currently passed 37 of 42 subjects. I work as a full stack developer at AYSAM. I am passionate about software development, and my experience with Linux got me interested in infrastructure and cybersecurity."
               />
             </p>
             <p className="mt-3">
@@ -123,25 +123,6 @@ export default function SobreMi() {
             />
           </LinkButton>
         </div>
-      </Reveal>
-
-      <Reveal>
-        <h2 className="mt-8 mb-3 font-sans text-lg text-accent">
-          <T es="Proyectos" en="Projects" />
-        </h2>
-        <p>
-          <T
-            es="Algunos de mis proyectos se encuentran en la"
-            en="Some of my projects can be found on the"
-          />{" "}
-          <Link
-            href="/proyectos"
-            className="text-accent-strong hover:underline"
-          >
-            <T es="página de proyectos" en="projects page" />
-          </Link>
-          .
-        </p>
       </Reveal>
 
       <Reveal>
