@@ -45,7 +45,7 @@ export function ProjectGrid() {
         <AnimatePresence mode="popLayout">
           {visible.map((project, i) => (
             <motion.div
-              key={project.name}
+              key={project.url}
               layout
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}

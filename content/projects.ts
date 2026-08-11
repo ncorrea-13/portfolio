@@ -1,7 +1,7 @@
 type LocalizedText = { es: string; en: string };
 
 export type Project = {
-  name: string;
+  name: LocalizedText;
   url: string;
   desc: LocalizedText;
   license?: string;
@@ -12,7 +12,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    name: "accesoriosstina",
+    name: { es: "Accesoriosstina", en: "Accesoriosstina" },
     url: "https://accesoriosstina.vercel.app/",
     desc: {
       es: "Página web para AccesoriossTina, un emprendimiento de accesorios que cuenta con autenticación de usuarios, gestión de insumos y control de stock.",
@@ -23,7 +23,7 @@ export const projects: Project[] = [
     image: "/projects/accesorioss.png",
   },
   {
-    name: "weathertui",
+    name: { es: "Weathertui", en: "Weathertui" },
     url: "https://github.com/ncorrea-13/weathertui",
     desc: {
       es: "Terminal User Interface basada en meteo-cli. Utiliza OpenWeatherMap para mostrar el pronóstico del tiempo en la terminal.",
@@ -35,7 +35,7 @@ export const projects: Project[] = [
     image: "/projects/weathertui.png",
   },
   {
-    name: "bw-tui",
+    name: { es: "Bw-tui", en: "Bw-tui" },
     url: "https://github.com/ncorrea-13/bw-tui",
     desc: {
       es: "Terminal User Interface que funciona como wrapper para utilizar Bitwarden desde la terminal.",
@@ -47,7 +47,7 @@ export const projects: Project[] = [
     image: "/projects/bw-tui.png",
   },
   {
-    name: "homeserver/homelab",
+    name: { es: "Homelab", en: "Homelab" },
     url: "https://github.com/ncorrea-13/homeserver",
     desc: {
       es: "Configuración y compose files de mi servidor personal. El mismo servidor que hostea la página de arquitectura.",
@@ -59,7 +59,7 @@ export const projects: Project[] = [
     image: "/projects/homelab.jpg",
   },
   {
-    name: "dotfiles",
+    name: { es: "Mis dotfiles personales", en: "My personal dotfiles" },
     url: "https://github.com/ncorrea-13/dotfiles",
     desc: {
       es: "Configuración personal de Linux para Devuan 6 (Excalibur) sobre Wayland. 100% systemd-free.",
@@ -71,7 +71,7 @@ export const projects: Project[] = [
     image: "/projects/dotfiles.png",
   },
   {
-    name: "Microservicio de mail",
+    name: { es: "Microservicio de mail", en: "Mail microservice" },
     url: "https://github.com/ncorrea-13/mailMicroservicio",
     desc: {
       es: "Microservicio de correo con arquitectura RESTful que se complementa con el Eccommerce del trabajo final de Arquitectura de Microservicios (2025).",
@@ -82,7 +82,10 @@ export const projects: Project[] = [
     stack: ["TypeScript", "Node.js", "Express"],
   },
   {
-    name: "Testing Automatizado sobre Thinkint Tester",
+    name: {
+      es: "Testing Automatizado sobre Thinkint Tester",
+      en: "Automated Testing on Thinking Tester",
+    },
     url: "https://github.com/matih1210/TPN-6-TESTING-AUTOMATIZADO",
     desc: {
       es: "Tests E2E que cubre registro, login, CRUD de contactos, validaciones y protección de rutas para la aplicación Thinking Tester Contact List.",
@@ -93,7 +96,7 @@ export const projects: Project[] = [
     image: "/projects/Cypress.png",
   },
   {
-    name: "generadorLibros",
+    name: { es: "Generador de portadas de libros", en: "Book cover generator" },
     url: "https://github.com/ncorrea-13/generadorLibros",
     desc: {
       es: "cGAN y cVAE para síntesis de estructuras de texto, trabajo final de Redes Neuronales Profundas (2025), con Jupyter Notebook y Google Colab.",
@@ -105,7 +108,10 @@ export const projects: Project[] = [
     image: "/projects/generador.png",
   },
   {
-    name: "Generador de números pseudoaleatorios",
+    name: {
+      es: "Generador de números pseudoaleatorios",
+      en: "Pseudo-random number generator",
+    },
     url: "https://huggingface.co/spaces/ncorrea-13/generadorFibonacci",
     desc: {
       es: "Implementación del Generador de Fibonacci Atrasado.",
@@ -116,7 +122,10 @@ export const projects: Project[] = [
     image: "/projects/Fibonacci.png",
   },
   {
-    name: "Sistema de Stock de inventario Fullstack",
+    name: {
+      es: "Sistema de Stock de inventario Fullstack",
+      en: "Fullstack Inventory Stock System",
+    },
     url: "https://github.com/ncorrea-13/sistInventario-back",
     desc: {
       es: "Sistema de stock de inventario con la gestión de productos, proveedores, órdenes y ventas.",
@@ -133,7 +142,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    name: "Asap Consultores",
+    name: { es: "Asap Consultores", en: "Asap Consultores" },
     url: "https://www.asapconsultores.com.ar/",
     desc: {
       es: "Página para la empresa ASAP Consultores estilo landing page informativa.",
@@ -144,7 +153,7 @@ export const projects: Project[] = [
     image: "/projects/ASAP.png",
   },
   {
-    name: "BugsLessDesign",
+    name: { es: "BugsLessDesign", en: "BugsLessDesign" },
     url: "https://bugs-less-design.vercel.app/",
     desc: {
       es: "Página del equipo de BugsLess Design. Permite el contacto fácil con la empresa y obtener información sobre los servicios ofrecidos.",
@@ -155,7 +164,7 @@ export const projects: Project[] = [
     image: "/projects/BugsLessDesign.png",
   },
   {
-    name: "vineyard",
+    name: { es: "vineyard", en: "vineyard" },
     url: "https://ecommerce-blue-chi.vercel.app/",
     desc: {
       es: "Proyecto de tienda para una bodega de vinos. La aplicación incluye un catálogo de productos, un sistema de registro y autenticación de usuarios.",
