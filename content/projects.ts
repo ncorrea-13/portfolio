@@ -1,5 +1,6 @@
-type LocalizedText = { es: string; en: string };
+import { SERVIDOR_URL } from "@/content/site";
 
+type LocalizedText = { es: string; en: string };
 export type Project = {
   name: LocalizedText;
   url: string;
@@ -48,7 +49,7 @@ export const projects: Project[] = [
   },
   {
     name: { es: "Homelab", en: "Homelab" },
-    url: "https://github.com/ncorrea-13/homeserver",
+    url: SERVIDOR_URL,
     desc: {
       es: "Configuración y compose files de mi servidor personal. El mismo servidor que hostea la página de arquitectura.",
       en: "Configuration and compose files for my personal server. The same server that hosts the architecture page.",
