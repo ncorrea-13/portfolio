@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Arquitectura del homeserver</title>
+    <title>Homelab</title>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="icon"
@@ -103,7 +103,15 @@
     <h2 data-i18n="gatewayH2"></h2>
     <p data-i18n="gatewayP"></p>
 
-    <h3 data-i18n="notesH3"></h3>
+    <h2 data-i18n="backupsH2"></h2>
+    <ul>
+      <li data-i18n="backup1"></li>
+      <li data-i18n="backup2"></li>
+      <li data-i18n="backup3"></li>
+      <li data-i18n="backup4"></li>
+    </ul>
+
+    <h2 data-i18n="notesH2"></h2>
 
     <ul>
       <li data-i18n="note1"></li>
@@ -206,10 +214,19 @@
           hw2: "<strong>SSD 480GB</strong> - Datos: volúmenes de Podman, toda la información y contenedores",
           hw3: "<strong>HDD 480GB</strong> - Backup diario",
           hw4: "<strong>HDD 480GB</strong> - Backup semanal",
-          gatewayH2: "Gateway y monitoreo",
+          gatewayH2: "Responsabilidades",
           gatewayP:
             "El ThinkCentre corre los servicios con gran almacenamiento de información como Immich o Vaultwarden. La Raspberry Pi 4B es nodo de red como DNS y proxy inverso, y también monitorea los otros servicios por Uptime Kuma. El Samsung S9+ corre Ntfy dentro de Termux.",
-          notesH3: "Notas de arquitectura",
+          backupsH2: "Backups",
+          backup1:
+            "<strong>Qué:</strong> Configuraciones de los contenedores, junto con los datos. Las bases de datos críticas se bumpean para evitar así que se corrompan los datos al copiarse mientras se mantiene la ejecución.",
+          backup2:
+            "<strong>Cómo:</strong> Un simple script en Bash con rsync. Manteniendolo lo más simple y modular posible. Al finalizar realiza una llamada a Ntfy para avisar que se realizó con éxito",
+          backup3:
+            "<strong>Cuándo:</strong> Diariamente corre por un cron programado contra un HDD dedicado para la copia diaria. Mismo sistema pero semanalmente contra otro HDD dedicado para backup semanal. Se mantienen varias copias en lugar de sobreescribir las anteriores. Principalmente de los servicios críticos como Vaultwarden.",
+          backup4:
+            "<strong>Restore:</strong> probado de forma manual durante la iteración, prueba y desarrollo del script. Ante fallos se puede restaurar la copia sin ningún problema.",
+          notesH2: "Notas de arquitectura",
           note1:
             "<strong>Acceso único:</strong> El tráfico viaja por la tailnet siempre y es redirigido por Caddy. De esta forma se identifican más facilmente a donde se está accediendo. Todos los puertos se encuentran cerrados para la red LAN.",
           note2:
@@ -294,10 +311,19 @@
           hw2: "<strong>480GB SSD</strong>: data, Podman volumes, all information and containers",
           hw3: "<strong>480GB HDD</strong>: daily backup",
           hw4: "<strong>480GB HDD</strong>: weekly backup",
-          gatewayH2: "Gateway and monitoring",
+          backupsH2: "Backups",
+          backup1:
+            "<strong>What:</strong> container configs, together with the data. Critical databases get dumped first, so the copy doesn't corrupt data while the service keeps running.",
+          backup2:
+            "<strong>How:</strong> a simple Bash script with rsync, kept as simple and modular as possible. On success it calls Ntfy to confirm the run went through.",
+          backup3:
+            "<strong>When:</strong> a daily cron job runs against a dedicated HDD for the daily copy. Same setup, but weekly, against a second dedicated HDD for the weekly backup. Several copies are kept instead of overwriting the previous ones, mainly for critical services like Vaultwarden.",
+          backup4:
+            "<strong>Restore:</strong> tested manually while iterating on and developing the script. If something fails, the copy restores without issues.",
+          gatewayH2: "Responsibilities",
           gatewayP:
             "The ThinkCentre runs the services that need heavy storage, like Immich or Vaultwarden. The Raspberry Pi 4B works as the network node, handling DNS and reverse proxy, and it also monitors the other services through Uptime Kuma. The Samsung S9+ runs Ntfy inside Termux.",
-          notesH3: "Architecture notes",
+          notesH2: "Architecture notes",
           note1:
             "<strong>Single access point:</strong> traffic always travels through the tailnet and gets redirected by Caddy. This makes it easier to identify what's being accessed. All ports are closed to the LAN.",
           note2:
