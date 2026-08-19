@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { LinkButton } from "@/components/LinkButton";
+import { CvLink } from "@/components/CvLink";
 import { ContactLinks } from "@/components/ContactLinks";
 import { Reveal } from "@/components/Reveal";
 import { T } from "@/components/T";
@@ -116,12 +116,12 @@ export default function SobreMi() {
       <Reveal>
         <h2 className="mt-8 mb-3"></h2>
         <div className="flex justify-center">
-          <LinkButton href="/cv.pdf" external>
+          <CvLink>
             <T
               es="Descargar CV completo (PDF)"
               en="Download full resume (PDF)"
             />
-          </LinkButton>
+          </CvLink>
         </div>
       </Reveal>
 

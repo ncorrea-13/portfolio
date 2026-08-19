@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LinkButton } from "@/components/LinkButton";
+import { CvLink } from "@/components/CvLink";
 import { ContactLinks } from "@/components/ContactLinks";
 import { TagGroup } from "@/components/TagGroup";
 import { ProjectCard } from "@/components/ProjectCard";
@@ -43,9 +43,9 @@ export default function Home() {
 
       <Reveal delay={0.1}>
         <div className="my-8 flex justify-center">
-          <LinkButton href="/cv.pdf" external>
+          <CvLink>
             <T es="Descargar CV" en="Download resume" />
-          </LinkButton>
+          </CvLink>
         </div>
       </Reveal>
 
