@@ -13,6 +13,25 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    name: { es: "PetHood", en: "PetHood" },
+    url: "https://github.com/ncorrea-13/Pethood-backend",
+    desc: {
+      es: "Trabajo final de carrera. API REST con Express, TypeScript, PostgreSQL y Prisma, con pipeline de CI en GitHub Actions. Incluye una app mobile complementaria hecha con Expo y NativeWind.",
+      en: "Final degree thesis. REST API built with Express, TypeScript, PostgreSQL, and Prisma, with a CI pipeline in GitHub Actions. Includes a companion mobile app built with Expo and NativeWind.",
+    },
+    license: "",
+    tags: ["backend", "frontend"],
+    stack: [
+      "Express",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma",
+      "Expo",
+      "NativeWind",
+    ],
+    image: "/projects/pethood.png",
+  },
+  {
     name: { es: "Accesoriosstina", en: "Accesoriosstina" },
     url: "https://accesoriosstina.vercel.app/",
     desc: {
