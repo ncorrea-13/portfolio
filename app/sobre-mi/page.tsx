@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { CvLink } from "@/components/CvLink";
 import { ContactLinks } from "@/components/ContactLinks";
 import { Reveal } from "@/components/Reveal";
@@ -18,8 +17,8 @@ export default function SobreMi() {
           <div>
             <p>
               <T
-                es="Soy un estudiante avanzado de Ingeniería en Sistemas de Información en la Universidad Tecnológica Nacional, Facultad Regional Mendoza. Actualmente tengo 37/42 materias aprobadas. Soy desarrollador full-stack en AYSAM. Me apasiona el desarrollo de software, y mi experiencia en Linux despertó interés en la infraestructura y la ciberseguridad."
-                en="I am an advanced student of Systems Engineering at Universidad Tecnológica Nacional, Facultad Regional Mendoza. I have currently passed 37 of 42 subjects. I work as a full stack developer at AYSAM. I am passionate about software development, and my experience with Linux got me interested in infrastructure and cybersecurity."
+                es="Soy un estudiante avanzado de Ingeniería en Sistemas de Información en la Universidad Tecnológica Nacional, Facultad Regional Mendoza con 37 de 42 materias aprobadas. Soy desarrollador full-stack en AYSAM. Vengo del desarrollo de software, pero trabajar en Linux me terminó llevando a infraestructura y ciberseguridad."
+                en="I am an advanced student of Systems Engineering at Universidad Tecnológica Nacional, Facultad Regional Mendoza. I have currently passed 37 of 42 subjects. I work as a full stack developer at AYSAM. I come from software development, but working in Linux ended up pulling me into infrastructure and cybersecurity."
               />
             </p>
             <p className="mt-3">
@@ -83,8 +82,8 @@ export default function SobreMi() {
         </h2>
         <p>
           <T
-            es="Trabajo en equipo, comunicación efectiva, responsabilidad y adaptabilidad; sobre todo al cambiar de roles desarrollo e infraestructura, donde el contexto y las prioridades cambian rápido."
-            en="Teamwork, clear communication, responsibility, and adaptability, especially when moving between development and infrastructure, where context and priorities change fast."
+            es="Salto bastante entre desarrollo e infraestructura, así que me acostumbré a comunicar bien y adaptarme rápido cuando cambian las prioridades. También a aprender herramientas nuevas por mi cuenta, a explicar decisiones técnicas a gente no técnica sin perder precisión, y a debuggear y decidir en situaciones donde no está todo claro."
+            en="I move around a lot between development and infrastructure, so I got used to communicating clearly and adapting fast when priorities shift. That also means picking up new tools on my own, explaining technical decisions to nontechnical people without losing precision, and debugging and making decisions in situations that aren't fully clear."
           />
         </p>
       </Reveal>
@@ -95,8 +94,8 @@ export default function SobreMi() {
         </h2>
         <p>
           <T
-            es="Le doy tanta importancia a cómo está construido el código como a que funcione. Mi principal enfoque a la hora de construir software es mantener la filosofía KISS. Mantener el software lo más chico posible así se puede desacoplar de forma sencilla y reutilizar en diferentes proyectos; a menos que la situación indique lo contrario."
-            en="I care as much about how the code is built as about whether it works. My main focus when building software is to follow the KISS philosophy. I try to keep software as small as possible, so it stays easy to decouple and reuse across different projects, unless the situation calls for something else."
+            es="Trato de mantener todo lo más simple posible (KISS): código chico, fácil de desacoplar y reusar. Si la situación pide otra cosa, la escucho, pero por defecto voy a lo simple."
+            en="I try to keep everything as simple as possible (KISS): small code, easy to decouple and reuse. If the situation calls for something else, I listen, but by default I go simple."
           />
         </p>
       </Reveal>
