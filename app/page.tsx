@@ -24,8 +24,8 @@ export default function Home() {
       <Reveal>
         <p className="my-6">
           <T
-            es="Estudiante avanzado de Ingeniería en Sistemas de Información y desarrollador full-stack en AYSAM. Soy un apasionado del desarrollo de software y de la administración de ese software. Disfruto administrar la infraestructura donde corre el software que construí, intentando exprimir y aprovechar los recursos que dispongo para la mejor optimización y eficiencia."
-            en="Advanced Systems Engineering student and full stack developer at AYSAM. I am passionate about building software and about running it. I enjoy managing the infrastructure my software runs on, and I try to make the most of the resources I have for better performance and efficiency."
+            es="Estudiante de último año de Ingeniería en Sistemas de Información. Desarrollador full-stack en AYSAM. Disfruto administrar la infraestructura donde corren los sistemas que creo, intentando exprimir y aprovechar los recursos que dispongo para su mejor eficiencia."
+            en="Final-year Systems Engineering student. Full stack developer at AYSAM. I enjoy managing the infrastructure my systems run on, trying to squeeze the most out of the resources I have for better efficiency."
           />
         </p>
       </Reveal>
@@ -75,7 +75,7 @@ export default function Home() {
         <ContactLinks />
         <p className="mt-4 text-sm text-muted">
           <T
-            es="Este sitio es solo informativo — no hay recolección de datos."
+            es="Este sitio es solo informativo. No hay recolección de datos."
             en="This site is for information only. No data is collected."
           />
         </p>

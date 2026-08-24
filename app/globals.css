@@ -17,6 +17,7 @@
   --tag-security: #9fdcef;
   --tag-frontend: #ef9fdc;
   --tag-prompt: #dcef9f;
+  --tag-devops: #efc39f;
   color-scheme: dark;
 }
 
@@ -38,6 +39,7 @@
     --tag-security: #39add0;
     --tag-frontend: #d039ad;
     --tag-prompt: #add039;
+    --tag-devops: #d0793a;
     color-scheme: light;
   }
 }
@@ -59,6 +61,7 @@ html[data-theme="dark"] {
   --tag-security: #9fdcef;
   --tag-frontend: #ef9fdc;
   --tag-prompt: #dcef9f;
+  --tag-devops: #efc39f;
   color-scheme: dark;
 }
 
@@ -79,6 +82,7 @@ html[data-theme="light"] {
   --tag-security: #39add0;
   --tag-frontend: #d039ad;
   --tag-prompt: #add039;
+  --tag-devops: #d0793a;
   color-scheme: light;
 }
 

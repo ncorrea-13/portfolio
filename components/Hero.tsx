@@ -45,8 +45,8 @@ export function Hero() {
         </h1>
         <p className="font-sans text-[15px] text-accent">
           {locale === "en"
-            ? "Full Stack Software Developer · Systems Administrator"
-            : "Desarrollador de Software Full-stack · Administrador de Sistemas"}
+            ? "Full Stack Software Developer · DevOps & Platform Engineering"
+            : "Desarrollador de Software Full-stack · DevOps & Platform Engineering"}
         </p>
       </motion.div>
     </motion.div>
