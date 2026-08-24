@@ -5,7 +5,7 @@ export const experience = [
       en: "Full Stack Software Developer",
     },
     org: "Aguas y Saneamiento Mendoza",
-    period: { es: "Dic 2025 - Presente", en: "Dec 2025 - Present" },
+    period: { es: "Nov 2025 - Presente", en: "Nov 2025 - Present" },
   },
   {
     role: { es: "Pasante de Sistemas", en: "Systems Intern" },
@@ -19,6 +19,14 @@ export const experience = [
     },
     org: "Laboratorio AuSegTIC, UTN - Beca BIS",
     period: { es: "Mar 2025 - Nov 2025", en: "Mar 2025 - Nov 2025" },
+  },
+  {
+    role: {
+      es: "Revisor y Colaborador de IA",
+      en: "Reviewer & Contributor",
+    },
+    org: "Outlier",
+    period: { es: "Jun 2025 - Sep 2025", en: "Jun 2025 - Sep 2025" },
   },
   {
     role: { es: "Full Stack Developer Jr", en: "Full Stack Developer Jr" },
