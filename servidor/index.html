@@ -55,11 +55,13 @@
 
     <h1 data-i18n="h1"></h1>
 
-    <div class="uptime-box compact">
-      <p class="uptime-label" id="uptime-label">
-        El último reinicio de la Pi fue el …
+    <h2 data-i18n="statusH2"></h2>
+    <div class="status-box" id="status-box">
+      <p class="status-summary" id="status-summary"></p>
+      <p class="status-headline" id="status-headline">
+        <span class="status-loading" data-i18n="statusLoading"></span>
       </p>
-      <p class="uptime-value" id="uptime-counter">calculando…</p>
+      <ul class="status-list" id="status-list"></ul>
     </div>
 
     <h2 data-i18n="philosophyH2"></h2>
@@ -199,8 +201,6 @@
         es: {
           navBack: "← Volver",
           h1: "Homelab",
-          uptimeLabelPlaceholder: "El último reinicio de la Pi fue el …",
-          uptimeCalculating: "calculando…",
           philosophyH2: "Filosofía",
           philosophyP1:
             "Infraestructura privada, modular y de bajo mantenimiento. Sin dependencia de servicios cloud comerciales. Esta página se publica mediante Cloudflare Tunnel. El resto de servicios se utilizan por WireGuard en mi tailnet personal, y de forma dinámica administro la apertura puntual al público vía Tailscale Funnel a medida de mis necesidades.",
@@ -252,6 +252,17 @@
             "<strong>Raspberry Pi 4B</strong>: BCM2711 quad-core 1.5GHz · 4GB RAM · Raspberry Pi OS Lite, Podman rootless",
           stack3:
             "<strong>Samsung S9+</strong>: Snapdragon 845 · 6GB RAM · Termux (proot-distro)",
+          statusH2: "Estado de servicios",
+          statusLoading: "Cargando estado...",
+          statusError: "No se pudo cargar el estado ahora mismo.",
+          statusAllUp: "Todos los sistemas operativos",
+          statusSomeDown: "Hay un servicio con problemas",
+          statusUp: "Operativo",
+          statusDown: "Caído",
+          statusPending: "Verificando",
+          statusMaintenance: "Mantenimiento",
+          statusUnknown: "Sin datos",
+          statusNever: "sin reportes aún",
           servicesH2: "Servicios",
           service1:
             "<strong>Core</strong>: Vaultwarden (contraseñas), Radicale (calendarios y contactos)",
@@ -289,15 +300,10 @@
           openSourceP1:
             "La configuración completa está disponible en el repositorio:",
           footer: "Última actualización: Agosto 2026",
-          uptimePrefix: "El último reinicio de la Pi fue el ",
-          uptimeFallbackLabel: "Pi activa desde",
-          uptimeUnavailable: "uptime no disponible",
         },
         en: {
           navBack: "← Back",
           h1: "Homelab",
-          uptimeLabelPlaceholder: "The Pi's last restart was on …",
-          uptimeCalculating: "calculating…",
           philosophyH2: "Philosophy",
           philosophyP1:
             "Private, modular infrastructure with low maintenance. It doesn't depend on any commercial cloud service. This page is published through Cloudflare Tunnel. All other services run over WireGuard on my personal tailnet, and I dynamically open public access to them through Tailscale Funnel whenever I need to.",
@@ -349,6 +355,17 @@
             "<strong>Raspberry Pi 4B</strong>: BCM2711 quad-core 1.5GHz · 4GB RAM · Raspberry Pi OS Lite, rootless Podman",
           stack3:
             "<strong>Samsung S9+</strong>: Snapdragon 845 · 6GB RAM · Termux (proot-distro)",
+          statusH2: "Service status",
+          statusLoading: "Loading status...",
+          statusError: "Couldn't load the status right now.",
+          statusAllUp: "All systems operational",
+          statusSomeDown: "One or more services are having issues",
+          statusUp: "Operational",
+          statusDown: "Down",
+          statusPending: "Checking",
+          statusMaintenance: "Maintenance",
+          statusUnknown: "No data",
+          statusNever: "no reports yet",
           servicesH2: "Services",
           service1:
             "<strong>Core</strong>: Vaultwarden (passwords), Radicale (calendars and contacts)",
@@ -386,45 +403,86 @@
           openSourceP1:
             "The full configuration is available in the repository:",
           footer: "Last updated: August 2026",
-          uptimePrefix: "The Pi's last restart was on ",
-          uptimeFallbackLabel: "Pi active since",
-          uptimeUnavailable: "uptime not available",
         },
       };
 
-      var bootEpoch = null;
+      var STATUS_API_URL = "https://homelab-status.ncorrea13.workers.dev/api/status";
 
-      function formatFecha(d, lang) {
-        return d.toLocaleDateString(lang === "en" ? "en-US" : "es-AR", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
+      function formatCheckedAt(raw, lang) {
+        if (!raw) return null;
+        var d = new Date(raw.replace(" ", "T") + "Z");
+        if (isNaN(d.getTime())) return null;
+        return d.toLocaleString(lang === "en" ? "en-US" : "es-AR", {
+          timeZone: "America/Argentina/Mendoza",
+          day: "2-digit",
+          month: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
         });
       }
 
-      function renderUptime(lang) {
-        var labelEl = document.getElementById("uptime-label");
-        var counterEl = document.getElementById("uptime-counter");
+      function renderStatus(services, lang) {
         var dict = translations[lang];
-        if (bootEpoch === null) {
-          labelEl.textContent = dict.uptimeLabelPlaceholder;
-          counterEl.textContent = dict.uptimeCalculating;
-          return;
-        }
-        labelEl.textContent =
-          dict.uptimePrefix + formatFecha(new Date(bootEpoch * 1000), lang);
+        var box = document.getElementById("status-box");
+        var summary = document.getElementById("status-summary");
+        var headline = document.getElementById("status-headline");
+        var list = document.getElementById("status-list");
+        var anyDown = services.some(function (s) {
+          return s.status === "down";
+        });
+        var upCount = services.filter(function (s) {
+          return s.status === "up";
+        }).length;
+
+        box.classList.toggle("status-down", anyDown);
+        summary.textContent = upCount + "/" + services.length;
+        headline.textContent = anyDown ? dict.statusSomeDown : dict.statusAllUp;
+
+        list.innerHTML = "";
+        services.forEach(function (s) {
+          var status = s.status || "unknown";
+          var li = document.createElement("li");
+
+          var nameSpan = document.createElement("span");
+          nameSpan.className = "status-name";
+          var dot = document.createElement("span");
+          dot.className = "status-dot " + status;
+          nameSpan.appendChild(dot);
+          nameSpan.appendChild(document.createTextNode(s.name));
+
+          var metaSpan = document.createElement("span");
+          metaSpan.className = "status-meta";
+          var checkedAt = formatCheckedAt(s.checked_at, lang);
+          var statusLabel = dict["status" + status.charAt(0).toUpperCase() + status.slice(1)] || dict.statusUnknown;
+          metaSpan.textContent = checkedAt
+            ? statusLabel + " · " + checkedAt
+            : statusLabel + " · " + dict.statusNever;
+
+          li.appendChild(nameSpan);
+          li.appendChild(metaSpan);
+          list.appendChild(li);
+        });
       }
 
-      function updateCounter() {
-        if (bootEpoch === null) return;
-        var counterEl = document.getElementById("uptime-counter");
-        var diff = Date.now() - bootEpoch * 1000;
-        var days = Math.floor(diff / 86400000);
-        var hours = Math.floor((diff % 86400000) / 3600000);
-        var mins = Math.floor((diff % 3600000) / 60000);
-        var secs = Math.floor((diff % 60000) / 1000);
-        counterEl.textContent =
-          days + "d " + hours + "h " + mins + "m " + secs + "s";
+      function loadStatus() {
+        var lang = document.documentElement.lang === "en" ? "en" : "es";
+        var dict = translations[lang];
+        var headline = document.getElementById("status-headline");
+        headline.innerHTML =
+          '<span class="status-loading">' + dict.statusLoading + "</span>";
+
+        fetch(STATUS_API_URL, { cache: "no-store" })
+          .then(function (r) {
+            if (!r.ok) throw new Error("bad response");
+            return r.json();
+          })
+          .then(function (services) {
+            renderStatus(services, lang);
+          })
+          .catch(function () {
+            headline.innerHTML =
+              '<span class="status-error">' + dict.statusError + "</span>";
+          });
       }
 
       function applyLocale(lang) {
@@ -452,7 +510,7 @@
           );
         document.getElementById("lang-toggle").textContent =
           lang === "en" ? "ES" : "EN";
-        renderUptime(lang);
+        loadStatus();
       }
 
       function toggleLocale() {
@@ -464,24 +522,7 @@
 
       document.addEventListener("DOMContentLoaded", function () {
         applyLocale(localStorage.getItem("lang") === "en" ? "en" : "es");
-
-        fetch("boot.json", { cache: "no-store" })
-          .then(function (r) {
-            return r.json();
-          })
-          .then(function (data) {
-            bootEpoch = data.boot_epoch;
-            renderUptime(document.documentElement.lang === "en" ? "en" : "es");
-            updateCounter();
-            setInterval(updateCounter, 1000);
-          })
-          .catch(function () {
-            var lang = document.documentElement.lang === "en" ? "en" : "es";
-            document.getElementById("uptime-label").textContent =
-              translations[lang].uptimeFallbackLabel;
-            document.getElementById("uptime-counter").textContent =
-              translations[lang].uptimeUnavailable;
-          });
+        setInterval(loadStatus, 60000);
       });
     </script>
   </body>

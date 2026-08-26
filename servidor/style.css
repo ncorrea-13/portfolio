@@ -258,24 +258,77 @@ strong {
   font-weight: 600;
 }
 
-/* Uptime counter */
-.uptime-box {
+/* --- Status de servicios --- */
+.status-box {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 10px;
   padding: 1rem 1.25rem;
-  margin: 1.5rem 0;
+  margin: 1rem 0 1.5rem;
   font-family: "Segoe UI", system-ui, sans-serif;
 }
-.uptime-label {
+.status-box.status-down { border-color: #d16969; }
+.status-summary {
   font-size: 12px;
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0 0 4px;
 }
-.uptime-value {
-  font-size: 20px;
+.status-headline {
+  font-size: 18px;
   color: var(--accent);
   margin: 0;
+}
+.status-box.status-down .status-headline { color: #d16969; }
+
+.status-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 14px;
+}
+.status-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+.status-list li:last-child { border-bottom: none; }
+
+.status-name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--heading);
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.status-dot.up { background: #6fcf97; }
+.status-dot.down { background: #d16969; }
+.status-dot.pending { background: #e0b25f; }
+.status-dot.maintenance { background: #6ab0de; }
+.status-dot.unknown { background: var(--muted); }
+
+.status-meta {
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.status-loading,
+.status-error {
+  color: var(--muted);
+  font-size: 14px;
+  font-family: "Segoe UI", system-ui, sans-serif;
 }
