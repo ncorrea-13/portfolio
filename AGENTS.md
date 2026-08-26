@@ -5,7 +5,7 @@
 Repo con dos superficies públicas independientes, deploy distinto cada una.
 
 - **Portfolio** (raíz) - Next.js 16 (App Router) + TypeScript + Tailwind 4, `output: "export"` (estático puro, sin SSR/API routes). Deploy en **Vercel**. Rutas: `/`, `/sobre-mi`, `/proyectos`.
-- **`servidor/`** - HTML/CSS/JS plano, sin build. Deploy vía Cloudflare Tunnel, corriendo 24/7 en el homeserver real. Prueba viva de que el self-hosting es real (estado de servicios vía fetch a un Cloudflare Worker externo, ver "Status API").
+- **`servidor/`** - HTML/CSS/JS plano, sin build. Deploy vía Cloudflare Tunnel, corriendo 24/7 en el homeserver real. Prueba viva de que el self-hosting es real (estado de servicios vía fetch a una API FastAPI externa, ver "Status API").
 
 No es el homeserver real: Tailscale/Cloudflare Tunnel no están acá, ni los compose files de los demás servicios (viven en github.com/ncorrea-13/homeserver). Verificar exposición real (headers, doc root, estado del tunnel) se hace en el servidor, no en este repo.
 
@@ -70,14 +70,14 @@ Ya implementado, no es una idea a futuro:
 - `LocaleToggle.tsx`: botón EN/ES en el header. Usa `useSyncExternalStore` con un snapshot server/cliente distinto (`mounted`) para evitar mismatch de hidratación - no simplificar quitando ese guard.
 - Contenido tipado en `content/*.ts` sigue el mismo patrón `LocalizedText = { es: string; en: string }` que `T` - mantenerlo consistente si se agrega contenido nuevo, no mezclar con una lib de i18n externa (next-intl, etc.) para esto: el alcance (3 rutas, texto fijo) no lo justifica.
 
-## Status API (Cloudflare Worker)
+## Status API (FastAPI)
 
-`servidor/index.html` renderiza el estado de los servicios (up/down, último check) haciendo `fetch` a `STATUS_API_URL` (`https://homelab-status.ncorrea13.workers.dev/api/status`, hardcodeado en el `<script>` inline). El Worker que lo sirve vive en un **repo aparte** (`homelab-status`, fuera de este repo), no acá:
+`servidor/index.html` renderiza el estado de los servicios (up/down, último check) haciendo `fetch` a `STATUS_API_URL` (`https://status.ncorrea.com.ar/api/status`, hardcodeado en el `<script>` inline). La API FastAPI vive en un **repo aparte** (`homelab-status`, fuera de este repo), no acá:
 
-- Recibe heartbeats de Uptime Kuma vía webhook (`/webhook/kuma`), los guarda en D1 (`services` + `events`) y expone `/api/status` con el último estado por servicio.
+- Recibe heartbeats de Uptime Kuma vía webhook (`/webhook/kuma`), los guarda en SQLite (`services` + `events`) y expone `/api/status` con el último estado por servicio.
 - Reemplaza al viejo `boot.json` + unit de systemd (`service/`, ya removido de este repo): ya no hay un contador de uptime local, sino estado real de los servicios monitoreados por Kuma.
-- CORS restringido a `https://homelab.ncorrea.com.ar` en el Worker - si `servidor/` se sirve desde otro origen, hay que ajustarlo ahí, no acá.
-- Este repo solo consume esa API por `fetch`; no tiene ni necesita el código del Worker, sus bindings D1, ni el secret de admin.
+- CORS restringido a `https://homelab.ncorrea.com.ar` en la API - si `servidor/` se sirve desde otro origen, hay que ajustarlo ahí, no acá.
+- Este repo solo consume esa API por `fetch`; no tiene ni necesita el código de la API ni el secret de admin.
 
 ## Convenciones de código
 
@@ -111,13 +111,13 @@ En cada push a `main`/`dev` y en cada PR: `pnpm install --frozen-lockfile` → `
 ## Deploy
 
 - **Portfolio**: push a `main` → deploy automático en Vercel (preview en PRs). Build genera `out/` estático.
-- **`servidor/`**: sin CI/CD - se sincroniza la carpeta `servidor/` a mano al doc root real vía Cloudflare Tunnel. El estado de servicios se consume de la Status API (Cloudflare Worker, deploy propio vía `wrangler deploy` en su repo aparte) en vez del viejo `boot.json`/unit de systemd.
+- **`servidor/`**: sin CI/CD - se sincroniza la carpeta `servidor/` a mano al doc root real vía Cloudflare Tunnel. El estado de servicios se consume de la Status API (FastAPI, repo aparte) en vez del viejo `boot.json`/unit de systemd.
 
 ## Cosas a evitar
 
 - No convertir `servidor/` en Next.js/React ni sumarle build - es una sola página con estado mínimo (tema + fetch a la Status API), ya resuelto en vanilla JS.
 - No usar Server Actions/API routes en el portfolio - rompe `output: "export"`.
 - No commitear `public/cv.pdf` ni `public/foto.jpg` (gitignored a propósito, son archivos personales).
-- No traer el código del Worker `homelab-status` a este repo - vive aparte, este repo solo lo consume por `fetch` a `/api/status`.
+- No traer el código de la API `homelab-status` a este repo - vive aparte, este repo solo lo consume por `fetch` a `/api/status`.
 - No agregar una librería de i18n externa para el toggle ES/EN - el Context propio (`LocaleProvider` + `T`) ya cubre el alcance de 3 rutas con texto fijo.
 - No asumir que este repo tiene acceso a la config real del homeserver (Tailscale/Funnel/Cloudflare Tunnel, compose files) - vive en github.com/ncorrea-13/homeserver.
