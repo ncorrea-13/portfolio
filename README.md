@@ -20,7 +20,6 @@ components/   componentes React compartidos
 content/      datos tipados
 public/       assets del portfolio
 servidor/     HTML/CSS/JS estático
-service/      unit de systemd que escribe servidor/boot.json
 ```
 
 ## Desarrollo
@@ -42,7 +41,7 @@ Genera `out/` estático para Vercel.
 
 ## Deploy de `servidor/`
 
-Se sirve tal cual vía Cloudflare Tunnel. Para su deploy se sincroniza la carpeta `servidor/` al root correspondiente. `boot.json` lo escribe `service/write-boot-time.service` en el host real.
+Se sirve tal cual vía Cloudflare Tunnel. Para su deploy se sincroniza la carpeta `servidor/` al root correspondiente. El estado de servicios se consume por `fetch` de una Status API propia (Cloudflare Worker + D1, alimentada por webhooks de Uptime Kuma, repo aparte).
 
 > [!NOTE] El deploy de `servidor/` es independiente del portfolio, ya que ambos están instanciados en diferentes servidores.
 
