@@ -5,7 +5,7 @@
 Repo con dos superficies públicas independientes, deploy distinto cada una.
 
 - **Portfolio** (raíz) - Next.js 16 (App Router) + TypeScript + Tailwind 4, `output: "export"` (estático puro, sin SSR/API routes). Deploy en **Vercel**. Rutas: `/`, `/sobre-mi`, `/proyectos`.
-- **`servidor/`** - HTML/CSS/JS plano, sin build. Deploy vía Cloudflare Tunnel, corriendo 24/7 en el homeserver real. Prueba viva de que el self-hosting es real (contador de uptime leído de `boot.json`).
+- **`servidor/`** - HTML/CSS/JS plano, sin build. Deploy vía Cloudflare Tunnel, corriendo 24/7 en el homeserver real. Prueba viva de que el self-hosting es real (estado de servicios vía fetch a un Cloudflare Worker externo, ver "Status API").
 
 No es el homeserver real: Tailscale/Cloudflare Tunnel no están acá, ni los compose files de los demás servicios (viven en github.com/ncorrea-13/homeserver). Verificar exposición real (headers, doc root, estado del tunnel) se hace en el servidor, no en este repo.
 
@@ -54,7 +54,6 @@ No hay test runner configurado (no hay lógica de negocio que testear - es conte
 ├── servidor/
 │   ├── index.html, style.css   # página de arquitectura, sin build
 │   └── diagrama-arquitectura.svg
-├── service/             # unit de systemd que escribe servidor/boot.json - NO se ejecuta desde este repo, es la fuente para copiar al homeserver real (ver service/README.md)
 ├── .github/workflows/ci.yml
 ├── mise.toml            # versión de pnpm pineada
 ├── next.config.ts        # output: "export", images.unoptimized
@@ -71,6 +70,15 @@ Ya implementado, no es una idea a futuro:
 - `LocaleToggle.tsx`: botón EN/ES en el header. Usa `useSyncExternalStore` con un snapshot server/cliente distinto (`mounted`) para evitar mismatch de hidratación - no simplificar quitando ese guard.
 - Contenido tipado en `content/*.ts` sigue el mismo patrón `LocalizedText = { es: string; en: string }` que `T` - mantenerlo consistente si se agrega contenido nuevo, no mezclar con una lib de i18n externa (next-intl, etc.) para esto: el alcance (3 rutas, texto fijo) no lo justifica.
 
+## Status API (Cloudflare Worker)
+
+`servidor/index.html` renderiza el estado de los servicios (up/down, último check) haciendo `fetch` a `STATUS_API_URL` (`https://homelab-status.ncorrea13.workers.dev/api/status`, hardcodeado en el `<script>` inline). El Worker que lo sirve vive en un **repo aparte** (`homelab-status`, fuera de este repo), no acá:
+
+- Recibe heartbeats de Uptime Kuma vía webhook (`/webhook/kuma`), los guarda en D1 (`services` + `events`) y expone `/api/status` con el último estado por servicio.
+- Reemplaza al viejo `boot.json` + unit de systemd (`service/`, ya removido de este repo): ya no hay un contador de uptime local, sino estado real de los servicios monitoreados por Kuma.
+- CORS restringido a `https://homelab.ncorrea.com.ar` en el Worker - si `servidor/` se sirve desde otro origen, hay que ajustarlo ahí, no acá.
+- Este repo solo consume esa API por `fetch`; no tiene ni necesita el código del Worker, sus bindings D1, ni el secret de admin.
+
 ## Convenciones de código
 
 - TypeScript estricto (`strict: true` en `tsconfig.json`).
@@ -79,11 +87,11 @@ Ya implementado, no es una idea a futuro:
 - Contenido (textos, links, proyectos, experiencia) vive en `content/*.ts`, tipado - no hardcodear strings de contenido dentro de componentes de `app/`/`components/` salvo texto puramente estructural (labels de UI que no son "contenido del portfolio").
 - Todo texto visible al usuario final va bilingüe (`T` o `LocalizedText`) - no agregar texto solo en español o solo en inglés.
 - Commits en español, formato convencional: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`.
-- `servidor/`: se edita `index.html`/`style.css` directo, sin pipeline de build - lo que está en el archivo es lo que se sirve. No portarlo a React/Next: página única, estado mínimo (tema + fetch de `boot.json`), ya resuelto en vanilla JS - un build no se justifica.
+- `servidor/`: se edita `index.html`/`style.css` directo, sin pipeline de build - lo que está en el archivo es lo que se sirve. No portarlo a React/Next: página única, estado mínimo (tema + fetch a la Status API), ya resuelto en vanilla JS - un build no se justifica.
 
 ## Variables de entorno
 
-No hay `.env` - el sitio no llama APIs externas ni tiene secrets; `content/site.ts` son constantes públicas commiteadas (URLs de contacto). `service/.env.example` es del systemd unit (`DOC_ROOT`), propio del homeserver real, no de este build.
+No hay `.env` - el sitio no llama APIs externas ni tiene secrets; `content/site.ts` son constantes públicas commiteadas (URLs de contacto).
 
 ## Comandos
 
@@ -103,13 +111,13 @@ En cada push a `main`/`dev` y en cada PR: `pnpm install --frozen-lockfile` → `
 ## Deploy
 
 - **Portfolio**: push a `main` → deploy automático en Vercel (preview en PRs). Build genera `out/` estático.
-- **`servidor/`**: sin CI/CD - se sincroniza la carpeta `servidor/` a mano al doc root real vía Cloudflare Tunnel. `boot.json` lo escribe `service/write-boot-time.service` en el host, no se versiona (gitignored).
+- **`servidor/`**: sin CI/CD - se sincroniza la carpeta `servidor/` a mano al doc root real vía Cloudflare Tunnel. El estado de servicios se consume de la Status API (Cloudflare Worker, deploy propio vía `wrangler deploy` en su repo aparte) en vez del viejo `boot.json`/unit de systemd.
 
 ## Cosas a evitar
 
-- No convertir `servidor/` en Next.js/React ni sumarle build - es una sola página con estado mínimo (tema + fetch de `boot.json`), ya resuelto en vanilla JS.
+- No convertir `servidor/` en Next.js/React ni sumarle build - es una sola página con estado mínimo (tema + fetch a la Status API), ya resuelto en vanilla JS.
 - No usar Server Actions/API routes en el portfolio - rompe `output: "export"`.
-- No commitear `public/cv.pdf`, `public/foto.jpg` ni `servidor/boot.json` (gitignored a propósito, son archivos personales/generados).
+- No commitear `public/cv.pdf` ni `public/foto.jpg` (gitignored a propósito, son archivos personales).
+- No traer el código del Worker `homelab-status` a este repo - vive aparte, este repo solo lo consume por `fetch` a `/api/status`.
 - No agregar una librería de i18n externa para el toggle ES/EN - el Context propio (`LocaleProvider` + `T`) ya cubre el alcance de 3 rutas con texto fijo.
 - No asumir que este repo tiene acceso a la config real del homeserver (Tailscale/Funnel/Cloudflare Tunnel, compose files) - vive en github.com/ncorrea-13/homeserver.
-- No ejecutar ni testear `service/` desde este repo - es la fuente para copiar al servidor real, no corre acá.
