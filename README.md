@@ -41,7 +41,7 @@ Genera `out/` estático para Vercel.
 
 ## Deploy de `servidor/`
 
-Se sirve tal cual vía Cloudflare Tunnel. Para su deploy se sincroniza la carpeta `servidor/` al root correspondiente. El estado de servicios se consume por `fetch` de una Status API propia (Cloudflare Worker + D1, alimentada por webhooks de Uptime Kuma, repo aparte).
+Se sirve tal cual vía Cloudflare Tunnel. Para su deploy se sincroniza la carpeta `servidor/` al root correspondiente. El estado de servicios se consume por `fetch` de una Status API propia (FastAPI + SQLite, alimentada por webhooks de Uptime Kuma, repo aparte en [homelab-status](https://github.com/ncorrea-13/homelab-status)).
 
 > [!NOTE] El deploy de `servidor/` es independiente del portfolio, ya que ambos están instanciados en diferentes servidores.
 
