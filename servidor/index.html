@@ -410,7 +410,7 @@
 
       function formatCheckedAt(raw, lang) {
         if (!raw) return null;
-        var d = new Date(raw.replace(" ", "T") + "Z");
+        var d = new Date(raw);
         if (isNaN(d.getTime())) return null;
         return d.toLocaleString(lang === "en" ? "en-US" : "es-AR", {
           timeZone: "America/Argentina/Mendoza",
@@ -420,7 +420,6 @@
           minute: "2-digit",
         });
       }
-
       function renderStatus(services, lang) {
         var dict = translations[lang];
         var box = document.getElementById("status-box");
@@ -453,7 +452,9 @@
           var metaSpan = document.createElement("span");
           metaSpan.className = "status-meta";
           var checkedAt = formatCheckedAt(s.checked_at, lang);
-          var statusLabel = dict["status" + status.charAt(0).toUpperCase() + status.slice(1)] || dict.statusUnknown;
+          var statusLabel =
+            dict["status" + status.charAt(0).toUpperCase() + status.slice(1)] ||
+            dict.statusUnknown;
           metaSpan.textContent = checkedAt
             ? statusLabel + " · " + checkedAt
             : statusLabel + " · " + dict.statusNever;
