@@ -3,6 +3,7 @@ export const skillGroups = [
     label: { es: "Backend", en: "Backend" },
     color: "var(--accent)",
     tags: [
+      "Go",
       "Java",
       "Spring Boot",
       "Node.js",
@@ -39,11 +40,6 @@ export const skillGroups = [
     label: { es: "DevOps", en: "DevOps" },
     color: "var(--tag-devops)",
     tags: ["Docker", "Podman", "Vercel", "CI/CD", "GitHub Actions"],
-  },
-  {
-    label: { es: "Sistemas", en: "Systems" },
-    color: "var(--accent-warm)",
-    tags: ["Go", "Rust"],
   },
   {
     label: { es: "Seguridad ofensiva", en: "Offensive Security" },
