@@ -111,7 +111,7 @@ En cada push a `main`/`dev` y en cada PR: `pnpm install --frozen-lockfile` → `
 ## Deploy
 
 - **Portfolio**: push a `main` → deploy automático en Vercel (preview en PRs). Build genera `out/` estático.
-- **`servidor/`**: sin CI/CD - se sincroniza la carpeta `servidor/` a mano al doc root real vía Cloudflare Tunnel. El estado de servicios se consume de la Status API (FastAPI, repo aparte) en vez del viejo `boot.json`/unit de systemd.
+- **`servidor/`**: CD por polling, no push-based - un timer systemd (`deploy-check.timer`, repo aparte `homelab`, corre en el Raspberry Pi) chequea cada 5 min el último commit de `main` en este repo vía GitHub API. Si cambió respecto al SHA guardado en `.deployed-sha`, el script (`deploy-check-docs.sh`) baja por `curl` los archivos de `servidor/` (`index.html`, `style.css`, `diagrama-arquitectura-claro.svg`, `diagrama-arquitectura-oscuro.svg`) directo desde GitHub raw al doc root real. No hay sync manual ni webhook - la definición del timer/service/env vive en `homelab/raspberry/deploy-check/`, fuera de este repo. El estado de servicios se sigue consumiendo de la Status API (FastAPI, repo aparte) en vez del viejo `boot.json`/unit de systemd.
 
 ## Cosas a evitar
 
