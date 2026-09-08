@@ -19,20 +19,20 @@
 Two independent public surfaces, each with its own deploy:
 
 - **Portfolio** (repo root): Next.js 16 (App Router) + TypeScript + Tailwind 4. Deployed on **Vercel**. Routes: `/`, `/sobre-mi`, `/proyectos`.
-- **[`servidor/`](servidor/)**: plain HTML/CSS/JS, no build. Served 24/7 from the real homeserver via Cloudflare Tunnel. Live proof that the self-hosting is real: it fetches service status from an external FastAPI (see [Status API](#status-api)).
+- **[`servidor/`](servidor/)**: plain HTML/CSS/JS. Deployed through the homelabe via Cloudflare Tunnel. CD by polling. It shows the Homelab information from the service status API (`https://status.ncorrea.com.ar/api/status`) which lives in another repo.
 
-No backend of its own, no persisted form input, nothing user-supplied gets reflected back. No injection surface.
+  No backend of its own, no persisted form input, nothing user-supplied gets reflected back. No injection surface.
 
 ## Stack
 
-| Layer | Tech |
-| --- | --- |
-| Frontend | Next.js 16 (App Router), React 19, TypeScript |
-| Styles | Tailwind CSS 4 (`@tailwindcss/postcss`) |
-| Package manager | pnpm (pinned in `mise.toml`) |
-| Deploy (portfolio) | Vercel, static export |
-| Deploy (`servidor/`) | Cloudflare Tunnel, served as-is from the homeserver |
-| CI | GitHub Actions, lint + build on push/PR to `main`/`dev` |
+| Layer                | Tech                                                              |
+| -------------------- | ----------------------------------------------------------------- |
+| Frontend             | Next.js 16 (App Router), React 19, TypeScript                     |
+| Styles               | Tailwind CSS 4 (`@tailwindcss/postcss`)                           |
+| Package manager      | pnpm (pinned in `mise.toml`)                                      |
+| Deploy (portfolio)   | Vercel, static export                                             |
+| Deploy (`servidor/`) | Cloudflare Tunnel + CD by polling (systemd timer, `homelab` repo) |
+| CI                   | GitHub Actions, lint + build on push/PR to `main`/`dev`           |
 
 ## Quick Start
 
