@@ -155,6 +155,7 @@
       <li data-i18n="decision4"></li>
       <li data-i18n="decision5"></li>
       <li data-i18n="decision6"></li>
+      <li data-i18n="decision7"></li>
     </ul>
 
     <h2 data-i18n="originsH2"></h2>
@@ -293,6 +294,8 @@
             "<strong>Exposición pública:</strong> solo esta landing queda fija, en un Tunnel independiente; el resto de los servicios se exponen puntualmente y se apagan al terminar de usarlos, vía Tailscale Funnel activado por un webhook local. El acceso interno normal siempre es por Caddy en la tailnet, sin MagicDNS.",
           decision6:
             "<strong>Separación de observabilidad:</strong> el nodo que monitorea vive aparte del nodo que corre los servicios. Si el host cae, el monitoreo sigue en pie.",
+          decision7:
+            "<strong>Deploy de esta misma página:</strong> un timer systemd en la Raspberry Pi revisa cada 5 minutos el último commit del repo y, si cambió, baja los archivos actualizados. Sin webhook expuesto ni puerto nuevo abierto: CD por polling en vez de push.",
           originsH2: "Orígenes del proyecto",
           originsP:
             "Mi servidor personal inició por medio esta misma Raspberry Pi 4B. Así fui experimentando, probando y trabajando poco a poco hasta llegar a este punto. En el día a día me sirve tanto para aprender como para proveer los servicios sin pagos de suscripción.",
@@ -396,6 +399,8 @@
             "<strong>Public exposure:</strong> only this landing page stays fixed, on its own independent Tunnel. Every other service is exposed on demand and turned off after use, through Tailscale Funnel triggered by a local webhook. Regular internal access always goes through Caddy on the tailnet, without MagicDNS.",
           decision6:
             "<strong>Observability separation:</strong> the node that monitors lives apart from the node that runs the services. If the host goes down, monitoring stays up.",
+          decision7:
+            "<strong>Deploying this very page:</strong> a systemd timer on the Raspberry Pi checks the repo's latest commit every 5 minutes and pulls the updated files if it changed. No exposed webhook, no new open port: CD by polling instead of push.",
           originsH2: "Project origins",
           originsP:
             "My personal server started with this same Raspberry Pi 4B. From there, I kept experimenting, testing, and working step by step until I got to this point. Day to day, it helps me both learn and run services without paying for subscriptions.",
