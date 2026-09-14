@@ -15,6 +15,7 @@ const featuredProjects = [
   "https://github.com/ncorrea-13/Pethood-backend",
   "https://homelab.ncorrea.com.ar/",
   "https://accesoriosstina.vercel.app/",
+  "https://github.com/ncorrea-13/rolboard",
 ];
 
 export default function Home() {
