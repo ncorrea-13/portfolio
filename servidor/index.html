@@ -118,13 +118,14 @@
     <ul>
       <li data-i18n="note1"></li>
       <li data-i18n="note2"></li>
+      <li data-i18n="note3"></li>
       <li data-i18n="note4"></li>
       <li data-i18n="note5"></li>
       <li data-i18n="note6"></li>
       <li data-i18n="note7"></li>
+      <li data-i18n="note8"></li>
       <li data-i18n="note9"></li>
       <li data-i18n="note10"></li>
-      <li data-i18n="note12"></li>
     </ul>
 
     <h2 data-i18n="stackH2"></h2>
@@ -133,6 +134,7 @@
       <li data-i18n="stack1"></li>
       <li data-i18n="stack2"></li>
       <li data-i18n="stack3"></li>
+      <li data-i18n="stack4"></li>
     </ul>
 
     <h2 data-i18n="servicesH2"></h2>
@@ -210,14 +212,14 @@
           archH2: "Arquitectura",
           diagramNote: "",
           archOpenFull: "Abrir diagrama en una pestaña nueva",
-          hwH3: "Almacenamiento del ThinkCentre",
+          hwH3: "Almacenamiento del Servidor de Producción",
           hw1: "<strong>SSD 120GB</strong> - Sistema operativo",
           hw2: "<strong>SSD 480GB</strong> - Datos: volúmenes de Podman, toda la información y contenedores",
           hw3: "<strong>HDD 480GB</strong> - Backup diario",
           hw4: "<strong>HDD 480GB</strong> - Backup semanal",
           gatewayH2: "Responsabilidades",
           gatewayP:
-            "El ThinkCentre corre los servicios con gran almacenamiento de información como Immich o Vaultwarden. La Raspberry Pi 4B es nodo de red como DNS y proxy inverso, y también monitorea los otros servicios por Uptime Kuma. El Samsung S9+ corre Ntfy dentro de Termux.",
+            "El ThinkCentre corre los servicios con gran almacenamiento de información como Immich o Vaultwarden. La Raspberry Pi 4B es nodo de red como DNS y proxy inverso, y también monitorea los otros servicios por Uptime Kuma. El Samsung S9+ corre Ntfy dentro de Termux. La HP ProDesk queda como laboratorio de pruebas y experimentación",
           backupsH2: "Backups",
           backup1:
             "<strong>Qué:</strong> Configuraciones de los contenedores, junto con los datos. Las bases de datos críticas se bumpean para evitar así que se corrompan los datos al copiarse mientras se mantiene la ejecución.",
@@ -232,20 +234,22 @@
             "<strong>Acceso único:</strong> El tráfico viaja por la tailnet siempre y es redirigido por Caddy. De esta forma se identifican más facilmente a donde se está accediendo. Todos los puertos se encuentran cerrados para la red LAN.",
           note2:
             "<strong>Tailscale:</strong> Permite la conexión en remoto por la VPN. También permite ir rotando la exposición con Funnel.",
-          note4:
+          note3:
             "<strong>Cockpit:</strong> corre directamente en el host. Es el panel principal de administración fuera de la terminal.",
-          note5:
+          note4:
             "<strong>Webhook:</strong> API que corre en el host. Permite instanciar en Homepage botones con scripts en bash para habilitar la salida de servicios de forma dinámica por Tailscale Funnel.",
-          note6:
+          note5:
             "<strong>Podman:</strong> motor rootless que orquesta todos los pods de servicios.",
-          note7:
+          note6:
             "<strong>Bases de datos:</strong> Immich y Miniflux poseen sus contenedores de base de datos. Se omiten en el diagrama.",
-          note9:
+          note7:
             "<strong>DNS:</strong> Pi-hole filtra consultas y las reenvía a Unbound, que sale a los servidores de Mullvad exclusivamente vía DoT. Los subdominios los redirige a Caddy.",
-          note10:
+          note8:
             "<strong>Proxy inverso:</strong> Caddy gestiona internamente el dominio para poder acceder de forma más sencilla a los servicios de la red.",
-          note12:
+          note9:
             "<strong>El observador del observador:</strong> el Samsung S9+ corre Ntfy y recibe todas las notificaciones del sistema. También vigila que Uptime Kuma esté vivo mediante un chequeo periódico.",
+          note10:
+            "<strong>Servidor de Laboratorio:</strong> se implementó un servidor dedicado de VMs para ciberseguridad, aprendizaje de Platform Engineering y pruebas. Se encuentra aislado de la red de producción y no tiene acceso a Internet.",
           stackH2: "Stack técnico",
           stack1:
             "<strong>ThinkCentre</strong>: Intel i3-6100T · 8GB RAM · Debian 13 Trixie, Podman rootless",
@@ -253,6 +257,8 @@
             "<strong>Raspberry Pi 4B</strong>: BCM2711 quad-core 1.5GHz · 4GB RAM · Raspberry Pi OS Lite, Podman rootless",
           stack3:
             "<strong>Samsung S9+</strong>: Snapdragon 845 · 6GB RAM · Termux (proot-distro)",
+          stack4:
+            "<strong>HP ProDesk</strong>: Intel i5-6500 · 12GB RAM · Debian 13 Trixie, libvirt + KVM/QEMU",
           statusH2: "Estado de servicios",
           statusLoading: "Cargando estado...",
           statusError: "No se pudo cargar el estado ahora mismo.",
@@ -276,10 +282,12 @@
           service5:
             "<strong>Storage</strong>: Syncthing (sincronización), Filebrowser (gestión de archivos)",
           service6:
-            "<strong>Utils (ThinkCentre) </strong>: Homepage (dashboard)",
+            "<strong>Rolboard </strong>: Servidor + Cliente (gestión de campañas de rol) - proyecto propio",
           service7:
-            "<strong>Utils (Raspberry Pi)</strong>: Uptime Kuma, vigilando todos los servicios del ThinkCentre y de la propia Pi",
+            "<strong>Utils (ThinkCentre) </strong>: Homepage (dashboard)",
           service8:
+            "<strong>Utils (Raspberry Pi)</strong>: Uptime Kuma, Homelab-status-api - proyecto propio",
+          service9:
             "<strong>Ntfy</strong>: Ntfy corriendo en Debian sobre Termux (proot-distro)",
           decisionsH2: "Decisiones técnicas",
           decision1:
@@ -315,7 +323,7 @@
           archH2: "Architecture",
           diagramNote: "(Diagram labels are in Spanish.)",
           archOpenFull: "Open diagram in a new tab",
-          hwH3: "ThinkCentre storage",
+          hwH3: "Production server storage",
           hw1: "<strong>120GB SSD</strong>: operating system",
           hw2: "<strong>480GB SSD</strong>: data, Podman volumes, all information and containers",
           hw3: "<strong>480GB HDD</strong>: daily backup",
@@ -331,26 +339,28 @@
             "<strong>Restore:</strong> tested manually while iterating on and developing the script. If something fails, the copy restores without issues.",
           gatewayH2: "Responsibilities",
           gatewayP:
-            "The ThinkCentre runs the services that need heavy storage, like Immich or Vaultwarden. The Raspberry Pi 4B works as the network node, handling DNS and reverse proxy, and it also monitors the other services through Uptime Kuma. The Samsung S9+ runs Ntfy inside Termux.",
+            "The ThinkCentre runs the services that need heavy storage, like Immich or Vaultwarden. The Raspberry Pi 4B works as the network node, handling DNS and reverse proxy, and it also monitors the other services through Uptime Kuma. The Samsung S9+ runs Ntfy inside Termux. The HP ProDesk is a lab for testing and experimentation.",
           notesH2: "Architecture notes",
           note1:
             "<strong>Single access point:</strong> traffic always travels through the tailnet and gets redirected by Caddy. This makes it easier to identify what's being accessed. All ports are closed to the LAN.",
           note2:
             "<strong>Tailscale:</strong> allows remote connections through the VPN. It also lets me rotate public exposure using Funnel.",
-          note4:
+          note3:
             "<strong>Cockpit:</strong> runs directly on the host. It's the main admin panel outside the terminal.",
-          note5:
+          note4:
             "<strong>Webhook:</strong> an API running on the host. It lets me add buttons in Homepage with bash scripts to dynamically enable public access to services through Tailscale Funnel.",
-          note6:
+          note5:
             "<strong>Podman:</strong> the rootless engine that orchestrates all the service pods.",
-          note7:
+          note6:
             "<strong>Databases:</strong> Immich and Miniflux each have their own database containers. They're left out of the diagram.",
-          note9:
+          note7:
             "<strong>DNS:</strong> Pi-hole filters queries and forwards them to Unbound, which reaches Mullvad's servers exclusively over DoT. It redirects subdomains to Caddy.",
-          note10:
+          note8:
             "<strong>Reverse proxy:</strong> Caddy manages the domain internally, making it easier to access the services on the network.",
-          note12:
+          note9:
             "<strong>The watcher of the watcher:</strong> the Samsung S9+ runs Ntfy and receives every system notification. It also checks that Uptime Kuma is alive through a periodic check.",
+          note10:
+            "<strong>Lab server:</strong> a dedicated VM server for cybersecurity, Platform Engineering learning, and testing. It's isolated from the production network and has no internet access.",
           stackH2: "Technical stack",
           stack1:
             "<strong>ThinkCentre</strong>: Intel i3-6100T · 8GB RAM · Debian 13 Trixie, rootless Podman",
@@ -358,6 +368,8 @@
             "<strong>Raspberry Pi 4B</strong>: BCM2711 quad-core 1.5GHz · 4GB RAM · Raspberry Pi OS Lite, rootless Podman",
           stack3:
             "<strong>Samsung S9+</strong>: Snapdragon 845 · 6GB RAM · Termux (proot-distro)",
+          stack4:
+            "<strong>HP ProDesk</strong>: Intel i5-6500 · 12GB RAM · Debian 13 Trixie, libvirt + KVM/QEMU",
           statusH2: "Service status",
           statusLoading: "Loading status...",
           statusError: "Couldn't load the status right now.",
@@ -381,10 +393,12 @@
           service5:
             "<strong>Storage</strong>: Syncthing (sync), Filebrowser (file management)",
           service6:
-            "<strong>Utils (ThinkCentre)</strong>: Homepage (dashboard)",
+            "<strong>Rolboard</strong>: server + client (tabletop RPG campaign management) - own project",
           service7:
-            "<strong>Utils (Raspberry Pi)</strong>: Uptime Kuma, watching every service on the ThinkCentre and on the Pi itself",
+            "<strong>Utils (ThinkCentre)</strong>: Homepage (dashboard)",
           service8:
+            "<strong>Utils (Raspberry Pi)</strong>: Uptime Kuma, Homelab-status-api - own project",
+          service9:
             "<strong>Ntfy</strong>: runs on Debian over Termux (proot-distro)",
           decisionsH2: "Technical decisions",
           decision1:
