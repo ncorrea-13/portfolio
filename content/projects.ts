@@ -13,16 +13,16 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    name: { es: "Rolboard", en: "Rolboard" },
-    url: "https://github.com/ncorrea-13/rolboard",
+    name: { es: "Homelab", en: "Homelab" },
+    url: SERVIDOR_URL,
     desc: {
-      es: "Dashboard personal para gestión de campañas de rol de mesa. Indexa el frontmatter YAML de un vault de Obsidian como metadata para consulta rápida durante la sesión en vivo.",
-      en: "Personal dashboard for tabletop RPG campaign management. It indexes an Obsidian vault's YAML frontmatter as metadata for fast lookup during a live session.",
+      es: "Servidor de servicios y experimentos donde despliego mis proyectos y me capacito como DevOps.",
+      en: "Server for services and experiments where I deploy my projects and upskill as a DevOps engineer.",
     },
     license: "MIT",
-    tags: ["backend", "frontend"],
-    stack: ["Go", "SQLite", "React", "TypeScript", "Vite"],
-    image: "/projects/rolboard.png",
+    tags: ["infra"],
+    stack: ["CI/CD", "SSH", "Systemd", "Cloudflare", "WireGuard", "Containers"],
+    image: "/projects/homelab.jpg",
   },
   {
     name: { es: "PetHood", en: "PetHood" },
@@ -42,6 +42,18 @@ export const projects: Project[] = [
       "NativeWind",
     ],
     image: "/projects/pethood.png",
+  },
+  {
+    name: { es: "Rolboard", en: "Rolboard" },
+    url: "https://github.com/ncorrea-13/rolboard",
+    desc: {
+      es: "Dashboard personal para gestión de campañas de rol de mesa. Indexa el frontmatter YAML de un vault de Obsidian como metadata para consulta rápida durante la sesión en vivo.",
+      en: "Personal dashboard for tabletop RPG campaign management. It indexes an Obsidian vault's YAML frontmatter as metadata for fast lookup during a live session.",
+    },
+    license: "MIT",
+    tags: ["backend", "frontend"],
+    stack: ["Go", "SQLite", "React", "TypeScript", "Vite"],
+    image: "/projects/rolboard.png",
   },
   {
     name: { es: "Accesoriosstina", en: "Accesoriosstina" },
@@ -77,18 +89,6 @@ export const projects: Project[] = [
     tags: ["tui-cli"],
     stack: ["Rust", "Ratatui"],
     image: "/projects/bw-tui.png",
-  },
-  {
-    name: { es: "Homelab", en: "Homelab" },
-    url: SERVIDOR_URL,
-    desc: {
-      es: "Configuración y compose files de mi servidor personal. El mismo servidor que hostea la página de arquitectura.",
-      en: "Configuration and compose files for my personal server. The same server that hosts the architecture page.",
-    },
-    license: "MIT",
-    tags: ["infra"],
-    stack: ["WireGuard", "Containers", "Bash", "Systemd"],
-    image: "/projects/homelab.jpg",
   },
   {
     name: { es: "Mis dotfiles personales", en: "My personal dotfiles" },
