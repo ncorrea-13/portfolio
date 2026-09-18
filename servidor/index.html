@@ -94,17 +94,57 @@
       ></a>
     </div>
 
-    <h3 data-i18n="hwH3"></h3>
+    <h2 data-i18n="servicesH2"></h2>
+
+    <p data-i18n="HwSv1"></p>
+    <ul>
+      <li data-i18n="serviceCockpit"></li>
+      <li data-i18n="serviceWebhook"></li>
+      <li>
+        <span data-i18n="podsLabel"></span>
+        <ul>
+          <li data-i18n="service1"></li>
+          <li data-i18n="service2"></li>
+          <li data-i18n="service3"></li>
+          <li data-i18n="service4"></li>
+          <li data-i18n="service5"></li>
+          <li data-i18n="service6"></li>
+        </ul>
+      </li>
+    </ul>
+    <p data-i18n="HwSv2"></p>
+    <ul>
+      <li data-i18n="serviceCockpitPi"></li>
+      <li data-i18n="serviceDocs"></li>
+      <li>
+        <span data-i18n="podsLabel"></span>
+        <ul>
+          <li data-i18n="service7"></li>
+          <li data-i18n="service8"></li>
+        </ul>
+      </li>
+    </ul>
+    <p data-i18n="HwSv3"></p>
+    <ul>
+      <li data-i18n="service9"></li>
+    </ul>
+    <p data-i18n="HwSv4"></p>
+    <ul>
+      <li data-i18n="service10"></li>
+      <li data-i18n="service11"></li>
+      <li data-i18n="service12"></li>
+    </ul>
+
+    <h2 data-i18n="gatewayH2"></h2>
+    <p data-i18n="gatewayP"></p>
+
+    <h2 data-i18n="hwH2"></h2>
     <ul>
       <li data-i18n="hw1"></li>
       <li data-i18n="hw2"></li>
       <li data-i18n="hw3"></li>
       <li data-i18n="hw4"></li>
     </ul>
-
-    <h2 data-i18n="gatewayH2"></h2>
-    <p data-i18n="gatewayP"></p>
-
     <h2 data-i18n="backupsH2"></h2>
     <ul>
       <li data-i18n="backup1"></li>
@@ -124,8 +164,6 @@
       <li data-i18n="note6"></li>
       <li data-i18n="note7"></li>
       <li data-i18n="note8"></li>
-      <li data-i18n="note9"></li>
-      <li data-i18n="note10"></li>
     </ul>
 
     <h2 data-i18n="stackH2"></h2>
@@ -136,17 +174,6 @@
       <li data-i18n="stack3"></li>
       <li data-i18n="stack4"></li>
     </ul>
-
-    <h2 data-i18n="servicesH2"></h2>
-
-    <p data-i18n="service1"></p>
-    <p data-i18n="service2"></p>
-    <p data-i18n="service3"></p>
-    <p data-i18n="service4"></p>
-    <p data-i18n="service5"></p>
-    <p data-i18n="service6"></p>
-    <p data-i18n="service7"></p>
-    <p data-i18n="service8"></p>
 
     <h2 data-i18n="decisionsH2"></h2>
 
@@ -212,7 +239,7 @@
           archH2: "Arquitectura",
           diagramNote: "",
           archOpenFull: "Abrir diagrama en una pestaña nueva",
-          hwH3: "Almacenamiento del Servidor de Producción",
+          hwH2: "Almacenamiento del Servidor de Producción",
           hw1: "<strong>SSD 120GB</strong> - Sistema operativo",
           hw2: "<strong>SSD 480GB</strong> - Datos: volúmenes de Podman, toda la información y contenedores",
           hw3: "<strong>HDD 480GB</strong> - Backup diario",
@@ -235,20 +262,16 @@
           note2:
             "<strong>Tailscale:</strong> Permite la conexión en remoto por la VPN. También permite ir rotando la exposición con Funnel.",
           note3:
-            "<strong>Cockpit:</strong> corre directamente en el host. Es el panel principal de administración fuera de la terminal.",
-          note4:
-            "<strong>Webhook:</strong> API que corre en el host. Permite instanciar en Homepage botones con scripts en bash para habilitar la salida de servicios de forma dinámica por Tailscale Funnel.",
-          note5:
             "<strong>Podman:</strong> motor rootless que orquesta todos los pods de servicios.",
-          note6:
+          note4:
             "<strong>Bases de datos:</strong> Immich y Miniflux poseen sus contenedores de base de datos. Se omiten en el diagrama.",
-          note7:
+          note5:
             "<strong>DNS:</strong> Pi-hole filtra consultas y las reenvía a Unbound, que sale a los servidores de Mullvad exclusivamente vía DoT. Los subdominios los redirige a Caddy.",
-          note8:
+          note6:
             "<strong>Proxy inverso:</strong> Caddy gestiona internamente el dominio para poder acceder de forma más sencilla a los servicios de la red.",
-          note9:
+          note7:
             "<strong>El observador del observador:</strong> el Samsung S9+ corre Ntfy y recibe todas las notificaciones del sistema. También vigila que Uptime Kuma esté vivo mediante un chequeo periódico.",
-          note10:
+          note8:
             "<strong>Servidor de Laboratorio:</strong> se implementó un servidor dedicado de VMs para ciberseguridad, aprendizaje de Platform Engineering y pruebas. Se encuentra aislado de la red de producción y no tiene acceso a Internet.",
           stackH2: "Stack técnico",
           stack1:
@@ -256,7 +279,7 @@
           stack2:
             "<strong>Raspberry Pi 4B</strong>: BCM2711 quad-core 1.5GHz · 4GB RAM · Raspberry Pi OS Lite, Podman rootless",
           stack3:
-            "<strong>Samsung S9+</strong>: Snapdragon 845 · 6GB RAM · Termux (proot-distro)",
+            "<strong>Samsung S9+</strong>: Snapdragon 845 · 6GB RAM · Termux, proot-distro",
           stack4:
             "<strong>HP ProDesk</strong>: Intel i5-6500 · 12GB RAM · Debian 13 Trixie, libvirt + KVM/QEMU",
           statusH2: "Estado de servicios",
@@ -271,12 +294,22 @@
           statusUnknown: "Sin datos",
           statusNever: "sin reportes aún",
           servicesH2: "Servicios",
+          HwSv1: "<strong>ThinkCentre</strong> (Debian)",
+          HwSv2: "<strong>Raspberry Pi 4B</strong> (Raspberry Pi OS Lite)",
+          HwSv3: "<strong>Samsung Galaxy S9+</strong> (Android)",
+          HwSv4: "<strong>Hp ProDesk</strong> (Debian)",
+          serviceCockpit:
+            "<strong>Cockpit</strong>: panel de administración web, corre directamente en el host",
+          serviceWebhook:
+            "<strong>Webhook</strong>: API en el host que dispara scripts bash desde Homepage para habilitar servicios por Tailscale Funnel",
+          serviceCockpitPi:
+            "<strong>Cockpit</strong>: panel de administración web, corre directamente en el host",
+          podsLabel: "<strong>Pods de Podman</strong> (rootless)",
           service1:
             "<strong>Core</strong>: Vaultwarden (contraseñas), Radicale (calendarios y contactos)",
-          service2:
-            "<strong>Gateway</strong>: Pi-hole (bloqueo de publicidad), Unbound (DNS recursivo con DoT), Caddy (Proxy inverso)",
+          service2: "<strong>Utils</strong>: Homepage (dashboard)",
           service3:
-            "<strong>Immich</strong>: Pod completo para Immich con su servidor, su backup y galería de fotos y videos con búsqueda por ML",
+            "<strong>Pictures</strong>: Pod completo para Immich con su servidor, su backup y galería de fotos y videos con búsqueda por ML",
           service4:
             "<strong>Entertainment</strong>: Miniflux (RSS), Suwayomi (lector de comics), Kavita (biblioteca digital) y Flaresolverr (bypass de Cloudflare)",
           service5:
@@ -284,11 +317,19 @@
           service6:
             "<strong>Rolboard </strong>: Servidor + Cliente (gestión de campañas de rol) - proyecto propio",
           service7:
-            "<strong>Utils (ThinkCentre) </strong>: Homepage (dashboard)",
+            "<strong>Gateway</strong>: Pi-hole (bloqueo de publicidad), Unbound (DNS recursivo con DoT), Caddy (Proxy inverso)",
           service8:
-            "<strong>Utils (Raspberry Pi)</strong>: Uptime Kuma, Homelab-status-api - proyecto propio",
+            "<strong>Utils</strong>: Uptime Kuma (monitoreo), Homelab-status-api (publicación) - proyecto propio",
+          serviceDocs:
+            "<strong>Docs</strong>: esta página, servida desde un Tunnel independiente y actualizada por polling desde el repo",
           service9:
-            "<strong>Ntfy</strong>: Ntfy corriendo en Debian sobre Termux (proot-distro)",
+            "<strong>Proot-distro</strong>: Instancia de Debian dentro de Temux. Dentro corre Ntfy y el checkeo de la Pi",
+          service10:
+            "<strong>VM-DevOps</strong>: Máquina Virtual con Docker que corre Floci para aprender deploys simulando entornos de Cloud",
+          service11:
+            "<strong>VM-Pentesting</strong>: Máquina Virtual con Docker la cual despliega laboratorios de pruebas de ciberseguridad",
+          service12:
+            "<strong>VM-Backup</strong>: Máquina Virtual con Docker que funciona como plantilla para poder crear nuevas VMs sin necesidad de descargar nuevas ISOs",
           decisionsH2: "Decisiones técnicas",
           decision1:
             "<strong>Debian:</strong> prioricé estabilidad y soporte de paquetes para un servidor que se va a encontrar siempre disponible y no debe recibir actualizaciones ni reinicios de forma inesperada.",
@@ -323,7 +364,7 @@
           archH2: "Architecture",
           diagramNote: "(Diagram labels are in Spanish.)",
           archOpenFull: "Open diagram in a new tab",
-          hwH3: "Production server storage",
+          hwH2: "Production server storage",
           hw1: "<strong>120GB SSD</strong>: operating system",
           hw2: "<strong>480GB SSD</strong>: data, Podman volumes, all information and containers",
           hw3: "<strong>480GB HDD</strong>: daily backup",
@@ -346,20 +387,16 @@
           note2:
             "<strong>Tailscale:</strong> allows remote connections through the VPN. It also lets me rotate public exposure using Funnel.",
           note3:
-            "<strong>Cockpit:</strong> runs directly on the host. It's the main admin panel outside the terminal.",
-          note4:
-            "<strong>Webhook:</strong> an API running on the host. It lets me add buttons in Homepage with bash scripts to dynamically enable public access to services through Tailscale Funnel.",
-          note5:
             "<strong>Podman:</strong> the rootless engine that orchestrates all the service pods.",
-          note6:
+          note4:
             "<strong>Databases:</strong> Immich and Miniflux each have their own database containers. They're left out of the diagram.",
-          note7:
+          note5:
             "<strong>DNS:</strong> Pi-hole filters queries and forwards them to Unbound, which reaches Mullvad's servers exclusively over DoT. It redirects subdomains to Caddy.",
-          note8:
+          note6:
             "<strong>Reverse proxy:</strong> Caddy manages the domain internally, making it easier to access the services on the network.",
-          note9:
+          note7:
             "<strong>The watcher of the watcher:</strong> the Samsung S9+ runs Ntfy and receives every system notification. It also checks that Uptime Kuma is alive through a periodic check.",
-          note10:
+          note8:
             "<strong>Lab server:</strong> a dedicated VM server for cybersecurity, Platform Engineering learning, and testing. It's isolated from the production network and has no internet access.",
           stackH2: "Technical stack",
           stack1:
@@ -367,7 +404,7 @@
           stack2:
             "<strong>Raspberry Pi 4B</strong>: BCM2711 quad-core 1.5GHz · 4GB RAM · Raspberry Pi OS Lite, rootless Podman",
           stack3:
-            "<strong>Samsung S9+</strong>: Snapdragon 845 · 6GB RAM · Termux (proot-distro)",
+            "<strong>Samsung S9+</strong>: Snapdragon 845 · 6GB RAM · Termux, proot-distro",
           stack4:
             "<strong>HP ProDesk</strong>: Intel i5-6500 · 12GB RAM · Debian 13 Trixie, libvirt + KVM/QEMU",
           statusH2: "Service status",
@@ -382,12 +419,22 @@
           statusUnknown: "No data",
           statusNever: "no reports yet",
           servicesH2: "Services",
+          HwSv1: "<strong>ThinkCentre</strong> (Debian)",
+          HwSv2: "<strong>Raspberry Pi 4B</strong> (Raspberry Pi OS Lite)",
+          HwSv3: "<strong>Samsung Galaxy S9+</strong> (Android)",
+          HwSv4: "<strong>Hp ProDesk</strong> (Debian)",
+          serviceCockpit:
+            "<strong>Cockpit</strong>: web admin panel, runs directly on the host",
+          serviceWebhook:
+            "<strong>Webhook</strong>: API on the host that triggers bash scripts from Homepage to enable services through Tailscale Funnel",
+          serviceCockpitPi:
+            "<strong>Cockpit</strong>: web admin panel, runs directly on the host",
+          podsLabel: "<strong>Podman pods</strong> (rootless)",
           service1:
             "<strong>Core</strong>: Vaultwarden (passwords), Radicale (calendars and contacts)",
-          service2:
-            "<strong>Gateway</strong>: Pi-hole (ad blocking), Unbound (recursive DNS with DoT), Caddy (reverse proxy)",
+          service2: "<strong>Utils</strong>: Homepage (dashboard)",
           service3:
-            "<strong>Immich</strong>: a complete pod for Immich, with its server, backup, and a photo and video gallery with ML powered search",
+            "<strong>Pictures</strong>: a complete pod for Immich, with its server, backup, and a photo and video gallery with ML powered search",
           service4:
             "<strong>Entertainment</strong>: Miniflux (RSS), Suwayomi (comic reader), Kavita (digital library), and Flaresolverr (Cloudflare bypass)",
           service5:
@@ -395,11 +442,19 @@
           service6:
             "<strong>Rolboard</strong>: server + client (tabletop RPG campaign management) - own project",
           service7:
-            "<strong>Utils (ThinkCentre)</strong>: Homepage (dashboard)",
+            "<strong>Gateway</strong>: Pi-hole (ad blocking), Unbound (recursive DNS with DoT), Caddy (reverse proxy)",
           service8:
-            "<strong>Utils (Raspberry Pi)</strong>: Uptime Kuma, Homelab-status-api - own project",
+            "<strong>Utils</strong>: Uptime Kuma (monitoring), Homelab-status-api (publishing) - own project",
+          serviceDocs:
+            "<strong>Docs</strong>: this page, served through an independent Tunnel and updated by polling the repo",
           service9:
-            "<strong>Ntfy</strong>: runs on Debian over Termux (proot-distro)",
+            "<strong>Proot-distro</strong>: a Debian instance inside Termux. Ntfy and the Pi health check run inside it",
+          service10:
+            "<strong>VM-DevOps</strong>: a virtual machine with Docker running Floci, used to learn deployments by simulating cloud environments",
+          service11:
+            "<strong>VM-Pentesting</strong>: a virtual machine with Docker that deploys cybersecurity testing labs",
+          service12:
+            "<strong>VM-Backup</strong>: a virtual machine with Docker that works as a template to create new VMs without downloading new ISOs",
           decisionsH2: "Technical decisions",
           decision1:
             "<strong>Debian:</strong> I prioritized stability and package support, since this server needs to stay available at all times and shouldn't get unexpected updates or restarts.",
