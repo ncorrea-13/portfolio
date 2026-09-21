@@ -10,6 +10,7 @@ import {
 type Locale = "es" | "en";
 
 const EVENT = "locale-change";
+const COOKIE_DOMAIN = ".ncorrea.com.ar";
 
 function subscribe(callback: () => void) {
   window.addEventListener(EVENT, callback);
@@ -21,7 +22,8 @@ function subscribe(callback: () => void) {
 }
 
 function getSnapshot(): Locale {
-  return localStorage.getItem("locale") === "en" ? "en" : "es";
+  const fromCookie = document.cookie.match(/(?:^|; )locale=(en|es)/)?.[1];
+  return (fromCookie ?? localStorage.getItem("locale")) === "en" ? "en" : "es";
 }
 
 function getServerSnapshot(): Locale {
@@ -42,6 +44,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 
   const setLocale = useCallback((next: Locale) => {
     localStorage.setItem("locale", next);
+    document.cookie = `locale=${next}; Domain=${COOKIE_DOMAIN}; Path=/; Max-Age=31536000; SameSite=Lax`;
     document.documentElement.lang = next;
     window.dispatchEvent(new Event(EVENT));
   }, []);
