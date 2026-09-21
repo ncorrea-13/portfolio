@@ -6,6 +6,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import { LocaleToggle } from "./LocaleToggle";
 import { useLocale } from "./LocaleProvider";
 import { SERVIDOR_URL } from "@/content/site";
+import styles from "./Nav.module.css";
 
 const links = [
   { href: "/", label: { es: "Inicio", en: "Home" } },
@@ -18,29 +19,26 @@ export function Nav() {
   const { locale } = useLocale();
 
   return (
-    <nav className="mx-auto flex max-w-3xl items-start justify-between gap-4 px-6 pt-10 pb-6 font-sans text-sm">
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+    <nav className={styles.nav}>
+      <div className={styles.links}>
         {links.map((link) => (
           <Link
             key={link.href}
             href={link.href}
             className={
               pathname === link.href
-                ? "text-accent-strong"
-                : "text-muted hover:text-accent-strong"
+                ? `${styles.link} ${styles.active}`
+                : styles.link
             }
           >
             {locale === "en" ? link.label.en : link.label.es}
           </Link>
         ))}
-        <a
-          href={SERVIDOR_URL}
-          className="text-muted hover:text-accent-strong"
-        >
+        <a href={SERVIDOR_URL} className={styles.link}>
           Homelab
         </a>
       </div>
-      <div className="flex shrink-0 items-center gap-2">
+      <div className={styles.toggles}>
         <LocaleToggle />
         <ThemeToggle />
       </div>

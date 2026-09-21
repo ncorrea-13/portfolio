@@ -3,6 +3,7 @@
 import { useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { useLocale } from "./LocaleProvider";
+import styles from "./Toggle.module.css";
 
 function subscribe() {
   return () => {};
@@ -22,7 +23,7 @@ export function ThemeToggle() {
       type="button"
       aria-label={locale === "en" ? "Switch theme" : "Cambiar tema"}
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-card-border bg-card-bg text-heading hover:border-accent-strong"
+      className={styles.btn}
     >
       {mounted ? "◐" : ""}
     </button>

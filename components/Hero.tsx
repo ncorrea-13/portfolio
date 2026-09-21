@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useLocale } from "./LocaleProvider";
+import styles from "./Hero.module.css";
+import common from "./common.module.css";
 
 const container = {
   hidden: {},
@@ -27,7 +29,7 @@ export function Hero() {
       variants={reduce ? undefined : container}
       initial={reduce ? false : "hidden"}
       animate={reduce ? undefined : "show"}
-      className="flex flex-col items-center gap-5 py-4 text-center sm:flex-row sm:text-left"
+      className={styles.hero}
     >
       <motion.div variants={reduce ? undefined : item}>
         <Image
@@ -36,14 +38,12 @@ export function Hero() {
           width={96}
           height={96}
           priority
-          className="shrink-0 rounded-full border border-card-border object-cover"
+          className={common.avatar}
         />
       </motion.div>
       <motion.div variants={reduce ? undefined : item}>
-        <h1 className="font-sans text-2xl font-semibold tracking-tight text-gradient">
-          Nicolás Correa
-        </h1>
-        <p className="font-sans text-[15px] text-accent">
+        <h1 className={styles.title}>Nicolás Correa</h1>
+        <p className={styles.subtitle}>
           {locale === "en"
             ? "Full Stack Software Developer · DevOps & Platform Engineering"
             : "Desarrollador de Software Full-stack · DevOps & Platform Engineering"}

@@ -5,6 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { projects, filters } from "@/content/projects";
 import { ProjectCard } from "./ProjectCard";
 import { useLocale } from "./LocaleProvider";
+import styles from "./ProjectGrid.module.css";
+import common from "./common.module.css";
 
 export function ProjectGrid() {
   const [active, setActive] = useState<string>("all");
@@ -17,7 +19,7 @@ export function ProjectGrid() {
 
   return (
     <div>
-      <div className="mb-6 flex flex-wrap gap-2 font-sans">
+      <div className={styles.filters}>
         {filters.map((f) => (
           <button
             key={f.key}
@@ -25,23 +27,15 @@ export function ProjectGrid() {
             onClick={() => setActive(f.key)}
             className={
               active === f.key
-                ? "rounded-full px-3.5 py-1 text-[13px] text-bg"
-                : "rounded-full border border-border px-3.5 py-1 text-[13px] text-text hover:border-accent-strong hover:text-heading"
-            }
-            style={
-              active === f.key
-                ? {
-                    backgroundImage:
-                      "linear-gradient(135deg, var(--accent-strong), var(--accent-warm))",
-                  }
-                : undefined
+                ? `${styles.filter} ${styles.active}`
+                : styles.filter
             }
           >
             {locale === "en" ? f.label.en : f.label.es}
           </button>
         ))}
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className={common.projectGrid}>
         <AnimatePresence mode="popLayout">
           {visible.map((project, i) => (
             <motion.div
@@ -51,7 +45,7 @@ export function ProjectGrid() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.2 }}
-              className="h-full"
+              className={styles.cell}
             >
               <ProjectCard project={project} index={i} />
             </motion.div>

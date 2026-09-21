@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import styles from "./layout.module.css";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
@@ -27,10 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={spaceGrotesk.variable} suppressHydrationWarning>
-      <body className="min-h-screen font-serif text-[16px] leading-[1.7]">
+      <body>
         <Providers>
           <Nav />
-          <main className="mx-auto max-w-3xl px-6">{children}</main>
+          <main className={styles.main}>{children}</main>
           <Footer />
         </Providers>
       </body>

@@ -1,0 +1,23 @@
+.intro {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 1.5rem;
+}
+.flow > * + * {
+  margin-top: 0.75rem;
+}
+.list > * + * {
+  margin-top: 0.5rem;
+}
+.entryTitle {
+  font-family: var(--font-sans);
+  color: var(--heading);
+}
+
+@media (min-width: 40rem) {
+  .intro {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}

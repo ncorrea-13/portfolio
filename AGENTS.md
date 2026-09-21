@@ -4,7 +4,7 @@
 
 Repo con dos superficies públicas independientes, deploy distinto cada una.
 
-- **Portfolio** (raíz) - Next.js 16 (App Router) + TypeScript + Tailwind 4, `output: "export"` (estático puro, sin SSR/API routes). Deploy en **Vercel**. Rutas: `/`, `/sobre-mi`, `/proyectos`.
+- **Portfolio** (raíz) - Next.js 16 (App Router) + TypeScript, `output: "export"` (estático puro, sin SSR/API routes). Deploy en **Vercel**. Rutas: `/`, `/sobre-mi`, `/proyectos`.
 - **`servidor/`** - HTML/CSS/JS plano, sin build. Deploy vía Cloudflare Tunnel, corriendo 24/7 en el homeserver real. Prueba viva de que el self-hosting es real (estado de servicios vía fetch a una API FastAPI externa, ver "Status API").
 
 No es el homeserver real: Tailscale/Cloudflare Tunnel no están acá, ni los compose files de los demás servicios (viven en github.com/ncorrea-13/homeserver). Verificar exposición real (headers, doc root, estado del tunnel) se hace en el servidor, no en este repo.
@@ -16,7 +16,7 @@ Sitio 100% estático en ambas superficies: sin backend propio, sin formularios q
 | Capa            | Servicio/lib                    | Notas                                                    |
 | --------------- | ------------------------------- | -------------------------------------------------------- |
 | Frontend        | Next.js 16 (App Router)         | React 19 + TypeScript, `output: "export"` → `out/`       |
-| Estilos         | Tailwind CSS 4                  | vía `@tailwindcss/postcss`                               |
+| Estilos         | CSS puro                        | `app/globals.css`, clases semánticas, sin framework      |
 | Animación       | framer-motion                   | usado en `Reveal.tsx` y transiciones puntuales           |
 | Tema            | next-themes                     | toggle claro/oscuro (`ThemeToggle.tsx`)                  |
 | Idioma          | Context propio                  | ES/EN, sin librería de i18n - ver "Internacionalización" |
