@@ -1,7 +1,8 @@
 import { EMAIL, GITHUB_URL, LINKEDIN_URL, WHATSAPP_URL } from "@/content/site";
+import button from "./Button.module.css";
+import styles from "./ContactLinks.module.css";
 
-const btnClass =
-  "inline-flex items-center gap-2 rounded-lg border border-card-border px-3 py-1.5 font-sans text-sm text-heading hover:border-accent-strong hover:bg-card-bg";
+const btnClass = `${button.btn} ${button.icon}`;
 
 function MailIcon() {
   return (
@@ -50,9 +51,9 @@ function WhatsAppIcon() {
   );
 }
 
-export function ContactLinks({ className = "" }: { className?: string }) {
+export function ContactLinks() {
   return (
-    <div className={`flex flex-wrap justify-center gap-3 ${className}`}>
+    <div className={styles.list}>
       <a href={`mailto:${EMAIL}`} className={btnClass}>
         <MailIcon /> Mail
       </a>

@@ -4,24 +4,26 @@ import { ContactLinks } from "@/components/ContactLinks";
 import { Reveal } from "@/components/Reveal";
 import { T } from "@/components/T";
 import { experience, education } from "@/content/experience";
+import styles from "./page.module.css";
+import common from "@/components/common.module.css";
 
 export default function SobreMi() {
   return (
     <>
-      <h1 className="mt-4 mb-6 font-sans text-2xl font-semibold text-heading">
+      <h1 className={`${common.pageTitle} ${common.pageTitleLoose}`}>
         <T es="Sobre mí" en="About me" />
       </h1>
 
       <Reveal>
-        <div className="flex flex-col-reverse items-center gap-6 sm:flex-row sm:items-start">
-          <div>
+        <div className={styles.intro}>
+          <div className={styles.flow}>
             <p>
               <T
                 es="Soy un estudiante avanzado de Ingeniería en Sistemas de Información en la Universidad Tecnológica Nacional, Facultad Regional Mendoza con 37 de 42 materias aprobadas. Soy desarrollador full-stack en AYSAM. Vengo del desarrollo de software, pero trabajar en Linux me terminó llevando a infraestructura y ciberseguridad."
                 en="I am an advanced student of Systems Engineering at Universidad Tecnológica Nacional, Facultad Regional Mendoza. I have currently passed 37 of 42 subjects. I work as a full stack developer at AYSAM. I come from software development, but working in Linux ended up pulling me into infrastructure and cybersecurity."
               />
             </p>
-            <p className="mt-3">
+            <p>
               <T
                 es="Además, mantengo mi homeserver, donde administro infraestructura, servicios, contenedores, redes y privacidad aplicada a un uso diario real."
                 en="I also maintain my homeserver, where I manage infrastructure, services, containers, networking, and privacy applied to real daily use."
@@ -33,26 +35,26 @@ export default function SobreMi() {
             alt="Nicolás Correa"
             width={160}
             height={160}
-            className="shrink-0 rounded-full border border-card-border object-cover"
+            className={common.avatar}
           />
         </div>
       </Reveal>
 
       <Reveal>
-        <h2 className="mt-8 mb-3 font-sans text-lg text-accent">
+        <h2 className={common.sectionTitle}>
           <T es="Experiencia" en="Experience" />
         </h2>
-        <ul className="space-y-2">
+        <ul className={styles.list}>
           {experience.map((item) => (
             <li key={item.role.es + item.period.es}>
-              <strong className="font-sans text-heading">
+              <strong className={styles.entryTitle}>
                 <T es={item.role.es} en={item.role.en} />
               </strong>{" "}
               ({item.org}), <T es={item.period.es} en={item.period.en} />
             </li>
           ))}
         </ul>
-        <p className="mt-3 text-sm text-muted">
+        <p className={common.note}>
           <T
             es="El detalle de cada rol está en el CV que se puede descargar más abajo."
             en="See the details of each role in the resume you can download below."
@@ -61,13 +63,13 @@ export default function SobreMi() {
       </Reveal>
 
       <Reveal>
-        <h2 className="mt-8 mb-3 font-sans text-lg text-accent">
+        <h2 className={common.sectionTitle}>
           <T es="Educación" en="Education" />
         </h2>
-        <ul className="space-y-2">
+        <ul className={styles.list}>
           {education.map((item) => (
             <li key={item.title.es + item.period.es}>
-              <strong className="font-sans text-heading">
+              <strong className={styles.entryTitle}>
                 <T es={item.title.es} en={item.title.en} />
               </strong>{" "}
               ({item.org}), <T es={item.period.es} en={item.period.en} />
@@ -77,7 +79,7 @@ export default function SobreMi() {
       </Reveal>
 
       <Reveal>
-        <h2 className="mt-8 mb-3 font-sans text-lg text-accent">
+        <h2 className={common.sectionTitle}>
           <T es="Habilidades blandas" en="Soft skills" />
         </h2>
         <p>
@@ -89,7 +91,7 @@ export default function SobreMi() {
       </Reveal>
 
       <Reveal>
-        <h2 className="mt-8 mb-3 font-sans text-lg text-accent">
+        <h2 className={common.sectionTitle}>
           <T es="Cómo encaro el software" en="How I approach software" />
         </h2>
         <p>
@@ -101,7 +103,7 @@ export default function SobreMi() {
       </Reveal>
 
       <Reveal>
-        <h2 className="mt-8 mb-3 font-sans text-lg text-accent">
+        <h2 className={common.sectionTitle}>
           <T es="Stack y entorno" en="Stack and environment" />
         </h2>
         <p>
@@ -113,8 +115,7 @@ export default function SobreMi() {
       </Reveal>
 
       <Reveal>
-        <h2 className="mt-8 mb-3"></h2>
-        <div className="flex justify-center">
+        <div className={common.ctaRow}>
           <CvLink>
             <T
               es="Descargar CV completo (PDF)"
@@ -125,7 +126,7 @@ export default function SobreMi() {
       </Reveal>
 
       <Reveal>
-        <h2 className="mt-8 mb-3 font-sans text-lg text-accent">
+        <h2 className={common.sectionTitle}>
           <T es="Contacto" en="Contact" />
         </h2>
         <ContactLinks />

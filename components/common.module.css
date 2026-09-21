@@ -1,0 +1,63 @@
+.pageTitle {
+  margin: 1rem 0 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 24px;
+  line-height: 2rem;
+  font-weight: 600;
+  color: var(--heading);
+}
+.pageTitleLoose {
+  margin-bottom: 1.5rem;
+}
+.sectionTitle {
+  margin: 2rem 0 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.75rem;
+  color: var(--accent);
+}
+.note {
+  margin-top: 0.75rem;
+  font-size: 14px;
+  line-height: 1.25rem;
+  color: var(--muted);
+}
+.noteLg {
+  margin-top: 1rem;
+}
+.link {
+  color: var(--accent-strong);
+}
+.seeAll {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 14px;
+  line-height: 1.25rem;
+}
+.ctaRow {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+.avatar {
+  flex-shrink: 0;
+  border: 1px solid var(--card-border);
+  border-radius: 9999px;
+  object-fit: cover;
+}
+.projectGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (hover: hover) {
+  .link:hover {
+    text-decoration: underline;
+  }
+}
+
+@media (min-width: 40rem) {
+  .projectGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

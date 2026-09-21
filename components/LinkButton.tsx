@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import styles from "./Button.module.css";
 
 export function LinkButton({
   href,
@@ -10,8 +11,7 @@ export function LinkButton({
   external?: boolean;
   children: ReactNode;
 }) {
-  const className =
-    "inline-block  rounded-lg border border-card-border px-4 py-1.5 font-sans text-sm text-heading hover:border-accent-strong hover:bg-card-bg";
+  const className = styles.btn;
 
   if (external) {
     return (

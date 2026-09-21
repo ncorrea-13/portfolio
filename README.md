@@ -7,7 +7,6 @@
 [![CI](https://github.com/ncorrea-13/homeserver-landing/actions/workflows/ci.yml/badge.svg)](https://github.com/ncorrea-13/homeserver-landing/actions/workflows/ci.yml)
 [![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=next.js&logoColor=white)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 **[Español](README.md)** | [English](README.en.md)
@@ -18,7 +17,7 @@
 
 Dos superficies públicas independientes, con deploy distinto cada una:
 
-- **Portfolio** (raíz del repo): Next.js 16 (App Router) + TypeScript + Tailwind 4. Deploy en **Vercel**. Rutas: `/`, `/sobre-mi`, `/proyectos`.
+- **Portfolio** (raíz del repo): Next.js 16 (App Router) + TypeScript. Deploy en **Vercel**. Rutas: `/`, `/sobre-mi`, `/proyectos`.
 - **[`servidor/`](servidor/)**: HTML/CSS/JS plano. Deploy en homelab vía Cloudflare Tunnel. CD por polling. Muestra la información del Homelab la api de estado de servicios (`https://status.ncorrea.com.ar/api/status`) que vive en otro repo.
 
 Sin backend propio, sin input de formularios persistido, nada suministrado por el usuario se refleja de vuelta. Sin superficie de inyección.
@@ -28,7 +27,7 @@ Sin backend propio, sin input de formularios persistido, nada suministrado por e
 | Capa                 | Tecnología                                                         |
 | -------------------- | ------------------------------------------------------------------ |
 | Frontend             | Next.js 16 (App Router), React 19, TypeScript                      |
-| Estilos              | Tailwind CSS 4 (`@tailwindcss/postcss`)                            |
+| Estilos              | CSS puro (`app/globals.css`)|
 | Package manager      | pnpm (pineado en `mise.toml`)                                      |
 | Deploy (portfolio)   | Vercel, export estático                                            |
 | Deploy (`servidor/`) | Cloudflare Tunnel + CD por polling (timer systemd, repo `homelab`) |

@@ -4,6 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Homelab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap"
+    />
     <link rel="stylesheet" href="style.css" />
     <link
       rel="icon"
@@ -32,7 +38,12 @@
   </head>
   <body>
     <nav class="site-nav">
-      <a href="https://www.ncorrea.com.ar" data-i18n="navBack"></a>
+      <div class="nav-links">
+        <a href="https://www.ncorrea.com.ar/" data-i18n="navHome"></a>
+        <a href="https://www.ncorrea.com.ar/sobre-mi" data-i18n="navAbout"></a>
+        <a href="https://www.ncorrea.com.ar/proyectos" data-i18n="navProjects"></a>
+        <a href="/" class="active" aria-current="page">Homelab</a>
+      </div>
       <div class="nav-toggles">
         <button
           class="lang-toggle"
@@ -53,6 +64,7 @@
       </div>
     </nav>
 
+    <main>
     <h1 data-i18n="h1"></h1>
 
     <h2 data-i18n="statusH2"></h2>
@@ -207,6 +219,7 @@
         ></small
       >
     </p>
+    </main>
 
     <script>
       function updateDiagrams(themeName) {
@@ -227,7 +240,9 @@
     <script>
       var translations = {
         es: {
-          navBack: "← Volver",
+          navHome: "Inicio",
+          navAbout: "Sobre mí",
+          navProjects: "Proyectos",
           h1: "Homelab",
           philosophyH2: "Filosofía",
           philosophyP1:
@@ -351,7 +366,9 @@
           footer: "Última actualización: Agosto 2026",
         },
         en: {
-          navBack: "← Back",
+          navHome: "Home",
+          navAbout: "About",
+          navProjects: "Projects",
           h1: "Homelab",
           philosophyH2: "Philosophy",
           philosophyP1:

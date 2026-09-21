@@ -1,9 +1,11 @@
 import { T } from "./T";
+import styles from "./Footer.module.css";
+import common from "./common.module.css";
 
 export function Footer() {
   return (
-    <footer className="mx-auto max-w-3xl px-6 py-10 font-sans text-xs text-muted">
-      <hr className="mb-6 border-border" />
+    <footer className={styles.footer}>
+      <hr />
       <T
         es="Última actualización: Agosto 2026"
         en="Last updated: August 2026"
@@ -11,7 +13,7 @@ export function Footer() {
       ·{" "}
       <a
         href="https://github.com/ncorrea-13/portfolio/blob/main/LICENSE"
-        className="text-accent-strong hover:underline"
+        className={common.link}
       >
         MIT License
       </a>

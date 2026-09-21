@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Project } from "@/content/projects";
 import { useLocale } from "./LocaleProvider";
+import styles from "./ProjectCard.module.css";
 
 const gradients = [
   "linear-gradient(135deg, var(--accent-strong), var(--accent-warm))",
@@ -35,46 +36,39 @@ export function ProjectCard({
       rel="noopener noreferrer"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
-      className="group flex h-full flex-col overflow-hidden rounded-lg border border-card-border bg-card-bg"
+      className={styles.card}
     >
-      <div className="aspect-video w-full shrink-0 overflow-hidden">
+      <div className={styles.media}>
         {project.image ? (
           <Image
             src={project.image}
             alt={name}
             width={480}
             height={270}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            className={styles.img}
           />
         ) : (
           <div
-            className="flex h-full w-full items-center justify-center font-sans text-2xl font-semibold text-bg/80"
+            className={styles.fallback}
             style={{ backgroundImage: gradients[index % gradients.length] }}
           >
             {initials(name)}
           </div>
         )}
       </div>
-      <div className="flex flex-1 flex-col p-4">
-        <div className="flex items-center justify-between gap-2">
-          <span className="font-sans font-semibold text-heading group-hover:text-accent-strong">
-            {name}
-          </span>
+      <div className={styles.body}>
+        <div className={styles.head}>
+          <span className={styles.name}>{name}</span>
           {project.license && (
-            <span className="font-mono text-xs text-muted">
-              {project.license}
-            </span>
+            <span className={styles.license}>{project.license}</span>
           )}
         </div>
-        <p className="mt-1.5 text-[15px]">
+        <p className={styles.desc}>
           {locale === "en" ? project.desc.en : project.desc.es}
         </p>
-        <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-3">
+        <div className={styles.stack}>
           {project.stack.map((tech) => (
-            <span
-              key={tech}
-              className="rounded-full border border-border bg-code-bg px-2 py-0.5 font-mono text-[11px] text-code-text"
-            >
+            <span key={tech} className={styles.chip}>
               {tech}
             </span>
           ))}

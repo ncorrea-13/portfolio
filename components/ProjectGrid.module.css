@@ -1,0 +1,33 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-sans);
+}
+.filter {
+  padding: 0.25rem 0.875rem;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  font-size: 13px;
+  color: var(--text);
+}
+.active {
+  border-width: 0;
+  background-image: linear-gradient(
+    135deg,
+    var(--accent-strong),
+    var(--accent-warm)
+  );
+  color: var(--bg);
+}
+.cell {
+  height: 100%;
+}
+
+@media (hover: hover) {
+  .filter:not(.active):hover {
+    border-color: var(--accent-strong);
+    color: var(--heading);
+  }
+}

@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import { useLocale } from "./LocaleProvider";
+import styles from "./Toggle.module.css";
 
 function subscribe() {
   return () => {};
@@ -20,7 +21,7 @@ export function LocaleToggle() {
       type="button"
       aria-label={locale === "en" ? "Switch language" : "Cambiar idioma"}
       onClick={() => setLocale(locale === "en" ? "es" : "en")}
-      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-card-border bg-card-bg font-sans text-[11px] font-semibold text-heading hover:border-accent-strong"
+      className={`${styles.btn} ${styles.lang}`}
     >
       {mounted ? (locale === "en" ? "ES" : "EN") : ""}
     </button>
