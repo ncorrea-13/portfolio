@@ -35,11 +35,9 @@ export function Nav() {
         ))}
         <a
           href={SERVIDOR_URL}
-          target="_blank"
-          rel="noopener noreferrer"
           className="text-muted hover:text-accent-strong"
         >
-          {locale === "en" ? "Homelab" : "Homelab"} ↗
+          Homelab
         </a>
       </div>
       <div className="flex shrink-0 items-center gap-2">
