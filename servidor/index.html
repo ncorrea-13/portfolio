@@ -604,12 +604,14 @@
       function toggleLocale() {
         var current = document.documentElement.lang === "en" ? "en" : "es";
         var next = current === "en" ? "es" : "en";
-        localStorage.setItem("lang", next);
+        document.cookie =
+          "locale=" + next + "; Domain=.ncorrea.com.ar; Path=/; Max-Age=31536000; SameSite=Lax";
         applyLocale(next);
       }
 
       document.addEventListener("DOMContentLoaded", function () {
-        applyLocale(localStorage.getItem("lang") === "en" ? "en" : "es");
+        var m = document.cookie.match(/(?:^|; )locale=(en|es)/);
+        applyLocale(m && m[1] === "en" ? "en" : "es");
         setInterval(loadStatus, 60000);
       });
     </script>
