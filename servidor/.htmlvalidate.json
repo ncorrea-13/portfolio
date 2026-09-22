@@ -1,0 +1,9 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "void-style": ["error", { "style": "selfclosing" }],
+    "doctype-style": "off",
+    "empty-heading": "off",
+    "wcag/h30": "off"
+  }
+}
