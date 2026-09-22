@@ -45,8 +45,8 @@ export function Hero() {
         <h1 className={styles.title}>Nicolás Correa</h1>
         <p className={styles.subtitle}>
           {locale === "en"
-            ? "Full Stack Software Developer · DevOps & Platform Engineering"
-            : "Desarrollador de Software Full-stack · DevOps & Platform Engineering"}
+            ? "DevOps & Platform Engineering · Full Stack Software Developer"
+            : "DevOps & Platform Engineering · Desarrollador de Software Full-stack"}
         </p>
       </motion.div>
     </motion.div>
