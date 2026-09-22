@@ -2,7 +2,7 @@
 
 # Portfolio
 
-**Personal portfolio + live homelab status page**
+**Personal portfolio + Homelab documentation**
 
 [![CI](https://github.com/ncorrea-13/homeserver-landing/actions/workflows/ci.yml/badge.svg)](https://github.com/ncorrea-13/homeserver-landing/actions/workflows/ci.yml)
 [![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=next.js&logoColor=white)](https://nextjs.org)
@@ -15,23 +15,24 @@
 
 ---
 
-Two independent public surfaces, each with its own deploy:
+This repo holds two complementary sites as a single repository:
 
-- **Portfolio** (repo root): Next.js 16 (App Router) + TypeScript. Deployed on **Vercel**. Routes: `/`, `/sobre-mi`, `/proyectos`.
-- **[`servidor/`](servidor/)**: plain HTML/CSS/JS. Deployed through the homelabe via Cloudflare Tunnel. CD by polling. It shows the Homelab information from the service status API (`https://status.ncorrea.com.ar/api/status`) which lives in another repo.
-
+- **Portfolio**: TypeScript + React + Next.js. Deployed on Vercel.
+- **Servidor**: plain HTML/CSS/JS. Deployed on the homelab via Cloudflare Tunnel. CD by polling.
   No backend of its own, no persisted form input, nothing user-supplied gets reflected back. No injection surface.
+
+Shows homelab info via the service status API (`https://status.ncorrea.com.ar/api/status`), which lives in another repo.
 
 ## Stack
 
-| Layer                | Tech                                                              |
-| -------------------- | ----------------------------------------------------------------- |
-| Frontend             | Next.js 16 (App Router), React 19, TypeScript                     |
-| Styles               | Plain CSS (`app/globals.css`)|
-| Package manager      | pnpm (pinned in `mise.toml`)                                      |
-| Deploy (portfolio)   | Vercel, static export                                             |
-| Deploy (`servidor/`) | Cloudflare Tunnel + CD by polling (systemd timer, `homelab` repo) |
-| CI                   | GitHub Actions, lint + build on push/PR to `main`/`dev`           |
+| Layer           | Tech                                                    |
+| --------------- | ------------------------------------------------------- |
+| Frontend        | Next.js 16, React 19, TypeScript                        |
+| Styles          | CSS                                                     |
+| Package manager | pnpm                                                    |
+| CI              | GitHub Actions, lint + build on push/PR to `main`/`dev` |
+| CD (portfolio)  | Vercel                                                  |
+| CD (servidor)   | Cloudflare Tunnel, deploy by pull                       |
 
 ## Quick Start
 
@@ -52,48 +53,42 @@ pnpm dev
 
 ```bash
 pnpm build   # next build → static export in out/
-pnpm start   # serve out/ locally to sanity-check the export
+pnpm start   # serve out/ locally to check the export
 ```
-
-`servidor/` needs no build; edit `servidor/index.html` / `servidor/style.css` directly and it's served as-is.
-
-## Environment variables
-
-None. The site calls no external API of its own; `content/site.ts` holds public constants committed to the repo (contact links). `servidor/index.html` hardcodes `STATUS_API_URL` inline; not an env var, since the export is fully static.
 
 ## Status API
 
-`servidor/index.html` renders service status (up/down, last check) by fetching `STATUS_API_URL` (`https://status.ncorrea.com.ar/api/status`). That FastAPI lives in a separate repo ([`homelab-status`](https://github.com/ncorrea-13/homelab-status)): it receives Uptime Kuma heartbeats via webhook, stores them in SQLite, and exposes `/api/status`. This repo only consumes it; no API code or secrets here.
+The documentation renders service status (up/down, last check) by fetching `STATUS_API_URL` (`https://status.ncorrea.com.ar/api/status`). That API lives in ([`homelab-status`](https://github.com/ncorrea-13/homelab-status)): it receives Uptime Kuma heartbeats via webhook, stores them in SQLite, and exposes `/api/status`.
 
 ## Project Structure
 
 ```
 app/
-├── layout.tsx        # Root layout: Providers (theme+locale), Nav, Footer
-├── page.tsx           # Home: hero, stack, contact
-├── sobre-mi/page.tsx  # Experience, education, CV
-├── proyectos/page.tsx # Project grid with tag filter
+├── layout.tsx
+├── page.tsx
+├── sobre-mi/page.tsx
+├── proyectos/page.tsx
 └── globals.css
 components/
-├── Providers.tsx       # ThemeProvider (next-themes) + LocaleProvider
-├── LocaleProvider.tsx  # ES/EN Context, persisted in localStorage
-├── T.tsx                # <T es="…" en="…" /> inline translation helper
+├── Providers.tsx
+├── LocaleProvider.tsx
+├── T.tsx
 ├── LocaleToggle.tsx, ThemeToggle.tsx
 ├── Nav.tsx, Footer.tsx, Hero.tsx, ContactLinks.tsx
 ├── ProjectCard.tsx, ProjectGrid.tsx, TagGroup.tsx
-├── LinkButton.tsx, Reveal.tsx  # Reveal = scroll-in animation (framer-motion)
+├── LinkButton.tsx, Reveal.tsx
 content/
-├── site.ts        # constants: contact URLs, SERVIDOR_URL
-├── projects.ts     # Project[] - name, url, desc {es,en}, tags, stack, image
-├── experience.ts   # work experience, {es,en} fields
-└── skills.ts        # tech stack shown on the home page
-public/             # portfolio assets (cv.pdf and foto.jpg gitignored)
+├── site.ts
+├── projects.ts
+├── experience.ts
+└── skills.ts
+public/
 servidor/
-├── index.html, style.css   # architecture page, no build step
+├── index.html, style.css
 └── diagrama-arquitectura.svg
 .github/workflows/ci.yml
-mise.toml            # pinned pnpm version
-next.config.ts        # output: "export", images.unoptimized
+mise.toml
+next.config.ts
 ```
 
 ## Related repo
@@ -103,3 +98,5 @@ Tailscale/Cloudflare Tunnel config and the rest of the homelab compose files liv
 ---
 
 _Mendoza, Argentina · Nicolás Correa ([ncorrea-13](https://github.com/ncorrea-13))_
+</content>
+</invoke>

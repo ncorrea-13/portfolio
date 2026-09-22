@@ -2,7 +2,7 @@
 
 # Portfolio
 
-**Portfolio personal + página de estado del homelab en vivo**
+**Portfolio personal + Documentación del homelab**
 
 [![CI](https://github.com/ncorrea-13/homeserver-landing/actions/workflows/ci.yml/badge.svg)](https://github.com/ncorrea-13/homeserver-landing/actions/workflows/ci.yml)
 [![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=next.js&logoColor=white)](https://nextjs.org)
@@ -15,23 +15,24 @@
 
 ---
 
-Dos superficies públicas independientes, con deploy distinto cada una:
+Este repositorio cuenta como un unico repositorio de dos webs las cuales se complementan:
 
-- **Portfolio** (raíz del repo): Next.js 16 (App Router) + TypeScript. Deploy en **Vercel**. Rutas: `/`, `/sobre-mi`, `/proyectos`.
-- **[`servidor/`](servidor/)**: HTML/CSS/JS plano. Deploy en homelab vía Cloudflare Tunnel. CD por polling. Muestra la información del Homelab la api de estado de servicios (`https://status.ncorrea.com.ar/api/status`) que vive en otro repo.
+- **Portfolio**: TypeScript + React + Next.js. Deploy en Vercel.
+- **Servidor**: HTML/CSS/JS plano. Deploy en homelab vía Cloudflare Tunnel. CD por polling.
+  Sin backend propio, sin input de formularios persistido, nada suministrado por el usuario se refleja de vuelta. Sin superficie de inyección.
 
-Sin backend propio, sin input de formularios persistido, nada suministrado por el usuario se refleja de vuelta. Sin superficie de inyección.
+Muestra la información del Homelab la api de estado de servicios (`https://status.ncorrea.com.ar/api/status`) que vive en otro repo.
 
 ## Stack
 
-| Capa                 | Tecnología                                                         |
-| -------------------- | ------------------------------------------------------------------ |
-| Frontend             | Next.js 16 (App Router), React 19, TypeScript                      |
-| Estilos              | CSS puro (`app/globals.css`)|
-| Package manager      | pnpm (pineado en `mise.toml`)                                      |
-| Deploy (portfolio)   | Vercel, export estático                                            |
-| Deploy (`servidor/`) | Cloudflare Tunnel + CD por polling (timer systemd, repo `homelab`) |
-| CI                   | GitHub Actions, lint + build en push/PR a `main`/`dev`             |
+| Capa            | Tecnología                                             |
+| --------------- | ------------------------------------------------------ |
+| Frontend        | Next.js 16, React 19, TypeScript                       |
+| Estilos         | CSS                                                    |
+| Package manager | pnpm                                                   |
+| CI              | GitHub Actions, lint + build en push/PR a `main`/`dev` |
+| CD (portfolio)  | Vercel                                                 |
+| CD (servidor)   | Cloudflare Tunnel, Deploy por pull                     |
 
 ## Quick Start
 
@@ -55,15 +56,9 @@ pnpm build   # next build → export estático en out/
 pnpm start   # sirve out/ local para verificar el export
 ```
 
-`servidor/` no necesita build, se edita `servidor/index.html` / `servidor/style.css` directo y se sirve tal cual.
-
-## Variables de entorno
-
-Ninguna. El sitio no llama a ninguna API propia; `content/site.ts` tiene constantes públicas commiteadas (links de contacto). `servidor/index.html` hardcodea `STATUS_API_URL` inline; no es una env var, ya que el export es 100% estático.
-
 ## Status API
 
-`servidor/index.html` renderiza el estado de servicios (up/down, último check) haciendo fetch a `STATUS_API_URL` (`https://status.ncorrea.com.ar/api/status`). Esa API FastAPI vive en un repo aparte ([`homelab-status`](https://github.com/ncorrea-13/homelab-status)): recibe heartbeats de Uptime Kuma vía webhook, los guarda en SQLite y expone `/api/status`. Este repo solo la consume; sin código de API ni secrets acá.
+La documentación renderiza el estado de servicios (up/down, último check) haciendo fetch a `STATUS_API_URL` (`https://status.ncorrea.com.ar/api/status`). Esa API vive en ([`homelab-status`](https://github.com/ncorrea-13/homelab-status)): recibe heartbeats de Uptime Kuma vía webhook, los guarda en SQLite y expone `/api/status`.
 
 ## Estructura del repo
 
