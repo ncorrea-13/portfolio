@@ -14,7 +14,6 @@
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%231e1e1e%22/><text x=%2250%22 y=%2268%22 font-size=%2250%22 font-family=%22monospace%22 fill=%22%23c9b8ff%22 text-anchor=%22middle%22>&gt;_</text></svg>"
-      ,
     />
     <script>
       (function () {
@@ -41,11 +40,15 @@
       <div class="nav-links">
         <a href="https://www.ncorrea.com.ar/" data-i18n="navHome"></a>
         <a href="https://www.ncorrea.com.ar/sobre-mi" data-i18n="navAbout"></a>
-        <a href="https://www.ncorrea.com.ar/proyectos" data-i18n="navProjects"></a>
+        <a
+          href="https://www.ncorrea.com.ar/proyectos"
+          data-i18n="navProjects"
+        ></a>
         <a href="/" class="active" aria-current="page">Homelab</a>
       </div>
       <div class="nav-toggles">
         <button
+          type="button"
           class="lang-toggle"
           id="lang-toggle"
           aria-label="Cambiar idioma"
@@ -54,6 +57,7 @@
           EN
         </button>
         <button
+          type="button"
           class="theme-toggle"
           id="theme-toggle"
           aria-label="Cambiar tema"
@@ -65,160 +69,160 @@
     </nav>
 
     <main>
-    <h1 data-i18n="h1"></h1>
+      <h1 data-i18n="h1"></h1>
 
-    <h2 data-i18n="statusH2"></h2>
-    <div class="status-box" id="status-box">
-      <p class="status-summary" id="status-summary"></p>
-      <p class="status-headline" id="status-headline">
-        <span class="status-loading" data-i18n="statusLoading"></span>
+      <h2 data-i18n="statusH2"></h2>
+      <div class="status-box" id="status-box">
+        <p class="status-summary" id="status-summary"></p>
+        <p class="status-headline" id="status-headline">
+          <span class="status-loading" data-i18n="statusLoading"></span>
+        </p>
+        <ul class="status-list" id="status-list"></ul>
+      </div>
+
+      <h2 data-i18n="philosophyH2"></h2>
+
+      <p data-i18n="philosophyP1"></p>
+
+      <p data-i18n="philosophyP2"></p>
+
+      <h2 data-i18n="archH2"></h2>
+
+      <br />
+
+      <img
+        id="archDiagramImg"
+        src="diagrama-arquitectura-oscuro.svg"
+        alt="Diagrama de arquitectura del ThinkCentre"
+        class="mermaid-container"
+      />
+
+      <div class="button-row">
+        <a
+          id="archOpenFull"
+          class="link-button"
+          href="diagrama-arquitectura-oscuro.svg"
+          target="_blank"
+          rel="noopener"
+          data-i18n="archOpenFull"
+        ></a>
+      </div>
+
+      <h2 data-i18n="servicesH2"></h2>
+
+      <p data-i18n="HwSv1"></p>
+      <ul>
+        <li data-i18n="serviceCockpit"></li>
+        <li data-i18n="serviceWebhook"></li>
+        <li>
+          <span data-i18n="podsLabel"></span>
+          <ul>
+            <li data-i18n="service1"></li>
+            <li data-i18n="service2"></li>
+            <li data-i18n="service3"></li>
+            <li data-i18n="service4"></li>
+            <li data-i18n="service5"></li>
+            <li data-i18n="service6"></li>
+          </ul>
+        </li>
+      </ul>
+      <p data-i18n="HwSv2"></p>
+      <ul>
+        <li data-i18n="serviceCockpitPi"></li>
+        <li data-i18n="serviceDocs"></li>
+        <li>
+          <span data-i18n="podsLabel"></span>
+          <ul>
+            <li data-i18n="service7"></li>
+            <li data-i18n="service8"></li>
+          </ul>
+        </li>
+      </ul>
+      <p data-i18n="HwSv3"></p>
+      <ul>
+        <li data-i18n="service9"></li>
+      </ul>
+      <p data-i18n="HwSv4"></p>
+      <ul>
+        <li data-i18n="service10"></li>
+        <li data-i18n="service11"></li>
+        <li data-i18n="service12"></li>
+      </ul>
+
+      <h2 data-i18n="gatewayH2"></h2>
+      <p data-i18n="gatewayP"></p>
+
+      <h2 data-i18n="hwH2"></h2>
+      <ul>
+        <li data-i18n="hw1"></li>
+        <li data-i18n="hw2"></li>
+        <li data-i18n="hw3"></li>
+        <li data-i18n="hw4"></li>
+      </ul>
+      <h2 data-i18n="backupsH2"></h2>
+      <ul>
+        <li data-i18n="backup1"></li>
+        <li data-i18n="backup2"></li>
+        <li data-i18n="backup3"></li>
+        <li data-i18n="backup4"></li>
+      </ul>
+
+      <h2 data-i18n="notesH2"></h2>
+
+      <ul>
+        <li data-i18n="note1"></li>
+        <li data-i18n="note2"></li>
+        <li data-i18n="note3"></li>
+        <li data-i18n="note4"></li>
+        <li data-i18n="note5"></li>
+        <li data-i18n="note6"></li>
+        <li data-i18n="note7"></li>
+        <li data-i18n="note8"></li>
+      </ul>
+
+      <h2 data-i18n="stackH2"></h2>
+
+      <ul>
+        <li data-i18n="stack1"></li>
+        <li data-i18n="stack2"></li>
+        <li data-i18n="stack3"></li>
+        <li data-i18n="stack4"></li>
+      </ul>
+
+      <h2 data-i18n="decisionsH2"></h2>
+
+      <ul>
+        <li data-i18n="decision1"></li>
+        <li data-i18n="decision2"></li>
+        <li data-i18n="decision3"></li>
+        <li data-i18n="decision4"></li>
+        <li data-i18n="decision5"></li>
+        <li data-i18n="decision6"></li>
+        <li data-i18n="decision7"></li>
+      </ul>
+
+      <h2 data-i18n="originsH2"></h2>
+      <p data-i18n="originsP"></p>
+
+      <h2 data-i18n="openSourceH2"></h2>
+
+      <p data-i18n="openSourceP1"></p>
+      <div class="button-row">
+        <a class="link-button" href="https://github.com/ncorrea-13/homeserver"
+          >github.com/ncorrea-13/homeserver</a
+        >
+      </div>
+
+      <hr />
+
+      <p>
+        <small
+          ><span data-i18n="footer"></span> ·
+          <a href="https://github.com/ncorrea-13/portfolio/blob/main/LICENSE"
+            >MIT License</a
+          ></small
+        >
       </p>
-      <ul class="status-list" id="status-list"></ul>
-    </div>
-
-    <h2 data-i18n="philosophyH2"></h2>
-
-    <p data-i18n="philosophyP1"></p>
-
-    <p data-i18n="philosophyP2"></p>
-
-    <h2 data-i18n="archH2"></h2>
-
-    <br />
-
-    <img
-      id="archDiagramImg"
-      src="diagrama-arquitectura-oscuro.svg"
-      alt="Diagrama de arquitectura del ThinkCentre"
-      class="mermaid-container"
-    />
-
-    <div class="button-row">
-      <a
-        id="archOpenFull"
-        class="link-button"
-        href="diagrama-arquitectura-oscuro.svg"
-        target="_blank"
-        rel="noopener"
-        data-i18n="archOpenFull"
-      ></a>
-    </div>
-
-    <h2 data-i18n="servicesH2"></h2>
-
-    <p data-i18n="HwSv1"></p>
-    <ul>
-      <li data-i18n="serviceCockpit"></li>
-      <li data-i18n="serviceWebhook"></li>
-      <li>
-        <span data-i18n="podsLabel"></span>
-        <ul>
-          <li data-i18n="service1"></li>
-          <li data-i18n="service2"></li>
-          <li data-i18n="service3"></li>
-          <li data-i18n="service4"></li>
-          <li data-i18n="service5"></li>
-          <li data-i18n="service6"></li>
-        </ul>
-      </li>
-    </ul>
-    <p data-i18n="HwSv2"></p>
-    <ul>
-      <li data-i18n="serviceCockpitPi"></li>
-      <li data-i18n="serviceDocs"></li>
-      <li>
-        <span data-i18n="podsLabel"></span>
-        <ul>
-          <li data-i18n="service7"></li>
-          <li data-i18n="service8"></li>
-        </ul>
-      </li>
-    </ul>
-    <p data-i18n="HwSv3"></p>
-    <ul>
-      <li data-i18n="service9"></li>
-    </ul>
-    <p data-i18n="HwSv4"></p>
-    <ul>
-      <li data-i18n="service10"></li>
-      <li data-i18n="service11"></li>
-      <li data-i18n="service12"></li>
-    </ul>
-
-    <h2 data-i18n="gatewayH2"></h2>
-    <p data-i18n="gatewayP"></p>
-
-    <h2 data-i18n="hwH2"></h2>
-    <ul>
-      <li data-i18n="hw1"></li>
-      <li data-i18n="hw2"></li>
-      <li data-i18n="hw3"></li>
-      <li data-i18n="hw4"></li>
-    </ul>
-    <h2 data-i18n="backupsH2"></h2>
-    <ul>
-      <li data-i18n="backup1"></li>
-      <li data-i18n="backup2"></li>
-      <li data-i18n="backup3"></li>
-      <li data-i18n="backup4"></li>
-    </ul>
-
-    <h2 data-i18n="notesH2"></h2>
-
-    <ul>
-      <li data-i18n="note1"></li>
-      <li data-i18n="note2"></li>
-      <li data-i18n="note3"></li>
-      <li data-i18n="note4"></li>
-      <li data-i18n="note5"></li>
-      <li data-i18n="note6"></li>
-      <li data-i18n="note7"></li>
-      <li data-i18n="note8"></li>
-    </ul>
-
-    <h2 data-i18n="stackH2"></h2>
-
-    <ul>
-      <li data-i18n="stack1"></li>
-      <li data-i18n="stack2"></li>
-      <li data-i18n="stack3"></li>
-      <li data-i18n="stack4"></li>
-    </ul>
-
-    <h2 data-i18n="decisionsH2"></h2>
-
-    <ul>
-      <li data-i18n="decision1"></li>
-      <li data-i18n="decision2"></li>
-      <li data-i18n="decision3"></li>
-      <li data-i18n="decision4"></li>
-      <li data-i18n="decision5"></li>
-      <li data-i18n="decision6"></li>
-      <li data-i18n="decision7"></li>
-    </ul>
-
-    <h2 data-i18n="originsH2"></h2>
-    <p data-i18n="originsP"></p>
-
-    <h2 data-i18n="openSourceH2"></h2>
-
-    <p data-i18n="openSourceP1"></p>
-    <div class="button-row">
-      <a class="link-button" href="https://github.com/ncorrea-13/homeserver"
-        >github.com/ncorrea-13/homeserver</a
-      >
-    </div>
-
-    <hr />
-
-    <p>
-      <small
-        ><span data-i18n="footer"></span> ·
-        <a href="https://github.com/ncorrea-13/portfolio/blob/main/LICENSE"
-          >MIT License</a
-        ></small
-      >
-    </p>
     </main>
 
     <script>
@@ -605,7 +609,9 @@
         var current = document.documentElement.lang === "en" ? "en" : "es";
         var next = current === "en" ? "es" : "en";
         document.cookie =
-          "locale=" + next + "; Domain=.ncorrea.com.ar; Path=/; Max-Age=31536000; SameSite=Lax";
+          "locale=" +
+          next +
+          "; Domain=.ncorrea.com.ar; Path=/; Max-Age=31536000; SameSite=Lax";
         applyLocale(next);
       }
 
