@@ -22,5 +22,4 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Validate HTML
-        run: |
-          npx html-validate servidor/index.html || true
+        run: npx --yes html-validate@11 servidor/index.html
