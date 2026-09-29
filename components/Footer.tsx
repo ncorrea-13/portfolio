@@ -7,8 +7,8 @@ export function Footer() {
     <footer className={styles.footer}>
       <hr />
       <T
-        es="Última actualización: Agosto 2026"
-        en="Last updated: August 2026"
+        es="Última actualización: Septiembre 2026"
+        en="Last updated: September 2026"
       />{" "}
       ·{" "}
       <a
