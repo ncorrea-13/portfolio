@@ -128,6 +128,7 @@
       <ul>
         <li data-i18n="serviceCockpit"></li>
         <li data-i18n="serviceWebhook"></li>
+        <li data-i18n="serviceHeimdall"></li>
         <li>
           <span data-i18n="podsLabel"></span>
           <ul>
@@ -144,6 +145,8 @@
       <ul>
         <li data-i18n="serviceCockpitPi"></li>
         <li data-i18n="serviceDocs"></li>
+        <li data-i18n="serviceTunnel"></li>
+        <li data-i18n="serviceHeimdallHub"></li>
         <li>
           <span data-i18n="podsLabel"></span>
           <ul>
@@ -155,9 +158,11 @@
       <p data-i18n="HwSv3"></p>
       <ul>
         <li data-i18n="service9"></li>
+        <li data-i18n="serviceHeimdallTermux"></li>
       </ul>
       <p data-i18n="HwSv4"></p>
       <ul>
+        <li data-i18n="serviceHeimdall"></li>
         <li data-i18n="service10"></li>
         <li data-i18n="service11"></li>
         <li data-i18n="service12"></li>
@@ -346,6 +351,8 @@
             "<strong>Cockpit</strong>: panel de administración web, corre directamente en el host",
           serviceWebhook:
             "<strong>Webhook</strong>: API en el host que dispara scripts bash desde Homepage para habilitar servicios por Tailscale Funnel",
+          serviceHeimdall:
+            "<strong>Heimdall</strong>: daemon de métricas (CPU, RAM, disco, temperatura), corre como servicio de systemd",
           serviceCockpitPi:
             "<strong>Cockpit</strong>: panel de administración web, corre directamente en el host",
           podsLabel: "<strong>Pods de Podman</strong> (rootless)",
@@ -359,15 +366,21 @@
           service5:
             "<strong>Storage</strong>: Syncthing (sincronización), SftpGo (gestión de archivos)",
           service6:
-            "<strong>Rolboard </strong>: Servidor + Cliente (gestión de campañas de rol) - proyecto propio",
+            "<strong>Rolboard </strong>: Servidor + Cliente (gestión de campañas de rol) proyecto propio",
           service7:
             "<strong>Gateway</strong>: Pi-hole (bloqueo de publicidad), Unbound (DNS recursivo con DoT), Caddy (Proxy inverso)",
           service8:
-            "<strong>Utils</strong>: Uptime Kuma (monitoreo), Homelab-status-api (publicación) - proyecto propio",
+            "<strong>Utils</strong>: Uptime Kuma (monitoreo), Homelab-status-api (publicación) proyecto propio,  turmo-screen (dashboard en pantalla USB) proyecto propio",
           serviceDocs:
             "<strong>Docs</strong>: esta página, servida desde un Tunnel independiente y actualizada por polling desde el repo",
+          serviceTunnel:
+            "<strong>Cloudflare Tunnel</strong>: cloudflared como servicio, expone sin abrir puertos",
+          serviceHeimdallHub:
+            "<strong>Heimdall Hub</strong>: recibe las métricas de todos los daemons, corre como servicio de systemd",
           service9:
             "<strong>Proot-distro</strong>: Instancia de Debian dentro de Temux. Dentro corre Ntfy y el checkeo de la Pi",
+          serviceHeimdallTermux:
+            "<strong>Heimdall</strong>: daemon de métricas (CPU, RAM, disco, temperatura) con build propia para aarch64, arranca con Termux:Boot",
           service10:
             "<strong>VM-DevOps</strong>: Máquina Virtual con Docker que corre Floci para aprender deploys simulando entornos de Cloud",
           service11:
@@ -475,6 +488,8 @@
             "<strong>Cockpit</strong>: web admin panel, runs directly on the host",
           serviceWebhook:
             "<strong>Webhook</strong>: API on the host that triggers bash scripts from Homepage to enable services through Tailscale Funnel",
+          serviceHeimdall:
+            "<strong>Heimdall</strong>: metrics daemon (CPU, RAM, disk, temperature), runs as a systemd service on the host",
           serviceCockpitPi:
             "<strong>Cockpit</strong>: web admin panel, runs directly on the host",
           podsLabel: "<strong>Podman pods</strong> (rootless)",
@@ -492,11 +507,17 @@
           service7:
             "<strong>Gateway</strong>: Pi-hole (ad blocking), Unbound (recursive DNS with DoT), Caddy (reverse proxy)",
           service8:
-            "<strong>Utils</strong>: Uptime Kuma (monitoring), Homelab-status-api (publishing) - own project",
+            "<strong>Utils</strong>: Uptime Kuma (monitoring), Homelab-status-api (publishing), turmo-screen (USB screen dashboard) - own projects",
           serviceDocs:
             "<strong>Docs</strong>: this page, served through an independent Tunnel and updated by polling the repo",
+          serviceTunnel:
+            "<strong>Cloudflare Tunnel</strong>: cloudflared as a service, exposes services without opening ports",
+          serviceHeimdallHub:
+            "<strong>Heimdall Hub</strong>: receives metrics from every daemon over Tailscale, runs as a systemd service on the host",
           service9:
             "<strong>Proot-distro</strong>: a Debian instance inside Termux. Ntfy and the Pi health check run inside it",
+          serviceHeimdallTermux:
+            "<strong>Heimdall</strong>: metrics daemon, own build for Termux and aarch64, started by Termux:Boot",
           service10:
             "<strong>VM-DevOps</strong>: a virtual machine with Docker running Floci, used to learn deployments by simulating cloud environments",
           service11:
