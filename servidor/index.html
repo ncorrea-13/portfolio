@@ -674,6 +674,26 @@
         var m = document.cookie.match(/(?:^|; )locale=(en|es)/);
         applyLocale(m && m[1] === "en" ? "en" : "es");
         setInterval(loadStatus, 60000);
+
+        if (
+          "IntersectionObserver" in window &&
+          !matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (e) {
+                if (!e.isIntersecting) return;
+                e.target.classList.add("in");
+                io.unobserve(e.target);
+              });
+            },
+            { rootMargin: "0px 0px -60px 0px" },
+          );
+          document.querySelectorAll("main > *").forEach(function (el) {
+            el.classList.add("reveal");
+            io.observe(el);
+          });
+        }
       });
     </script>
   </body>
