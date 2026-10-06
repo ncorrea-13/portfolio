@@ -15,7 +15,7 @@ const featuredProjects = [
   "https://github.com/ncorrea-13/bw-tui",
   "https://github.com/Pethood-project",
   "https://homelab.ncorrea.com.ar/",
-  "https://github.com/ncorrea-13/rolboard",
+  "https://rolboard.ncorrea.com.ar/",
 ];
 
 export default function Home() {
