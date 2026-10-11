@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "@/components/Providers";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -47,6 +48,7 @@ export default function RootLayout({
           <main className={styles.main}>{children}</main>
           <Footer />
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   );
