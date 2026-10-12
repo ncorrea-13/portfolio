@@ -47,13 +47,13 @@ export const projects: Project[] = [
     name: { es: "Rolboard", en: "Rolboard" },
     url: "https://rolboard.ncorrea.com.ar/",
     desc: {
-      es: "Dashboard personal para gestión de campañas de rol de mesa. Indexa el frontmatter YAML de un vault de Obsidian como metadata para consulta rápida durante la sesión en vivo.",
-      en: "Personal dashboard for tabletop RPG campaign management. It indexes an Obsidian vault's YAML frontmatter as metadata for fast lookup during a live session.",
+      es: "Dashboard para gestión de campañas de rol de mesa. Indexa el frontmatter YAML de un vault de Obsidian como metadata para consulta rápida durante la sesión en vivo.",
+      en: "Dashboard for tabletop RPG campaign management. It indexes an Obsidian vault's YAML frontmatter as metadata for fast lookup during a live session.",
     },
     license: "MIT",
     tags: ["backend", "frontend"],
     stack: ["Go", "SQLite", "React", "TypeScript", "Vite"],
-    image: "/projects/rolboard.png",
+    image: "/projects/rolboard.jpg",
   },
   {
     name: { es: "Accesoriosstina", en: "Accesoriosstina" },
