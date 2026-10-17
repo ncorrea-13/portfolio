@@ -1,21 +1,14 @@
 import Link from "next/link";
 import { ContactLinks } from "@/components/ContactLinks";
 import { TagGroup } from "@/components/TagGroup";
-import { ProjectCard } from "@/components/ProjectCard";
+import { OwnProjects } from "@/components/OwnProjects";
 import { Hero } from "@/components/Hero";
 import { Now } from "@/components/Now";
 import { Reveal } from "@/components/Reveal";
 import { T } from "@/components/T";
 import { skillGroups } from "@/content/skills";
-import { projects } from "@/content/projects";
+import { ownProjects } from "@/content/projects";
 import common from "@/components/common.module.css";
-
-const featuredProjects = [
-  "https://github.com/ncorrea-13/bw-tui",
-  "https://github.com/Pethood-project",
-  "https://homelab.ncorrea.com.ar/",
-  "https://rolboard.ncorrea.com.ar/",
-];
 
 export default function Home() {
   return (
@@ -44,13 +37,7 @@ export default function Home() {
         <h2 className={common.sectionTitle}>
           <T es="Proyectos destacados" en="Featured projects" />
         </h2>
-        <div className={common.projectGrid}>
-          {projects
-            .filter((p) => featuredProjects.includes(p.url))
-            .map((project, i) => (
-              <ProjectCard key={project.url} project={project} index={i} />
-            ))}
-        </div>
+        <OwnProjects projects={ownProjects} />
         <Link href="/proyectos" className={`${common.link} ${common.seeAll}`}>
           <T es="Ver todos →" en="See all →" />
         </Link>
