@@ -4,6 +4,7 @@ export const skillGroups = [
     color: "var(--accent)",
     tags: [
       "Go",
+      "Rust",
       "Node.js",
       "Express.js",
       "NestJS",
@@ -16,6 +17,7 @@ export const skillGroups = [
       "PL/SQL",
       "OracleDB",
       "PostgreSQL",
+      "SQLite",
       "GraphQL",
       "RabbitMQ",
     ],
@@ -32,6 +34,7 @@ export const skillGroups = [
       "Wireguard",
       "Proxmox",
       "Tailscale",
+      "Caddy",
       "QEMU",
       "Cloudflare Tunnel",
     ],
