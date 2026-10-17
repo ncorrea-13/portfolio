@@ -3,6 +3,9 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useLocale } from "./LocaleProvider";
+import { CvLink } from "./CvLink";
+import { LinkButton } from "./LinkButton";
+import { T } from "./T";
 import styles from "./Hero.module.css";
 import common from "./common.module.css";
 
@@ -35,23 +38,38 @@ export function Hero() {
       animate="show"
       className={styles.hero}
     >
-      <motion.div variants={item(reduce)}>
-        <Image
-          src="/foto.jpg"
-          alt="Nicolás Correa"
-          width={96}
-          height={96}
-          priority
-          className={common.avatar}
-        />
-      </motion.div>
-      <motion.div variants={item(reduce)}>
+      <motion.div variants={item(reduce)} className={styles.copy}>
+        <p className={styles.kicker}>Mendoza, Argentina</p>
         <h1 className={styles.title}>Nicolás Correa</h1>
         <p className={styles.subtitle}>
           {locale === "en"
             ? "DevOps & Platform Engineering · Full Stack Software Developer"
             : "DevOps & Platform Engineering · Desarrollador de Software Full-stack"}
         </p>
+        <p className={styles.intro}>
+          <T
+            es="Estudiante de último año de Ingeniería en Sistemas de Información. Disfruto administrar la infraestructura donde corren los sistemas que creo, intentando exprimir y aprovechar los recursos que dispongo para su mejor eficiencia."
+            en="Final-year Systems Engineering student. I enjoy managing the infrastructure my systems run on, trying to squeeze the most out of the resources I have for better efficiency."
+          />
+        </p>
+        <div className={styles.actions}>
+          <LinkButton href="/proyectos" primary>
+            <T es="Ver proyectos" en="See projects" />
+          </LinkButton>
+          <CvLink>
+            <T es="Descargar CV" en="Download resume" />
+          </CvLink>
+        </div>
+      </motion.div>
+      <motion.div variants={item(reduce)} className={styles.photo}>
+        <Image
+          src="/foto.jpg"
+          alt="Nicolás Correa"
+          width={160}
+          height={160}
+          priority
+          className={common.avatar}
+        />
       </motion.div>
     </motion.div>
   );
