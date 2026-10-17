@@ -19,29 +19,38 @@ export function Nav() {
   const { locale } = useLocale();
 
   return (
-    <nav className={styles.nav}>
-      <div className={styles.links}>
-        {links.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={
-              pathname === link.href
-                ? `${styles.link} ${styles.active}`
-                : styles.link
-            }
-          >
-            {locale === "en" ? link.label.en : link.label.es}
-          </Link>
-        ))}
-        <a href={SERVIDOR_URL} className={styles.link}>
-          Homelab
-        </a>
-      </div>
-      <div className={styles.toggles}>
-        <LocaleToggle />
-        <ThemeToggle />
-      </div>
-    </nav>
+    <header className={styles.bar}>
+      <nav className={styles.nav}>
+        <Link href="/" className={styles.brand}>
+          <span className={styles.prompt} aria-hidden="true">
+            &gt;_
+          </span>
+          ncorrea
+        </Link>
+        <div className={styles.links}>
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              aria-current={pathname === link.href ? "page" : undefined}
+              className={
+                pathname === link.href
+                  ? `${styles.link} ${styles.active}`
+                  : styles.link
+              }
+            >
+              {locale === "en" ? link.label.en : link.label.es}
+            </Link>
+          ))}
+          <a href={SERVIDOR_URL} className={styles.link}>
+            Homelab
+          </a>
+        </div>
+        <div className={styles.toggles}>
+          <LocaleToggle />
+          <ThemeToggle />
+        </div>
+      </nav>
+    </header>
   );
 }

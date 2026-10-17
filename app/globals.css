@@ -57,7 +57,9 @@ hr {
 
 :root {
   --font-body: Georgia, "Times New Roman", serif;
-  --page-width: 48rem;
+  --page-width: 60rem;
+  --measure: 38rem;
+  --text-display: clamp(2.75rem, 9vw, 5rem);
   --font-sans: var(--font-display), system-ui, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, "Fira Code", monospace;
   --bg: #1e1e1e;
@@ -77,6 +79,7 @@ hr {
   --tag-frontend: #ef9fdc;
   --tag-prompt: #dcef9f;
   --tag-devops: #efc39f;
+  --live: #7ee2a8;
   color-scheme: dark;
 }
 
@@ -99,6 +102,7 @@ hr {
     --tag-frontend: #d039ad;
     --tag-prompt: #add039;
     --tag-devops: #d0793a;
+  --live: #0e7a4b;
     color-scheme: light;
   }
 }
@@ -121,6 +125,7 @@ html[data-theme="dark"] {
   --tag-frontend: #ef9fdc;
   --tag-prompt: #dcef9f;
   --tag-devops: #efc39f;
+  --live: #7ee2a8;
   color-scheme: dark;
 }
 
@@ -142,6 +147,7 @@ html[data-theme="light"] {
   --tag-frontend: #d039ad;
   --tag-prompt: #add039;
   --tag-devops: #d0793a;
+  --live: #0e7a4b;
   color-scheme: light;
 }
 
@@ -159,8 +165,7 @@ body {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.7;
-  opacity: 0;
-  animation: fadeIn 0.5s ease forwards;
+  animation: fadeIn 0.5s ease;
 }
 
 @keyframes fadeIn {
@@ -177,7 +182,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
   body {
     animation: none;
-    opacity: 1;
   }
   * {
     transition: none !important;
