@@ -1,124 +1,131 @@
 # AGENTS.md - homeserver-landing (portfolio + servidor)
 
-## Visión general
+## Overview
 
-Repo con dos superficies públicas independientes, deploy distinto cada una.
+The repo holds two independent public surfaces, each with its own deploy.
 
-- **Portfolio** (raíz) - Next.js 16 (App Router) + TypeScript, `output: "export"` (estático puro, sin SSR/API routes). Deploy en **Vercel**. Rutas: `/`, `/sobre-mi`, `/proyectos`.
-- **`servidor/`** - HTML/CSS/JS plano, sin build. Deploy vía Cloudflare Tunnel, corriendo 24/7 en el homeserver real. Prueba viva de que el self-hosting es real (estado de servicios vía fetch a una API Go externa, ver "Status API").
+- **Portfolio** (root) - Next.js 16 (App Router) + TypeScript, `output: "export"` (pure static, no SSR/API routes). Deployed on **Vercel**. Routes: `/`, `/sobre-mi`, `/proyectos`.
+- **`servidor/`** - plain HTML/CSS/JS, no build. Deployed through a Cloudflare Tunnel, running 24/7 on the real homeserver. Live proof that the self-hosting is real (service status comes from a `fetch` to an external Go API, see "Status API").
 
-No es el homeserver real: Tailscale/Cloudflare Tunnel no están acá, ni los compose files de los demás servicios (viven en github.com/ncorrea-13/homeserver). Verificar exposición real (headers, doc root, estado del tunnel) se hace en el servidor, no en este repo.
+This is not the real homeserver: Tailscale/Cloudflare Tunnel are not here, nor are the compose files of the other services (they live in github.com/ncorrea-13/homeserver). Verifying the real exposure (headers, doc root, tunnel state) happens on the server, not in this repo.
 
-Sitio 100% estático en ambas superficies: sin backend propio, sin formularios que persistan datos, sin input de usuario reflejado. No hay superficie de inyección (XSS/SQLi/RCE) porque no hay lógica de servidor en el portfolio.
+Both surfaces are 100% static: no backend of their own, no forms that persist data, no reflected user input. There is no injection surface (XSS/SQLi/RCE) because the portfolio has no server logic.
 
 ## Stack
 
-| Capa            | Servicio/lib                    | Notas                                                    |
-| --------------- | ------------------------------- | -------------------------------------------------------- |
-| Frontend        | Next.js 16 (App Router)         | React 19 + TypeScript, `output: "export"` → `out/`       |
-| Estilos         | CSS puro                        | `app/globals.css`, clases semánticas, sin framework      |
-| Animación       | framer-motion                   | usado en `Reveal.tsx` y transiciones puntuales           |
-| Tema            | next-themes                     | toggle claro/oscuro (`ThemeToggle.tsx`)                  |
-| Idioma          | Context propio                  | ES/EN, sin librería de i18n - ver "Internacionalización" |
-| Deploy          | Vercel (portfolio)              | build estático, sin runtime de servidor                  |
-| Deploy          | Cloudflare Tunnel (`servidor/`) | archivos servidos tal cual en el homeserver real         |
-| Package manager | pnpm (pineado en `mise.toml`)   | -                                                        |
-| CI              | GitHub Actions                  | lint + build en cada push/PR a `main`/`dev`              |
+| Layer           | Service/lib                     | Notes                                                  |
+| --------------- | ------------------------------- | ------------------------------------------------------ |
+| Frontend        | Next.js 16 (App Router)         | React 19 + TypeScript, `output: "export"` → `out/`     |
+| Styles          | Plain CSS                       | `app/globals.css` + CSS modules, no framework          |
+| Animation       | framer-motion                   | used in `Reveal.tsx`, `Hero.tsx` and a few transitions |
+| Theme           | next-themes                     | light/dark toggle (`ThemeToggle.tsx`)                  |
+| Language        | Own Context                     | ES/EN, no i18n library - see "Internationalization"    |
+| Deploy          | Vercel (portfolio)              | static build, no server runtime                        |
+| Deploy          | Cloudflare Tunnel (`servidor/`) | files served as-is on the real homeserver              |
+| Package manager | pnpm (pinned in `mise.toml`)    | -                                                      |
+| CI              | GitHub Actions                  | lint + build on every push/PR to `main`/`dev`          |
 
-No hay test runner configurado (no hay lógica de negocio que testear - es contenido + presentación). No agregar Vitest/Jest sin que aparezca lógica real que lo justifique.
+There is no test runner (there is no business logic to test - it is content + presentation). Do not add Vitest/Jest until real logic shows up that justifies it.
 
-## Estructura del repo
+## Repo structure
 
 ```
 /
 ├── app/
-│   ├── layout.tsx        # Root layout: Providers (theme+locale), Nav, Footer
-│   ├── page.tsx           # Home: Hero, stack, contacto
-│   ├── sobre-mi/page.tsx  # Experiencia, educación, CV
-│   ├── proyectos/page.tsx # Grid de proyectos con filtro por tag
-│   └── globals.css
+│   ├── layout.tsx             # Root layout: Providers (theme+locale), Nav, Footer
+│   ├── page.tsx               # Home: Hero, Now strip, stack, own projects, contact
+│   ├── sobre-mi/page.tsx      # Experience and education timelines, text rows, CV
+│   ├── proyectos/page.tsx     # Public work showcase, own projects, learning gallery
+│   └── globals.css            # Design tokens (see "Code conventions")
 ├── components/
-│   ├── Providers.tsx       # Envuelve ThemeProvider (next-themes) + LocaleProvider
-│   ├── LocaleProvider.tsx  # Context ES/EN propio, persiste en localStorage
-│   ├── T.tsx                # <T es="…" en="…" /> - helper de traducción inline
+│   ├── Providers.tsx          # Wraps ThemeProvider (next-themes) + LocaleProvider
+│   ├── LocaleProvider.tsx     # Own ES/EN Context, persisted in localStorage
+│   ├── T.tsx                  # <T es="…" en="…" /> - inline translation helper
 │   ├── LocaleToggle.tsx, ThemeToggle.tsx
-│   ├── Nav.tsx, Footer.tsx, Hero.tsx, ContactLinks.tsx
-│   ├── ProjectCard.tsx, ProjectGrid.tsx, TagGroup.tsx
-│   ├── LinkButton.tsx, Reveal.tsx  # Reveal = scroll-in animado (framer-motion)
+│   ├── Nav.tsx, Footer.tsx, Hero.tsx, Now.tsx, ContactLinks.tsx
+│   ├── Timeline.tsx           # Experience/education rows
+│   ├── ClientShowcase.tsx     # Tabbed browser-window showcase for public client work
+│   ├── OwnProjects.tsx        # Featured posters + hardware card for own projects
+│   ├── ProjectGrid.tsx        # Filterable scroll-snap gallery for learning work
+│   ├── TagGroup.tsx, LinkButton.tsx, CvLink.tsx
+│   ├── Reveal.tsx             # Animated scroll-in (framer-motion)
+│   └── *.module.css           # One CSS module per component
 ├── content/
-│   ├── site.ts        # constantes: URLs de contacto, SERVIDOR_URL
-│   ├── projects.ts    # Project[] - name, url, desc {es,en}, tags, stack, image
-│   ├── experience.ts  # experiencia laboral, campos {es,en} por texto
-│   └── skills.ts       # stack técnico mostrado en el home
-├── public/             # assets del portfolio (cv.pdf y foto.jpg gitignored)
+│   ├── site.ts                # Constants: contact URLs, SERVIDOR_URL
+│   ├── projects.ts            # Project[] (own, client, learning), filters, tag tones
+│   ├── experience.ts          # Work experience and education, {es,en} per text
+│   ├── now.ts                 # The Work / Studying / Homelab strip on the home
+│   └── skills.ts              # Technical stack shown on the home
+├── public/                    # Portfolio assets (cv.pdf and foto.jpg are gitignored)
 ├── servidor/
-│   ├── index.html, style.css   # página de arquitectura, sin build
-│   └── diagrama-arquitectura.svg
+│   ├── index.html, style.css  # Technical documentation page, no build
+│   └── diagrama-arquitectura-claro.svg, diagrama-arquitectura-oscuro.svg
 ├── .github/workflows/ci.yml
-├── mise.toml            # versión de pnpm pineada
-├── next.config.ts        # output: "export", images.unoptimized
+├── mise.toml                  # Pinned pnpm version
+├── next.config.ts             # output: "export", images.unoptimized
 ├── CLAUDE.md
 └── README.md
 ```
 
-## Internacionalización (ES/EN)
+## Internationalization (ES/EN)
 
-Ya implementado, no es una idea a futuro:
+Already implemented, not a future idea:
 
-- `LocaleProvider` (`components/LocaleProvider.tsx`): Context con `locale: "es" | "en"`, persiste en `localStorage` bajo la key `"locale"`, sincroniza entre pestañas vía evento `storage` + evento custom `locale-change`. `getServerSnapshot()` devuelve siempre `"es"` (el SSR/export estático no puede leer `localStorage`), así que el primer render en el cliente puede "flashear" ES antes de hidratar con la preferencia real - comportamiento esperado, no un bug.
-- `<T es="…" en="…" />` (`components/T.tsx`): forma preferida de texto bilingüe embebido en JSX. Contenido más largo o estructurado (arrays en `content/*.ts`) usa el shape `{ es: string; en: string }` in-line en vez de `T`.
-- `LocaleToggle.tsx`: botón EN/ES en el header. Usa `useSyncExternalStore` con un snapshot server/cliente distinto (`mounted`) para evitar mismatch de hidratación - no simplificar quitando ese guard.
-- Contenido tipado en `content/*.ts` sigue el mismo patrón `LocalizedText = { es: string; en: string }` que `T` - mantenerlo consistente si se agrega contenido nuevo, no mezclar con una lib de i18n externa (next-intl, etc.) para esto: el alcance (3 rutas, texto fijo) no lo justifica.
+- `LocaleProvider` (`components/LocaleProvider.tsx`): Context with `locale: "es" | "en"`, persisted in `localStorage` under the key `"locale"`, synced across tabs through the `storage` event plus a custom `locale-change` event. `getServerSnapshot()` always returns `"es"` (SSR/static export cannot read `localStorage`), so the first client render may "flash" ES before hydrating with the real preference - expected behavior, not a bug.
+- `<T es="…" en="…" />` (`components/T.tsx`): preferred way to embed bilingual text in JSX. Longer or structured content (arrays in `content/*.ts`) uses the inline `{ es: string; en: string }` shape instead of `T`.
+- `LocaleToggle.tsx`: EN/ES button in the header. It uses `useSyncExternalStore` with different server/client snapshots (`mounted`) to avoid a hydration mismatch - do not simplify it by removing that guard.
+- Typed content in `content/*.ts` follows the same `LocalizedText = { es: string; en: string }` pattern as `T` - keep it consistent when adding content, and do not mix in an external i18n library (next-intl, etc.): the scope (3 routes, fixed text) does not justify it.
 
 ## Status API (Go)
 
-`servidor/index.html` renderiza el estado de los servicios (up/down, desde cuándo cambió el estado) haciendo `fetch` a `STATUS_API_URL` (`https://status.ncorrea.com.ar/api/status`, hardcodeado en el `<script>` inline). La API en Go vive en un **repo aparte** (`homelab-status`, fuera de este repo), no acá:
+`servidor/index.html` renders the service status (up/down, since when the status changed) by calling `fetch` on `STATUS_API_URL` (`https://status.ncorrea.com.ar/api/status`, hardcoded in the inline `<script>`). The Go API lives in a **separate repo** (`homelab-status`, outside this repo), not here:
 
-- Recibe heartbeats de Uptime Kuma vía webhook (`/webhook/kuma`), los guarda en SQLite (`services` + `events`) y expone `/api/status` con el último estado por servicio.
-- Reemplaza al viejo `boot.json` + unit de systemd (`service/`, ya removido de este repo): ya no hay un contador de uptime local, sino estado real de los servicios monitoreados por Kuma.
-- CORS restringido a `https://homelab.ncorrea.com.ar` en la API - si `servidor/` se sirve desde otro origen, hay que ajustarlo ahí, no acá.
-- Este repo solo consume esa API por `fetch`; no tiene ni necesita el código de la API ni el secret de admin.
+- It receives Uptime Kuma heartbeats through a webhook (`/webhook/kuma`), stores them in SQLite (`services` + `events`) and exposes `/api/status` with the latest state per service.
+- It replaces the old `boot.json` + systemd unit (`service/`, already removed from this repo): there is no local uptime counter anymore, only the real state of the services monitored by Kuma.
+- CORS is restricted to `https://homelab.ncorrea.com.ar` in the API - if `servidor/` is ever served from another origin, adjust it there, not here. The same restriction means the portfolio origin cannot read this API from the browser.
+- This repo only consumes that API through `fetch`; it neither has nor needs the API code or the admin secret.
 
-## Convenciones de código
+## Code conventions
 
-- TypeScript estricto (`strict: true` en `tsconfig.json`).
-- Server Components por defecto; `"use client"` solo donde hace falta interactividad real (tema, idioma, animaciones con framer-motion, filtro de proyectos).
-- `output: "export"` es una restricción dura: nada de Server Actions, API routes, ni nada que dependa de un runtime de servidor en producción - el build tiene que poder servirse como archivos estáticos puros en Vercel.
-- Contenido (textos, links, proyectos, experiencia) vive en `content/*.ts`, tipado - no hardcodear strings de contenido dentro de componentes de `app/`/`components/` salvo texto puramente estructural (labels de UI que no son "contenido del portfolio").
-- Todo texto visible al usuario final va bilingüe (`T` o `LocalizedText`) - no agregar texto solo en español o solo en inglés.
-- Tokens de diseño en `app/globals.css` (incluido `--live`, el único acento complementario: solo para "en vivo/operativo"). `servidor/style.css` los duplica a mano porque se sirve como archivos sueltos: si cambia uno, cambiar el otro.
-- Commits en español, formato convencional: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`.
-- `servidor/`: se edita `index.html`/`style.css` directo, sin pipeline de build - lo que está en el archivo es lo que se sirve. No portarlo a React/Next: página única, estado mínimo (tema + fetch a la Status API), ya resuelto en vanilla JS - un build no se justifica.
+- Strict TypeScript (`strict: true` in `tsconfig.json`).
+- Server Components by default; `"use client"` only where real interactivity is needed (theme, language, framer-motion animations, tabs, project filter).
+- `output: "export"` is a hard constraint: no Server Actions, no API routes, nothing that depends on a server runtime in production - the build has to be servable as pure static files on Vercel.
+- Content (texts, links, projects, experience) lives in typed `content/*.ts` files - do not hardcode content strings inside `app/`/`components/` unless it is purely structural text (UI labels that are not "portfolio content").
+- All text visible to the end user is bilingual (`T` or `LocalizedText`) - never add text in only Spanish or only English.
+- Design tokens live in `app/globals.css`, including `--live`, the only complementary accent: use it only for "live/operational/ongoing". `servidor/style.css` duplicates the tokens by hand because it is served as loose files: if one changes, change the other.
+- Commits are written in English, conventional format, `type: short description in infinitive form` (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `style:`). One logical change per commit.
+- `servidor/`: edit `index.html`/`style.css` directly, with no build pipeline - what is in the file is what gets served. Do not port it to React/Next: it is a single page with minimal state (theme + fetch to the Status API), already solved in vanilla JS - a build is not justified.
 
-## Variables de entorno
+## Environment variables
 
-No hay `.env` - el sitio no llama APIs externas ni tiene secrets; `content/site.ts` son constantes públicas commiteadas (URLs de contacto).
+There is no `.env` - the site calls no external APIs and has no secrets; `content/site.ts` holds public, committed constants (contact URLs).
 
-## Comandos
+## Commands
 
 ```bash
 pnpm install
 pnpm dev            # next dev
-pnpm build          # next build → genera out/ (export estático)
-pnpm start          # next start (solo para probar out/ local; prod es estático en Vercel)
+pnpm build          # next build → generates out/ (static export)
+pnpm start          # next start (only to test out/ locally; prod is static on Vercel)
 pnpm lint           # eslint
 pnpm exec tsc --noEmit
 ```
 
 ## CI (`.github/workflows/ci.yml`)
 
-En cada push a `main`/`dev` y en cada PR: `pnpm install --frozen-lockfile` → `pnpm run lint` → `pnpm run build`. No corre `tsc --noEmit` como paso separado (el build de Next ya tipa-chequea) ni tests (no hay ninguno configurado). Si se agrega lógica no trivial (parseo, cálculo), sumar Vitest y un paso de test acá, no antes.
+On every push to `main`/`dev` and on every PR: `pnpm install --frozen-lockfile` → `pnpm run lint` → `pnpm run build`. It does not run `tsc --noEmit` as a separate step (the Next build already type-checks) nor tests (none are configured). If non-trivial logic is added (parsing, calculations), add Vitest and a test step here, not before.
 
 ## Deploy
 
-- **Portfolio**: push a `main` → deploy automático en Vercel (preview en PRs). Build genera `out/` estático.
-- **`servidor/`**: CD por polling, no push-based - un timer systemd (`deploy-check.timer`, repo aparte `homeserver`, corre en el Raspberry Pi) chequea cada 5 min el último commit de `main` en este repo vía GitHub API. Si cambió respecto al SHA guardado en `.deployed-sha`, el script (`deploy-check-docs.sh`) baja por `curl` los archivos de `servidor/` (`index.html`, `style.css`, `diagrama-arquitectura-claro.svg`, `diagrama-arquitectura-oscuro.svg`) directo desde GitHub raw al doc root real. No hay sync manual ni webhook - la definición del timer/service/env vive en `homeserver/raspberry/deploy-check/`, fuera de este repo. El estado de servicios se sigue consumiendo de la Status API (Go, repo aparte) en vez del viejo `boot.json`/unit de systemd.
+- **Portfolio**: push to `main` → automatic deploy on Vercel (preview on PRs). The build generates a static `out/`.
+- **`servidor/`**: CD by polling, not push-based - a systemd timer (`deploy-check.timer`, in the separate `homeserver` repo, running on the Raspberry Pi) checks every 5 minutes the latest commit of `main` in this repo through the GitHub API. If it differs from the SHA saved in `.deployed-sha`, the script (`deploy-check-docs.sh`) downloads with `curl` the files of `servidor/` (`index.html`, `style.css`, `diagrama-arquitectura-claro.svg`, `diagrama-arquitectura-oscuro.svg`) straight from GitHub raw into the real doc root. There is no manual sync or webhook - the timer/service/env definition lives in `homeserver/raspberry/deploy-check/`, outside this repo. If a new file is added to `servidor/`, it must be added to that script too. Service state is consumed from the Status API (Go, separate repo) instead of the old `boot.json`/systemd unit.
 
-## Cosas a evitar
+## Things to avoid
 
-- No convertir `servidor/` en Next.js/React ni sumarle build - es una sola página con estado mínimo (tema + fetch a la Status API), ya resuelto en vanilla JS.
-- No usar Server Actions/API routes en el portfolio - rompe `output: "export"`.
-- No commitear `public/cv.pdf` ni `public/foto.jpg` (gitignored a propósito, son archivos personales).
-- No traer el código de la API `homelab-status` a este repo - vive aparte, este repo solo lo consume por `fetch` a `/api/status`.
-- No agregar una librería de i18n externa para el toggle ES/EN - el Context propio (`LocaleProvider` + `T`) ya cubre el alcance de 3 rutas con texto fijo.
-- No asumir que este repo tiene acceso a la config real del homeserver (Tailscale/Funnel/Cloudflare Tunnel, compose files) - vive en github.com/ncorrea-13/homeserver.
+- Do not turn `servidor/` into Next.js/React or add a build to it - it is a single page with minimal state (theme + fetch to the Status API), already solved in vanilla JS.
+- Do not use Server Actions/API routes in the portfolio - it breaks `output: "export"`.
+- Do not commit `public/cv.pdf` or `public/foto.jpg` (gitignored on purpose, they are personal files).
+- Do not bring the `homelab-status` API code into this repo - it lives separately, and this repo only consumes it through `fetch` to `/api/status`.
+- Do not add an external i18n library for the ES/EN toggle - the own Context (`LocaleProvider` + `T`) already covers the scope of 3 routes with fixed text.
+- Do not assume this repo has access to the real homeserver config (Tailscale/Funnel/Cloudflare Tunnel, compose files) - it lives in github.com/ncorrea-13/homeserver.
+- Do not publish internal or confidential work from employers in `/proyectos`: that page lists public work only; role details belong in the CV.
