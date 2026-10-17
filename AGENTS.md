@@ -86,6 +86,7 @@ Ya implementado, no es una idea a futuro:
 - `output: "export"` es una restricción dura: nada de Server Actions, API routes, ni nada que dependa de un runtime de servidor en producción - el build tiene que poder servirse como archivos estáticos puros en Vercel.
 - Contenido (textos, links, proyectos, experiencia) vive en `content/*.ts`, tipado - no hardcodear strings de contenido dentro de componentes de `app/`/`components/` salvo texto puramente estructural (labels de UI que no son "contenido del portfolio").
 - Todo texto visible al usuario final va bilingüe (`T` o `LocalizedText`) - no agregar texto solo en español o solo en inglés.
+- Tokens de diseño en `app/globals.css` (incluido `--live`, el único acento complementario: solo para "en vivo/operativo"). `servidor/style.css` los duplica a mano porque se sirve como archivos sueltos: si cambia uno, cambiar el otro.
 - Commits en español, formato convencional: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`.
 - `servidor/`: se edita `index.html`/`style.css` directo, sin pipeline de build - lo que está en el archivo es lo que se sirve. No portarlo a React/Next: página única, estado mínimo (tema + fetch a la Status API), ya resuelto en vanilla JS - un build no se justifica.
 
