@@ -23,15 +23,12 @@ export default function Home() {
         <h2 className={common.sectionTitle}>
           <T es="Stack" en="Stack" />
         </h2>
-        {skillGroups.map((group) => (
-          <TagGroup
-            key={group.label.es}
-            label={group.label}
-            tags={group.tags}
-            color={group.color}
-          />
-        ))}
       </Reveal>
+      {skillGroups.map((group, i) => (
+        <Reveal key={group.label.es} delay={i * 0.06}>
+          <TagGroup label={group.label} tags={group.tags} color={group.color} />
+        </Reveal>
+      ))}
 
       <Reveal>
         <h2 className={common.sectionTitle}>
