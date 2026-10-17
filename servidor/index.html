@@ -51,7 +51,7 @@
   </head>
   <body>
     <header class="bar">
-      <nav class="site-nav">
+      <nav class="site-nav" id="site-nav" aria-label="Principal">
         <a class="brand" href="https://www.ncorrea.com.ar/"
           ><span class="prompt" aria-hidden="true"
             >&gt;<span class="cursor">_</span></span
@@ -96,7 +96,9 @@
     <div class="doc">
       <aside class="toc">
         <nav aria-labelledby="toc-title">
-          <p class="toc-title" id="toc-title" data-i18n="tocTitle"></p>
+          <p class="toc-title" id="toc-title" data-i18n="tocTitle">
+            En esta página
+          </p>
           <ol id="toc-list"></ol>
         </nav>
       </aside>
@@ -672,6 +674,9 @@
             "aria-label",
             lang === "en" ? "Switch language" : "Cambiar idioma",
           );
+        document
+          .getElementById("site-nav")
+          .setAttribute("aria-label", lang === "en" ? "Main" : "Principal");
         document.getElementById("lang-toggle").textContent =
           lang === "en" ? "ES" : "EN";
         buildToc();
