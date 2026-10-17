@@ -1,6 +1,8 @@
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { Reveal } from "@/components/Reveal";
 import { T } from "@/components/T";
+import { ProjectCard } from "@/components/ProjectCard";
+import { clientWork, ownProjects } from "@/content/projects";
 import { GITHUB_URL } from "@/content/site";
 import styles from "./page.module.css";
 import common from "@/components/common.module.css";
@@ -10,21 +12,51 @@ export default function Proyectos() {
     <>
       <Reveal>
         <h1 className={common.pageTitle}>
-          <T es="Proyectos" en="Projects" />
+          <T es="Trabajo y proyectos" en="Work and projects" />
         </h1>
         <p className={styles.lead}>
           <T
-            es="Proyectos en los que he participado. Aquellos open source incluye la referencia de su licencia. Código y detalles en cada repositorio."
-            en="Projects I have worked on. The open source ones include a license reference. Code and details are in each repository."
+            es="Sitios que desarrollé para clientes, proyectos propios y trabajos de aprendizaje y académicos. En los open source se indica la licencia; el código está en cada repositorio."
+            en="Websites I built for clients, my own projects, and learning and academic work. Open source ones list their license; the code is in each repository."
           />
         </p>
       </Reveal>
 
+      <Reveal>
+        <h2 className={common.sectionTitle}>
+          <T es="Trabajo profesional" en="Professional work" />
+        </h2>
+        <div className={styles.client}>
+          {clientWork.map((project, i) => (
+            <ProjectCard key={project.url} project={project} index={i} row />
+          ))}
+        </div>
+      </Reveal>
+
+      <Reveal>
+        <h2 className={common.sectionTitle}>
+          <T es="Proyectos propios" en="Own projects" />
+        </h2>
+        <div className={common.projectGrid}>
+          {ownProjects.map((project, i) => (
+            <ProjectCard key={project.url} project={project} index={i} />
+          ))}
+        </div>
+      </Reveal>
+
+      <Reveal>
+        <h2 className={common.sectionTitle}>
+          <T
+            es="Aprendizaje y trabajos académicos"
+            en="Learning and academic work"
+          />
+        </h2>
+      </Reveal>
       <ProjectGrid />
 
       <Reveal>
         <h2 className={common.sectionTitle}>
-          <T es="Ver todo" en="See everything" />
+          <T es="Más en GitHub" en="More on GitHub" />
         </h2>
         <p>
           <T

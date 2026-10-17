@@ -22,9 +22,11 @@ function initials(name: string) {
 export function ProjectCard({
   project,
   index = 0,
+  row = false,
 }: {
   project: Project;
   index?: number;
+  row?: boolean;
 }) {
   const { locale } = useLocale();
   const name = locale === "en" ? project.name.en : project.name.es;
@@ -36,7 +38,7 @@ export function ProjectCard({
       rel="noopener noreferrer"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
-      className={styles.card}
+      className={row ? `${styles.card} ${styles.row}` : styles.card}
     >
       <div className={styles.media}>
         {project.image ? (
@@ -63,6 +65,11 @@ export function ProjectCard({
             <span className={styles.license}>{project.license}</span>
           )}
         </div>
+        {project.role && (
+          <span className={styles.license}>
+            {locale === "en" ? project.role.en : project.role.es}
+          </span>
+        )}
         <p className={styles.desc}>
           {locale === "en" ? project.desc.en : project.desc.es}
         </p>

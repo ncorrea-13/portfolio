@@ -84,3 +84,20 @@
     transform: scale(1.05);
   }
 }
+
+@media (min-width: 40rem) {
+  .row {
+    flex-direction: row;
+  }
+  .row .media {
+    width: 40%;
+    min-height: 9rem;
+    aspect-ratio: auto;
+  }
+  .row .body {
+    justify-content: center;
+  }
+  .row .stack {
+    margin-top: 0;
+  }
+}
