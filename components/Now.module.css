@@ -1,0 +1,110 @@
+.list {
+  display: grid;
+  margin-top: 3rem;
+  border-block: 1px solid var(--border);
+}
+.item + .item {
+  border-top: 1px solid var(--border);
+}
+.cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  height: 100%;
+  padding: 1.25rem 2rem 1.25rem 0;
+}
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+.live {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--live);
+  animation: pulse 2.4s ease-out infinite;
+}
+.title {
+  margin-top: 0.25rem;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--heading);
+  transition: color 200ms ease;
+}
+.detail {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.arrow {
+  position: absolute;
+  top: 1.25rem;
+  right: 0.5rem;
+  font-family: var(--font-mono);
+  color: var(--muted);
+  transition:
+    transform 200ms ease,
+    color 200ms ease;
+}
+.link:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: -2px;
+}
+.link:active .title {
+  color: var(--accent-strong);
+}
+
+@media (min-width: 48rem) {
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .item + .item {
+    border-top: 0;
+    border-left: 1px solid var(--border);
+  }
+  .cell {
+    padding: 1.5rem 2rem 1.5rem 1.5rem;
+  }
+  .item:first-child .cell {
+    padding-left: 0;
+  }
+}
+
+@media (hover: hover) {
+  .link:hover .title {
+    color: var(--accent-strong);
+  }
+  .link:hover .arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live {
+    animation: none;
+  }
+  .arrow {
+    transition: none;
+  }
+  .link:hover .arrow {
+    transform: none;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--live) 45%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 7px color-mix(in oklab, var(--live) 0%, transparent);
+  }
+}

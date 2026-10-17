@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
 import { LocaleToggle } from "./LocaleToggle";
@@ -17,31 +18,52 @@ const links = [
 export function Nav() {
   const pathname = usePathname();
   const { locale } = useLocale();
+  const reduce = useReducedMotion();
 
   return (
-    <nav className={styles.nav}>
-      <div className={styles.links}>
-        {links.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={
-              pathname === link.href
-                ? `${styles.link} ${styles.active}`
-                : styles.link
-            }
-          >
-            {locale === "en" ? link.label.en : link.label.es}
-          </Link>
-        ))}
-        <a href={SERVIDOR_URL} className={styles.link}>
-          Homelab
-        </a>
-      </div>
-      <div className={styles.toggles}>
-        <LocaleToggle />
-        <ThemeToggle />
-      </div>
-    </nav>
+    <header className={styles.bar}>
+      <nav className={styles.nav}>
+        <Link href="/" className={styles.brand}>
+          <span className={styles.prompt} aria-hidden="true">
+            &gt;<span className={styles.cursor}>_</span>
+          </span>
+          ncorrea
+        </Link>
+        <div className={styles.links}>
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              aria-current={pathname === link.href ? "page" : undefined}
+              className={
+                pathname === link.href
+                  ? `${styles.link} ${styles.active}`
+                  : styles.link
+              }
+            >
+              {locale === "en" ? link.label.en : link.label.es}
+              {pathname === link.href && (
+                <motion.span
+                  layoutId="nav-underline"
+                  className={styles.underline}
+                  transition={
+                    reduce
+                      ? { duration: 0 }
+                      : { type: "spring", stiffness: 500, damping: 40 }
+                  }
+                />
+              )}
+            </Link>
+          ))}
+          <a href={SERVIDOR_URL} className={styles.link}>
+            Homelab
+          </a>
+        </div>
+        <div className={styles.toggles}>
+          <LocaleToggle />
+          <ThemeToggle />
+        </div>
+      </nav>
+    </header>
   );
 }

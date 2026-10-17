@@ -6,13 +6,13 @@
     <title>Homelab</title>
     <meta
       name="description"
-      content="My homelab as a learning space: a self-hosted setup running on my own hardware, with documented architecture, the decisions behind it and live service status."
+      content="Self-hosted infrastructure in production on my own hardware, with documented architecture, the decisions behind it and live service status."
     />
     <meta property="og:site_name" content="Nicolás Correa · Homelab" />
     <meta property="og:title" content="Homelab" />
     <meta
       property="og:description"
-      content="My homelab as a learning space: documented architecture, decisions and live service status."
+      content="Self-hosted infrastructure in production: documented architecture, decisions and live service status."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://homelab.ncorrea.com.ar/" />
@@ -50,213 +50,235 @@
     </script>
   </head>
   <body>
-    <nav class="site-nav">
-      <div class="nav-links">
-        <a href="https://www.ncorrea.com.ar/" data-i18n="navHome"></a>
-        <a href="https://www.ncorrea.com.ar/sobre-mi" data-i18n="navAbout"></a>
-        <a
-          href="https://www.ncorrea.com.ar/proyectos"
-          data-i18n="navProjects"
-        ></a>
-        <a href="/" class="active" aria-current="page">Homelab</a>
-      </div>
-      <div class="nav-toggles">
-        <button
-          type="button"
-          class="lang-toggle"
-          id="lang-toggle"
-          aria-label="Cambiar idioma"
-          onclick="toggleLocale()"
+    <header class="bar">
+      <nav class="site-nav" id="site-nav" aria-label="Principal">
+        <a class="brand" href="https://www.ncorrea.com.ar/"
+          ><span class="prompt" aria-hidden="true"
+            >&gt;<span class="cursor">_</span></span
+          >
+          ncorrea</a
         >
-          EN
-        </button>
-        <button
-          type="button"
-          class="theme-toggle"
-          id="theme-toggle"
-          aria-label="Cambiar tema"
-          onclick="toggleTheme()"
-        >
-          ◐
-        </button>
-      </div>
-    </nav>
+        <div class="nav-links">
+          <a href="https://www.ncorrea.com.ar/" data-i18n="navHome"></a>
+          <a
+            href="https://www.ncorrea.com.ar/sobre-mi"
+            data-i18n="navAbout"
+          ></a>
+          <a
+            href="https://www.ncorrea.com.ar/proyectos"
+            data-i18n="navProjects"
+          ></a>
+          <a href="/" class="active" aria-current="page">Homelab</a>
+        </div>
+        <div class="nav-toggles">
+          <button
+            type="button"
+            class="lang-toggle"
+            id="lang-toggle"
+            aria-label="Cambiar idioma"
+            onclick="toggleLocale()"
+          >
+            EN
+          </button>
+          <button
+            type="button"
+            class="theme-toggle"
+            id="theme-toggle"
+            aria-label="Cambiar tema"
+            onclick="toggleTheme()"
+          >
+            ◐
+          </button>
+        </div>
+      </nav>
+    </header>
 
-    <main>
-      <h1 data-i18n="h1"></h1>
+    <div class="doc">
+      <aside class="toc">
+        <nav aria-labelledby="toc-title">
+          <p class="toc-title" id="toc-title" data-i18n="tocTitle">
+            En esta página
+          </p>
+          <ol id="toc-list"></ol>
+        </nav>
+      </aside>
+      <main>
+        <header class="doc-header">
+          <p class="kicker" data-i18n="kicker"></p>
+          <h1 data-i18n="h1"></h1>
+          <p class="lead" data-i18n="lead"></p>
+        </header>
 
-      <h2 data-i18n="statusH2"></h2>
-      <div class="status-box" id="status-box">
-        <p class="status-summary" id="status-summary"></p>
-        <p class="status-headline" id="status-headline">
-          <span class="status-loading" data-i18n="statusLoading"></span>
-        </p>
-        <ul class="status-list" id="status-list"></ul>
-      </div>
+        <h2 data-i18n="statusH2"></h2>
+        <div class="status-box" id="status-box">
+          <p class="status-summary" id="status-summary"></p>
+          <p class="status-headline" id="status-headline">
+            <span class="status-loading" data-i18n="statusLoading"></span>
+          </p>
+          <ul class="status-list" id="status-list"></ul>
+        </div>
 
-      <h2 data-i18n="philosophyH2"></h2>
+        <h2 data-i18n="philosophyH2"></h2>
 
-      <p data-i18n="philosophyP1"></p>
+        <p data-i18n="philosophyP1"></p>
 
-      <p data-i18n="philosophyP2"></p>
+        <p data-i18n="philosophyP2"></p>
 
-      <h2 data-i18n="archH2"></h2>
+        <h2 data-i18n="archH2"></h2>
 
-      <br />
+        <br />
 
-      <img
-        id="archDiagramImg"
-        src="diagrama-arquitectura-oscuro.svg"
-        alt="Diagrama de arquitectura del ThinkCentre"
-        class="mermaid-container"
-      />
+        <img
+          id="archDiagramImg"
+          src="diagrama-arquitectura-oscuro.svg"
+          alt="Diagrama de arquitectura del ThinkCentre"
+          class="mermaid-container"
+        />
 
-      <div class="button-row">
-        <a
-          id="archOpenFull"
-          class="link-button"
-          href="diagrama-arquitectura-oscuro.svg"
-          target="_blank"
-          rel="noopener"
-          data-i18n="archOpenFull"
-        ></a>
-      </div>
+        <div class="button-row">
+          <a
+            id="archOpenFull"
+            class="link-button"
+            href="diagrama-arquitectura-oscuro.svg"
+            target="_blank"
+            rel="noopener"
+            data-i18n="archOpenFull"
+          ></a>
+        </div>
 
-      <h2 data-i18n="servicesH2"></h2>
+        <h2 data-i18n="servicesH2"></h2>
 
-      <p data-i18n="HwSv1"></p>
-      <ul>
-        <li data-i18n="serviceCockpit"></li>
-        <li data-i18n="serviceWebhook"></li>
-        <li data-i18n="serviceHeimdall"></li>
-        <li>
-          <span data-i18n="podsLabel"></span>
-          <ul>
-            <li data-i18n="service1"></li>
-            <li data-i18n="service2"></li>
-            <li data-i18n="service3"></li>
-            <li data-i18n="service4"></li>
-            <li data-i18n="service5"></li>
-            <li data-i18n="service6"></li>
-          </ul>
-        </li>
-      </ul>
-      <p data-i18n="HwSv2"></p>
-      <ul>
-        <li data-i18n="serviceCockpitPi"></li>
-        <li data-i18n="serviceDocs"></li>
-        <li data-i18n="serviceTunnel"></li>
-        <li data-i18n="serviceHeimdallHub"></li>
-        <li>
-          <span data-i18n="podsLabel"></span>
-          <ul>
-            <li data-i18n="service7"></li>
-            <li data-i18n="service8"></li>
-          </ul>
-        </li>
-      </ul>
-      <p data-i18n="HwSv3"></p>
-      <ul>
-        <li data-i18n="service9"></li>
-        <li data-i18n="serviceHeimdallTermux"></li>
-      </ul>
-      <p data-i18n="HwSv4"></p>
-      <ul>
-        <li data-i18n="serviceHeimdall"></li>
-        <li data-i18n="service10"></li>
-        <li data-i18n="service11"></li>
-        <li data-i18n="service12"></li>
-      </ul>
+        <p data-i18n="HwSv1"></p>
+        <ul>
+          <li data-i18n="serviceCockpit"></li>
+          <li data-i18n="serviceWebhook"></li>
+          <li data-i18n="serviceHeimdall"></li>
+          <li>
+            <span data-i18n="podsLabel"></span>
+            <ul>
+              <li data-i18n="service1"></li>
+              <li data-i18n="service2"></li>
+              <li data-i18n="service3"></li>
+              <li data-i18n="service4"></li>
+              <li data-i18n="service5"></li>
+              <li data-i18n="service6"></li>
+            </ul>
+          </li>
+        </ul>
+        <p data-i18n="HwSv2"></p>
+        <ul>
+          <li data-i18n="serviceCockpitPi"></li>
+          <li data-i18n="serviceDocs"></li>
+          <li data-i18n="serviceTunnel"></li>
+          <li data-i18n="serviceHeimdallHub"></li>
+          <li>
+            <span data-i18n="podsLabel"></span>
+            <ul>
+              <li data-i18n="service7"></li>
+              <li data-i18n="service8"></li>
+            </ul>
+          </li>
+        </ul>
+        <p data-i18n="HwSv3"></p>
+        <ul>
+          <li data-i18n="service9"></li>
+          <li data-i18n="serviceHeimdallTermux"></li>
+        </ul>
+        <p data-i18n="HwSv4"></p>
+        <ul>
+          <li data-i18n="serviceHeimdall"></li>
+          <li data-i18n="service10"></li>
+          <li data-i18n="service11"></li>
+          <li data-i18n="service12"></li>
+        </ul>
 
-      <h2 data-i18n="gatewayH2"></h2>
-      <p data-i18n="gatewayP"></p>
+        <h2 data-i18n="gatewayH2"></h2>
+        <p data-i18n="gatewayP"></p>
 
-      <h2 data-i18n="hwH2"></h2>
-      <ul>
-        <li data-i18n="hw1"></li>
-        <li data-i18n="hw2"></li>
-        <li data-i18n="hw3"></li>
-        <li data-i18n="hw4"></li>
-      </ul>
-      <h2 data-i18n="backupsH2"></h2>
-      <ul>
-        <li data-i18n="backup1"></li>
-        <li data-i18n="backup2"></li>
-        <li data-i18n="backup3"></li>
-        <li data-i18n="backup4"></li>
-      </ul>
+        <h2 data-i18n="hwH2"></h2>
+        <ul>
+          <li data-i18n="hw1"></li>
+          <li data-i18n="hw2"></li>
+          <li data-i18n="hw3"></li>
+          <li data-i18n="hw4"></li>
+        </ul>
+        <h2 data-i18n="backupsH2"></h2>
+        <ul>
+          <li data-i18n="backup1"></li>
+          <li data-i18n="backup2"></li>
+          <li data-i18n="backup3"></li>
+          <li data-i18n="backup4"></li>
+        </ul>
 
-      <h2 data-i18n="notesH2"></h2>
+        <h2 data-i18n="notesH2"></h2>
 
-      <ul>
-        <li data-i18n="note1"></li>
-        <li data-i18n="note2"></li>
-        <li data-i18n="note3"></li>
-        <li data-i18n="note4"></li>
-        <li data-i18n="note5"></li>
-        <li data-i18n="note6"></li>
-        <li data-i18n="note7"></li>
-        <li data-i18n="note8"></li>
-      </ul>
+        <ul>
+          <li data-i18n="note1"></li>
+          <li data-i18n="note4"></li>
+          <li data-i18n="note5"></li>
+          <li data-i18n="note7"></li>
+          <li data-i18n="note8"></li>
+        </ul>
 
-      <h2 data-i18n="stackH2"></h2>
+        <h2 data-i18n="stackH2"></h2>
 
-      <ul>
-        <li data-i18n="stack1"></li>
-        <li data-i18n="stack2"></li>
-        <li data-i18n="stack3"></li>
-        <li data-i18n="stack4"></li>
-      </ul>
+        <ul>
+          <li data-i18n="stack1"></li>
+          <li data-i18n="stack2"></li>
+          <li data-i18n="stack3"></li>
+          <li data-i18n="stack4"></li>
+        </ul>
 
-      <h2 data-i18n="decisionsH2"></h2>
+        <h2 data-i18n="decisionsH2"></h2>
 
-      <ul>
-        <li data-i18n="decision1"></li>
-        <li data-i18n="decision2"></li>
-        <li data-i18n="decision3"></li>
-        <li data-i18n="decision4"></li>
-        <li data-i18n="decision5"></li>
-        <li data-i18n="decision6"></li>
-        <li data-i18n="decision7"></li>
-      </ul>
+        <ul>
+          <li data-i18n="decision1"></li>
+          <li data-i18n="decision2"></li>
+          <li data-i18n="decision3"></li>
+          <li data-i18n="decision4"></li>
+          <li data-i18n="decision5"></li>
+          <li data-i18n="decision6"></li>
+          <li data-i18n="decision7"></li>
+        </ul>
 
-      <h2 data-i18n="originsH2"></h2>
-      <p data-i18n="originsP"></p>
+        <h2 data-i18n="originsH2"></h2>
+        <p data-i18n="originsP"></p>
 
-      <h2 data-i18n="openSourceH2"></h2>
+        <h2 data-i18n="openSourceH2"></h2>
 
-      <p data-i18n="openSourceP1"></p>
-      <div class="button-row">
-        <a class="link-button" href="https://github.com/ncorrea-13/homeserver"
-          >homeserver</a
-        >
-      </div>
+        <p data-i18n="openSourceP1"></p>
+        <div class="button-row">
+          <a class="link-button" href="https://github.com/ncorrea-13/homeserver"
+            >homeserver</a
+          >
+        </div>
 
-      <h2 data-i18n="relatedH2"></h2>
+        <h2 data-i18n="relatedH2"></h2>
 
-      <p data-i18n="relatedP"></p>
-      <div class="button-row">
-        <a class="link-button" href="https://github.com/ncorrea-13/turmo-screen"
-          >turmo-screen</a
-        >
-        <a
-          class="link-button"
-          href="https://github.com/ncorrea-13/homelab-status"
-          >homelab-status</a
-        >
-      </div>
+        <p data-i18n="relatedP"></p>
+        <div class="button-row">
+          <a
+            class="link-button"
+            href="https://github.com/ncorrea-13/turmo-screen"
+            >turmo-screen</a
+          >
+          <a
+            class="link-button"
+            href="https://github.com/ncorrea-13/homelab-status"
+            >homelab-status</a
+          >
+        </div>
 
-      <hr />
+        <hr />
 
-      <p>
-        <small
-          ><span data-i18n="footer"></span> ·
+        <p class="doc-footer">
+          <span data-i18n="footer"></span> ·
           <a href="https://github.com/ncorrea-13/portfolio/blob/main/LICENSE"
             >MIT License</a
-          ></small
-        >
-      </p>
-    </main>
+          >
+        </p>
+      </main>
+    </div>
 
     <script>
       function updateDiagrams(themeName) {
@@ -281,9 +303,12 @@
           navAbout: "Sobre mí",
           navProjects: "Proyectos",
           h1: "Homelab",
+          kicker: "Documentación técnica",
+          lead: "Infraestructura self-hosted en producción: arquitectura, decisiones técnicas y estado de los servicios en vivo.",
+          tocTitle: "En esta página",
           philosophyH2: "Filosofía",
           philosophyP1:
-            "Infraestructura privada, modular y de bajo mantenimiento. Sin dependencia de servicios cloud comerciales. Esta página se publica mediante Cloudflare Tunnel. El resto de servicios se utilizan por WireGuard en mi tailnet personal, y de forma dinámica administro la apertura puntual al público vía Tailscale Funnel a medida de mis necesidades.",
+            "Infraestructura privada, modular y de bajo mantenimiento, sin depender de servicios cloud comerciales. Todo se accede por mi red privada de Tailscale; solo esta página es pública (ver Decisiones técnicas).",
           philosophyP2:
             "Cada stack corre en un pod de Podman, gestionado como servicio de systemd a nivel usuario. Permite mantener las responsabilidades y los entornos aislados.",
           archH2: "Arquitectura",
@@ -295,29 +320,23 @@
           hw4: "<strong>HDD 480GB</strong> - Backup semanal",
           gatewayH2: "Responsabilidades",
           gatewayP:
-            "El ThinkCentre corre los servicios con gran almacenamiento de información como Immich o Vaultwarden. La Raspberry Pi 4B es nodo de red como DNS y proxy inverso, y también monitorea los otros servicios por Uptime Kuma. El Samsung S9+ corre Ntfy dentro de Termux. La HP ProDesk queda como laboratorio de pruebas y experimentación",
+            "El ThinkCentre corre los servicios con más datos, como Immich o Vaultwarden. La Raspberry Pi 4B es el nodo de red (DNS, proxy inverso) y monitorea al resto. El Samsung S9+ recibe las alertas. La HP ProDesk es el laboratorio de pruebas.",
           backupsH2: "Backups",
           backup1:
-            "<strong>Qué:</strong> Configuraciones de los contenedores, junto con los datos. Las bases de datos críticas se bumpean para evitar así que se corrompan los datos al copiarse mientras se mantiene la ejecución.",
+            "<strong>Qué:</strong> configuraciones de los contenedores junto con los datos. Las bases de datos críticas (Immich y Vaultwarden) se vuelcan primero, para no copiar archivos en uso y evitar datos corruptos.",
           backup2:
-            "<strong>Cómo:</strong> Un simple script en Bash con rsync. Manteniendolo lo más simple y modular posible. Al finalizar realiza una llamada a Ntfy para avisar que se realizó con éxito",
+            "<strong>Cómo:</strong> un script en Bash con rsync, lo más simple y modular posible. Al terminar avisa por Ntfy.",
           backup3:
             "<strong>Cuándo:</strong> Diariamente corre por un cron programado contra un HDD dedicado para la copia diaria. Mismo sistema pero semanalmente contra otro HDD dedicado para backup semanal. Se mantienen varias copias en lugar de sobreescribir las anteriores. Principalmente de los servicios críticos como Vaultwarden.",
           backup4:
             "<strong>Restore:</strong> probado de forma manual durante la iteración, prueba y desarrollo del script. Ante fallos se puede restaurar la copia sin ningún problema.",
           notesH2: "Notas de arquitectura",
           note1:
-            "<strong>Acceso único:</strong> El tráfico viaja por la tailnet siempre y es redirigido por Caddy. De esta forma se identifican más facilmente a donde se está accediendo. Todos los puertos se encuentran cerrados para la red LAN.",
-          note2:
-            "<strong>Tailscale:</strong> Permite la conexión en remoto por la VPN. También permite ir rotando la exposición con Funnel.",
-          note3:
-            "<strong>Podman:</strong> motor rootless que orquesta todos los pods de servicios.",
+            "<strong>Acceso único:</strong> todo el tráfico viaja por la tailnet y lo redirige Caddy, que además gestiona el dominio interno. Ningún puerto de servicio está abierto a la LAN.",
           note4:
             "<strong>Bases de datos:</strong> Immich y Miniflux poseen sus contenedores de base de datos. Se omiten en el diagrama.",
           note5:
             "<strong>DNS:</strong> Pi-hole filtra consultas y las reenvía a Unbound, que sale a los servidores de Mullvad exclusivamente vía DoT. Los subdominios los redirige a Caddy.",
-          note6:
-            "<strong>Proxy inverso:</strong> Caddy gestiona internamente el dominio para poder acceder de forma más sencilla a los servicios de la red.",
           note7:
             "<strong>El observador del observador:</strong> el Samsung S9+ corre Ntfy y recibe todas las notificaciones del sistema. También vigila que Uptime Kuma esté vivo mediante un chequeo periódico.",
           note8:
@@ -342,11 +361,12 @@
           statusMaintenance: "Mantenimiento",
           statusUnknown: "Sin datos",
           statusNever: "sin reportes aún",
+          statusSince: "desde",
           servicesH2: "Servicios",
           HwSv1: "<strong>ThinkCentre</strong> (Debian)",
           HwSv2: "<strong>Raspberry Pi 4B</strong> (Raspberry Pi OS Lite)",
           HwSv3: "<strong>Samsung Galaxy S9+</strong> (Android)",
-          HwSv4: "<strong>Hp ProDesk</strong> (Debian)",
+          HwSv4: "<strong>HP ProDesk</strong> (Debian)",
           serviceCockpit:
             "<strong>Cockpit</strong>: panel de administración web, corre directamente en el host",
           serviceWebhook:
@@ -378,7 +398,7 @@
           serviceHeimdallHub:
             "<strong>Heimdall Hub</strong>: recibe las métricas de todos los daemons, corre como servicio de systemd",
           service9:
-            "<strong>Proot-distro</strong>: Instancia de Debian dentro de Temux. Dentro corre Ntfy y el checkeo de la Pi",
+            "<strong>Proot-distro</strong>: Instancia de Debian dentro de Termux. Dentro corre Ntfy y el chequeo de la Pi",
           serviceHeimdallTermux:
             "<strong>Heimdall</strong>: daemon de métricas (CPU, RAM, disco, temperatura) con build propia para aarch64, arranca con Termux:Boot",
           service10:
@@ -404,23 +424,26 @@
             "<strong>Deploy de esta misma página:</strong> un timer systemd en la Raspberry Pi revisa cada 5 minutos el último commit del repo y, si cambió, baja los archivos actualizados. Sin webhook expuesto ni puerto nuevo abierto: CD por polling en vez de push.",
           originsH2: "Orígenes del proyecto",
           originsP:
-            "Mi servidor personal inició por medio esta misma Raspberry Pi 4B. Así fui experimentando, probando y trabajando poco a poco hasta llegar a este punto. En el día a día me sirve tanto para aprender como para proveer los servicios sin pagos de suscripción.",
+            "Mi servidor personal arrancó con esta misma Raspberry Pi 4B. Fui experimentando y probando poco a poco hasta llegar a este punto. Hoy me sirve tanto para aprender como para tener mis servicios sin pagar suscripciones.",
           openSourceH2: "Código abierto",
           openSourceP1:
             "La configuración completa está disponible en el repositorio:",
           relatedH2: "Repositorios relacionados",
           relatedP:
             "Otros proyectos propios que corren en este homelab: envío de dashboards a una pantalla serial USB (turmo-screen) y la API que expone el estado de los servicios (homelab-status).",
-          footer: "Última actualización: Septiembre 2026",
+          footer: "Última actualización: Octubre 2026",
         },
         en: {
           navHome: "Home",
           navAbout: "About",
           navProjects: "Projects",
           h1: "Homelab",
+          kicker: "Technical documentation",
+          lead: "Self-hosted infrastructure in production: architecture, technical decisions and live service status.",
+          tocTitle: "On this page",
           philosophyH2: "Philosophy",
           philosophyP1:
-            "Private, modular infrastructure with low maintenance. It doesn't depend on any commercial cloud service. This page is published through Cloudflare Tunnel. All other services run over WireGuard on my personal tailnet, and I dynamically open public access to them through Tailscale Funnel whenever I need to.",
+            "Private, modular, low-maintenance infrastructure that doesn't depend on commercial cloud services. Everything is reached through my private Tailscale network; only this page is public (see Technical decisions).",
           philosophyP2:
             "Each stack runs in a Podman pod, managed as a user level systemd service. This keeps responsibilities and environments isolated.",
           archH2: "Architecture",
@@ -432,29 +455,23 @@
           hw4: "<strong>480GB HDD</strong>: weekly backup",
           backupsH2: "Backups",
           backup1:
-            "<strong>What:</strong> container configs, together with the data. Critical databases get dumped first, so the copy doesn't corrupt data while the service keeps running.",
+            "<strong>What:</strong> container configs together with the data. Critical databases (Immich and Vaultwarden) are dumped first, so files in use are never copied and data doesn't get corrupted.",
           backup2:
-            "<strong>How:</strong> a simple Bash script with rsync, kept as simple and modular as possible. On success it calls Ntfy to confirm the run went through.",
+            "<strong>How:</strong> a Bash script with rsync, kept as simple and modular as possible. When it finishes it notifies through Ntfy.",
           backup3:
             "<strong>When:</strong> a daily cron job runs against a dedicated HDD for the daily copy. Same setup, but weekly, against a second dedicated HDD for the weekly backup. Several copies are kept instead of overwriting the previous ones, mainly for critical services like Vaultwarden.",
           backup4:
             "<strong>Restore:</strong> tested manually while iterating on and developing the script. If something fails, the copy restores without issues.",
           gatewayH2: "Responsibilities",
           gatewayP:
-            "The ThinkCentre runs the services that need heavy storage, like Immich or Vaultwarden. The Raspberry Pi 4B works as the network node, handling DNS and reverse proxy, and it also monitors the other services through Uptime Kuma. The Samsung S9+ runs Ntfy inside Termux. The HP ProDesk is a lab for testing and experimentation.",
+            "The ThinkCentre runs the services with the most data, like Immich or Vaultwarden. The Raspberry Pi 4B is the network node (DNS, reverse proxy) and monitors the rest. The Samsung S9+ receives the alerts. The HP ProDesk is the testing lab.",
           notesH2: "Architecture notes",
           note1:
-            "<strong>Single access point:</strong> traffic always travels through the tailnet and gets redirected by Caddy. This makes it easier to identify what's being accessed. All ports are closed to the LAN.",
-          note2:
-            "<strong>Tailscale:</strong> allows remote connections through the VPN. It also lets me rotate public exposure using Funnel.",
-          note3:
-            "<strong>Podman:</strong> the rootless engine that orchestrates all the service pods.",
+            "<strong>Single access point:</strong> all traffic travels through the tailnet and is redirected by Caddy, which also manages the internal domain. No service port is open to the LAN.",
           note4:
             "<strong>Databases:</strong> Immich and Miniflux each have their own database containers. They're left out of the diagram.",
           note5:
             "<strong>DNS:</strong> Pi-hole filters queries and forwards them to Unbound, which reaches Mullvad's servers exclusively over DoT. It redirects subdomains to Caddy.",
-          note6:
-            "<strong>Reverse proxy:</strong> Caddy manages the domain internally, making it easier to access the services on the network.",
           note7:
             "<strong>The watcher of the watcher:</strong> the Samsung S9+ runs Ntfy and receives every system notification. It also checks that Uptime Kuma is alive through a periodic check.",
           note8:
@@ -479,11 +496,12 @@
           statusMaintenance: "Maintenance",
           statusUnknown: "No data",
           statusNever: "no reports yet",
+          statusSince: "since",
           servicesH2: "Services",
           HwSv1: "<strong>ThinkCentre</strong> (Debian)",
           HwSv2: "<strong>Raspberry Pi 4B</strong> (Raspberry Pi OS Lite)",
           HwSv3: "<strong>Samsung Galaxy S9+</strong> (Android)",
-          HwSv4: "<strong>Hp ProDesk</strong> (Debian)",
+          HwSv4: "<strong>HP ProDesk</strong> (Debian)",
           serviceCockpit:
             "<strong>Cockpit</strong>: web admin panel, runs directly on the host",
           serviceWebhook:
@@ -541,14 +559,14 @@
             "<strong>Deploying this very page:</strong> a systemd timer on the Raspberry Pi checks the repo's latest commit every 5 minutes and pulls the updated files if it changed. No exposed webhook, no new open port: CD by polling instead of push.",
           originsH2: "Project origins",
           originsP:
-            "My personal server started with this same Raspberry Pi 4B. From there, I kept experimenting, testing, and working step by step until I got to this point. Day to day, it helps me both learn and run services without paying for subscriptions.",
+            "My personal server started with this same Raspberry Pi 4B. I kept experimenting and testing step by step until I got to this point. Today it helps me both learn and run my own services without paying for subscriptions.",
           openSourceH2: "Open source",
           openSourceP1:
             "The full configuration is available in the repository:",
           relatedH2: "Related repos",
           relatedP:
             "Other own projects running on this homelab: sending dashboards to a USB serial screen (turmo-screen) and the API that exposes service status (homelab-status).",
-          footer: "Last updated: September 2026",
+          footer: "Last updated: October 2026",
         },
       };
 
@@ -601,8 +619,9 @@
           var statusLabel =
             dict["status" + status.charAt(0).toUpperCase() + status.slice(1)] ||
             dict.statusUnknown;
+          // Kuma notifica solo cuando cambia el estado: checked_at es "desde cuándo", no "último chequeo".
           metaSpan.textContent = checkedAt
-            ? statusLabel + " · " + checkedAt
+            ? statusLabel + " · " + dict.statusSince + " " + checkedAt
             : statusLabel + " · " + dict.statusNever;
 
           li.appendChild(nameSpan);
@@ -655,10 +674,56 @@
             "aria-label",
             lang === "en" ? "Switch language" : "Cambiar idioma",
           );
+        document
+          .getElementById("site-nav")
+          .setAttribute("aria-label", lang === "en" ? "Main" : "Principal");
         document.getElementById("lang-toggle").textContent =
           lang === "en" ? "ES" : "EN";
+        buildToc();
         loadStatus();
       }
+
+      var tocHeadings = [];
+      var tocTicking = false;
+      function updateToc() {
+        tocTicking = false;
+        var current = null;
+        tocHeadings.forEach(function (h) {
+          if (h.getBoundingClientRect().top <= window.innerHeight * 0.25)
+            current = h;
+        });
+        document.querySelectorAll("#toc-list a").forEach(function (a) {
+          if (current && a.getAttribute("href") === "#" + current.id)
+            a.setAttribute("aria-current", "location");
+          else a.removeAttribute("aria-current");
+        });
+      }
+      function buildToc() {
+        var list = document.getElementById("toc-list");
+        list.innerHTML = "";
+        tocHeadings = Array.prototype.slice.call(
+          document.querySelectorAll("main h2"),
+        );
+        tocHeadings.forEach(function (h) {
+          if (!h.id) h.id = h.getAttribute("data-i18n").replace(/H2$/, "");
+          var li = document.createElement("li");
+          var a = document.createElement("a");
+          a.href = "#" + h.id;
+          a.textContent = h.textContent;
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+        updateToc();
+      }
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (tocTicking) return;
+          tocTicking = true;
+          requestAnimationFrame(updateToc);
+        },
+        { passive: true },
+      );
 
       function toggleLocale() {
         var current = document.documentElement.lang === "en" ? "en" : "es";

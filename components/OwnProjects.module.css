@@ -1,0 +1,239 @@
+.wrap {
+  display: grid;
+  gap: 1rem;
+}
+.tiles {
+  display: grid;
+  gap: 1rem;
+}
+
+.poster {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 30rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--card-bg);
+  transition: border-color 200ms ease;
+}
+.img {
+  object-fit: cover;
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.scrim {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14rem 1.25rem 1.25rem;
+  background: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 11rem,
+    color-mix(in oklab, var(--bg) 90%, transparent) 16rem,
+    var(--bg) 100%
+  );
+}
+.kicker,
+.status {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+}
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.name {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  line-height: 1.15;
+  font-weight: 600;
+  color: var(--heading);
+  transition: color 200ms ease;
+}
+.lead .name {
+  margin-top: 0.375rem;
+  font-size: 32px;
+  line-height: 1.1;
+}
+.desc {
+  margin-top: 0.875rem;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.lead .desc {
+  max-width: 38rem;
+}
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.cta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-strong);
+}
+
+.hardware {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--card-bg);
+  transition: border-color 200ms ease;
+}
+.photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: var(--code-bg);
+}
+.photoImg {
+  object-fit: cover;
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hwBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem 1.25rem;
+}
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--live);
+}
+.live {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--live);
+  animation: pulse 2.4s ease-out infinite;
+}
+.hwName {
+  font-family: var(--font-sans);
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 600;
+  color: var(--heading);
+  transition: color 200ms ease;
+}
+.hwDesc {
+  font-size: 15px;
+  line-height: 1.55;
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-block: 1px solid var(--border);
+}
+.fact {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0.75rem 0;
+}
+.fact + .fact {
+  padding-left: 1rem;
+  border-left: 1px solid var(--border);
+}
+.factValue {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  line-height: 1.2;
+  color: var(--heading);
+}
+.factLabel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.poster:focus-visible,
+.hardware:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+.poster:active .name,
+.hardware:active .hwName {
+  color: var(--accent-strong);
+}
+
+@media (min-width: 48rem) {
+  .tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .lead {
+    min-height: 28rem;
+  }
+  .lead .scrim {
+    padding: 12rem 1.75rem 1.75rem;
+  }
+  .lead .name {
+    font-size: 44px;
+  }
+  .lead .meta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .hardware {
+    grid-template-columns: 24rem minmax(0, 1fr);
+  }
+  .photo {
+    aspect-ratio: auto;
+    border-right: 1px solid var(--border);
+    border-bottom: 0;
+  }
+  .hwBody {
+    justify-content: center;
+    padding: 2rem;
+  }
+}
+
+@media (hover: hover) {
+  .poster:hover,
+  .hardware:hover {
+    border-color: var(--accent-strong);
+  }
+  .poster:hover .img,
+  .hardware:hover .photoImg {
+    transform: scale(1.04);
+  }
+  .poster:hover .name,
+  .hardware:hover .hwName {
+    color: var(--accent-strong);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live {
+    animation: none;
+  }
+  .img,
+  .photoImg {
+    transition: none;
+  }
+  .poster:hover .img,
+  .hardware:hover .photoImg {
+    transform: none;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--live) 45%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 7px color-mix(in oklab, var(--live) 0%, transparent);
+  }
+}

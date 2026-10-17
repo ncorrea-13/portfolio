@@ -1,23 +1,46 @@
 .intro {
   display: flex;
   flex-direction: column-reverse;
-  align-items: center;
+  align-items: flex-start;
   gap: 1.5rem;
+}
+.flow {
+  max-width: 44rem;
 }
 .flow > * + * {
   margin-top: 0.75rem;
 }
-.list > * + * {
-  margin-top: 0.5rem;
+.facets {
+  margin-top: 4rem;
+  border-top: 1px solid var(--border);
 }
-.entryTitle {
-  font-family: var(--font-sans);
-  color: var(--heading);
+.facet {
+  display: grid;
+  gap: 0.5rem;
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.facetTitle {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.75rem;
+  color: var(--accent);
+}
+.facetText {
+  max-width: 44rem;
+}
+
+@media (min-width: 48rem) {
+  .facet {
+    grid-template-columns: 14rem minmax(0, 1fr);
+    gap: 1.5rem;
+  }
 }
 
 @media (min-width: 40rem) {
   .intro {
     flex-direction: row;
-    align-items: flex-start;
+    justify-content: space-between;
+    gap: 3rem;
   }
 }

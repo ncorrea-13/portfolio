@@ -9,21 +9,12 @@ export type Project = {
   tags: string[];
   stack: string[];
   image?: string;
+  imagePosition?: string;
+  facts?: { value: string; label: LocalizedText }[];
+  role?: LocalizedText;
 };
 
 export const projects: Project[] = [
-  {
-    name: { es: "Homelab", en: "Homelab" },
-    url: SERVIDOR_URL,
-    desc: {
-      es: "Servidor de servicios y experimentos donde despliego mis proyectos y me capacito como DevOps.",
-      en: "Server for services and experiments where I deploy my projects and upskill as a DevOps engineer.",
-    },
-    license: "MIT",
-    tags: ["infra"],
-    stack: ["CI/CD", "SSH", "Systemd", "Cloudflare", "WireGuard", "Containers"],
-    image: "/projects/homelab.jpg",
-  },
   {
     name: { es: "PetHood", en: "PetHood" },
     url: "https://github.com/Pethood-project",
@@ -42,53 +33,6 @@ export const projects: Project[] = [
       "NativeWind",
     ],
     image: "/projects/pethood.png",
-  },
-  {
-    name: { es: "Rolboard", en: "Rolboard" },
-    url: "https://rolboard.ncorrea.com.ar/",
-    desc: {
-      es: "Dashboard para gestión de campañas de rol de mesa. Indexa el frontmatter YAML de un vault de Obsidian como metadata para consulta rápida durante la sesión en vivo.",
-      en: "Dashboard for tabletop RPG campaign management. It indexes an Obsidian vault's YAML frontmatter as metadata for fast lookup during a live session.",
-    },
-    license: "MIT",
-    tags: ["backend", "frontend"],
-    stack: ["Go", "SQLite", "React", "TypeScript", "Vite"],
-    image: "/projects/rolboard.jpg",
-  },
-  {
-    name: { es: "Accesoriosstina", en: "Accesoriosstina" },
-    url: "https://accesoriosstina.vercel.app/",
-    desc: {
-      es: "Página web para AccesoriossTina, un emprendimiento de accesorios que cuenta con autenticación de usuarios, gestión de insumos y control de stock.",
-      en: "A website for AccesoriossTina, an accessories business featuring user authentication, supplies management, and stock control.",
-    },
-    tags: ["frontend"],
-    stack: ["React", "Next.js", "Tailwind"],
-    image: "/projects/accesorioss.png",
-  },
-  {
-    name: { es: "Weathertui", en: "Weathertui" },
-    url: "https://github.com/ncorrea-13/weathertui",
-    desc: {
-      es: "Terminal User Interface basada en meteo-cli. Utiliza OpenWeatherMap para mostrar el pronóstico del tiempo en la terminal.",
-      en: "A terminal user interface based on meteo-cli. It uses OpenWeatherMap to show the weather forecast in the terminal.",
-    },
-    license: "GPLv3",
-    tags: ["tui-cli"],
-    stack: ["Go", "Bubbletea"],
-    image: "/projects/weathertui.png",
-  },
-  {
-    name: { es: "Bw-tui", en: "Bw-tui" },
-    url: "https://github.com/ncorrea-13/bw-tui",
-    desc: {
-      es: "Terminal User Interface que funciona como wrapper para utilizar Bitwarden desde la terminal.",
-      en: "A terminal user interface that wraps Bitwarden so you can use it from the terminal.",
-    },
-    license: "GPLv3",
-    tags: ["tui-cli"],
-    stack: ["Rust", "Ratatui"],
-    image: "/projects/bw-tui.png",
   },
   {
     name: { es: "Mis dotfiles personales", en: "My personal dotfiles" },
@@ -174,28 +118,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    name: { es: "Asap Consultores", en: "Asap Consultores" },
-    url: "https://www.asapconsultores.com.ar/",
-    desc: {
-      es: "Página para la empresa ASAP Consultores estilo landing page informativa.",
-      en: "A landing page style website for the company ASAP.",
-    },
-    tags: ["frontend"],
-    stack: ["React", "Next.js", "Tailwind"],
-    image: "/projects/ASAP.png",
-  },
-  {
-    name: { es: "BugsLessDesign", en: "BugsLessDesign" },
-    url: "https://bugs-less-design.vercel.app/",
-    desc: {
-      es: "Página del equipo de BugsLess Design. Permite el contacto fácil con la empresa y obtener información sobre los servicios ofrecidos.",
-      en: "The website for the BugsLess Design team. It offers an easy way to contact the company and learn about their services.",
-    },
-    tags: ["frontend"],
-    stack: ["React", "Redux", "Tailwind"],
-    image: "/projects/BugsLessDesign.png",
-  },
-  {
     name: { es: "vineyard", en: "vineyard" },
     url: "https://ecommerce-blue-chi.vercel.app/",
     desc: {
@@ -208,6 +130,114 @@ export const projects: Project[] = [
   },
 ];
 
+export const ownProjects: Project[] = [
+  {
+    name: { es: "Rolboard", en: "Rolboard" },
+    url: "https://rolboard.ncorrea.com.ar/",
+    desc: {
+      es: "App para dirigir campañas de rol de mesa: sesiones, arcos, NPCs, locaciones, facciones y tracker de combate. Corre como web, escritorio (Windows y Linux) y Android, e indexa el frontmatter de un vault de Obsidian. Con CI y releases automatizados.",
+      en: "App for running tabletop RPG campaigns: sessions, arcs, NPCs, locations, factions, and a combat tracker. Runs as a web app, on desktop (Windows and Linux), and on Android, and indexes an Obsidian vault's frontmatter. With CI and automated releases.",
+    },
+    license: "MIT",
+    tags: ["backend", "frontend"],
+    stack: ["Go", "SQLite", "React", "TypeScript", "Wails", "Docker"],
+    image: "/projects/rolboard.jpg",
+  },
+  {
+    name: { es: "Bw-tui", en: "Bw-tui" },
+    url: "https://github.com/ncorrea-13/bw-tui",
+    desc: {
+      es: "TUI en Rust sobre el CLI oficial de Bitwarden: bóveda, edición de ítems, generador de contraseñas y limpieza del portapapeles. Funciona en Wayland y WSL2. Con CI, binarios en cada release y Dependabot.",
+      en: "Rust TUI on top of the official Bitwarden CLI: vault browsing, item editing, a password generator, and clipboard clearing. Works on Wayland and WSL2. With CI, binaries on every release, and Dependabot.",
+    },
+    license: "GPLv3",
+    tags: ["tui-cli"],
+    stack: ["Rust", "Ratatui"],
+    imagePosition: "left top",
+    image: "/projects/bw-tui.png",
+  },
+  {
+    name: { es: "Weathertui", en: "Weathertui" },
+    url: "https://github.com/ncorrea-13/weathertui",
+    desc: {
+      es: "TUI en Go que muestra el clima actual de una ciudad con datos de OpenWeatherMap, con configuración guiada en el primer arranque. Con CI, binarios en cada release y Dependabot.",
+      en: "Go TUI that shows a city's current weather from OpenWeatherMap data, with guided setup on first run. With CI, binaries on every release, and Dependabot.",
+    },
+    license: "GPLv3",
+    tags: ["tui-cli"],
+    stack: ["Go", "Bubbletea"],
+    image: "/projects/weathertui.png",
+  },
+  {
+    name: { es: "Homelab", en: "Homelab" },
+    url: SERVIDOR_URL,
+    desc: {
+      es: "Homelab real, 24/7, en cuatro equipos. Más de 10 servicios como pods de Podman rootless con systemd, accesibles solo por Tailscale a través de Caddy, con DNS por Unbound sobre DoT y puertos cerrados en la LAN. Backups diarios y semanales en discos dedicados con restore probado, laboratorio de VMs aislado de la red y estado en vivo con Uptime Kuma.",
+      en: "A real homelab running 24/7 on four devices. 10+ services as rootless Podman pods under systemd, reachable only over Tailscale through Caddy, with DNS via Unbound over DoT and LAN ports closed. Daily and weekly backups on dedicated disks with tested restores, a VM lab isolated from the network, and live status through Uptime Kuma.",
+    },
+    license: "MIT",
+    tags: ["infra"],
+    stack: [
+      "Podman",
+      "Systemd",
+      "Caddy",
+      "Tailscale",
+      "Cloudflare",
+      "Pi-hole",
+      "KVM",
+      "Uptime Kuma",
+    ],
+    imagePosition: "center 52%",
+    facts: [
+      { value: "4", label: { es: "equipos", en: "devices" } },
+      { value: "10+", label: { es: "servicios", en: "services" } },
+      { value: "24/7", label: { es: "en producción", en: "in production" } },
+    ],
+    image: "/projects/homelab.jpg",
+  },
+];
+
+const developer = { es: "Desarrollador", en: "Developer" };
+
+export const clientWork: Project[] = [
+  {
+    name: { es: "AccesoriossTina", en: "AccesoriossTina" },
+    url: "https://accesoriosstina.vercel.app/",
+    desc: {
+      es: "Desarrollo del sitio de AccesoriossTina, con autenticación de usuarios, gestión de insumos y control de stock.",
+      en: "Development of the AccesoriossTina website, with user authentication, supplies management, and stock control.",
+    },
+    role: developer,
+    tags: [],
+    stack: ["React", "Next.js", "Tailwind"],
+    image: "/projects/accesorioss.png",
+  },
+  {
+    name: { es: "ASAP Consultores", en: "ASAP Consultores" },
+    url: "https://www.asapconsultores.com.ar/",
+    desc: {
+      es: "Desarrollo del sitio institucional de ASAP Consultores: presentación de la empresa y sus servicios.",
+      en: "Development of the corporate website for ASAP Consultores, presenting the company and its services.",
+    },
+    role: developer,
+    tags: [],
+    stack: ["React", "Next.js", "Tailwind"],
+    image: "/projects/ASAP.png",
+  },
+  {
+    name: { es: "BugsLess Design", en: "BugsLess Design" },
+    url: "https://bugs-less-design.vercel.app/",
+    desc: {
+      es: "Desarrollo del sitio de BugsLess Design: canal de contacto y presentación de los servicios del equipo.",
+      en: "Development of the BugsLess Design website: a contact channel and overview of the team's services.",
+    },
+    role: developer,
+    tags: [],
+    stack: ["React", "Redux", "Tailwind"],
+    image: "/projects/BugsLessDesign.png",
+  },
+];
+
 export const filters = [
   { key: "all", label: { es: "Todos", en: "All" } },
   { key: "backend", label: { es: "Backend", en: "Backend" } },
@@ -217,3 +247,12 @@ export const filters = [
   { key: "testing", label: { es: "Testing", en: "Testing" } },
   { key: "ml", label: { es: "ML", en: "ML" } },
 ] as const;
+
+export const tagTone: Record<string, string> = {
+  backend: "var(--accent)",
+  frontend: "var(--tag-frontend)",
+  infra: "var(--tag-infra)",
+  "tui-cli": "var(--tag-devops)",
+  testing: "var(--tag-security)",
+  ml: "var(--tag-prompt)",
+};

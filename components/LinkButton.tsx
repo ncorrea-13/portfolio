@@ -5,13 +5,15 @@ import styles from "./Button.module.css";
 export function LinkButton({
   href,
   external,
+  primary,
   children,
 }: {
   href: string;
   external?: boolean;
+  primary?: boolean;
   children: ReactNode;
 }) {
-  const className = styles.btn;
+  const className = primary ? `${styles.btn} ${styles.primary}` : styles.btn;
 
   if (external) {
     return (
