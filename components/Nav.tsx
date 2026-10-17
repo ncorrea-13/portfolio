@@ -25,7 +25,7 @@ export function Nav() {
       <nav className={styles.nav}>
         <Link href="/" className={styles.brand}>
           <span className={styles.prompt} aria-hidden="true">
-            &gt;_
+            &gt;<span className={styles.cursor}>_</span>
           </span>
           ncorrea
         </Link>

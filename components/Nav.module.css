@@ -30,6 +30,15 @@
 .prompt {
   color: var(--live);
 }
+.cursor {
+  animation: blink 1.1s step-end 4;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
 .links {
   display: flex;
   flex-basis: 100%;
@@ -39,8 +48,8 @@
   order: 3;
 }
 .link {
+  position: relative;
   color: var(--muted);
-  text-underline-offset: 0.4em;
 }
 .active {
   color: var(--heading);
@@ -54,7 +63,6 @@
   border-radius: 2px;
   background: var(--accent-strong);
 }
-  position: relative;
 .toggles {
   display: flex;
   flex-shrink: 0;
@@ -79,5 +87,11 @@
 @media (hover: hover) {
   .link:hover {
     color: var(--accent-strong);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
   }
 }
