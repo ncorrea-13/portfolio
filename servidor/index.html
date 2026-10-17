@@ -342,6 +342,7 @@
           statusMaintenance: "Mantenimiento",
           statusUnknown: "Sin datos",
           statusNever: "sin reportes aún",
+          statusSince: "desde",
           servicesH2: "Servicios",
           HwSv1: "<strong>ThinkCentre</strong> (Debian)",
           HwSv2: "<strong>Raspberry Pi 4B</strong> (Raspberry Pi OS Lite)",
@@ -479,6 +480,7 @@
           statusMaintenance: "Maintenance",
           statusUnknown: "No data",
           statusNever: "no reports yet",
+          statusSince: "since",
           servicesH2: "Services",
           HwSv1: "<strong>ThinkCentre</strong> (Debian)",
           HwSv2: "<strong>Raspberry Pi 4B</strong> (Raspberry Pi OS Lite)",
@@ -601,8 +603,9 @@
           var statusLabel =
             dict["status" + status.charAt(0).toUpperCase() + status.slice(1)] ||
             dict.statusUnknown;
+          // Kuma notifica solo cuando cambia el estado: checked_at es "desde cuándo", no "último chequeo".
           metaSpan.textContent = checkedAt
-            ? statusLabel + " · " + checkedAt
+            ? statusLabel + " · " + dict.statusSince + " " + checkedAt
             : statusLabel + " · " + dict.statusNever;
 
           li.appendChild(nameSpan);
