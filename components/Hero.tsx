@@ -6,32 +6,36 @@ import { useLocale } from "./LocaleProvider";
 import styles from "./Hero.module.css";
 import common from "./common.module.css";
 
-const container = {
+const container = (reduce: boolean) => ({
   hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
-};
+  show: {
+    transition: reduce ? {} : { staggerChildren: 0.12, delayChildren: 0.05 },
+  },
+});
 
-const item = {
-  hidden: { opacity: 0, y: 14 },
+// The static export renders "hidden" into the HTML, so with reduced motion it still has to
+// animate to "show" (instantly) or the hero stays at opacity 0.
+const item = (reduce: boolean) => ({
+  hidden: { opacity: 0, y: reduce ? 0 : 14 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
+    transition: { duration: reduce ? 0 : 0.5, ease: "easeOut" as const },
   },
-};
+});
 
 export function Hero() {
-  const reduce = useReducedMotion();
+  const reduce = !!useReducedMotion();
   const { locale } = useLocale();
 
   return (
     <motion.div
-      variants={reduce ? undefined : container}
-      initial={reduce ? false : "hidden"}
-      animate={reduce ? undefined : "show"}
+      variants={container(reduce)}
+      initial="hidden"
+      animate="show"
       className={styles.hero}
     >
-      <motion.div variants={reduce ? undefined : item}>
+      <motion.div variants={item(reduce)}>
         <Image
           src="/foto.jpg"
           alt="Nicolás Correa"
@@ -41,7 +45,7 @@ export function Hero() {
           className={common.avatar}
         />
       </motion.div>
-      <motion.div variants={reduce ? undefined : item}>
+      <motion.div variants={item(reduce)}>
         <h1 className={styles.title}>Nicolás Correa</h1>
         <p className={styles.subtitle}>
           {locale === "en"
