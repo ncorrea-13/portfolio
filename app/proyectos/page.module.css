@@ -1,7 +1,4 @@
 .lead {
+  max-width: var(--measure);
   margin-bottom: 1.5rem;
-}
-.client {
-  display: grid;
-  gap: 1rem;
 }

@@ -2,7 +2,7 @@ import { ProjectGrid } from "@/components/ProjectGrid";
 import { Reveal } from "@/components/Reveal";
 import { T } from "@/components/T";
 import { OwnProjects } from "@/components/OwnProjects";
-import { ProjectCard } from "@/components/ProjectCard";
+import { ClientShowcase } from "@/components/ClientShowcase";
 import { clientWork, ownProjects } from "@/content/projects";
 import { GITHUB_URL } from "@/content/site";
 import styles from "./page.module.css";
@@ -25,13 +25,15 @@ export default function Proyectos() {
 
       <Reveal>
         <h2 className={common.sectionTitle}>
-          <T es="Trabajo profesional" en="Professional work" />
+          <T es="Trabajos públicos" en="Public work" />
         </h2>
-        <div className={styles.client}>
-          {clientWork.map((project) => (
-            <ProjectCard key={project.url} project={project} row />
-          ))}
-        </div>
+        <p className={common.note}>
+          <T
+            es="Incluye solo trabajo que se puede ver públicamente. El software interno de mis empleos no se publica; el detalle de cada rol está en el CV."
+            en="Only work that can be viewed publicly. Internal software from my jobs is not published; each role's detail is in the CV."
+          />
+        </p>
+        <ClientShowcase projects={clientWork} />
       </Reveal>
 
       <Reveal>

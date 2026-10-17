@@ -247,3 +247,12 @@ export const filters = [
   { key: "testing", label: { es: "Testing", en: "Testing" } },
   { key: "ml", label: { es: "ML", en: "ML" } },
 ] as const;
+
+export const tagTone: Record<string, string> = {
+  backend: "var(--accent)",
+  frontend: "var(--tag-frontend)",
+  infra: "var(--tag-infra)",
+  "tui-cli": "var(--tag-devops)",
+  testing: "var(--tag-security)",
+  ml: "var(--tag-prompt)",
+};

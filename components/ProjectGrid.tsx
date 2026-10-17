@@ -1,56 +1,185 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { projects, filters } from "@/content/projects";
-import { ProjectCard } from "./ProjectCard";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
+import Image from "next/image";
+import { projects, filters, tagTone } from "@/content/projects";
+import type { Project } from "@/content/projects";
 import { useLocale } from "./LocaleProvider";
+import card from "./ProjectCard.module.css";
 import styles from "./ProjectGrid.module.css";
-import common from "./common.module.css";
+
+function initials(name: string) {
+  return name
+    .replace(/[^a-zA-Z0-9]/g, "")
+    .slice(0, 2)
+    .toUpperCase();
+}
+
+function GalleryItem({ project }: { project: Project }) {
+  const { locale } = useLocale();
+  const text = (t: { es: string; en: string }) =>
+    locale === "en" ? t.en : t.es;
+  const main = project.tags[0];
+  const label = filters.find((f) => f.key === main)?.label;
+  const name = text(project.name);
+
+  return (
+    <a
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={styles.item}
+      style={{ "--tone": tagTone[main] ?? "var(--accent)" } as CSSProperties}
+    >
+      <div className={styles.media}>
+        {project.image ? (
+          <Image
+            src={project.image}
+            alt=""
+            width={640}
+            height={400}
+            sizes="19rem"
+            className={styles.img}
+            style={{ objectPosition: project.imagePosition ?? "top" }}
+          />
+        ) : (
+          <div className={styles.fallback} aria-hidden="true">
+            {initials(name)}
+          </div>
+        )}
+      </div>
+      <div className={styles.meta}>
+        <span className={styles.tag}>
+          <span className={styles.dot} aria-hidden="true" />
+          {label ? text(label) : main}
+        </span>
+        {project.license && (
+          <span className={card.license}>{project.license}</span>
+        )}
+      </div>
+      <h3 className={styles.name}>
+        {name}{" "}
+        <span className={styles.arrow} aria-hidden="true">
+          ↗
+        </span>
+      </h3>
+      <p className={styles.desc}>{text(project.desc)}</p>
+      <div className={card.stack}>
+        {project.stack.slice(0, 4).map((tech) => (
+          <span key={tech} className={card.chip}>
+            {tech}
+          </span>
+        ))}
+        {project.stack.length > 4 && (
+          <span className={card.chip}>+{project.stack.length - 4}</span>
+        )}
+      </div>
+    </a>
+  );
+}
 
 export function ProjectGrid() {
   const [active, setActive] = useState<string>("all");
   const { locale } = useLocale();
+  const track = useRef<HTMLDivElement>(null);
+  const [edges, setEdges] = useState({ start: true, end: false });
 
   const visible =
     active === "all"
       ? projects
       : projects.filter((p) => p.tags.includes(active));
+  const count = (key: string) =>
+    key === "all"
+      ? projects.length
+      : projects.filter((p) => p.tags.includes(key)).length;
+
+  const measure = useCallback(() => {
+    const el = track.current;
+    if (!el) return;
+    setEdges({
+      start: el.scrollLeft <= 4,
+      end: el.scrollLeft + el.clientWidth >= el.scrollWidth - 4,
+    });
+  }, []);
+
+  useEffect(() => {
+    track.current?.scrollTo({ left: 0 });
+    measure();
+  }, [active, measure]);
+
+  function scrollBy(dir: 1 | -1) {
+    const el = track.current;
+    if (!el) return;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollBy({
+      left: dir * el.clientWidth * 0.8,
+      behavior: reduce ? "auto" : "smooth",
+    });
+  }
 
   return (
     <div>
-      <div className={styles.filters}>
-        {filters.map((f) => (
-          <button
-            key={f.key}
-            type="button"
-            onClick={() => setActive(f.key)}
-            className={
-              active === f.key
-                ? `${styles.filter} ${styles.active}`
-                : styles.filter
-            }
-          >
-            {locale === "en" ? f.label.en : f.label.es}
-          </button>
-        ))}
-      </div>
-      <div className={common.projectGrid}>
-        <AnimatePresence mode="popLayout">
-          {visible.map((project) => (
-            <motion.div
-              key={project.url}
-              layout
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.2 }}
-              className={styles.cell}
+      <div className={styles.bar}>
+        <div className={styles.filters}>
+          {filters.map((f) => (
+            <button
+              key={f.key}
+              type="button"
+              aria-pressed={active === f.key}
+              onClick={() => setActive(f.key)}
+              className={
+                active === f.key
+                  ? `${styles.filter} ${styles.active}`
+                  : styles.filter
+              }
+              style={
+                {
+                  "--tone": tagTone[f.key] ?? "var(--accent-strong)",
+                } as CSSProperties
+              }
             >
-              <ProjectCard project={project} />
-            </motion.div>
+              {locale === "en" ? f.label.en : f.label.es}
+              <span className={styles.count}>{count(f.key)}</span>
+            </button>
           ))}
-        </AnimatePresence>
+        </div>
+        <div className={styles.nav}>
+          <button
+            type="button"
+            className={styles.arrowBtn}
+            onClick={() => scrollBy(-1)}
+            disabled={edges.start}
+            aria-label={locale === "en" ? "Previous" : "Anterior"}
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            className={styles.arrowBtn}
+            onClick={() => scrollBy(1)}
+            disabled={edges.end}
+            aria-label={locale === "en" ? "Next" : "Siguiente"}
+          >
+            →
+          </button>
+        </div>
+      </div>
+      <div
+        ref={track}
+        className={styles.track}
+        onScroll={measure}
+        role="region"
+        tabIndex={0}
+        aria-label={
+          locale === "en"
+            ? "Learning and academic projects"
+            : "Proyectos de aprendizaje y académicos"
+        }
+      >
+        {visible.map((project) => (
+          <GalleryItem key={project.url} project={project} />
+        ))}
       </div>
     </div>
   );

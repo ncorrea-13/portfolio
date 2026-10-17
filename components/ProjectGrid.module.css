@@ -1,33 +1,214 @@
+.bar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
 .filters {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
 }
 .filter {
-  padding: 0.25rem 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
   border: 1px solid var(--border);
-  border-radius: 9999px;
-  font-size: 13px;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  line-height: 1.25rem;
   color: var(--text);
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease;
+}
+.filter::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 2px;
+  background: var(--tone);
+}
+.count {
+  color: var(--muted);
 }
 .active {
-  border-width: 0;
-  background-image: linear-gradient(
-    135deg,
-    var(--accent-strong),
-    var(--accent-warm)
-  );
-  color: var(--bg);
+  border-color: var(--tone);
+  background: var(--card-bg);
+  color: var(--heading);
 }
-.cell {
+.filter:focus-visible,
+.arrowBtn:focus-visible,
+.item:focus-visible,
+.track:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+.filter:active,
+.arrowBtn:active {
+  transform: translateY(1px);
+}
+
+.nav {
+  display: none;
+  gap: 0.5rem;
+}
+.arrowBtn {
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  font-family: var(--font-mono);
+  color: var(--heading);
+  transition:
+    border-color 150ms ease,
+    opacity 150ms ease;
+}
+.arrowBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.track {
+  display: flex;
+  gap: 1.5rem;
+  margin-inline: -1.5rem;
+  padding: 0 1.5rem 1rem;
+  overflow-x: auto;
+  scroll-padding-inline: 1.5rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.item {
+  display: flex;
+  flex: 0 0 min(19rem, 80%);
+  flex-direction: column;
+  scroll-snap-align: start;
+}
+.media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.625rem;
+  background: var(--code-bg);
+  transition: border-color 200ms ease;
+}
+.img {
+  display: block;
+  width: 100%;
   height: 100%;
+  object-fit: cover;
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 32px;
+  color: var(--tone);
+}
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.875rem;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 2px;
+  background: var(--tone);
+}
+.name {
+  margin-top: 0.25rem;
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--heading);
+  transition: color 200ms ease;
+}
+.arrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  color: var(--muted);
+  transition:
+    transform 200ms ease,
+    color 200ms ease;
+}
+.desc {
+  display: -webkit-box;
+  margin-top: 0.375rem;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+@media (min-width: 48rem) {
+  .bar {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .nav {
+    display: flex;
+  }
 }
 
 @media (hover: hover) {
   .filter:not(.active):hover {
-    border-color: var(--accent-strong);
+    border-color: var(--tone);
     color: var(--heading);
+  }
+  .arrowBtn:not(:disabled):hover {
+    border-color: var(--accent-strong);
+  }
+  .item:hover .media {
+    border-color: var(--tone);
+  }
+  .item:hover .img {
+    transform: scale(1.05);
+  }
+  .item:hover .name {
+    color: var(--accent-strong);
+  }
+  .item:hover .arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .img,
+  .arrow,
+  .filter,
+  .arrowBtn {
+    transition: none;
+  }
+  .item:hover .img,
+  .item:hover .arrow {
+    transform: none;
   }
 }
