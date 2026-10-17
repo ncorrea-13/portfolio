@@ -8,11 +8,14 @@
   gap: 0.5rem;
   overflow-x: auto;
   padding-bottom: 0.25rem;
+  scroll-snap-type: x proximity;
   scrollbar-width: thin;
+  mask-image: linear-gradient(to right, #000 88%, transparent);
 }
 .tab {
   display: flex;
   flex: none;
+  scroll-snap-align: start;
   flex-direction: column;
   gap: 0.125rem;
   padding: 0.5rem 0.875rem;
@@ -177,6 +180,7 @@
   .tabs {
     flex-direction: column;
     overflow: visible;
+    mask-image: none;
   }
   .tab {
     padding: 0.75rem 1rem;

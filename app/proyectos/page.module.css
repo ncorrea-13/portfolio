@@ -2,3 +2,9 @@
   max-width: var(--measure);
   margin-bottom: 1.5rem;
 }
+.note {
+  margin-bottom: 1.5rem;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+}

@@ -27,10 +27,10 @@ export default function Proyectos() {
         <h2 className={common.sectionTitle}>
           <T es="Trabajos públicos" en="Public work" />
         </h2>
-        <p className={common.note}>
+        <p className={styles.note}>
           <T
-            es="Incluye solo trabajo que se puede ver públicamente. El software interno de mis empleos no se publica; el detalle de cada rol está en el CV."
-            en="Only work that can be viewed publicly. Internal software from my jobs is not published; each role's detail is in the CV."
+            es="Incluye solo trabajo público. El software interno de mis empleos no se publica; el detalle de cada rol está en el CV."
+            en="Public work only. Internal software from my jobs is not published; each role's detail is in the CV."
           />
         </p>
         <ClientShowcase projects={clientWork} />
