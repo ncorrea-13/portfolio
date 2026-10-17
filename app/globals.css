@@ -90,7 +90,7 @@ hr {
     --accent-strong: #5638d6;
     --code-bg: #f0ede4;
     --code-text: #5638d6;
-    --muted: #7a766c;
+    --muted: #6b675d;
     --card-bg: #f0ede4;
     --card-border: #b8acff;
     --accent-warm: #d9724a;
@@ -133,7 +133,7 @@ html[data-theme="light"] {
   --accent-strong: #5638d6;
   --code-bg: #f0ede4;
   --code-text: #5638d6;
-  --muted: #7a766c;
+  --muted: #6b675d;
   --card-bg: #f0ede4;
   --card-border: #b8acff;
   --accent-warm: #d9724a;
