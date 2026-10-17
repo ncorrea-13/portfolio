@@ -13,12 +13,12 @@ export default function Proyectos() {
     <>
       <Reveal>
         <h1 className={common.pageTitle}>
-          <T es="Trabajo y proyectos" en="Work and projects" />
+          <T es="Proyectos" en="Projects" />
         </h1>
         <p className={styles.lead}>
           <T
-            es="Sitios que desarrollé para clientes, proyectos propios y trabajos de aprendizaje y académicos. En los open source se indica la licencia; el código está en cada repositorio."
-            en="Websites I built for clients, my own projects, and learning and academic work. Open source ones list their license; the code is in each repository."
+            es="Sitios en producción que desarrollé para clientes, proyectos propios que mantengo y trabajos de aprendizaje. Donde corresponde se indica la licencia; el código está en cada repositorio."
+            en="Production sites I built for clients, my own projects that I maintain, and learning work. Where it applies the license is listed; the code is in each repository."
           />
         </p>
       </Reveal>
@@ -55,12 +55,12 @@ export default function Proyectos() {
 
       <Reveal>
         <h2 className={common.sectionTitle}>
-          <T es="Más en GitHub" en="More on GitHub" />
+          <T es="Todos los repositorios" en="All repositories" />
         </h2>
         <p>
           <T
-            es="Además poseo varios trabajos académicos y experimentos menores. El listado completo está en mi cuenta de Github:"
-            en="I have several academic assignments and small experiments. The full list is on my GitHub account:"
+            es="Hay más trabajos académicos y experimentos chicos que no están acá. Los encontrás en mi GitHub:"
+            en="There are more academic assignments and small experiments not listed here. You can find them on my GitHub:"
           />{" "}
           <a href={GITHUB_URL} className={common.link}>
             {GITHUB_URL.replace("https://", "")}
