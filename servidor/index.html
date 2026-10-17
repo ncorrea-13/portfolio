@@ -50,213 +50,233 @@
     </script>
   </head>
   <body>
-    <nav class="site-nav">
-      <div class="nav-links">
-        <a href="https://www.ncorrea.com.ar/" data-i18n="navHome"></a>
-        <a href="https://www.ncorrea.com.ar/sobre-mi" data-i18n="navAbout"></a>
-        <a
-          href="https://www.ncorrea.com.ar/proyectos"
-          data-i18n="navProjects"
-        ></a>
-        <a href="/" class="active" aria-current="page">Homelab</a>
-      </div>
-      <div class="nav-toggles">
-        <button
-          type="button"
-          class="lang-toggle"
-          id="lang-toggle"
-          aria-label="Cambiar idioma"
-          onclick="toggleLocale()"
+    <header class="bar">
+      <nav class="site-nav">
+        <a class="brand" href="https://www.ncorrea.com.ar/"
+          ><span class="prompt" aria-hidden="true">&gt;_</span> ncorrea</a
         >
-          EN
-        </button>
-        <button
-          type="button"
-          class="theme-toggle"
-          id="theme-toggle"
-          aria-label="Cambiar tema"
-          onclick="toggleTheme()"
-        >
-          ◐
-        </button>
-      </div>
-    </nav>
+        <div class="nav-links">
+          <a href="https://www.ncorrea.com.ar/" data-i18n="navHome"></a>
+          <a
+            href="https://www.ncorrea.com.ar/sobre-mi"
+            data-i18n="navAbout"
+          ></a>
+          <a
+            href="https://www.ncorrea.com.ar/proyectos"
+            data-i18n="navProjects"
+          ></a>
+          <a href="/" class="active" aria-current="page">Homelab</a>
+        </div>
+        <div class="nav-toggles">
+          <button
+            type="button"
+            class="lang-toggle"
+            id="lang-toggle"
+            aria-label="Cambiar idioma"
+            onclick="toggleLocale()"
+          >
+            EN
+          </button>
+          <button
+            type="button"
+            class="theme-toggle"
+            id="theme-toggle"
+            aria-label="Cambiar tema"
+            onclick="toggleTheme()"
+          >
+            ◐
+          </button>
+        </div>
+      </nav>
+    </header>
 
-    <main>
-      <h1 data-i18n="h1"></h1>
+    <div class="doc">
+      <aside class="toc">
+        <nav aria-labelledby="toc-title">
+          <p class="toc-title" id="toc-title" data-i18n="tocTitle"></p>
+          <ol id="toc-list"></ol>
+        </nav>
+      </aside>
+      <main>
+        <header class="doc-header">
+          <p class="kicker" data-i18n="kicker"></p>
+          <h1 data-i18n="h1"></h1>
+          <p class="lead" data-i18n="lead"></p>
+        </header>
 
-      <h2 data-i18n="statusH2"></h2>
-      <div class="status-box" id="status-box">
-        <p class="status-summary" id="status-summary"></p>
-        <p class="status-headline" id="status-headline">
-          <span class="status-loading" data-i18n="statusLoading"></span>
-        </p>
-        <ul class="status-list" id="status-list"></ul>
-      </div>
+        <h2 data-i18n="statusH2"></h2>
+        <div class="status-box" id="status-box">
+          <p class="status-summary" id="status-summary"></p>
+          <p class="status-headline" id="status-headline">
+            <span class="status-loading" data-i18n="statusLoading"></span>
+          </p>
+          <ul class="status-list" id="status-list"></ul>
+        </div>
 
-      <h2 data-i18n="philosophyH2"></h2>
+        <h2 data-i18n="philosophyH2"></h2>
 
-      <p data-i18n="philosophyP1"></p>
+        <p data-i18n="philosophyP1"></p>
 
-      <p data-i18n="philosophyP2"></p>
+        <p data-i18n="philosophyP2"></p>
 
-      <h2 data-i18n="archH2"></h2>
+        <h2 data-i18n="archH2"></h2>
 
-      <br />
+        <br />
 
-      <img
-        id="archDiagramImg"
-        src="diagrama-arquitectura-oscuro.svg"
-        alt="Diagrama de arquitectura del ThinkCentre"
-        class="mermaid-container"
-      />
+        <img
+          id="archDiagramImg"
+          src="diagrama-arquitectura-oscuro.svg"
+          alt="Diagrama de arquitectura del ThinkCentre"
+          class="mermaid-container"
+        />
 
-      <div class="button-row">
-        <a
-          id="archOpenFull"
-          class="link-button"
-          href="diagrama-arquitectura-oscuro.svg"
-          target="_blank"
-          rel="noopener"
-          data-i18n="archOpenFull"
-        ></a>
-      </div>
+        <div class="button-row">
+          <a
+            id="archOpenFull"
+            class="link-button"
+            href="diagrama-arquitectura-oscuro.svg"
+            target="_blank"
+            rel="noopener"
+            data-i18n="archOpenFull"
+          ></a>
+        </div>
 
-      <h2 data-i18n="servicesH2"></h2>
+        <h2 data-i18n="servicesH2"></h2>
 
-      <p data-i18n="HwSv1"></p>
-      <ul>
-        <li data-i18n="serviceCockpit"></li>
-        <li data-i18n="serviceWebhook"></li>
-        <li data-i18n="serviceHeimdall"></li>
-        <li>
-          <span data-i18n="podsLabel"></span>
-          <ul>
-            <li data-i18n="service1"></li>
-            <li data-i18n="service2"></li>
-            <li data-i18n="service3"></li>
-            <li data-i18n="service4"></li>
-            <li data-i18n="service5"></li>
-            <li data-i18n="service6"></li>
-          </ul>
-        </li>
-      </ul>
-      <p data-i18n="HwSv2"></p>
-      <ul>
-        <li data-i18n="serviceCockpitPi"></li>
-        <li data-i18n="serviceDocs"></li>
-        <li data-i18n="serviceTunnel"></li>
-        <li data-i18n="serviceHeimdallHub"></li>
-        <li>
-          <span data-i18n="podsLabel"></span>
-          <ul>
-            <li data-i18n="service7"></li>
-            <li data-i18n="service8"></li>
-          </ul>
-        </li>
-      </ul>
-      <p data-i18n="HwSv3"></p>
-      <ul>
-        <li data-i18n="service9"></li>
-        <li data-i18n="serviceHeimdallTermux"></li>
-      </ul>
-      <p data-i18n="HwSv4"></p>
-      <ul>
-        <li data-i18n="serviceHeimdall"></li>
-        <li data-i18n="service10"></li>
-        <li data-i18n="service11"></li>
-        <li data-i18n="service12"></li>
-      </ul>
+        <p data-i18n="HwSv1"></p>
+        <ul>
+          <li data-i18n="serviceCockpit"></li>
+          <li data-i18n="serviceWebhook"></li>
+          <li data-i18n="serviceHeimdall"></li>
+          <li>
+            <span data-i18n="podsLabel"></span>
+            <ul>
+              <li data-i18n="service1"></li>
+              <li data-i18n="service2"></li>
+              <li data-i18n="service3"></li>
+              <li data-i18n="service4"></li>
+              <li data-i18n="service5"></li>
+              <li data-i18n="service6"></li>
+            </ul>
+          </li>
+        </ul>
+        <p data-i18n="HwSv2"></p>
+        <ul>
+          <li data-i18n="serviceCockpitPi"></li>
+          <li data-i18n="serviceDocs"></li>
+          <li data-i18n="serviceTunnel"></li>
+          <li data-i18n="serviceHeimdallHub"></li>
+          <li>
+            <span data-i18n="podsLabel"></span>
+            <ul>
+              <li data-i18n="service7"></li>
+              <li data-i18n="service8"></li>
+            </ul>
+          </li>
+        </ul>
+        <p data-i18n="HwSv3"></p>
+        <ul>
+          <li data-i18n="service9"></li>
+          <li data-i18n="serviceHeimdallTermux"></li>
+        </ul>
+        <p data-i18n="HwSv4"></p>
+        <ul>
+          <li data-i18n="serviceHeimdall"></li>
+          <li data-i18n="service10"></li>
+          <li data-i18n="service11"></li>
+          <li data-i18n="service12"></li>
+        </ul>
 
-      <h2 data-i18n="gatewayH2"></h2>
-      <p data-i18n="gatewayP"></p>
+        <h2 data-i18n="gatewayH2"></h2>
+        <p data-i18n="gatewayP"></p>
 
-      <h2 data-i18n="hwH2"></h2>
-      <ul>
-        <li data-i18n="hw1"></li>
-        <li data-i18n="hw2"></li>
-        <li data-i18n="hw3"></li>
-        <li data-i18n="hw4"></li>
-      </ul>
-      <h2 data-i18n="backupsH2"></h2>
-      <ul>
-        <li data-i18n="backup1"></li>
-        <li data-i18n="backup2"></li>
-        <li data-i18n="backup3"></li>
-        <li data-i18n="backup4"></li>
-      </ul>
+        <h2 data-i18n="hwH2"></h2>
+        <ul>
+          <li data-i18n="hw1"></li>
+          <li data-i18n="hw2"></li>
+          <li data-i18n="hw3"></li>
+          <li data-i18n="hw4"></li>
+        </ul>
+        <h2 data-i18n="backupsH2"></h2>
+        <ul>
+          <li data-i18n="backup1"></li>
+          <li data-i18n="backup2"></li>
+          <li data-i18n="backup3"></li>
+          <li data-i18n="backup4"></li>
+        </ul>
 
-      <h2 data-i18n="notesH2"></h2>
+        <h2 data-i18n="notesH2"></h2>
 
-      <ul>
-        <li data-i18n="note1"></li>
-        <li data-i18n="note2"></li>
-        <li data-i18n="note3"></li>
-        <li data-i18n="note4"></li>
-        <li data-i18n="note5"></li>
-        <li data-i18n="note6"></li>
-        <li data-i18n="note7"></li>
-        <li data-i18n="note8"></li>
-      </ul>
+        <ul>
+          <li data-i18n="note1"></li>
+          <li data-i18n="note2"></li>
+          <li data-i18n="note3"></li>
+          <li data-i18n="note4"></li>
+          <li data-i18n="note5"></li>
+          <li data-i18n="note6"></li>
+          <li data-i18n="note7"></li>
+          <li data-i18n="note8"></li>
+        </ul>
 
-      <h2 data-i18n="stackH2"></h2>
+        <h2 data-i18n="stackH2"></h2>
 
-      <ul>
-        <li data-i18n="stack1"></li>
-        <li data-i18n="stack2"></li>
-        <li data-i18n="stack3"></li>
-        <li data-i18n="stack4"></li>
-      </ul>
+        <ul>
+          <li data-i18n="stack1"></li>
+          <li data-i18n="stack2"></li>
+          <li data-i18n="stack3"></li>
+          <li data-i18n="stack4"></li>
+        </ul>
 
-      <h2 data-i18n="decisionsH2"></h2>
+        <h2 data-i18n="decisionsH2"></h2>
 
-      <ul>
-        <li data-i18n="decision1"></li>
-        <li data-i18n="decision2"></li>
-        <li data-i18n="decision3"></li>
-        <li data-i18n="decision4"></li>
-        <li data-i18n="decision5"></li>
-        <li data-i18n="decision6"></li>
-        <li data-i18n="decision7"></li>
-      </ul>
+        <ul>
+          <li data-i18n="decision1"></li>
+          <li data-i18n="decision2"></li>
+          <li data-i18n="decision3"></li>
+          <li data-i18n="decision4"></li>
+          <li data-i18n="decision5"></li>
+          <li data-i18n="decision6"></li>
+          <li data-i18n="decision7"></li>
+        </ul>
 
-      <h2 data-i18n="originsH2"></h2>
-      <p data-i18n="originsP"></p>
+        <h2 data-i18n="originsH2"></h2>
+        <p data-i18n="originsP"></p>
 
-      <h2 data-i18n="openSourceH2"></h2>
+        <h2 data-i18n="openSourceH2"></h2>
 
-      <p data-i18n="openSourceP1"></p>
-      <div class="button-row">
-        <a class="link-button" href="https://github.com/ncorrea-13/homeserver"
-          >homeserver</a
-        >
-      </div>
+        <p data-i18n="openSourceP1"></p>
+        <div class="button-row">
+          <a class="link-button" href="https://github.com/ncorrea-13/homeserver"
+            >homeserver</a
+          >
+        </div>
 
-      <h2 data-i18n="relatedH2"></h2>
+        <h2 data-i18n="relatedH2"></h2>
 
-      <p data-i18n="relatedP"></p>
-      <div class="button-row">
-        <a class="link-button" href="https://github.com/ncorrea-13/turmo-screen"
-          >turmo-screen</a
-        >
-        <a
-          class="link-button"
-          href="https://github.com/ncorrea-13/homelab-status"
-          >homelab-status</a
-        >
-      </div>
+        <p data-i18n="relatedP"></p>
+        <div class="button-row">
+          <a
+            class="link-button"
+            href="https://github.com/ncorrea-13/turmo-screen"
+            >turmo-screen</a
+          >
+          <a
+            class="link-button"
+            href="https://github.com/ncorrea-13/homelab-status"
+            >homelab-status</a
+          >
+        </div>
 
-      <hr />
+        <hr />
 
-      <p>
-        <small
-          ><span data-i18n="footer"></span> ·
+        <p class="doc-footer">
+          <span data-i18n="footer"></span> ·
           <a href="https://github.com/ncorrea-13/portfolio/blob/main/LICENSE"
             >MIT License</a
-          ></small
-        >
-      </p>
-    </main>
+          >
+        </p>
+      </main>
+    </div>
 
     <script>
       function updateDiagrams(themeName) {
@@ -281,6 +301,9 @@
           navAbout: "Sobre mí",
           navProjects: "Proyectos",
           h1: "Homelab",
+          kicker: "Documentación técnica",
+          lead: "Infraestructura self-hosted en producción: arquitectura, decisiones técnicas y estado de los servicios en vivo.",
+          tocTitle: "En esta página",
           philosophyH2: "Filosofía",
           philosophyP1:
             "Infraestructura privada, modular y de bajo mantenimiento. Sin dependencia de servicios cloud comerciales. Esta página se publica mediante Cloudflare Tunnel. El resto de servicios se utilizan por WireGuard en mi tailnet personal, y de forma dinámica administro la apertura puntual al público vía Tailscale Funnel a medida de mis necesidades.",
@@ -419,6 +442,9 @@
           navAbout: "About",
           navProjects: "Projects",
           h1: "Homelab",
+          kicker: "Technical documentation",
+          lead: "Self-hosted infrastructure in production: architecture, technical decisions and live service status.",
+          tocTitle: "On this page",
           philosophyH2: "Philosophy",
           philosophyP1:
             "Private, modular infrastructure with low maintenance. It doesn't depend on any commercial cloud service. This page is published through Cloudflare Tunnel. All other services run over WireGuard on my personal tailnet, and I dynamically open public access to them through Tailscale Funnel whenever I need to.",
@@ -660,8 +686,51 @@
           );
         document.getElementById("lang-toggle").textContent =
           lang === "en" ? "ES" : "EN";
+        buildToc();
         loadStatus();
       }
+
+      var tocHeadings = [];
+      var tocTicking = false;
+      function updateToc() {
+        tocTicking = false;
+        var current = null;
+        tocHeadings.forEach(function (h) {
+          if (h.getBoundingClientRect().top <= window.innerHeight * 0.25)
+            current = h;
+        });
+        document.querySelectorAll("#toc-list a").forEach(function (a) {
+          if (current && a.getAttribute("href") === "#" + current.id)
+            a.setAttribute("aria-current", "location");
+          else a.removeAttribute("aria-current");
+        });
+      }
+      function buildToc() {
+        var list = document.getElementById("toc-list");
+        list.innerHTML = "";
+        tocHeadings = Array.prototype.slice.call(
+          document.querySelectorAll("main h2"),
+        );
+        tocHeadings.forEach(function (h) {
+          if (!h.id) h.id = h.getAttribute("data-i18n").replace(/H2$/, "");
+          var li = document.createElement("li");
+          var a = document.createElement("a");
+          a.href = "#" + h.id;
+          a.textContent = h.textContent;
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+        updateToc();
+      }
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (tocTicking) return;
+          tocTicking = true;
+          requestAnimationFrame(updateToc);
+        },
+        { passive: true },
+      );
 
       function toggleLocale() {
         var current = document.documentElement.lang === "en" ? "en" : "es";
