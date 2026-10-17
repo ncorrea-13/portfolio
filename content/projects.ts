@@ -201,18 +201,6 @@ const developer = { es: "Desarrollador", en: "Developer" };
 
 export const clientWork: Project[] = [
   {
-    name: { es: "ASAP Consultores", en: "ASAP Consultores" },
-    url: "https://www.asapconsultores.com.ar/",
-    desc: {
-      es: "Desarrollo del sitio institucional de ASAP Consultores: presentación de la empresa y sus servicios.",
-      en: "Development of the corporate website for ASAP Consultores, presenting the company and its services.",
-    },
-    role: developer,
-    tags: [],
-    stack: ["React", "Next.js", "Tailwind"],
-    image: "/projects/ASAP.png",
-  },
-  {
     name: { es: "AccesoriossTina", en: "AccesoriossTina" },
     url: "https://accesoriosstina.vercel.app/",
     desc: {
@@ -223,6 +211,18 @@ export const clientWork: Project[] = [
     tags: [],
     stack: ["React", "Next.js", "Tailwind"],
     image: "/projects/accesorioss.png",
+  },
+  {
+    name: { es: "ASAP Consultores", en: "ASAP Consultores" },
+    url: "https://www.asapconsultores.com.ar/",
+    desc: {
+      es: "Desarrollo del sitio institucional de ASAP Consultores: presentación de la empresa y sus servicios.",
+      en: "Development of the corporate website for ASAP Consultores, presenting the company and its services.",
+    },
+    role: developer,
+    tags: [],
+    stack: ["React", "Next.js", "Tailwind"],
+    image: "/projects/ASAP.png",
   },
   {
     name: { es: "BugsLess Design", en: "BugsLess Design" },
