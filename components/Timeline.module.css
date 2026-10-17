@@ -21,7 +21,7 @@
   height: 0.5rem;
   border-radius: 9999px;
   background: var(--live);
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--live) 25%, transparent);
+  animation: pulse 2.4s ease-out infinite;
 }
 .title {
   display: block;
@@ -41,5 +41,21 @@
   .row {
     grid-template-columns: 14rem 1fr;
     gap: 1.5rem;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--live) 45%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 7px color-mix(in oklab, var(--live) 0%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live {
+    animation: none;
   }
 }

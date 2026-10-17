@@ -81,6 +81,10 @@ body {
   body {
     animation: none;
   }
+  .cursor,
+  .status-headline::before {
+    animation: none;
+  }
   * {
     transition: none !important;
   }
@@ -354,7 +358,16 @@ li {
   height: 0.625rem;
   border-radius: 50%;
   background: var(--live);
-  box-shadow: 0 0 0 4px color-mix(in oklab, var(--live) 25%, transparent);
+  animation: pulse 2.4s ease-out infinite;
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--live) 45%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 7px color-mix(in oklab, var(--live) 0%, transparent);
+  }
 }
 .status-box.status-down .status-headline {
   color: var(--danger);
@@ -369,6 +382,7 @@ li {
   list-style: none;
   font-family: var(--font-sans);
   font-size: 14px;
+  animation: none;
 }
 .status-list li {
   display: flex;
