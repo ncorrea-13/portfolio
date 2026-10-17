@@ -1,7 +1,7 @@
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { Reveal } from "@/components/Reveal";
 import { T } from "@/components/T";
-import { OwnProjectCard } from "@/components/OwnProjectCard";
+import { OwnProjects } from "@/components/OwnProjects";
 import { ProjectCard } from "@/components/ProjectCard";
 import { clientWork, ownProjects } from "@/content/projects";
 import { GITHUB_URL } from "@/content/site";
@@ -38,11 +38,7 @@ export default function Proyectos() {
         <h2 className={common.sectionTitle}>
           <T es="Proyectos propios" en="Own projects" />
         </h2>
-        <div className={common.projectGrid}>
-          {ownProjects.map((project) => (
-            <OwnProjectCard key={project.url} project={project} />
-          ))}
-        </div>
+        <OwnProjects projects={ownProjects} />
       </Reveal>
 
       <Reveal>

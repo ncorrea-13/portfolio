@@ -1,0 +1,171 @@
+.wrap {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* Lead: poster. The screenshot is the background, a theme-colored scrim carries the text. */
+.lead {
+  position: relative;
+  display: block;
+  min-height: 22rem;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: 0.75rem;
+  background: var(--card-bg);
+  transition: border-color 200ms ease;
+}
+.leadImg {
+  object-fit: cover;
+  object-position: top;
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.scrim {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 22rem;
+  padding: 11rem 1.25rem 1.25rem;
+  background: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 8rem,
+    color-mix(in oklab, var(--bg) 88%, transparent) 13rem,
+    var(--bg) 100%
+  );
+}
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+}
+.leadName {
+  margin-top: 0.25rem;
+  font-family: var(--font-sans);
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 600;
+  color: var(--heading);
+}
+.leadDesc {
+  max-width: 38rem;
+  margin-top: 0.5rem;
+  font-size: 15px;
+}
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.875rem;
+}
+.cta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+}
+
+/* Index: no boxes, hairlines only. */
+.index {
+  border-top: 1px solid var(--border);
+}
+.row {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
+  padding: 1.125rem 2rem 1.125rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: background-color 200ms ease;
+}
+.rowHead {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.rowName {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--heading);
+  transition: color 200ms ease;
+}
+.rowDesc {
+  font-size: 15px;
+}
+.rowBody {
+  display: grid;
+  gap: 0.5rem;
+}
+.arrow {
+  position: absolute;
+  top: 1.125rem;
+  right: 0;
+  font-family: var(--font-mono);
+  color: var(--muted);
+  transition:
+    transform 200ms ease,
+    color 200ms ease;
+}
+
+.lead:focus-visible,
+.row:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+.row:active .rowName,
+.lead:active .leadName {
+  color: var(--accent-strong);
+}
+
+@media (min-width: 40rem) {
+  .lead,
+  .scrim {
+    min-height: 28rem;
+  }
+  .scrim {
+    padding: 12rem 1.75rem 1.75rem;
+  }
+  .leadName {
+    font-size: 44px;
+  }
+  .meta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .row {
+    grid-template-columns: 11rem 1fr;
+    gap: 1.5rem;
+    padding-right: 2.5rem;
+  }
+  .rowHead {
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+}
+
+@media (hover: hover) {
+  .lead:hover {
+    border-color: var(--accent-strong);
+  }
+  .lead:hover .leadImg {
+    transform: scale(1.03);
+  }
+  .row:hover .rowName {
+    color: var(--accent-strong);
+  }
+  .row:hover .arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leadImg,
+  .arrow {
+    transition: none;
+  }
+  .lead:hover .leadImg,
+  .row:hover .arrow {
+    transform: none;
+  }
+}
