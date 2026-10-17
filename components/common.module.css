@@ -27,6 +27,8 @@
 }
 .link {
   color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 .seeAll {
   display: inline-block;
@@ -52,7 +54,7 @@
 
 @media (hover: hover) {
   .link:hover {
-    text-decoration: underline;
+    text-decoration-thickness: 2px;
   }
 }
 
