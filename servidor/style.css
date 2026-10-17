@@ -103,7 +103,6 @@ main a:not(.link-button) {
   text-underline-offset: 0.2em;
 }
 
-/* --- Nav (same as the portfolio) --- */
 .bar {
   position: sticky;
   top: 0;
@@ -194,7 +193,6 @@ main a:not(.link-button) {
   font-weight: 600;
 }
 
-/* --- Doc layout: sticky index + content --- */
 .doc {
   box-sizing: border-box;
   max-width: var(--page-width);
@@ -323,7 +321,6 @@ li {
   text-decoration: none;
 }
 
-/* --- Service status --- */
 .status-box {
   margin: 1rem 0 1.5rem;
   padding: 1.25rem;
@@ -427,7 +424,6 @@ li {
   color: var(--muted);
 }
 
-/* --- Footer --- */
 .doc-footer {
   margin-top: 3rem;
   font-family: var(--font-mono);
