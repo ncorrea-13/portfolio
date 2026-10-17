@@ -9,6 +9,8 @@ export type Project = {
   tags: string[];
   stack: string[];
   image?: string;
+  imagePosition?: string;
+  facts?: { value: string; label: LocalizedText }[];
   role?: LocalizedText;
 };
 
@@ -151,6 +153,7 @@ export const ownProjects: Project[] = [
     license: "GPLv3",
     tags: ["tui-cli"],
     stack: ["Rust", "Ratatui"],
+    imagePosition: "left top",
     image: "/projects/bw-tui.png",
   },
   {
@@ -183,6 +186,12 @@ export const ownProjects: Project[] = [
       "Pi-hole",
       "KVM",
       "Uptime Kuma",
+    ],
+    imagePosition: "center 52%",
+    facts: [
+      { value: "4", label: { es: "equipos", en: "devices" } },
+      { value: "10+", label: { es: "servicios", en: "services" } },
+      { value: "24/7", label: { es: "en producción", en: "in production" } },
     ],
     image: "/projects/homelab.jpg",
   },
