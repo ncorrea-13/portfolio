@@ -5,3 +5,6 @@
   display: grid;
   gap: 1rem;
 }
+.wide {
+  grid-column: 1 / -1;
+}

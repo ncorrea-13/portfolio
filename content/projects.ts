@@ -10,6 +10,7 @@ export type Project = {
   stack: string[];
   image?: string;
   role?: LocalizedText;
+  featured?: boolean;
 };
 
 export const projects: Project[] = [
@@ -137,6 +138,7 @@ export const ownProjects: Project[] = [
       en: "App for running tabletop RPG campaigns: sessions, arcs, NPCs, locations, factions, and a combat tracker. Runs as a web app, on desktop (Windows and Linux), and on Android, and indexes an Obsidian vault's frontmatter. With CI and automated releases.",
     },
     license: "MIT",
+    featured: true,
     tags: ["backend", "frontend"],
     stack: ["Go", "SQLite", "React", "TypeScript", "Wails", "Docker"],
     image: "/projects/rolboard.jpg",
@@ -173,6 +175,7 @@ export const ownProjects: Project[] = [
       en: "A real homelab running 24/7 on four devices. 10+ services as rootless Podman pods under systemd, reachable only over Tailscale through Caddy, with DNS via Unbound over DoT and LAN ports closed. Daily and weekly backups on dedicated disks with tested restores, a VM lab isolated from the network, and live status through Uptime Kuma.",
     },
     license: "MIT",
+    featured: true,
     tags: ["infra"],
     stack: [
       "Podman",

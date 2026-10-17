@@ -39,7 +39,12 @@ export default function Proyectos() {
         </h2>
         <div className={common.projectGrid}>
           {ownProjects.map((project, i) => (
-            <ProjectCard key={project.url} project={project} index={i} />
+            <div
+              key={project.url}
+              className={project.featured ? styles.wide : undefined}
+            >
+              <ProjectCard project={project} index={i} row={project.featured} />
+            </div>
           ))}
         </div>
       </Reveal>
