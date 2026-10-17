@@ -48,8 +48,8 @@ export function Hero() {
         </p>
         <p className={styles.intro}>
           <T
-            es="Estudiante de último año de Ingeniería en Sistemas de Información. Disfruto administrar la infraestructura donde corren los sistemas que creo, intentando exprimir y aprovechar los recursos que dispongo para su mejor eficiencia."
-            en="Final-year Systems Engineering student. I enjoy managing the infrastructure my systems run on, trying to squeeze the most out of the resources I have for better efficiency."
+            es="Automatizo el camino del código a producción y mantengo la infraestructura que lo sostiene, para que el software salga rápido, sea confiable y fácil de mantener."
+            en="I automate the path from code to production and run the infrastructure behind it, so software ships fast, runs reliably, and stays easy to maintain."
           />
         </p>
         <div className={styles.actions}>
