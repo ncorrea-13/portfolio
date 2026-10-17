@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
 import { LocaleToggle } from "./LocaleToggle";
@@ -17,6 +18,7 @@ const links = [
 export function Nav() {
   const pathname = usePathname();
   const { locale } = useLocale();
+  const reduce = useReducedMotion();
 
   return (
     <header className={styles.bar}>
@@ -40,6 +42,17 @@ export function Nav() {
               }
             >
               {locale === "en" ? link.label.en : link.label.es}
+              {pathname === link.href && (
+                <motion.span
+                  layoutId="nav-underline"
+                  className={styles.underline}
+                  transition={
+                    reduce
+                      ? { duration: 0 }
+                      : { type: "spring", stiffness: 500, damping: 40 }
+                  }
+                />
+              )}
             </Link>
           ))}
           <a href={SERVIDOR_URL} className={styles.link}>

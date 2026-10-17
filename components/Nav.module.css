@@ -44,10 +44,17 @@
 }
 .active {
   color: var(--heading);
-  text-decoration: underline;
-  text-decoration-color: var(--accent-strong);
-  text-decoration-thickness: 2px;
 }
+.underline {
+  position: absolute;
+  right: 0;
+  bottom: -0.35rem;
+  left: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent-strong);
+}
+  position: relative;
 .toggles {
   display: flex;
   flex-shrink: 0;
