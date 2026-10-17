@@ -1,16 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import type { Project } from "@/content/projects";
 import { useLocale } from "./LocaleProvider";
 import styles from "./ProjectCard.module.css";
-
-const gradients = [
-  "linear-gradient(135deg, var(--accent-strong), var(--accent-warm))",
-  "linear-gradient(135deg, var(--accent), var(--card-border))",
-  "linear-gradient(135deg, var(--accent-warm), var(--accent-strong))",
-];
 
 function initials(name: string) {
   return name
@@ -21,23 +14,19 @@ function initials(name: string) {
 
 export function ProjectCard({
   project,
-  index = 0,
   row = false,
 }: {
   project: Project;
-  index?: number;
   row?: boolean;
 }) {
   const { locale } = useLocale();
   const name = locale === "en" ? project.name.en : project.name.es;
 
   return (
-    <motion.a
+    <a
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
       className={row ? `${styles.card} ${styles.row}` : styles.card}
     >
       <div className={styles.media}>
@@ -50,10 +39,7 @@ export function ProjectCard({
             className={styles.img}
           />
         ) : (
-          <div
-            className={styles.fallback}
-            style={{ backgroundImage: gradients[index % gradients.length] }}
-          >
+          <div className={styles.fallback} aria-hidden="true">
             {initials(name)}
           </div>
         )}
@@ -64,6 +50,9 @@ export function ProjectCard({
           {project.license && (
             <span className={styles.license}>{project.license}</span>
           )}
+          <span className={styles.arrow} aria-hidden="true">
+            ↗
+          </span>
         </div>
         {project.role && (
           <span className={styles.license}>
@@ -81,6 +70,6 @@ export function ProjectCard({
           ))}
         </div>
       </div>
-    </motion.a>
+    </a>
   );
 }

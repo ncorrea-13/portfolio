@@ -37,7 +37,7 @@ export function ProjectGrid() {
       </div>
       <div className={common.projectGrid}>
         <AnimatePresence mode="popLayout">
-          {visible.map((project, i) => (
+          {visible.map((project) => (
             <motion.div
               key={project.url}
               layout
@@ -47,7 +47,7 @@ export function ProjectGrid() {
               transition={{ duration: 0.2 }}
               className={styles.cell}
             >
-              <ProjectCard project={project} index={i} />
+              <ProjectCard project={project} />
             </motion.div>
           ))}
         </AnimatePresence>

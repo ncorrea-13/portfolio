@@ -28,8 +28,8 @@ export default function Proyectos() {
           <T es="Trabajo profesional" en="Professional work" />
         </h2>
         <div className={styles.client}>
-          {clientWork.map((project, i) => (
-            <ProjectCard key={project.url} project={project} index={i} row />
+          {clientWork.map((project) => (
+            <ProjectCard key={project.url} project={project} row />
           ))}
         </div>
       </Reveal>
