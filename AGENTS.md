@@ -5,7 +5,7 @@
 Repo con dos superficies públicas independientes, deploy distinto cada una.
 
 - **Portfolio** (raíz) - Next.js 16 (App Router) + TypeScript, `output: "export"` (estático puro, sin SSR/API routes). Deploy en **Vercel**. Rutas: `/`, `/sobre-mi`, `/proyectos`.
-- **`servidor/`** - HTML/CSS/JS plano, sin build. Deploy vía Cloudflare Tunnel, corriendo 24/7 en el homeserver real. Prueba viva de que el self-hosting es real (estado de servicios vía fetch a una API FastAPI externa, ver "Status API").
+- **`servidor/`** - HTML/CSS/JS plano, sin build. Deploy vía Cloudflare Tunnel, corriendo 24/7 en el homeserver real. Prueba viva de que el self-hosting es real (estado de servicios vía fetch a una API Go externa, ver "Status API").
 
 No es el homeserver real: Tailscale/Cloudflare Tunnel no están acá, ni los compose files de los demás servicios (viven en github.com/ncorrea-13/homeserver). Verificar exposición real (headers, doc root, estado del tunnel) se hace en el servidor, no en este repo.
 
@@ -70,9 +70,9 @@ Ya implementado, no es una idea a futuro:
 - `LocaleToggle.tsx`: botón EN/ES en el header. Usa `useSyncExternalStore` con un snapshot server/cliente distinto (`mounted`) para evitar mismatch de hidratación - no simplificar quitando ese guard.
 - Contenido tipado en `content/*.ts` sigue el mismo patrón `LocalizedText = { es: string; en: string }` que `T` - mantenerlo consistente si se agrega contenido nuevo, no mezclar con una lib de i18n externa (next-intl, etc.) para esto: el alcance (3 rutas, texto fijo) no lo justifica.
 
-## Status API (FastAPI)
+## Status API (Go)
 
-`servidor/index.html` renderiza el estado de los servicios (up/down, último check) haciendo `fetch` a `STATUS_API_URL` (`https://status.ncorrea.com.ar/api/status`, hardcodeado en el `<script>` inline). La API FastAPI vive en un **repo aparte** (`homelab-status`, fuera de este repo), no acá:
+`servidor/index.html` renderiza el estado de los servicios (up/down, desde cuándo cambió el estado) haciendo `fetch` a `STATUS_API_URL` (`https://status.ncorrea.com.ar/api/status`, hardcodeado en el `<script>` inline). La API en Go vive en un **repo aparte** (`homelab-status`, fuera de este repo), no acá:
 
 - Recibe heartbeats de Uptime Kuma vía webhook (`/webhook/kuma`), los guarda en SQLite (`services` + `events`) y expone `/api/status` con el último estado por servicio.
 - Reemplaza al viejo `boot.json` + unit de systemd (`service/`, ya removido de este repo): ya no hay un contador de uptime local, sino estado real de los servicios monitoreados por Kuma.
@@ -111,7 +111,7 @@ En cada push a `main`/`dev` y en cada PR: `pnpm install --frozen-lockfile` → `
 ## Deploy
 
 - **Portfolio**: push a `main` → deploy automático en Vercel (preview en PRs). Build genera `out/` estático.
-- **`servidor/`**: CD por polling, no push-based - un timer systemd (`deploy-check.timer`, repo aparte `homelab`, corre en el Raspberry Pi) chequea cada 5 min el último commit de `main` en este repo vía GitHub API. Si cambió respecto al SHA guardado en `.deployed-sha`, el script (`deploy-check-docs.sh`) baja por `curl` los archivos de `servidor/` (`index.html`, `style.css`, `diagrama-arquitectura-claro.svg`, `diagrama-arquitectura-oscuro.svg`) directo desde GitHub raw al doc root real. No hay sync manual ni webhook - la definición del timer/service/env vive en `homelab/raspberry/deploy-check/`, fuera de este repo. El estado de servicios se sigue consumiendo de la Status API (FastAPI, repo aparte) en vez del viejo `boot.json`/unit de systemd.
+- **`servidor/`**: CD por polling, no push-based - un timer systemd (`deploy-check.timer`, repo aparte `homeserver`, corre en el Raspberry Pi) chequea cada 5 min el último commit de `main` en este repo vía GitHub API. Si cambió respecto al SHA guardado en `.deployed-sha`, el script (`deploy-check-docs.sh`) baja por `curl` los archivos de `servidor/` (`index.html`, `style.css`, `diagrama-arquitectura-claro.svg`, `diagrama-arquitectura-oscuro.svg`) directo desde GitHub raw al doc root real. No hay sync manual ni webhook - la definición del timer/service/env vive en `homeserver/raspberry/deploy-check/`, fuera de este repo. El estado de servicios se sigue consumiendo de la Status API (Go, repo aparte) en vez del viejo `boot.json`/unit de systemd.
 
 ## Cosas a evitar
 
