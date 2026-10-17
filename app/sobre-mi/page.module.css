@@ -5,13 +5,36 @@
   gap: 1.5rem;
 }
 .flow {
-  max-width: var(--measure);
+  max-width: 44rem;
 }
 .flow > * + * {
   margin-top: 0.75rem;
 }
-.prose {
-  max-width: var(--measure);
+.facets {
+  margin-top: 4rem;
+  border-top: 1px solid var(--border);
+}
+.facet {
+  display: grid;
+  gap: 0.5rem;
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.facetTitle {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.75rem;
+  color: var(--accent);
+}
+.facetText {
+  max-width: 44rem;
+}
+
+@media (min-width: 48rem) {
+  .facet {
+    grid-template-columns: 14rem minmax(0, 1fr);
+    gap: 1.5rem;
+  }
 }
 
 @media (min-width: 40rem) {
