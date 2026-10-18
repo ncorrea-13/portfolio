@@ -1,12 +1,14 @@
 import { SERVIDOR_URL } from "@/content/site";
 
 type LocalizedText = { es: string; en: string };
+export type FilterKey = (typeof filters)[number]["key"];
+type Tag = Exclude<FilterKey, "all">;
 export type Project = {
   name: LocalizedText;
   url: string;
   desc: LocalizedText;
   license?: string;
-  tags: string[];
+  tags: Tag[];
   stack: string[];
   image?: string;
   imagePosition?: string;
@@ -19,18 +21,18 @@ export const projects: Project[] = [
     name: { es: "PetHood", en: "PetHood" },
     url: "https://github.com/Pethood-project",
     desc: {
-      es: "Trabajo final de carrera. API REST con Express, TypeScript, PostgreSQL y Prisma, con pipeline de CI en GitHub Actions. Incluye una app mobile complementaria hecha con Expo y NativeWind.",
-      en: "Final degree thesis. REST API built with Express, TypeScript, PostgreSQL, and Prisma, with a CI pipeline in GitHub Actions. Includes a companion mobile app built with Expo and NativeWind.",
+      es: "Trabajo final de carrera: plataforma de adopción y rescate animal. API REST con chat en tiempo real, app mobile con Expo y panel de administración web con Next.js, con tests y CI.",
+      en: "Final degree thesis: an animal adoption and rescue platform. REST API with real-time chat, a mobile app built with Expo, and a web admin panel built with Next.js, with tests and CI.",
     },
     license: "",
-    tags: ["backend", "frontend"],
+    tags: ["backend", "frontend", "mobile"],
     stack: [
       "Express",
       "TypeScript",
       "PostgreSQL",
       "Prisma",
+      "Next.js",
       "Expo",
-      "NativeWind",
     ],
     image: "/projects/pethood.png",
   },
@@ -38,12 +40,12 @@ export const projects: Project[] = [
     name: { es: "Mis dotfiles personales", en: "My personal dotfiles" },
     url: "https://github.com/ncorrea-13/dotfiles",
     desc: {
-      es: "Configuración personal de Linux para Devuan 6 (Excalibur) sobre Wayland. 100% systemd-free.",
-      en: "My personal Linux setup for Devuan 6 (Excalibur) on Wayland. 100% systemd-free.",
+      es: "Config personal de Linux sobre Devuan 6 con OpenRC y Sway, 100% systemd-free. Un install.sh enlaza todo en $HOME y respalda lo existente. Incluye Zsh, Neovim, Zellij y WezTerm.",
+      en: "Personal Linux setup on Devuan 6 with OpenRC and Sway, 100% systemd-free. An install.sh links everything into $HOME and backs up existing files. Includes Zsh, Neovim, Zellij, and WezTerm.",
     },
     license: "MIT",
     tags: ["infra", "tui-cli"],
-    stack: ["Bash", "Lua", "Neovim"],
+    stack: ["Devuan", "OpenRC", "Sway", "Bash", "Zsh", "Lua", "Neovim"],
     image: "/projects/dotfiles.png",
   },
   {
@@ -59,13 +61,13 @@ export const projects: Project[] = [
   },
   {
     name: {
-      es: "Testing Automatizado sobre Thinkint Tester",
+      es: "Testing Automatizado sobre Thinking Tester",
       en: "Automated Testing on Thinking Tester",
     },
     url: "https://github.com/matih1210/TPN-6-TESTING-AUTOMATIZADO",
     desc: {
-      es: "Tests E2E que cubre registro, login, CRUD de contactos, validaciones y protección de rutas para la aplicación Thinking Tester Contact List.",
-      en: "End to end tests covering sign up, login, contact CRUD, validations, and route protection for the Thinking Tester Contact List app.",
+      es: "Suite E2E con Cypress: 19 casos que cubren registro, login y logout, CRUD de contactos, validaciones de campos obligatorios y protección de rutas sin sesión.",
+      en: "Cypress E2E suite: 19 test cases covering sign up, login and logout, contact CRUD, required-field validations, and route protection without a session.",
     },
     tags: ["testing"],
     stack: ["Node.js", "Cypress"],
@@ -75,11 +77,11 @@ export const projects: Project[] = [
     name: { es: "Generador de portadas de libros", en: "Book cover generator" },
     url: "https://github.com/ncorrea-13/generadorLibros",
     desc: {
-      es: "cGAN y cVAE para síntesis de estructuras de texto, trabajo final de Redes Neuronales Profundas (2025), con Jupyter Notebook y Google Colab.",
-      en: "cGAN and cVAE models for text structure synthesis, final project for Deep Neural Networks (2025), built with Jupyter Notebook and Google Colab.",
+      es: "BookCoverAI: generador de portadas de libros por género con una cGAN y una cVAE, entrenadas con el dataset Book30. La app en Streamlit permite elegir el género, el modelo y la cantidad de imágenes, e incluye un juego con niveles de dificultad para adivinar el género de la portada generada.",
+      en: "BookCoverAI: a book cover generator by genre using a cGAN and a cVAE, trained on the Book30 dataset. The Streamlit app lets you pick the genre, the model, and the number of images, and includes a game with difficulty levels where you guess the genre of the generated cover.",
     },
     license: "GPLv3",
-    tags: ["frontend", "ml"],
+    tags: ["ml", "frontend"],
     stack: ["Python", "PyTorch", "Streamlit"],
     image: "/projects/generador.png",
   },
@@ -90,31 +92,31 @@ export const projects: Project[] = [
     },
     url: "https://huggingface.co/spaces/ncorrea-13/generadorFibonacci",
     desc: {
-      es: "Implementación del Generador de Fibonacci Atrasado.",
-      en: "An implementation of the Lagged Fibonacci Generator.",
+      es: "Generador de números pseudoaleatorios con Fibonacci atrasado. Incluye transformada inversa, aceptación-rechazo y tests estadísticos como Kolmogorov-Smirnov y Chi-cuadrado, con interfaz en Gradio.",
+      en: "Pseudo-random number generator using Lagged Fibonacci. Includes inverse transform, acceptance-rejection, and statistical tests such as Kolmogorov-Smirnov and Chi-square, with a Gradio interface.",
     },
-    tags: ["frontend", "backend"],
+    tags: ["backend"],
     stack: ["Python", "Gradio"],
     image: "/projects/Fibonacci.png",
   },
   {
     name: {
-      es: "Sistema de Stock de inventario Fullstack",
-      en: "Fullstack Inventory Stock System",
+      es: "Sistema de gestión de inventario",
+      en: "Inventory management system",
     },
     url: "https://github.com/ncorrea-13/sistInventario-back",
     desc: {
-      es: "Sistema de stock de inventario con la gestión de productos, proveedores, órdenes y ventas.",
-      en: "An inventory stock system that manages products, suppliers, orders, and sales.",
+      es: "Gestión de inventario con modelos de lote fijo e intervalo fijo, lote óptimo, punto de pedido y stock de seguridad. Incluye proveedores, órdenes de compra, ventas y un cron que genera órdenes automáticamente.",
+      en: "Inventory management with fixed-lot and fixed-interval models, optimal lot size, reorder point, and safety stock. Includes suppliers, purchase orders, sales, and a cron job that generates orders automatically.",
     },
     tags: ["frontend", "backend"],
     stack: [
-      "React",
+      "TypeScript",
       "Next.js",
       "Tailwind",
-      "PrismaORM",
-      "PostgreSql",
       "Express",
+      "Prisma",
+      "PostgreSQL",
     ],
   },
   {
@@ -184,6 +186,7 @@ export const ownProjects: Project[] = [
       "Tailscale",
       "Cloudflare",
       "Pi-hole",
+      "Unbound",
       "KVM",
       "Uptime Kuma",
     ],
@@ -209,7 +212,7 @@ export const clientWork: Project[] = [
     },
     role: developer,
     tags: [],
-    stack: ["React", "Next.js", "Tailwind"],
+    stack: ["React", "Next.js", "TypeScript", "Tailwind", "Supabase"],
     image: "/projects/accesorioss.png",
   },
   {
@@ -233,7 +236,7 @@ export const clientWork: Project[] = [
     },
     role: developer,
     tags: [],
-    stack: ["React", "Redux", "Tailwind"],
+    stack: ["React", "Vite", "Tailwind", "Three.js"],
     image: "/projects/BugsLessDesign.png",
   },
 ];
@@ -243,15 +246,17 @@ export const filters = [
   { key: "backend", label: { es: "Backend", en: "Backend" } },
   { key: "frontend", label: { es: "Frontend", en: "Frontend" } },
   { key: "infra", label: { es: "Infraestructura", en: "Infrastructure" } },
+  { key: "mobile", label: { es: "Mobile", en: "Mobile" } },
   { key: "tui-cli", label: { es: "TUI/CLI", en: "TUI/CLI" } },
   { key: "testing", label: { es: "Testing", en: "Testing" } },
-  { key: "ml", label: { es: "ML", en: "ML" } },
+  { key: "ml", label: { es: "Machine Learning", en: "Machine Learning" } },
 ] as const;
 
-export const tagTone: Record<string, string> = {
+export const tagTone: Record<Tag, string> = {
   backend: "var(--accent)",
   frontend: "var(--tag-frontend)",
   infra: "var(--tag-infra)",
+  mobile: "var(--tag-mobile)",
   "tui-cli": "var(--tag-devops)",
   testing: "var(--tag-security)",
   ml: "var(--tag-prompt)",
