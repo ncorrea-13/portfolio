@@ -21,8 +21,8 @@ export const projects: Project[] = [
     name: { es: "PetHood", en: "PetHood" },
     url: "https://github.com/Pethood-project",
     desc: {
-      es: "Trabajo final de carrera: plataforma de adopción y rescate animal. API REST con Express, TypeScript, PostgreSQL y Prisma, con chat en tiempo real, tests con Vitest y CI en GitHub Actions. Incluye una app mobile con Expo y un panel de administración web con Next.js.",
-      en: "Final degree thesis: an animal adoption and rescue platform. REST API built with Express, TypeScript, PostgreSQL, and Prisma, with real-time chat, Vitest tests, and CI on GitHub Actions. Includes a mobile app built with Expo and a web admin panel built with Next.js.",
+      es: "Trabajo final de carrera: plataforma de adopción y rescate animal. API REST con chat en tiempo real, app mobile con Expo y panel de administración web con Next.js, con tests y CI.",
+      en: "Final degree thesis: an animal adoption and rescue platform. REST API with real-time chat, a mobile app built with Expo, and a web admin panel built with Next.js, with tests and CI.",
     },
     license: "",
     tags: ["backend", "frontend", "mobile"],
@@ -40,12 +40,12 @@ export const projects: Project[] = [
     name: { es: "Mis dotfiles personales", en: "My personal dotfiles" },
     url: "https://github.com/ncorrea-13/dotfiles",
     desc: {
-      es: "Configuración personal de Linux para Devuan 6 (Excalibur) sobre Wayland. 100% systemd-free.",
-      en: "My personal Linux setup for Devuan 6 (Excalibur) on Wayland. 100% systemd-free.",
+      es: "Config personal de Linux sobre Devuan 6 con OpenRC y Sway, 100% systemd-free. Un install.sh enlaza todo en $HOME y respalda lo existente. Incluye Zsh, Neovim, Zellij y WezTerm.",
+      en: "Personal Linux setup on Devuan 6 with OpenRC and Sway, 100% systemd-free. An install.sh links everything into $HOME and backs up existing files. Includes Zsh, Neovim, Zellij, and WezTerm.",
     },
     license: "MIT",
     tags: ["infra", "tui-cli"],
-    stack: ["Bash", "Lua", "Neovim"],
+    stack: ["Devuan", "OpenRC", "Sway", "Bash", "Zsh", "Lua", "Neovim"],
     image: "/projects/dotfiles.png",
   },
   {
@@ -66,8 +66,8 @@ export const projects: Project[] = [
     },
     url: "https://github.com/matih1210/TPN-6-TESTING-AUTOMATIZADO",
     desc: {
-      es: "Suite E2E con Cypress sobre Thinking Tester Contact List: 19 casos en 8 specs que cubren registro, login y logout, CRUD de contactos, validaciones de campos obligatorios y protección de rutas sin sesión.",
-      en: "Cypress E2E suite for the Thinking Tester Contact List app: 19 test cases across 8 specs covering sign up, login and logout, contact CRUD, required-field validations, and route protection without a session.",
+      es: "Suite E2E con Cypress: 19 casos que cubren registro, login y logout, CRUD de contactos, validaciones de campos obligatorios y protección de rutas sin sesión.",
+      en: "Cypress E2E suite: 19 test cases covering sign up, login and logout, contact CRUD, required-field validations, and route protection without a session.",
     },
     tags: ["testing"],
     stack: ["Node.js", "Cypress"],
@@ -77,8 +77,8 @@ export const projects: Project[] = [
     name: { es: "Generador de portadas de libros", en: "Book cover generator" },
     url: "https://github.com/ncorrea-13/generadorLibros",
     desc: {
-      es: "BookCoverAI: generador de portadas de libros por género con una cGAN y una cVAE, y un juego para adivinar el género de la portada generada. Entrenado con el dataset Book30 en notebooks y desplegado con Streamlit.",
-      en: "BookCoverAI: a book cover generator by genre using a cGAN and a cVAE, plus a game where you guess the genre of the generated cover. Trained on the Book30 dataset in notebooks and deployed with Streamlit.",
+      es: "BookCoverAI: generador de portadas de libros por género con una cGAN y una cVAE, entrenadas con el dataset Book30. La app en Streamlit permite elegir el género, el modelo y la cantidad de imágenes, e incluye un juego con niveles de dificultad para adivinar el género de la portada generada.",
+      en: "BookCoverAI: a book cover generator by genre using a cGAN and a cVAE, trained on the Book30 dataset. The Streamlit app lets you pick the genre, the model, and the number of images, and includes a game with difficulty levels where you guess the genre of the generated cover.",
     },
     license: "GPLv3",
     tags: ["ml", "frontend"],
@@ -92,8 +92,8 @@ export const projects: Project[] = [
     },
     url: "https://huggingface.co/spaces/ncorrea-13/generadorFibonacci",
     desc: {
-      es: "Generador de números pseudoaleatorios con el método de Fibonacci atrasado, con parámetros y semilla configurables. Incluye generación de variables aleatorias por transformada inversa y aceptación-rechazo, y tests estadísticos de calidad como Kolmogorov-Smirnov, Chi-cuadrado, Rachas, Poker y Serial, con interfaz en Gradio.",
-      en: "Pseudo-random number generator using the Lagged Fibonacci method, with configurable parameters and seed. Includes random variable generation by inverse transform and acceptance-rejection, and statistical quality tests such as Kolmogorov-Smirnov, Chi-square, Runs, Poker, and Serial, with a Gradio interface.",
+      es: "Generador de números pseudoaleatorios con Fibonacci atrasado. Incluye transformada inversa, aceptación-rechazo y tests estadísticos como Kolmogorov-Smirnov y Chi-cuadrado, con interfaz en Gradio.",
+      en: "Pseudo-random number generator using Lagged Fibonacci. Includes inverse transform, acceptance-rejection, and statistical tests such as Kolmogorov-Smirnov and Chi-square, with a Gradio interface.",
     },
     tags: ["backend"],
     stack: ["Python", "Gradio"],
@@ -106,8 +106,8 @@ export const projects: Project[] = [
     },
     url: "https://github.com/ncorrea-13/sistInventario-back",
     desc: {
-      es: "Sistema de gestión de inventario con modelos de reposición de lote fijo e intervalo fijo, cálculo de lote óptimo, punto de pedido, stock de seguridad y CGI. Gestiona artículos, proveedores, órdenes de compra y ventas, y un cron genera automáticamente las órdenes del modelo de intervalo fijo.",
-      en: "Inventory management system with fixed-lot and fixed-interval replenishment models, optimal lot size, reorder point, safety stock, and CGI. Manages items, suppliers, purchase orders, and sales, and a cron job automatically generates orders for the fixed-interval model.",
+      es: "Gestión de inventario con modelos de lote fijo e intervalo fijo, lote óptimo, punto de pedido y stock de seguridad. Incluye proveedores, órdenes de compra, ventas y un cron que genera órdenes automáticamente.",
+      en: "Inventory management with fixed-lot and fixed-interval models, optimal lot size, reorder point, and safety stock. Includes suppliers, purchase orders, sales, and a cron job that generates orders automatically.",
     },
     tags: ["frontend", "backend"],
     stack: [
