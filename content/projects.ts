@@ -61,13 +61,13 @@ export const projects: Project[] = [
   },
   {
     name: {
-      es: "Testing Automatizado sobre Thinkint Tester",
+      es: "Testing Automatizado sobre Thinking Tester",
       en: "Automated Testing on Thinking Tester",
     },
     url: "https://github.com/matih1210/TPN-6-TESTING-AUTOMATIZADO",
     desc: {
-      es: "Tests E2E que cubre registro, login, CRUD de contactos, validaciones y protección de rutas para la aplicación Thinking Tester Contact List.",
-      en: "End to end tests covering sign up, login, contact CRUD, validations, and route protection for the Thinking Tester Contact List app.",
+      es: "Suite E2E con Cypress sobre Thinking Tester Contact List: 19 casos en 8 specs que cubren registro, login y logout, CRUD de contactos, validaciones de campos obligatorios y protección de rutas sin sesión.",
+      en: "Cypress E2E suite for the Thinking Tester Contact List app: 19 test cases across 8 specs covering sign up, login and logout, contact CRUD, required-field validations, and route protection without a session.",
     },
     tags: ["testing"],
     stack: ["Node.js", "Cypress"],
@@ -77,8 +77,8 @@ export const projects: Project[] = [
     name: { es: "Generador de portadas de libros", en: "Book cover generator" },
     url: "https://github.com/ncorrea-13/generadorLibros",
     desc: {
-      es: "cGAN y cVAE para síntesis de estructuras de texto, trabajo final de Redes Neuronales Profundas (2025), con Jupyter Notebook y Google Colab.",
-      en: "cGAN and cVAE models for text structure synthesis, final project for Deep Neural Networks (2025), built with Jupyter Notebook and Google Colab.",
+      es: "BookCoverAI: generador de portadas de libros por género con una cGAN y una cVAE, y un juego para adivinar el género de la portada generada. Entrenado con el dataset Book30 en notebooks y desplegado con Streamlit.",
+      en: "BookCoverAI: a book cover generator by genre using a cGAN and a cVAE, plus a game where you guess the genre of the generated cover. Trained on the Book30 dataset in notebooks and deployed with Streamlit.",
     },
     license: "GPLv3",
     tags: ["ml", "frontend"],
@@ -92,8 +92,8 @@ export const projects: Project[] = [
     },
     url: "https://huggingface.co/spaces/ncorrea-13/generadorFibonacci",
     desc: {
-      es: "Implementación del Generador de Fibonacci Atrasado.",
-      en: "An implementation of the Lagged Fibonacci Generator.",
+      es: "Generador de números pseudoaleatorios con el método de Fibonacci atrasado, con parámetros y semilla configurables. Incluye generación de variables aleatorias por transformada inversa y aceptación-rechazo, y tests estadísticos de calidad como Kolmogorov-Smirnov, Chi-cuadrado, Rachas, Poker y Serial, con interfaz en Gradio.",
+      en: "Pseudo-random number generator using the Lagged Fibonacci method, with configurable parameters and seed. Includes random variable generation by inverse transform and acceptance-rejection, and statistical quality tests such as Kolmogorov-Smirnov, Chi-square, Runs, Poker, and Serial, with a Gradio interface.",
     },
     tags: ["backend"],
     stack: ["Python", "Gradio"],
@@ -101,22 +101,22 @@ export const projects: Project[] = [
   },
   {
     name: {
-      es: "Sistema de Stock de inventario Fullstack",
-      en: "Fullstack Inventory Stock System",
+      es: "Sistema de gestión de inventario",
+      en: "Inventory management system",
     },
     url: "https://github.com/ncorrea-13/sistInventario-back",
     desc: {
-      es: "Sistema de stock de inventario con la gestión de productos, proveedores, órdenes y ventas.",
-      en: "An inventory stock system that manages products, suppliers, orders, and sales.",
+      es: "Sistema de gestión de inventario con modelos de reposición de lote fijo e intervalo fijo, cálculo de lote óptimo, punto de pedido, stock de seguridad y CGI. Gestiona artículos, proveedores, órdenes de compra y ventas, y un cron genera automáticamente las órdenes del modelo de intervalo fijo.",
+      en: "Inventory management system with fixed-lot and fixed-interval replenishment models, optimal lot size, reorder point, safety stock, and CGI. Manages items, suppliers, purchase orders, and sales, and a cron job automatically generates orders for the fixed-interval model.",
     },
     tags: ["frontend", "backend"],
     stack: [
-      "React",
+      "TypeScript",
       "Next.js",
       "Tailwind",
-      "PrismaORM",
-      "PostgreSql",
       "Express",
+      "Prisma",
+      "PostgreSQL",
     ],
   },
   {
