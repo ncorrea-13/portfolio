@@ -4,8 +4,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import { projects, filters, tagTone } from "@/content/projects";
-import type { Project } from "@/content/projects";
+import type { FilterKey, Project } from "@/content/projects";
 import { useLocale } from "./LocaleProvider";
+import { ProjectTags } from "./ProjectTags";
 import card from "./ProjectCard.module.css";
 import styles from "./ProjectGrid.module.css";
 
@@ -21,7 +22,6 @@ function GalleryItem({ project }: { project: Project }) {
   const text = (t: { es: string; en: string }) =>
     locale === "en" ? t.en : t.es;
   const main = project.tags[0];
-  const label = filters.find((f) => f.key === main)?.label;
   const name = text(project.name);
 
   return (
@@ -50,10 +50,7 @@ function GalleryItem({ project }: { project: Project }) {
         )}
       </div>
       <div className={styles.meta}>
-        <span className={styles.tag}>
-          <span className={styles.dot} aria-hidden="true" />
-          {label ? text(label) : main}
-        </span>
+        <ProjectTags tags={project.tags} />
         {project.license && (
           <span className={card.license}>{project.license}</span>
         )}
@@ -80,7 +77,7 @@ function GalleryItem({ project }: { project: Project }) {
 }
 
 export function ProjectGrid() {
-  const [active, setActive] = useState<string>("all");
+  const [active, setActive] = useState<FilterKey>("all");
   const { locale } = useLocale();
   const track = useRef<HTMLDivElement>(null);
   const [edges, setEdges] = useState({ start: true, end: false });
@@ -89,10 +86,12 @@ export function ProjectGrid() {
     active === "all"
       ? projects
       : projects.filter((p) => p.tags.includes(active));
-  const count = (key: string) =>
+  const count = (key: FilterKey) =>
     key === "all"
       ? projects.length
       : projects.filter((p) => p.tags.includes(key)).length;
+
+  const shown = filters.filter((f) => f.key === "all" || count(f.key) >= 2);
 
   const measure = useCallback(() => {
     const el = track.current;
@@ -122,7 +121,7 @@ export function ProjectGrid() {
     <div>
       <div className={styles.bar}>
         <div className={styles.filters}>
-          {filters.map((f) => (
+          {shown.map((f) => (
             <button
               key={f.key}
               type="button"
@@ -135,7 +134,9 @@ export function ProjectGrid() {
               }
               style={
                 {
-                  "--tone": tagTone[f.key] ?? "var(--accent-strong)",
+                  "--tone":
+                    (f.key === "all" ? undefined : tagTone[f.key]) ??
+                    "var(--accent-strong)",
                 } as CSSProperties
               }
             >

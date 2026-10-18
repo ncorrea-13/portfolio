@@ -1,12 +1,14 @@
 import { SERVIDOR_URL } from "@/content/site";
 
 type LocalizedText = { es: string; en: string };
+export type FilterKey = (typeof filters)[number]["key"];
+type Tag = Exclude<FilterKey, "all">;
 export type Project = {
   name: LocalizedText;
   url: string;
   desc: LocalizedText;
   license?: string;
-  tags: string[];
+  tags: Tag[];
   stack: string[];
   image?: string;
   imagePosition?: string;
@@ -79,7 +81,7 @@ export const projects: Project[] = [
       en: "cGAN and cVAE models for text structure synthesis, final project for Deep Neural Networks (2025), built with Jupyter Notebook and Google Colab.",
     },
     license: "GPLv3",
-    tags: ["frontend", "ml"],
+    tags: ["ml", "frontend"],
     stack: ["Python", "PyTorch", "Streamlit"],
     image: "/projects/generador.png",
   },
@@ -93,7 +95,7 @@ export const projects: Project[] = [
       es: "Implementación del Generador de Fibonacci Atrasado.",
       en: "An implementation of the Lagged Fibonacci Generator.",
     },
-    tags: ["frontend", "backend"],
+    tags: ["backend"],
     stack: ["Python", "Gradio"],
     image: "/projects/Fibonacci.png",
   },
@@ -246,10 +248,10 @@ export const filters = [
   { key: "infra", label: { es: "Infraestructura", en: "Infrastructure" } },
   { key: "tui-cli", label: { es: "TUI/CLI", en: "TUI/CLI" } },
   { key: "testing", label: { es: "Testing", en: "Testing" } },
-  { key: "ml", label: { es: "ML", en: "ML" } },
+  { key: "ml", label: { es: "Machine Learning", en: "Machine Learning" } },
 ] as const;
 
-export const tagTone: Record<string, string> = {
+export const tagTone: Record<Tag, string> = {
   backend: "var(--accent)",
   frontend: "var(--tag-frontend)",
   infra: "var(--tag-infra)",
