@@ -63,14 +63,11 @@ function GalleryItem({ project }: { project: Project }) {
       </h3>
       <p className={styles.desc}>{text(project.desc)}</p>
       <div className={card.stack}>
-        {project.stack.slice(0, 4).map((tech) => (
+        {project.stack.map((tech) => (
           <span key={tech} className={card.chip}>
             {tech}
           </span>
         ))}
-        {project.stack.length > 4 && (
-          <span className={card.chip}>+{project.stack.length - 4}</span>
-        )}
       </div>
     </a>
   );
