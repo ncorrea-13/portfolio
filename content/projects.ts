@@ -171,6 +171,18 @@ export const ownProjects: Project[] = [
     image: "/projects/weathertui.png",
   },
   {
+    name: { es: "ytglide", en: "ytglide" },
+    url: "https://github.com/ncorrea-13/ytglide",
+    desc: {
+      es: "TUI en Rust para buscar en YouTube con miniaturas reales. Usa yt-dlp para la búsqueda y mpv para reproducir video o solo audio, sin scraping ni cuenta. Con CI y binarios en cada release.",
+      en: "Rust TUI to search YouTube with real thumbnails. Uses yt-dlp for search and mpv for video or audio-only playback, with no scraping and no account. With CI and binaries on every release.",
+    },
+    license: "GPLv3",
+    tags: ["tui-cli"],
+    stack: ["Rust", "Ratatui", "mpv", "yt-dlp"],
+    image: "/projects/ytglide.png",
+  },
+  {
     name: { es: "Homelab", en: "Homelab" },
     url: SERVIDOR_URL,
     desc: {
