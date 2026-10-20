@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { CSSProperties } from "react";
+import type { CSSProperties, MouseEvent, PointerEvent } from "react";
 import Image from "next/image";
 import { projects, filters, tagTone } from "@/content/projects";
 import type { FilterKey, Project } from "@/content/projects";
@@ -17,7 +17,7 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-function GalleryItem({ project }: { project: Project }) {
+function GalleryItem({ project, lead }: { project: Project; lead?: boolean }) {
   const { locale } = useLocale();
   const text = (t: { es: string; en: string }) =>
     locale === "en" ? t.en : t.es;
@@ -29,7 +29,7 @@ function GalleryItem({ project }: { project: Project }) {
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      className={styles.item}
+      className={lead ? `${styles.item} ${styles.lead}` : styles.item}
       style={{ "--tone": tagTone[main] ?? "var(--accent)" } as CSSProperties}
     >
       <div className={styles.media}>
@@ -39,7 +39,7 @@ function GalleryItem({ project }: { project: Project }) {
             alt=""
             width={640}
             height={400}
-            sizes="19rem"
+            sizes={lead ? "30rem" : "19rem"}
             className={styles.img}
             style={{ objectPosition: project.imagePosition ?? "top" }}
           />
@@ -77,7 +77,15 @@ export function ProjectGrid() {
   const [active, setActive] = useState<FilterKey>("all");
   const { locale } = useLocale();
   const track = useRef<HTMLDivElement>(null);
-  const [edges, setEdges] = useState({ start: true, end: false });
+  const [edges, setEdges] = useState({
+    start: true,
+    end: false,
+    index: 0,
+    thumb: 100,
+    left: 0,
+  });
+  const [dragging, setDragging] = useState(false);
+  const drag = useRef({ x: 0, left: 0, moved: false });
 
   const visible =
     active === "all"
@@ -93,9 +101,21 @@ export function ProjectGrid() {
   const measure = useCallback(() => {
     const el = track.current;
     if (!el) return;
+    const items = Array.from(el.children) as HTMLElement[];
+    const max = el.scrollWidth - el.clientWidth;
+    const end = el.scrollLeft >= max - 4;
+    // the item sitting at the left edge: last one whose start has been reached
+    const edge = el.scrollLeft + (items[0]?.offsetLeft ?? 0) + 4;
+    let index = 0;
+    items.forEach((item, i) => {
+      if (item.offsetLeft <= edge) index = i;
+    });
     setEdges({
       start: el.scrollLeft <= 4,
-      end: el.scrollLeft + el.clientWidth >= el.scrollWidth - 4,
+      end,
+      index: end && max > 4 ? items.length - 1 : index,
+      thumb: Math.min(100, (el.clientWidth / el.scrollWidth) * 100),
+      left: (el.scrollLeft / el.scrollWidth) * 100,
     });
   }, []);
 
@@ -113,6 +133,44 @@ export function ProjectGrid() {
       behavior: reduce ? "auto" : "smooth",
     });
   }
+
+  // Mouse drag-to-scroll; touch and pen keep their native scrolling. Window listeners
+  // (not pointer capture) so link clicks still reach the cards.
+  function onPointerDown(e: PointerEvent<HTMLDivElement>) {
+    const el = track.current;
+    if (!el || e.pointerType !== "mouse" || e.button !== 0) return;
+    drag.current = { x: e.clientX, left: el.scrollLeft, moved: false };
+    const move = (ev: globalThis.PointerEvent) => {
+      const d = drag.current;
+      const dx = ev.clientX - d.x;
+      if (!d.moved) {
+        if (Math.abs(dx) < 5) return;
+        d.moved = true;
+        setDragging(true);
+      }
+      el.scrollLeft = d.left - dx;
+    };
+    const up = () => {
+      setDragging(false);
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+      window.removeEventListener("pointercancel", up);
+    };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+    window.addEventListener("pointercancel", up);
+  }
+
+  // a drag must not count as a click on the card under the cursor
+  function onClickCapture(e: MouseEvent<HTMLDivElement>) {
+    if (!drag.current.moved) return;
+    e.preventDefault();
+    e.stopPropagation();
+    drag.current.moved = false;
+  }
+
+  const scrollable = !(edges.start && edges.end);
+  const pad = (n: number) => String(n).padStart(2, "0");
 
   return (
     <div>
@@ -165,8 +223,19 @@ export function ProjectGrid() {
       </div>
       <div
         ref={track}
-        className={styles.track}
+        className={
+          dragging ? `${styles.track} ${styles.dragging}` : styles.track
+        }
+        style={
+          {
+            "--fade-l": edges.start ? "0px" : "1.5rem",
+            "--fade-r": edges.end ? "0px" : "2.5rem",
+          } as CSSProperties
+        }
         onScroll={measure}
+        onPointerDown={onPointerDown}
+        onClickCapture={onClickCapture}
+        onDragStart={(e) => e.preventDefault()}
         role="region"
         tabIndex={0}
         aria-label={
@@ -175,10 +244,24 @@ export function ProjectGrid() {
             : "Proyectos de aprendizaje y académicos"
         }
       >
-        {visible.map((project) => (
-          <GalleryItem key={project.url} project={project} />
+        {visible.map((project, i) => (
+          <GalleryItem key={project.url} project={project} lead={i === 0} />
         ))}
       </div>
+      {scrollable && (
+        <div className={styles.progress} aria-hidden="true">
+          <span className={styles.counter}>
+            <span className={styles.counterNow}>{pad(edges.index + 1)}</span> /{" "}
+            {pad(visible.length)}
+          </span>
+          <span className={styles.rail}>
+            <span
+              className={styles.thumb}
+              style={{ width: `${edges.thumb}%`, left: `${edges.left}%` }}
+            />
+          </span>
+        </div>
+      )}
     </div>
   );
 }
