@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
 import type { Project } from "@/content/projects";
 import { useLocale } from "./LocaleProvider";
 import card from "./ProjectCard.module.css";
@@ -13,6 +14,7 @@ function host(url: string) {
 
 export function ClientShowcase({ projects }: { projects: Project[] }) {
   const { locale } = useLocale();
+  const reduce = !!useReducedMotion();
   const [selected, setSelected] = useState(0);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const text = (t: { es: string; en: string }) =>
@@ -59,6 +61,17 @@ export function ClientShowcase({ projects }: { projects: Project[] }) {
             onClick={() => setSelected(i)}
             className={styles.tab}
           >
+            {i === selected && (
+              <motion.span
+                layoutId="client-tab-bg"
+                className={styles.tabBg}
+                transition={
+                  reduce
+                    ? { duration: 0 }
+                    : { type: "spring", stiffness: 500, damping: 40 }
+                }
+              />
+            )}
             <span className={styles.tabName}>{text(p.name)}</span>
             <span className={styles.tabMeta}>{host(p.url)}</span>
           </button>
@@ -73,6 +86,7 @@ export function ClientShowcase({ projects }: { projects: Project[] }) {
       >
         <div className={styles.stage}>
           <a
+            key={project.url}
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
@@ -85,10 +99,10 @@ export function ClientShowcase({ projects }: { projects: Project[] }) {
               <span className={styles.dot} />
               <span className={styles.dot} />
               <span className={styles.address}>{host(project.url)}</span>
+              <span className={styles.load} />
             </span>
             {project.image && (
               <Image
-                key={project.url}
                 src={project.image}
                 alt=""
                 width={1280}
@@ -99,7 +113,7 @@ export function ClientShowcase({ projects }: { projects: Project[] }) {
             )}
           </a>
         </div>
-        <div className={styles.info}>
+        <div key={project.url} className={styles.info}>
           <div className={styles.head}>
             <h3 className={styles.name}>{text(project.name)}</h3>
             {project.role && (
