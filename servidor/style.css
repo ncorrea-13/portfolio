@@ -143,7 +143,7 @@ main a:not(.link-button) {
   color: var(--live);
 }
 .cursor {
-  animation: blink 1.1s step-end 4;
+  animation: blink 1.1s step-end infinite;
 }
 @keyframes blink {
   50% {
