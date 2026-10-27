@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 export const SITE_URL = "https://ncorrea.com.ar";
 
-// Metadata is resolved at build time, so it cannot follow the client-side locale: titles stay bilingual in one string.
 export const routes = [
   {
     path: "/",
