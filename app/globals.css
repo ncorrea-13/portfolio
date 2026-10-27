@@ -80,6 +80,7 @@ hr {
   --tag-prompt: #dcef9f;
   --tag-devops: #efc39f;
   --tag-mobile: #9fb0ef;
+  --tag-mcp: #c39fef;
   --live: #7ee2a8;
   color-scheme: dark;
 }
@@ -104,6 +105,7 @@ hr {
     --tag-prompt: #add039;
     --tag-devops: #d0793a;
     --tag-mobile: #3a62d0;
+    --tag-mcp: #8a39d0;
   --live: #0e7a4b;
     color-scheme: light;
   }
@@ -128,6 +130,7 @@ html[data-theme="dark"] {
   --tag-prompt: #dcef9f;
   --tag-devops: #efc39f;
   --tag-mobile: #9fb0ef;
+  --tag-mcp: #c39fef;
   --live: #7ee2a8;
   color-scheme: dark;
 }
@@ -151,6 +154,7 @@ html[data-theme="light"] {
   --tag-prompt: #add039;
   --tag-devops: #d0793a;
   --tag-mobile: #3a62d0;
+  --tag-mcp: #8a39d0;
   --live: #0e7a4b;
   color-scheme: light;
 }
