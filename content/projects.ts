@@ -219,8 +219,8 @@ export const clientWork: Project[] = [
     name: { es: "AccesoriossTina", en: "AccesoriossTina" },
     url: "https://accesoriosstina.vercel.app/",
     desc: {
-      es: "Desarrollo del sitio de AccesoriossTina, con autenticación de usuarios, gestión de insumos y control de stock.",
-      en: "Development of the AccesoriossTina website, with user authentication, supplies management, and stock control.",
+      es: "E-commerce de AccesoriossTina, un emprendimiento de accesorios hechos a mano. Catálogo con carrito junto con un panel de administración.",
+      en: "E-commerce for AccesoriossTina, a small business selling handmade accessories. Catalog with a cart, along with an admin panel.",
     },
     role: developer,
     tags: [],
