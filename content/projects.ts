@@ -219,13 +219,25 @@ export const clientWork: Project[] = [
     name: { es: "AccesoriossTina", en: "AccesoriossTina" },
     url: "https://accesoriosstina.vercel.app/",
     desc: {
-      es: "Desarrollo del sitio de AccesoriossTina, con autenticación de usuarios, gestión de insumos y control de stock.",
-      en: "Development of the AccesoriossTina website, with user authentication, supplies management, and stock control.",
+      es: "E-commerce de AccesoriossTina, un emprendimiento de accesorios hechos a mano. Catálogo con carrito junto con un panel de administración.",
+      en: "E-commerce for AccesoriossTina, a small business selling handmade accessories. Catalog with a cart, along with an admin panel.",
     },
     role: developer,
     tags: [],
     stack: ["React", "Next.js", "TypeScript", "Tailwind", "Supabase"],
     image: "/projects/accesorioss.png",
+  },
+  {
+    name: { es: "Asunción de la Virgen", en: "Asunción de la Virgen" },
+    url: "https://pagina-aca.vercel.app",
+    desc: {
+      es: "Desarrollo del sitio de la Acción Católica de la parroquia Asunción de la Virgen: presentación del movimiento, grupos por edad, actividades y cómo sumarse.",
+      en: "Development of the website for the Acción Católica movement of the Asunción de la Virgen parish: an overview of the movement, age groups, activities, and how to join.",
+    },
+    role: developer,
+    tags: [],
+    stack: ["React", "Vite", "TypeScript", "React Router"],
+    image: "/projects/aca.png",
   },
   {
     name: { es: "ASAP Consultores", en: "ASAP Consultores" },

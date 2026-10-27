@@ -1,3 +1,5 @@
+import { pageMetadata, SITE_URL } from "@/content/routes";
+import { GITHUB_URL, LINKEDIN_URL } from "@/content/site";
 import Link from "next/link";
 import { ContactLinks } from "@/components/ContactLinks";
 import { TagGroup } from "@/components/TagGroup";
@@ -10,9 +12,25 @@ import { skillGroups } from "@/content/skills";
 import { ownProjects } from "@/content/projects";
 import common from "@/components/common.module.css";
 
+export const metadata = pageMetadata("/");
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Nicolás Correa",
+  url: SITE_URL,
+  jobTitle: "DevOps & Platform Engineering · Full Stack Software Developer",
+  image: `${SITE_URL}/foto.jpg`,
+  sameAs: [GITHUB_URL, LINKEDIN_URL],
+};
+
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
       <Hero />
 
       <Reveal>

@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/content/routes";
 import Image from "next/image";
 import { CvLink } from "@/components/CvLink";
 import { ContactLinks } from "@/components/ContactLinks";
@@ -7,6 +8,8 @@ import { Timeline } from "@/components/Timeline";
 import { experience, education } from "@/content/experience";
 import styles from "./page.module.css";
 import common from "@/components/common.module.css";
+
+export const metadata = pageMetadata("/sobre-mi");
 
 export default function SobreMi() {
   return (

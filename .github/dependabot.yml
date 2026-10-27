@@ -1,13 +1,17 @@
 version: 2
-updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+multi-ecosystem-groups:
+  all:
     target-branch: "main"
     schedule:
       interval: "weekly"
 
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    patterns: ["*"]
+    multi-ecosystem-group: "all"
+
   - package-ecosystem: "github-actions"
     directory: "/"
-    target-branch: "main"
-    schedule:
-      interval: "weekly"
+    patterns: ["*"]
+    multi-ecosystem-group: "all"
