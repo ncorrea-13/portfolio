@@ -228,6 +228,18 @@ export const clientWork: Project[] = [
     image: "/projects/accesorioss.png",
   },
   {
+    name: { es: "Asunción de la Virgen", en: "Asunción de la Virgen" },
+    url: "https://pagina-aca.vercel.app",
+    desc: {
+      es: "Desarrollo del sitio de la Acción Católica de la parroquia Asunción de la Virgen: presentación del movimiento, grupos por edad, actividades y cómo sumarse.",
+      en: "Development of the website for the Acción Católica movement of the Asunción de la Virgen parish: an overview of the movement, age groups, activities, and how to join.",
+    },
+    role: developer,
+    tags: [],
+    stack: ["React", "Vite", "TypeScript", "React Router"],
+    image: "/projects/aca.png",
+  },
+  {
     name: { es: "ASAP Consultores", en: "ASAP Consultores" },
     url: "https://www.asapconsultores.com.ar/",
     desc: {
