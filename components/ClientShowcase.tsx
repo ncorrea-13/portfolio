@@ -108,6 +108,7 @@ export function ClientShowcase({ projects }: { projects: Project[] }) {
                 width={1280}
                 height={800}
                 sizes="(min-width: 60rem) 40rem, 100vw"
+                loading="eager"
                 className={styles.shot}
               />
             )}
