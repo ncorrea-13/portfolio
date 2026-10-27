@@ -26,14 +26,7 @@ export const projects: Project[] = [
     },
     license: "",
     tags: ["backend", "frontend", "mobile"],
-    stack: [
-      "Express",
-      "TypeScript",
-      "PostgreSQL",
-      "Prisma",
-      "Next.js",
-      "Expo",
-    ],
+    stack: ["Express", "TypeScript", "PostgreSQL", "Prisma", "Next.js", "Expo"],
     image: "/projects/pethood.png",
   },
   {
@@ -137,12 +130,12 @@ export const ownProjects: Project[] = [
     name: { es: "Rolboard", en: "Rolboard" },
     url: "https://rolboard.ncorrea.com.ar/",
     desc: {
-      es: "App para dirigir campañas de rol de mesa: sesiones, arcos, NPCs, locaciones, facciones y tracker de combate. Corre como web, escritorio (Windows y Linux) y Android, e indexa el frontmatter de un vault de Obsidian. Con CI y releases automatizados.",
-      en: "App for running tabletop RPG campaigns: sessions, arcs, NPCs, locations, factions, and a combat tracker. Runs as a web app, on desktop (Windows and Linux), and on Android, and indexes an Obsidian vault's frontmatter. With CI and automated releases.",
+      es: "App para dirigir campañas de rol de mesa: sesiones, arcos, NPCs, locaciones, facciones y tracker de combate. Corre como web, escritorio y Android, e indexa el frontmatter de un vault de Obsidian. Incluye un servidor MCP para que agentes de IA como Claude Code lean y editen la campaña. Con CI y releases automatizados.",
+      en: "App for running tabletop RPG campaigns: sessions, arcs, NPCs, locations, factions, and a combat tracker. Runs as a web app, on desktop and on Android, and indexes an Obsidian vault's frontmatter. Includes an MCP server so AI agents like Claude Code can read and edit the campaign. With CI and automated releases.",
     },
     license: "MIT",
-    tags: ["backend", "frontend"],
-    stack: ["Go", "SQLite", "React", "TypeScript", "Wails", "Docker"],
+    tags: ["backend", "frontend", "mcp"],
+    stack: ["Go", "SQLite", "React", "TypeScript", "Wails", "Docker", "MCP"],
     image: "/projects/rolboard.jpg",
   },
   {
@@ -274,6 +267,7 @@ export const filters = [
   { key: "tui-cli", label: { es: "TUI/CLI", en: "TUI/CLI" } },
   { key: "testing", label: { es: "Testing", en: "Testing" } },
   { key: "ml", label: { es: "Machine Learning", en: "Machine Learning" } },
+  { key: "mcp", label: { es: "MCP", en: "MCP" } },
 ] as const;
 
 export const tagTone: Record<Tag, string> = {
@@ -284,4 +278,5 @@ export const tagTone: Record<Tag, string> = {
   "tui-cli": "var(--tag-devops)",
   testing: "var(--tag-security)",
   ml: "var(--tag-prompt)",
+  mcp: "var(--tag-mcp)",
 };
