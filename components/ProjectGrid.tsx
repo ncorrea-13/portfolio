@@ -36,7 +36,7 @@ function GalleryItem({ project, lead }: { project: Project; lead?: boolean }) {
         {project.image ? (
           <Image
             src={project.image}
-            alt=""
+            alt={`${locale === "en" ? "Screenshot of" : "Captura de"} ${name}`}
             width={640}
             height={400}
             sizes={lead ? "30rem" : "19rem"}

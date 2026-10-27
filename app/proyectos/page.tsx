@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/content/routes";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { Reveal } from "@/components/Reveal";
 import { T } from "@/components/T";
@@ -7,6 +8,8 @@ import { clientWork, ownProjects } from "@/content/projects";
 import { GITHUB_URL } from "@/content/site";
 import styles from "./page.module.css";
 import common from "@/components/common.module.css";
+
+export const metadata = pageMetadata("/proyectos");
 
 export default function Proyectos() {
   return (

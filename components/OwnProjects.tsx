@@ -24,7 +24,7 @@ function Poster({ project }: { project: Project }) {
       {project.image && (
         <Image
           src={project.image}
-          alt=""
+          alt={`${locale === "en" ? "Screenshot of" : "Captura de"} ${text(project.name)}`}
           fill
           sizes="(min-width: 60rem) 57rem, 100vw"
           className={styles.img}
@@ -145,7 +145,7 @@ function Slide({
         {project.image && (
           <Image
             src={project.image}
-            alt=""
+            alt={`${locale === "en" ? "Screenshot of" : "Captura de"} ${text(project.name)}`}
             fill
             sizes="(min-width: 48rem) 30rem, 100vw"
             className={styles.img}

@@ -104,7 +104,7 @@ export function ClientShowcase({ projects }: { projects: Project[] }) {
             {project.image && (
               <Image
                 src={project.image}
-                alt=""
+                alt={`${locale === "en" ? "Screenshot of" : "Captura de"} ${text(project.name)}`}
                 width={1280}
                 height={800}
                 sizes="(min-width: 60rem) 40rem, 100vw"

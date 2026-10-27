@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/content/routes";
 import Link from "next/link";
 import { ContactLinks } from "@/components/ContactLinks";
 import { TagGroup } from "@/components/TagGroup";
@@ -9,6 +10,8 @@ import { T } from "@/components/T";
 import { skillGroups } from "@/content/skills";
 import { ownProjects } from "@/content/projects";
 import common from "@/components/common.module.css";
+
+export const metadata = pageMetadata("/");
 
 export default function Home() {
   return (
