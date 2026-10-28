@@ -148,6 +148,7 @@ function Slide({
             alt={`${locale === "en" ? "Screenshot of" : "Captura de"} ${text(project.name)}`}
             fill
             sizes="(min-width: 48rem) 30rem, 100vw"
+            loading={index === 0 ? "eager" : "lazy"}
             className={styles.img}
             style={{ objectPosition: project.imagePosition ?? "top" }}
           />
