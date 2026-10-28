@@ -176,6 +176,18 @@ export const ownProjects: Project[] = [
     image: "/projects/ytglide.png",
   },
   {
+    name: { es: "UTN FRM MCP", en: "UTN FRM MCP" },
+    url: "https://utn-frm-mcp.vercel.app/",
+    desc: {
+      es: "Servidor MCP para el Campus Virtual, Autogestión y el correo de UTN FRM: 40 herramientas para que un asistente como Claude Code consulte entregas, apuntes, notas y correlatividades con la cuenta del estudiante. Solo lectura y sesión local. Con CI en Windows, Linux y macOS.",
+      en: "MCP server for UTN FRM's Campus Virtual, Autogestión, and mail: 40 tools so an assistant like Claude Code can look up assignments, course materials, grades, and prerequisites with the student's own account. Read-only, local session. With CI on Windows, Linux, and macOS.",
+    },
+    license: "MIT",
+    tags: ["mcp"],
+    stack: ["TypeScript", "Node.js", "MCP", "Playwright", "Zod"],
+    image: "/projects/utn-frm-mcp.jpg",
+  },
+  {
     name: { es: "Homelab", en: "Homelab" },
     url: SERVIDOR_URL,
     desc: {
