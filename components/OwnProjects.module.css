@@ -29,6 +29,15 @@
   inset: 0 0 auto;
   height: 14rem;
   overflow: hidden;
+  /* the image itself dissolves, so there is no edge for the scrim to hide */
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0,
+    #000 30%,
+    rgb(0 0 0 / 0.75) 58%,
+    rgb(0 0 0 / 0.35) 82%,
+    rgb(0 0 0 / 0.08) 100%
+  );
 }
 .dots {
   position: absolute;
@@ -86,9 +95,12 @@
   background: linear-gradient(
     to bottom,
     transparent 0,
-    transparent 11rem,
-    color-mix(in oklab, var(--bg) 90%, transparent) 16rem,
-    var(--bg) 100%
+    transparent 3rem,
+    color-mix(in oklab, var(--bg) 8%, transparent) 5rem,
+    color-mix(in oklab, var(--bg) 30%, transparent) 8rem,
+    color-mix(in oklab, var(--bg) 62%, transparent) 11rem,
+    color-mix(in oklab, var(--bg) 88%, transparent) 13.5rem,
+    var(--bg) 16rem
   );
 }
 .kicker,
@@ -227,17 +239,27 @@
   }
   .slideMedia {
     inset: 0 0 0 auto;
-    width: 52%;
+    width: 54%;
     height: auto;
+    /* short eased ramp starting where the copy ends, so the screenshot's own headline stays readable */
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      rgb(0 0 0 / 0.12) 8%,
+      rgb(0 0 0 / 0.4) 16%,
+      rgb(0 0 0 / 0.75) 26%,
+      rgb(0 0 0 / 0.95) 38%,
+      #000 48%
+    );
   }
   .slide .scrim {
-    flex: 0 0 58%;
+    flex: 0 0 50%;
     justify-content: center;
     padding: 2rem 2rem 2rem 1.25rem;
     background: linear-gradient(
       to right,
       var(--bg) 0,
-      var(--bg) 80%,
+      var(--bg) 84%,
       transparent 100%
     );
   }
