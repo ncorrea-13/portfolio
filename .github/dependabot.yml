@@ -10,6 +10,8 @@ updates:
     directory: "/"
     patterns: ["*"]
     multi-ecosystem-group: "all"
+    # same as `pnpm update`: bump only inside package.json ranges, touch the lockfile only
+    versioning-strategy: "lockfile-only"
     ignore:
       # typescript-eslint does not support TS >=7 yet (typescript-eslint#10940)
       - dependency-name: "typescript"
