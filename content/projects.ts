@@ -12,6 +12,7 @@ export type Project = {
   stack: string[];
   image?: string;
   imagePosition?: string;
+  video?: { src: string; poster: string };
   facts?: { value: string; label: LocalizedText }[];
   role?: LocalizedText;
 };
@@ -150,6 +151,7 @@ export const ownProjects: Project[] = [
     stack: ["Rust", "Ratatui"],
     imagePosition: "left top",
     image: "/projects/bw-tui.png",
+    video: { src: "/projects/bw-tui.mp4", poster: "/projects/bw-tui-poster.webp" },
   },
   {
     name: { es: "Weathertui", en: "Weathertui" },
@@ -162,6 +164,7 @@ export const ownProjects: Project[] = [
     tags: ["tui-cli"],
     stack: ["Go", "Bubbletea"],
     image: "/projects/weathertui.png",
+    video: { src: "/projects/weathertui.mp4", poster: "/projects/weathertui-poster.webp" },
   },
   {
     name: { es: "ytglide", en: "ytglide" },
@@ -174,6 +177,7 @@ export const ownProjects: Project[] = [
     tags: ["tui-cli"],
     stack: ["Rust", "Ratatui", "mpv", "yt-dlp"],
     image: "/projects/ytglide.png",
+    video: { src: "/projects/ytglide.mp4", poster: "/projects/ytglide-poster.webp" },
   },
   {
     name: { es: "UTN FRM MCP", en: "UTN FRM MCP" },
@@ -185,6 +189,7 @@ export const ownProjects: Project[] = [
     license: "MIT",
     tags: ["mcp"],
     stack: ["TypeScript", "Node.js", "MCP", "Playwright", "Zod"],
+    imagePosition: "left top",
     image: "/projects/utn-frm-mcp.jpg",
   },
   {

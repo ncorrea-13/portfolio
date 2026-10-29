@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 import type { Project } from "@/content/projects";
@@ -116,7 +116,7 @@ function Hardware({ project }: { project: Project }) {
   );
 }
 
-const ROTATE_MS = 2000;
+const ROTATE_MS = 6000;
 
 function Slide({
   project,
@@ -132,6 +132,15 @@ function Slide({
   const { locale } = useLocale();
   const text = (t: Localized) => (locale === "en" ? t.en : t.es);
   const pad = (n: number) => String(n).padStart(2, "0");
+  const reduce = !!useReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (active && !reduce) v.play().catch(() => {});
+    else v.pause();
+  }, [active, reduce]);
 
   return (
     <a
@@ -142,7 +151,20 @@ function Slide({
       inert={!active}
     >
       <div className={styles.slideMedia}>
-        {project.image && (
+        {project.video ? (
+          <video
+            ref={videoRef}
+            src={project.video.src}
+            poster={project.video.poster}
+            className={styles.vid}
+            muted
+            loop
+            playsInline
+            preload={index === 0 ? "auto" : "none"}
+            aria-hidden="true"
+          />
+        ) : (
+          project.image && (
           <Image
             src={project.image}
             alt={`${locale === "en" ? "Screenshot of" : "Captura de"} ${text(project.name)}`}
@@ -152,6 +174,7 @@ function Slide({
             className={styles.img}
             style={{ objectPosition: project.imagePosition ?? "top" }}
           />
+          )
         )}
       </div>
       <div className={styles.scrim}>
