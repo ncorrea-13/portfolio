@@ -189,6 +189,7 @@ export const ownProjects: Project[] = [
     license: "MIT",
     tags: ["mcp"],
     stack: ["TypeScript", "Node.js", "MCP", "Playwright", "Zod"],
+    imagePosition: "left top",
     image: "/projects/utn-frm-mcp.jpg",
   },
   {
