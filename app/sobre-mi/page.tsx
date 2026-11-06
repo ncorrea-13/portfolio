@@ -23,8 +23,8 @@ export default function SobreMi() {
           <div className={styles.flow}>
             <p>
               <T
-                es="Soy un estudiante avanzado de Ingeniería en Sistemas de Información en la Universidad Tecnológica Nacional, Facultad Regional Mendoza con 37 de 42 materias aprobadas. Soy desarrollador full-stack en AYSAM. Vengo del desarrollo de software, pero trabajar en Linux me terminó llevando a infraestructura y ciberseguridad."
-                en="I am an advanced student of Systems Engineering at Universidad Tecnológica Nacional, Facultad Regional Mendoza. I have currently passed 37 of 42 subjects. I work as a full stack developer at AYSAM. I come from software development, but working in Linux ended up pulling me into infrastructure and cybersecurity."
+                es="Soy un estudiante avanzado de Ingeniería en Sistemas de Información en la Universidad Tecnológica Nacional, Facultad Regional Mendoza con 37 de 42 materias aprobadas. Soy desarrollador de software en Rendel. Vengo del desarrollo de software, pero trabajar en Linux me terminó llevando a infraestructura y ciberseguridad."
+                en="I am an advanced student of Systems Engineering at Universidad Tecnológica Nacional, Facultad Regional Mendoza. I have currently passed 37 of 42 subjects. I work as a software developer at Rendel. I come from software development, but working in Linux ended up pulling me into infrastructure and cybersecurity."
               />
             </p>
             <p>

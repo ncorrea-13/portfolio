@@ -1,11 +1,19 @@
 export const experience = [
   {
     role: {
+      es: "Desarrollador de Software e Inteligencia Artificial",
+      en: "Full Stack Software Developer",
+    },
+    org: "Rendel",
+    period: { es: "Nov 2026 - Presente", en: "Nov 2026 - Present" },
+  },
+  {
+    role: {
       es: "Desarrollador de Software Full-Stack",
       en: "Full Stack Software Developer",
     },
     org: "Aguas y Saneamiento Mendoza",
-    period: { es: "Nov 2025 - Presente", en: "Nov 2025 - Present" },
+    period: { es: "Nov 2025 - Nov 2026", en: "Nov 2025 - Nov 2026" },
   },
   {
     role: { es: "Pasante de Sistemas", en: "Systems Intern" },
