@@ -74,8 +74,11 @@ export const skillGroups = [
     tags: [
       "Claude Code",
       "OpenCode",
-      { es: "Agentes LLM", en: "LLM Agents" },
+      "Github Copilot",
+      "Codex",
       "MCP",
+      "SDD",
+      { es: "Orquestación de agentes", en: "LLM Orchestration" },
       { es: "Automatización", en: "Automation" },
     ],
   },
