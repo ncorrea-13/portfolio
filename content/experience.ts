@@ -2,7 +2,7 @@ export const experience = [
   {
     role: {
       es: "Desarrollador de Software e Inteligencia Artificial",
-      en: "Full Stack Software Developer",
+      en: "Software and Artificial Intelligence Developer",
     },
     org: "Rendel",
     period: { es: "Nov 2026 - Presente", en: "Nov 2026 - Present" },
