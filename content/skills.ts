@@ -27,7 +27,7 @@ export const skillGroups = [
     color: "var(--tag-infra)",
     tags: [
       "Bash",
-      { es: "Linux avanzado", en: "Advanced Linux" },
+      "Linux",
       "Systemd",
       { es: "Microservicios", en: "Microservices" },
       { es: "Redes", en: "Networking" },

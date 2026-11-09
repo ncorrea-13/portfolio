@@ -20,8 +20,8 @@ export default function Proyectos() {
         </h1>
         <p className={styles.lead}>
           <T
-            es="Sitios en producción que desarrollé para clientes, proyectos propios que mantengo y trabajos de aprendizaje. Donde corresponde se indica la licencia; el código está en cada repositorio."
-            en="Production sites I built for clients, my own projects that I maintain, and learning work. Where it applies the license is listed; the code is in each repository."
+            es="Sitios que hice para clientes, proyectos propios que mantengo y trabajos de aprendizaje. Las tarjetas muestran la licencia cuando existe, y el código está en cada repositorio."
+            en="Sites I built for clients, my own projects that I maintain, and learning work. Cards show the license when there is one, and the code lives in each repository."
           />
         </p>
       </Reveal>
@@ -32,8 +32,8 @@ export default function Proyectos() {
         </h2>
         <p className={styles.note}>
           <T
-            es="Incluye solo trabajo público. El software interno de mis empleos no se publica; el detalle de cada rol está en el CV."
-            en="Public work only. Internal software from my jobs is not published; each role's detail is in the CV."
+            es="Solo trabajo público. El software interno de mis empleos no lo publico; el detalle de cada rol está en el CV."
+            en="Public work only. I don't publish the internal software from my jobs; each role's details are in the resume."
           />
         </p>
         <ClientShowcase projects={clientWork} />

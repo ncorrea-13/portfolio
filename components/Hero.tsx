@@ -48,8 +48,8 @@ export function Hero() {
         </p>
         <p className={styles.intro}>
           <T
-            es="Automatizo el camino del código a producción y mantengo la infraestructura que lo sostiene, para que el software salga rápido, sea confiable y fácil de mantener."
-            en="I automate the path from code to production and run the infrastructure behind it, so software ships fast, runs reliably, and stays easy to maintain."
+            es="Automatizo el camino del código a producción y mantengo la infraestructura que lo sostiene: CI/CD, contenedores rootless y backups con restore probado."
+            en="I automate the path from code to production and run the infrastructure behind it: CI/CD, rootless containers, and backups with tested restores."
           />
         </p>
         <div className={styles.actions}>

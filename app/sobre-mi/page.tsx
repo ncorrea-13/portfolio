@@ -23,14 +23,14 @@ export default function SobreMi() {
           <div className={styles.flow}>
             <p>
               <T
-                es="Soy un estudiante avanzado de Ingeniería en Sistemas de Información en la Universidad Tecnológica Nacional, Facultad Regional Mendoza con 37 de 42 materias aprobadas. Soy desarrollador de software en Rendel. Vengo del desarrollo de software, pero trabajar en Linux me terminó llevando a infraestructura y ciberseguridad."
-                en="I am an advanced student of Systems Engineering at Universidad Tecnológica Nacional, Facultad Regional Mendoza. I have currently passed 37 of 42 subjects. I work as a software developer at Rendel. I come from software development, but working in Linux ended up pulling me into infrastructure and cybersecurity."
+                es="Soy estudiante avanzado de Ingeniería en Sistemas de Información en la Universidad Tecnológica Nacional, Facultad Regional Mendoza, con 37 de 42 materias aprobadas. Trabajo como desarrollador de software en Rendel. Vengo del desarrollo de software, pero trabajar en Linux me terminó llevando a infraestructura y ciberseguridad."
+                en="I am an advanced Systems Engineering student at Universidad Tecnológica Nacional, Facultad Regional Mendoza, with 37 of 42 subjects passed. I work as a software developer at Rendel. I come from software development, but working in Linux pulled me into infrastructure and cybersecurity."
               />
             </p>
             <p>
               <T
-                es="Además, mantengo mi homeserver, donde administro infraestructura, servicios, contenedores, redes y privacidad aplicada a un uso diario real."
-                en="I also maintain my homeserver, where I manage infrastructure, services, containers, networking, and privacy applied to real daily use."
+                es="Mantengo un homeserver con más de 10 servicios que uso todos los días, como Vaultwarden e Immich."
+                en="I run a homeserver with more than 10 services I use every day, such as Vaultwarden and Immich."
               />
             </p>
           </div>
@@ -57,8 +57,8 @@ export default function SobreMi() {
         />
         <p className={common.note}>
           <T
-            es="El detalle de cada rol está en el CV que se puede descargar más abajo."
-            en="See the details of each role in the resume you can download below."
+            es="El detalle de cada rol está en el CV, más abajo."
+            en="Role details are in the resume below."
           />
         </p>
       </Reveal>
@@ -78,8 +78,8 @@ export default function SobreMi() {
             </h3>
             <p className={styles.facetText}>
               <T
-                es="Salto bastante entre desarrollo e infraestructura, así que me acostumbré a comunicar bien y adaptarme rápido cuando cambian las prioridades. También a aprender herramientas nuevas por mi cuenta, a explicar decisiones técnicas a gente no técnica sin perder precisión, y a debuggear y decidir en situaciones donde no está todo claro."
-                en="I move around a lot between development and infrastructure, so I got used to communicating clearly and adapting fast when priorities shift. That also means picking up new tools on my own, explaining technical decisions to nontechnical people without losing precision, and debugging and making decisions in situations that aren't fully clear."
+                es="Trabajo entre desarrollo e infraestructura. Aprendo herramientas nuevas por mi cuenta y explico decisiones técnicas a gente no técnica sin perder precisión."
+                en="I work across development and infrastructure. I pick up new tools on my own and explain technical decisions to nontechnical people without losing precision."
               />
             </p>
           </div>
@@ -89,8 +89,8 @@ export default function SobreMi() {
             </h3>
             <p className={styles.facetText}>
               <T
-                es="Trato de mantener todo lo más simple posible (KISS): código chico, fácil de desacoplar y reusar. Si la situación pide otra cosa, la escucho, pero por defecto voy a lo simple."
-                en="I try to keep everything as simple as possible (KISS): small code, easy to decouple and reuse. If the situation calls for something else, I listen, but by default I go simple."
+                es="Mantengo todo lo más simple posible (KISS): código chico, fácil de desacoplar y reusar. Si la situación pide otra cosa, la escucho, pero por defecto elijo lo simple."
+                en="I keep everything as simple as possible (KISS): small code that's easy to decouple and reuse. If the situation calls for something else, I listen, but my default is simple."
               />
             </p>
           </div>
@@ -100,8 +100,8 @@ export default function SobreMi() {
             </h3>
             <p className={styles.facetText}>
               <T
-                es="Mi día a día pasa por la terminal: Neovim como editor principal, Zellij como multiplexor y Yazi para manejar archivos, todo dentro de WezTerm. La mayoría de mis herramientas propias las uso por medio de interfaces CLI o TUI, así las tengo disponibles en cualquier máquina independientemente del sistema y el lenguaje."
-                en="My daily work happens in the terminal: Neovim as my main editor, Zellij as multiplexer, and Yazi to manage files, all inside WezTerm. I use most of my own tools through CLI or TUI interfaces, so I have them available on any machine, no matter the system or language."
+                es="Mi día a día pasa por la terminal: Neovim como editor principal, Zellij como multiplexor y Yazi para manejar archivos, todo dentro de WezTerm. La mayoría de mis herramientas propias las uso por medio de interfaces CLI o TUI, así las tengo en cualquier máquina, sin importar el sistema ni el lenguaje."
+                en="My daily work happens in the terminal: Neovim as my main editor, Zellij as multiplexer, and Yazi to manage files, all inside WezTerm. I use most of my own tools through CLI or TUI interfaces, so I have them on any machine, whatever the system or language."
               />
             </p>
           </div>
