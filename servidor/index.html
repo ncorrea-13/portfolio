@@ -153,6 +153,7 @@
           id="archDiagramImg"
           src="diagrama-arquitectura-oscuro.svg"
           alt="Diagrama de arquitectura del ThinkCentre"
+          data-i18n-alt="archAlt"
           class="mermaid-container"
         />
 
@@ -329,12 +330,13 @@
           tocTitle: "En esta página",
           philosophyH2: "Filosofía",
           philosophyP1:
-            "Infraestructura privada, modular y de bajo mantenimiento, sin depender de servicios cloud comerciales. Todo se accede por mi red privada de Tailscale; solo esta página es pública (ver Decisiones técnicas).",
+            "Infraestructura privada y de bajo mantenimiento, sin servicios cloud comerciales. Accedo a todo por mi red privada de Tailscale; solo esta página es pública (ver Decisiones técnicas).",
           philosophyP2:
-            "Cada stack corre en un pod de Podman, gestionado como servicio de systemd a nivel usuario. Permite mantener las responsabilidades y los entornos aislados.",
+            "Cada stack corre en un pod de Podman, administrado como servicio de systemd de usuario. Así cada responsabilidad y cada entorno quedan aislados.",
           archH2: "Arquitectura",
           archOpenFull: "Abrir diagrama en una pestaña nueva",
-          hwH2: "Almacenamiento del Servidor de Producción",
+          archAlt: "Diagrama de arquitectura del ThinkCentre",
+          hwH2: "Almacenamiento del servidor de producción",
           hw1: "<strong>SSD 120GB</strong> - Sistema operativo",
           hw2: "<strong>SSD 480GB</strong> - Datos: volúmenes de Podman, toda la información y contenedores",
           hw3: "<strong>HDD 480GB</strong> - Backup diario",
@@ -344,24 +346,24 @@
             "El ThinkCentre corre los servicios con más datos, como Immich o Vaultwarden. La Raspberry Pi 4B es el nodo de red (DNS, proxy inverso) y monitorea al resto. El Samsung S9+ recibe las alertas. La HP ProDesk es el laboratorio de pruebas.",
           backupsH2: "Backups",
           backup1:
-            "<strong>Qué:</strong> configuraciones de los contenedores junto con los datos. Las bases de datos críticas (Immich y Vaultwarden) se vuelcan primero, para no copiar archivos en uso y evitar datos corruptos.",
+            "<strong>Qué:</strong> configuraciones de los contenedores y datos. Vuelco primero las bases de datos críticas (Immich y Vaultwarden), así no copio archivos en uso ni datos corruptos.",
           backup2:
             "<strong>Cómo:</strong> un script en Bash con rsync, lo más simple y modular posible. Al terminar avisa por Ntfy.",
           backup3:
-            "<strong>Cuándo:</strong> Diariamente corre por un cron programado contra un HDD dedicado para la copia diaria. Mismo sistema pero semanalmente contra otro HDD dedicado para backup semanal. Se mantienen varias copias en lugar de sobreescribir las anteriores. Principalmente de los servicios críticos como Vaultwarden.",
+            "<strong>Cuándo:</strong> un cron diario copia a un HDD dedicado y otro semanal copia a un segundo HDD dedicado. Conservo varias copias en vez de sobrescribir las anteriores, sobre todo de servicios críticos como Vaultwarden.",
           backup4:
-            "<strong>Restore:</strong> probado de forma manual durante la iteración, prueba y desarrollo del script. Ante fallos se puede restaurar la copia sin ningún problema.",
+            "<strong>Restore:</strong> lo probé a mano mientras desarrollaba el script.",
           notesH2: "Notas de arquitectura",
           note1:
             "<strong>Acceso único:</strong> todo el tráfico viaja por la tailnet y lo redirige Caddy, que además gestiona el dominio interno. Ningún puerto de servicio está abierto a la LAN.",
           note4:
-            "<strong>Bases de datos:</strong> Immich y Miniflux poseen sus contenedores de base de datos. Se omiten en el diagrama.",
+            "<strong>Bases de datos:</strong> Immich y Miniflux tienen sus propios contenedores de base de datos. El diagrama los omite.",
           note5:
-            "<strong>DNS:</strong> Pi-hole filtra consultas y las reenvía a Unbound, que sale a los servidores de Mullvad exclusivamente vía DoT. Los subdominios los redirige a Caddy.",
+            "<strong>DNS:</strong> Pi-hole filtra consultas y las reenvía a Unbound, que sale a los servidores de Mullvad solo por DoT. Los subdominios los redirige a Caddy.",
           note7:
             "<strong>El observador del observador:</strong> el Samsung S9+ corre Ntfy y recibe todas las notificaciones del sistema. También vigila que Uptime Kuma esté vivo mediante un chequeo periódico.",
           note8:
-            "<strong>Servidor de Laboratorio:</strong> se implementó un servidor dedicado de VMs para ciberseguridad, aprendizaje de Platform Engineering y pruebas. Se encuentra aislado de la red de producción y no tiene acceso a Internet.",
+            "<strong>Servidor de Laboratorio:</strong> servidor dedicado de VMs para ciberseguridad, aprendizaje de Platform Engineering y pruebas. Está aislado de la red de producción y no tiene acceso a Internet.",
           stackH2: "Stack técnico",
           stack1:
             "<strong>ThinkCentre</strong>: Intel i3-6100T · 8GB RAM · Debian 13 Trixie, Podman rootless",
@@ -375,7 +377,7 @@
           statusLoading: "Cargando estado...",
           statusError: "No se pudo cargar el estado ahora mismo.",
           statusAllUp: "Todos los sistemas operativos",
-          statusSomeDown: "Hay un servicio con problemas",
+          statusSomeDown: "Hay servicios con problemas",
           statusUp: "Operativo",
           statusDown: "Caído",
           statusPending: "Verificando",
@@ -407,11 +409,11 @@
           service5:
             "<strong>Storage</strong>: Syncthing (sincronización), SftpGo (gestión de archivos)",
           service6:
-            "<strong>Rolboard </strong>: Servidor + Cliente (gestión de campañas de rol) proyecto propio",
+            "<strong>Rolboard</strong>: servidor + cliente (gestión de campañas de rol), proyecto propio",
           service7:
             "<strong>Gateway</strong>: Pi-hole (bloqueo de publicidad), Unbound (DNS recursivo con DoT), Caddy (Proxy inverso)",
           service8:
-            "<strong>Utils</strong>: Uptime Kuma (monitoreo), Homelab-status-api (publicación) proyecto propio,  turmo-screen (dashboard en pantalla USB) proyecto propio",
+            "<strong>Utils</strong>: Uptime Kuma (monitoreo), Homelab-status-api (publicación) y turmo-screen (dashboard en pantalla USB), proyectos propios",
           serviceDocs:
             "<strong>Docs</strong>: esta página, servida desde un Tunnel independiente y actualizada por polling desde el repo",
           serviceTunnel:
@@ -425,18 +427,18 @@
           service10:
             "<strong>VM-DevOps</strong>: Máquina Virtual con Docker que corre Floci para aprender deploys simulando entornos de Cloud",
           service11:
-            "<strong>VM-Pentesting</strong>: Máquina Virtual con Docker la cual despliega laboratorios de pruebas de ciberseguridad",
+            "<strong>VM-Pentesting</strong>: Máquina Virtual con Docker que despliega laboratorios de pruebas de ciberseguridad",
           service12:
-            "<strong>VM-Backup</strong>: Máquina Virtual con Docker que funciona como plantilla para poder crear nuevas VMs sin necesidad de descargar nuevas ISOs",
+            "<strong>VM-Backup</strong>: Máquina Virtual con Docker que sirve de plantilla para crear VMs nuevas sin descargar otra ISO",
           decisionsH2: "Decisiones técnicas",
           decision1:
-            "<strong>Debian:</strong> prioricé estabilidad y soporte de paquetes para un servidor que se va a encontrar siempre disponible y no debe recibir actualizaciones ni reinicios de forma inesperada.",
+            "<strong>Debian:</strong> prioricé estabilidad y soporte de paquetes para un servidor que corre 24/7 y no puede sufrir actualizaciones ni reinicios inesperados.",
           decision2:
-            "<strong>Podman:</strong> menor superficie de ataque al no depender de un daemon corriendo como root.",
+            "<strong>Podman:</strong> menor superficie de ataque, porque no depende de un daemon que corra como root.",
           decision3:
-            "<strong>Tailscale:</strong> cero puertos abiertos en el router, evitando fallas de seguridad y accesos no deseados.",
+            "<strong>Tailscale:</strong> cero puertos abiertos en el router, sin exposición directa a Internet.",
           decision4:
-            "<strong>Cloudflare:</strong> permite la gestión simple y sencilla para mi dominio personal, gestionando los SSL y su renovación de forma automática.",
+            "<strong>Cloudflare:</strong> administra mi dominio personal y renueva los certificados SSL solo.",
           decision5:
             "<strong>Exposición pública:</strong> solo esta landing queda fija, en un Tunnel independiente; el resto de los servicios se exponen puntualmente y se apagan al terminar de usarlos, vía Tailscale Funnel activado por un webhook local. El acceso interno normal siempre es por Caddy en la tailnet, sin MagicDNS.",
           decision6:
@@ -452,7 +454,7 @@
           relatedH2: "Repositorios relacionados",
           relatedP:
             "Otros proyectos propios que corren en este homelab: envío de dashboards a una pantalla serial USB (turmo-screen) y la API que expone el estado de los servicios (homelab-status).",
-          footer: "Última actualización: Octubre 2026",
+          footer: "Última actualización: Noviembre 2026",
         },
         en: {
           navHome: "Home",
@@ -464,11 +466,12 @@
           tocTitle: "On this page",
           philosophyH2: "Philosophy",
           philosophyP1:
-            "Private, modular, low-maintenance infrastructure that doesn't depend on commercial cloud services. Everything is reached through my private Tailscale network; only this page is public (see Technical decisions).",
+            "Private, low-maintenance infrastructure with no commercial cloud services. I reach everything through my private Tailscale network; only this page is public (see Technical decisions).",
           philosophyP2:
-            "Each stack runs in a Podman pod, managed as a user level systemd service. This keeps responsibilities and environments isolated.",
+            "Each stack runs in a Podman pod, managed as a user-level systemd service. Each responsibility and environment stays isolated.",
           archH2: "Architecture",
           archOpenFull: "Open diagram in a new tab",
+          archAlt: "Architecture diagram of the ThinkCentre",
           hwH2: "Production server storage",
           hw1: "<strong>120GB SSD</strong>: operating system",
           hw2: "<strong>480GB SSD</strong>: data, Podman volumes, all information and containers",
@@ -476,13 +479,13 @@
           hw4: "<strong>480GB HDD</strong>: weekly backup",
           backupsH2: "Backups",
           backup1:
-            "<strong>What:</strong> container configs together with the data. Critical databases (Immich and Vaultwarden) are dumped first, so files in use are never copied and data doesn't get corrupted.",
+            "<strong>What:</strong> container configs and data. I dump the critical databases (Immich and Vaultwarden) first, so I don't copy files in use or corrupted data.",
           backup2:
             "<strong>How:</strong> a Bash script with rsync, kept as simple and modular as possible. When it finishes it notifies through Ntfy.",
           backup3:
-            "<strong>When:</strong> a daily cron job runs against a dedicated HDD for the daily copy. Same setup, but weekly, against a second dedicated HDD for the weekly backup. Several copies are kept instead of overwriting the previous ones, mainly for critical services like Vaultwarden.",
+            "<strong>When:</strong> a daily cron job copies to one dedicated HDD and a weekly one copies to a second dedicated HDD. I keep several copies instead of overwriting the previous ones, mainly for critical services like Vaultwarden.",
           backup4:
-            "<strong>Restore:</strong> tested manually while iterating on and developing the script. If something fails, the copy restores without issues.",
+            "<strong>Restore:</strong> I tested it by hand while developing the script.",
           gatewayH2: "Responsibilities",
           gatewayP:
             "The ThinkCentre runs the services with the most data, like Immich or Vaultwarden. The Raspberry Pi 4B is the network node (DNS, reverse proxy) and monitors the rest. The Samsung S9+ receives the alerts. The HP ProDesk is the testing lab.",
@@ -490,9 +493,9 @@
           note1:
             "<strong>Single access point:</strong> all traffic travels through the tailnet and is redirected by Caddy, which also manages the internal domain. No service port is open to the LAN.",
           note4:
-            "<strong>Databases:</strong> Immich and Miniflux each have their own database containers. They're left out of the diagram.",
+            "<strong>Databases:</strong> Immich and Miniflux each have their own database containers. The diagram leaves them out.",
           note5:
-            "<strong>DNS:</strong> Pi-hole filters queries and forwards them to Unbound, which reaches Mullvad's servers exclusively over DoT. It redirects subdomains to Caddy.",
+            "<strong>DNS:</strong> Pi-hole filters queries and forwards them to Unbound, which reaches Mullvad's servers only over DoT. It redirects subdomains to Caddy.",
           note7:
             "<strong>The watcher of the watcher:</strong> the Samsung S9+ runs Ntfy and receives every system notification. It also checks that Uptime Kuma is alive through a periodic check.",
           note8:
@@ -536,7 +539,7 @@
             "<strong>Core</strong>: Vaultwarden (passwords), Radicale (calendars and contacts)",
           service2: "<strong>Utils</strong>: Homepage (dashboard)",
           service3:
-            "<strong>Pictures</strong>: a complete pod for Immich, with its server, backup, and a photo and video gallery with ML powered search",
+            "<strong>Pictures</strong>: a complete pod for Immich, with its server, backup, and a photo and video gallery with ML-powered search",
           service4:
             "<strong>Entertainment</strong>: Miniflux (RSS), Suwayomi (comic reader), Kavita (digital library), and Flaresolverr (Cloudflare bypass)",
           service5:
@@ -565,13 +568,13 @@
             "<strong>VM-Backup</strong>: a virtual machine with Docker that works as a template to create new VMs without downloading new ISOs",
           decisionsH2: "Technical decisions",
           decision1:
-            "<strong>Debian:</strong> I prioritized stability and package support, since this server needs to stay available at all times and shouldn't get unexpected updates or restarts.",
+            "<strong>Debian:</strong> I prioritized stability and package support, since this server runs 24/7 and can't take unexpected updates or restarts.",
           decision2:
             "<strong>Podman:</strong> a smaller attack surface, since it doesn't depend on a daemon running as root.",
           decision3:
-            "<strong>Tailscale:</strong> zero open ports on the router, avoiding security gaps and unwanted access.",
+            "<strong>Tailscale:</strong> zero open ports on the router, with no direct exposure to the internet.",
           decision4:
-            "<strong>Cloudflare:</strong> makes it simple to manage my personal domain, handling SSL certificates and renewing them automatically.",
+            "<strong>Cloudflare:</strong> manages my personal domain and renews the SSL certificates on its own.",
           decision5:
             "<strong>Public exposure:</strong> only this landing page stays fixed, on its own independent Tunnel. Every other service is exposed on demand and turned off after use, through Tailscale Funnel triggered by a local webhook. Regular internal access always goes through Caddy on the tailnet, without MagicDNS.",
           decision6:
@@ -587,7 +590,7 @@
           relatedH2: "Related repos",
           relatedP:
             "Other own projects running on this homelab: sending dashboards to a USB serial screen (turmo-screen) and the API that exposes service status (homelab-status).",
-          footer: "Last updated: October 2026",
+          footer: "Last updated: November 2026",
         },
       };
 

@@ -63,7 +63,6 @@ export default function Home() {
           <T es="Contacto" en="Contact" />
         </h2>
         <ContactLinks />
-        <p className={`${common.note} ${common.noteLg}`}></p>
       </Reveal>
     </>
   );
