@@ -31,6 +31,17 @@ export const projects: Project[] = [
     image: "/projects/pethood.png",
   },
   {
+    name: { es: "Ajedrez en vivo", en: "Live chess" },
+    url: "https://ajedrez-en-vivo.vercel.app/",
+    desc: {
+      es: "Explorador interactivo de 2.000 partidas para analizar cómo le va a un modelo de ajedrez según ritmo, nivel y ventaja.",
+      en: "Interactive explorer for 2,000 games, showing how a chess model performs by time control, skill level, and advantage.",
+    },
+    tags: ["backend", "frontend"],
+    stack: [],
+    image: "/projects/ajedrez-en-vivo.png",
+  },
+  {
     name: { es: "Mis dotfiles personales", en: "My personal dotfiles" },
     url: "https://github.com/ncorrea-13/dotfiles",
     desc: {
